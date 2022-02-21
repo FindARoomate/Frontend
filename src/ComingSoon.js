@@ -7,15 +7,15 @@ const ComingSoon = () => {
     return ( 
         <div className="coming-soon">
             <Header/>
-            <div className="coming-soon-body">
+            <div className="body coming-soon-body">
                 <div className="hero">
                     <div className="text">
                         <h1>LAUNCHING<br/>SOON!!!</h1>
-                        <img src={launchingSoonDesktop} alt="" class="heading-bg-desktop"/>
-                        <img src={launchingSoonMobile} alt="" class="heading-bg-mobile"/>
+                        <img src={launchingSoonDesktop} alt="Background Image" class="heading-bg-desktop"/>
+                        <img src={launchingSoonMobile} alt="Background Image" class="heading-bg-mobile"/>
                         <p>Get notified when this website goes live</p>
                     </div>
-                    <img src={rocket} />
+                    <img alt="Rocket image" src={rocket} />
                 </div>
 
                 <div className="coming-soon-form">
