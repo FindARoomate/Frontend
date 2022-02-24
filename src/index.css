@@ -6,6 +6,7 @@
 :root
 {
     --dark-color : #000000;
+    --blue-color: #0029DD;
 }
 
 
@@ -37,6 +38,12 @@ a
 h1,h2, h3
 {
   font-family: 'Syne';
+  color: var(--blue-color);
+}
+
+h1
+{
+  color: var(--blue-color);
 }
 
 input, textarea
@@ -44,7 +51,7 @@ input, textarea
   border-radius: 5px;
   background: white;
   padding: 15px;
-  border: none;
+  border: 1px solid #7D7D7D;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   width: 100%;
@@ -55,6 +62,20 @@ input::placeholder, textarea::placeholder
 {
   font-weight: 300;
   font-size: 13px;
+}
+
+input:active, input:hover, input:visited, input:focus, input:disabled, input:checked, textarea:active,  textarea:focus
+{
+  background: white;
+  border: 1px solid #0029DD!important;
+}
+
+label
+{
+  font-size: 12px;
+  color: #7D7D7D;
+  margin-bottom: 5px;
+  text-align: left;
 }
 
 button
@@ -72,6 +93,11 @@ button
   cursor: pointer;
   width: 100%;
 
+}
+
+button:disabled
+{
+  background: #6682FF;
 }
 
 .logo
@@ -95,6 +121,31 @@ button
 {
   padding: 20px 20px 40px 20px;
 }
+
+.gray
+{
+  color: #7D7D7D;
+}
+
+.blue
+{
+  color: #0029DD;
+}
+
+.italics
+{
+  font-style: italic;
+}
+
+.no-border
+{
+  border: 0px;
+}
+/* 
+.desktop-only
+{
+  display: none!important;
+} */
 
 /* Coming soon page - Mobile */
 .coming-soon-header
@@ -285,13 +336,102 @@ button
   border-radius: 5px;
 }
 
+.contact-body .contact-form form input, textarea
+{
+  border: none;
+}
+
 .contact-body .contact-form textarea
 {
   height: 200px;
 }
 
+/* Login page and Sign Up page- Mobile */
+
+.auth .auth-headers
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth .auth-headers h1
+{
+  font-family: 'Open Sans';
+  font-size: 18px;
+}
+
+.auth .forgot-password
+{
+  opacity: 75%;
+  font-size: 11px;
+}
+
+.auth .additionals
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth .additionals span
+{
+  margin: 5px 0px;
+  font-size: 13px;
+}
+
+.auth .additionals .alternative-login
+{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.auth .additionals .auth-link
+{
+  color: var(--blue-color);
+  text-decoration: underline;
+}
+
+.auth .additionals .divider
+{
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid #000; 
+  line-height: 0.1em;
+  margin: 10px 0 20px; 
+}
+
+.auth .additionals .divider span 
+{ 
+  background:#fff; 
+  padding:0 25px; 
+}
+
+.auth .auth-body form span.passwordInput
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.auth .auth-body form span.passwordInput img
+{
+  margin-left: -27px;
+  cursor: pointer;
+}
+
+.auth .auth-body .mobile-only-additionals
+{
+  display:flex;
+}
+
+.auth .auth-body .desktop-only-additionals
+{
+  display:none;
+}
+
 /* Tablet and Desktop view */
-@media screen and (min-width: 480px) 
+@media screen and (min-width: 760px) 
 {
   /* Universals - Desktop */
   p
@@ -310,6 +450,7 @@ button
   {
     font-size: 18px;
     font-weight: 300;
+    width: 100%;
   }
 
   input::placeholder, textarea::placeholder
@@ -332,10 +473,23 @@ button
   
   .body
   {
-    padding: 70px 10% 20px 10%;
+    padding: 20px 9.5% 20px 9.5%;
   }
 
+  label
+  {
+    font-size: 16px;
+  }
 
+  /* .mobile-only
+  {
+    display: none!important;
+  } */
+/* 
+  .desktop-only
+  {
+    display: inherit;
+  } */
   /* Coming soon page - desktop */
   .coming-soon-header
   {
@@ -499,5 +653,97 @@ button
     height: 200px;
   }
 
+  /* Login and Sign Up pages - Desktop */
+
+  .auth .auth-headers h1
+  {
+    font-size: 28px;
+  }
+  
+  .auth .auth-body
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:5vw;
+  }
+
+  .auth .auth-headers p
+  {
+    font-family: 'Open Sans';
+    font-size: 22px;
+  }
+
+  .auth .auth-headers img
+  {
+    height: 200px;
+    margin: 40px 0;
+  }
+
+  .auth .auth-body .mobile-only-additionals
+  {
+    display:none;
+  }
+
+  .auth .auth-body .desktop-only-additionals
+  {
+    display:flex;
+  }
+
+  .auth .additionals
+  {
+    min-width: 30vw;
+  }
+
+  .auth .additionals span
+  {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+
+  .auth .additionals .alternative-login 
+  {
+    height: 100%;
+    max-height: 18px;
+    margin: 5px 0px;
+  }
+
+  .auth .additionals .alternative-login img
+  {
+    width: 30px;
+    margin: 5px 20px;
+  }
+
+  .auth .additionals .divider
+  {
+  margin-bottom: 35px; 
+  }
+
+
+  .auth .auth-body .auth-form-fields
+  {
+    width: 100%;
+    max-width: 486px;
+  }
+
+  .auth .forgot-password
+  {
+    opacity: 75%;
+    font-size: 18px;
+  }
+
+  /* Login page */
+  .login-body
+  {
+    flex-direction: row-reverse;
+  }
+
+  /* Sign Up page */
+  .sign-up-headers p
+  {
+    width: 100%;
+    max-width: 400px;
+  }
+ 
 }
 
