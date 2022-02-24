@@ -105,7 +105,7 @@ const Login = () => {
                             Continue with <img src={googleIcon} />
                         </span>
                         <span>
-                        Create new account? <Link to='/sign-up'><span className="sign-up">Sign up</span></Link>
+                        Create new account? <Link to='/sign-up'><span className="auth-link">Sign up</span></Link>
                         </span>
                     </div>        
                 </div>
