@@ -119,7 +119,7 @@ button:disabled
 
 .body
 {
-  padding: 20px 20px 40px 20px;
+  padding: 40px 20px;
 }
 
 .gray
@@ -353,6 +353,9 @@ button:disabled
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30px;
+  flex: 1;
+  text-align: center;
 }
 
 .auth .auth-headers h1
@@ -429,6 +432,11 @@ button:disabled
 {
   display:none;
 }
+.auth-body {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
@@ -473,7 +481,7 @@ button:disabled
   
   .body
   {
-    padding: 20px 9.5% 20px 9.5%;
+    padding: 70px 9.5%;
   }
 
   label
@@ -659,13 +667,16 @@ button:disabled
   {
     font-size: 28px;
   }
-  
+  .auth {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    overflow-y: hidden;
+  }
   .auth .auth-body
   {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap:5vw;
+    flex: 1;
   }
 
   .auth .auth-headers p
@@ -722,8 +733,7 @@ button:disabled
 
   .auth .auth-body .auth-form-fields
   {
-    width: 100%;
-    max-width: 486px;
+    width: 90%;
   }
 
   .auth .forgot-password
