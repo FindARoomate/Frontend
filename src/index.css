@@ -119,7 +119,7 @@ button:disabled
 
 .body
 {
-  padding: 40px 20px;
+  padding: 40px 0px;
 }
 
 .gray
@@ -353,7 +353,7 @@ button:disabled
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 30px 50px;
   flex: 1;
   text-align: center;
 }
@@ -375,6 +375,7 @@ button:disabled
   display: flex;
   flex-direction: column;
   align-items: center;
+  display: none;
 }
 
 .auth .additionals span
@@ -434,8 +435,8 @@ button:disabled
 }
 .auth-body {
   display: block;
-  width: fit-content;
   margin: 0 auto;
+  width: 90%;
 }
 
 /* Tablet and Desktop view */
@@ -674,10 +675,10 @@ button:disabled
     justify-content: space-between;
     overflow-y: hidden;
   }
-  .auth .auth-body
-  {
-    flex: 1;
+  .additionals {
+    display: none;
   }
+ 
 
   .auth .auth-headers p
   {
@@ -695,10 +696,14 @@ button:disabled
   {
     display:none;
   }
+  .auth .additionals {
+    display: flex;
+  }
 
   .auth .auth-body .desktop-only-additionals
   {
     display:flex;
+    display: block;
   }
 
   .auth .additionals
@@ -733,7 +738,7 @@ button:disabled
 
   .auth .auth-body .auth-form-fields
   {
-    width: 90%;
+    width: 100%;
   }
 
   .auth .forgot-password
@@ -746,6 +751,9 @@ button:disabled
   .login-body
   {
     flex-direction: row-reverse;
+  }
+  .auth-body {
+    width: 55%;
   }
 
   /* Sign Up page */
