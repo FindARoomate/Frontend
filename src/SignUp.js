@@ -16,7 +16,7 @@ const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [emailValue, setEmail] = useState(null);
   const [passwordValue, setPassword] = useState(null);
-  const [errors, setErrors] = useState(["An error", "two errors"]);
+  const [errors, setErrors] = useState(null);
 
   const handlePhoneNumberChange = (phoneNumberValue) => 
   {
@@ -62,9 +62,6 @@ const SignUp = () => {
       "password": passwordValue
     }
 
-    var myHeaders = new Headers();
-    myHeaders.append();
-
     //Send request to database
     fetch('http://find-a-roomate.herokuapp.com/auth/register/', 
     {
@@ -91,11 +88,12 @@ const SignUp = () => {
         
       }
 
-      return res.json();
+      // Show correct success message
+      console.log(body);
     })
     .catch((error) =>
-   {
-      console.log(error.message);
+    {
+     setErrors(error.message);
     })
 
   }
@@ -116,7 +114,8 @@ const SignUp = () => {
         <DesktopAuthPrompt signup />
         <div className="auth-body body">
           <div className="auth-form-fields">
-            {errors && <ErrorsComponent errors = {errors}/>}
+            {/* {errors && <ErrorsComponent errors = {errors}/>} */}
+            {errors && console.log(errors)}
 
             <form  onSubmit={(e) => handleSubmit(e)}>
               <div>

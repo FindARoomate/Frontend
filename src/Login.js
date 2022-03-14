@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import closedEyeIcon from "./icons/closed-eye-icon.svg";
 import DesktopAuthPrompt from "./DesktopAuthPrompt";
 import MobileAuthPrompt from "./MobileAuthPrompt";
+import ValidationError from "./classes/Errors/ValidationError";
 
 const Login = () => {
   const [passwordInputType, setPasswordInputType] = useState("password");
@@ -12,28 +13,72 @@ const Login = () => {
   const [emailValue, setEmail] = useState(null);
   const [passwordValue, setPassword] = useState(null);
 
-  const handleEmailChange = (emailValue) => {
+  const handleLogin = (e) => 
+  {
+    e.preventDefault();
+    const loginCredentials = 
+    {
+      "email" : emailValue,
+      "password": passwordValue
+    }
+
+    fetch('http://find-a-roomate.herokuapp.com/auth/login/', 
+    {
+      method: "POST",
+      body: JSON.stringify(loginCredentials),
+      redirect: "follow",
+      mode: "cors",
+      headers: 
+      {
+        "Content-Type" : "application/json",
+        "Accept" : "application/json"
+      }
+    })
+    .then (async (res) => 
+    {
+        const body = await (res.json());
+
+        if(!res.ok)
+        {
+          throw new ValidationError("Incorrect Credentials")
+        }
+
+        //show success message
+        console.log(body);
+    })
+    .catch((error) => 
+    {
+      console.log(error.message);
+    });
+
+  }
+
+  const handleEmailChange = (emailValue) => 
+  {
     setEmail(emailValue);
-    console.log(emailValue);
   };
 
-  const handlePasswordChange = (passwordValue) => {
+  const handlePasswordChange = (passwordValue) => 
+  {
     setPassword(passwordValue);
   };
 
-  const handleRevealPassword = () => {
+  const handleRevealPassword = () => 
+  {
     setPasswordInputType("text");
     setRevealPasswordDisplay("none");
     setConcealPasswordDisplay("block");
   };
 
-  const handleConcealPassword = () => {
+  const handleConcealPassword = () => 
+  {
     setPasswordInputType("password");
     setRevealPasswordDisplay("block");
     setConcealPasswordDisplay("none");
   };
 
-  useEffect(() => {
+  useEffect(() => 
+  {
     setIsDisabled(!(emailValue && passwordValue));
   });
 
@@ -44,7 +89,7 @@ const Login = () => {
         <DesktopAuthPrompt login />
         <div className="body auth-body login-body">
           <div style={{ margin: 0 }} className="auth-form-fields">
-            <form action="#">
+            <form onSubmit={(e) => handleLogin(e)}>
               <div>
                 <label>Email</label>
                 <input
