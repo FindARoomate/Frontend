@@ -1,10 +1,11 @@
 import Header from "./Header";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import googleIcon from "./icons/google-icon.svg";
 import closedEyeIcon from "./icons/closed-eye-icon.svg";
 import openedEyeIcon from "./icons/opened-eye-icon.svg";
-import AuthPrompt from "./AuthPrompt";
+import DesktopAuthPrompt from "./DesktopAuthPrompt";
+import MobileAuthPrompt from "./MobileAuthPrompt";
+import ValidationError from "./classes/Errors/ValidationError";
+import ErrorsComponent from "./Errors";
 
 const SignUp = () => {
   const [nameValue, setName] = useState(null);
@@ -15,49 +16,109 @@ const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [emailValue, setEmail] = useState(null);
   const [passwordValue, setPassword] = useState(null);
+  const [errors, setErrors] = useState(["An error", "two errors"]);
 
-  const handlePhoneNumberChange = (phoneNumberValue) => {
+  const handlePhoneNumberChange = (phoneNumberValue) => 
+  {
     setPhoneNumber(phoneNumberValue);
   };
 
-  const handleNameChange = (nameValue) => {
+  const handleNameChange = (nameValue) => 
+  {
     setName(nameValue);
   };
 
-  const handleEmailChange = (emailValue) => {
+  const handleEmailChange = (emailValue) => 
+  {
     setEmail(emailValue);
   };
 
-  const handlePasswordChange = (passwordValue) => {
+  const handlePasswordChange = (passwordValue) => 
+  {
     setPassword(passwordValue);
   };
 
-  const handleRevealPassword = () => {
+  const handleRevealPassword = () => 
+  {
     setPasswordInputType("text");
     setRevealPasswordDisplay("none");
     setConcealPasswordDisplay("block");
   };
 
-  const handleConcealPassword = () => {
+  const handleConcealPassword = () => 
+  {
     setPasswordInputType("password");
     setRevealPasswordDisplay("block");
     setConcealPasswordDisplay("none");
   };
 
-  useEffect(() => {
+  const handleSubmit = (e) =>
+  {
+    e.preventDefault();
+    const formDetails = 
+    {
+      "username" : nameValue,
+      "email": emailValue,
+      "password": passwordValue
+    }
+
+    var myHeaders = new Headers();
+    myHeaders.append();
+
+    //Send request to database
+    fetch('http://find-a-roomate.herokuapp.com/auth/register/', 
+    {
+      method: 'POST',
+      body : JSON.stringify(formDetails),
+      redirect: "follow",
+      mode: "cors",
+      headers: 
+      {
+        "Content-Type" : "application/json",
+        "Accept" : "application/json"
+      }
+    })
+    .then(async (res) => 
+    {
+      const body = await (res.json());
+
+      if(!res.ok)
+      {
+        Object.values(body).forEach((error) => 
+        {
+          throw(new ValidationError(error));
+        });
+        
+      }
+
+      return res.json();
+    })
+    .catch((error) =>
+   {
+      console.log(error.message);
+    })
+
+  }
+
+  useEffect(() => 
+  {
     setIsDisabled(
       !(emailValue && passwordValue && nameValue && phoneNumberValue)
     );
   });
 
+
+
   return (
     <>
       <Header />
       <div className="auth">
-        <AuthPrompt signup />
+        <DesktopAuthPrompt signup />
         <div className="auth-body body">
           <div className="auth-form-fields">
-            <form action="#">
+            {errors && <ErrorsComponent errors = {errors}/>}
+
+            <form  onSubmit={(e) => handleSubmit(e)}>
               <div>
                 <label>Name</label>
                 <input
@@ -113,26 +174,12 @@ const SignUp = () => {
                   />
                 </span>
               </div>
-              <button disabled={isDisabled} link="/sign-up">
+              <button disabled={isDisabled}>
                 Next
               </button>
             </form>
 
-            <div className="mobile-only-additionals additionals">
-              <span className="divider">
-                {" "}
-                <span>or</span>{" "}
-              </span>
-              <span className="alternative-login">
-                Continue with <img src={googleIcon} />
-              </span>
-              <span>
-                Already have an account?{" "}
-                <Link to="/login">
-                  <span className="auth-link">Login</span>
-                </Link>
-              </span>
-            </div>
+            <MobileAuthPrompt signup/>
           </div>
         </div>
       </div>

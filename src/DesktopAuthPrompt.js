@@ -4,7 +4,7 @@ import googleIcon from "./icons/google-icon.svg";
 import loginImage from "./images/login-image.svg";
 import signUpImage from "./images/sign-up-image.svg";
 
-const AuthPrompt = (props) => {
+const DesktopAuthPrompt = (props) => {
   return (
     <div className="auth-headers">
       <h1>{props.login ? "LOGIN" : "SIGN UP"}</h1>
@@ -42,4 +42,4 @@ const AuthPrompt = (props) => {
   );
 };
 
-export default AuthPrompt;
+export default DesktopAuthPrompt;

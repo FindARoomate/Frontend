@@ -1,11 +1,8 @@
 import Header from "./Header";
 import { useState, useEffect } from "react";
-import Button from "./assets/Button";
-import { Link } from "react-router-dom";
-import googleIcon from "./icons/google-icon.svg";
-import loginImage from "./images/login-image.svg";
 import closedEyeIcon from "./icons/closed-eye-icon.svg";
-import AuthPrompt from "./AuthPrompt";
+import DesktopAuthPrompt from "./DesktopAuthPrompt";
+import MobileAuthPrompt from "./MobileAuthPrompt";
 
 const Login = () => {
   const [passwordInputType, setPasswordInputType] = useState("password");
@@ -44,7 +41,7 @@ const Login = () => {
     <>
       <Header />
       <div style={{ flexDirection: "row-reverse" }} className="auth">
-        <AuthPrompt login />
+        <DesktopAuthPrompt login />
         <div className="body auth-body login-body">
           <div style={{ margin: 0 }} className="auth-form-fields">
             <form action="#">
@@ -97,21 +94,8 @@ const Login = () => {
               Forgot password
             </a>
 
-            <div className="mobile-only-additionals additionals">
-              <span className="divider">
-                {" "}
-                <span>or</span>{" "}
-              </span>
-              <span className="alternative-login">
-                Continue with <img src={googleIcon} />
-              </span>
-              <span>
-                Create new account?{" "}
-                <Link to="/sign-up">
-                  <span className="auth-link">Sign up</span>
-                </Link>
-              </span>
-            </div>
+           <MobileAuthPrompt login />
+
           </div>
         </div>
       </div>
