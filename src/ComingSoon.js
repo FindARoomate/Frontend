@@ -1,7 +1,5 @@
 import Header from './Header';
-import rocket from './images/rocket.svg';
-import launchingSoonDesktop from './images/launching-soon-desktop.svg';
-import launchingSoonMobile from './images/launching-soon-mobile.svg';
+import LaunchingSoonImage from './images/launching-soon.svg';
 
 const ComingSoon = () => {
     return ( 
@@ -10,20 +8,22 @@ const ComingSoon = () => {
             <div className="body coming-soon-body">
                 <div className="hero">
                     <div className="text">
-                        <h1>LAUNCHING<br/>SOON!!!</h1>
-                        <img src={launchingSoonDesktop} alt="Background Image" class="heading-bg-desktop"/>
-                        <img src={launchingSoonMobile} alt="Background Image" class="heading-bg-mobile"/>
-                        <p>Get notified when this website goes live</p>
+                        <h1>Find The Perfect Roommate ...</h1>
+                        <p>Connect with several rommmates that match your requirements.</p>
                     </div>
-                    <img alt="Rocket image" src={rocket} />
+                    <div className="coming-soon-form">
+                        <p>Get notified when this website goes live</p>
+                        <form action="#">
+                            <input type="text" placeholder="E-mail" />
+                            <button>Notify Me</button>
+                        </form>
+                    </div>                    
                 </div>
+                <div className="launching-soon-image desktop-only">
+                    <img src={LaunchingSoonImage} />
 
-                <div className="coming-soon-form">
-                    <form action="#">
-                        <input type="text" placeholder="E-mail" />
-                        <button>Notify Me</button>
-                    </form>
                 </div>
+               
             </div>
         </div>
      );
