@@ -26,7 +26,7 @@ const Login = () => {
       "password": passwordValue
     }
 
-    fetch('http://find-a-roomate.herokuapp.com/auth/login/', 
+    fetch('https://find-a-roomate.herokuapp.com/auth/login/', 
     {
       method: "POST",
       body: JSON.stringify(loginCredentials),

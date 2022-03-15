@@ -69,7 +69,7 @@ const SignUp = () => {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Accept", "application/json");
     //Send request to database
-    fetch('http://find-a-roomate.herokuapp.com/auth/register/', 
+    fetch('https://find-a-roomate.herokuapp.com/auth/register/', 
     {
       method: 'POST',
       body : JSON.stringify(formDetails),

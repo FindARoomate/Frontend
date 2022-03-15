@@ -42,7 +42,7 @@ const ComingSoon = () =>
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Accept", "application/json");
 
-        fetch('http://find-a-roomate.herokuapp.com/auth/join-waitlist/',
+        fetch('https://find-a-roomate.herokuapp.com/auth/join-waitlist/',
         {
             method: "POST",
             body: JSON.stringify(credentials),
