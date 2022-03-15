@@ -5,7 +5,8 @@ import openedEyeIcon from "./icons/opened-eye-icon.svg";
 import DesktopAuthPrompt from "./DesktopAuthPrompt";
 import MobileAuthPrompt from "./MobileAuthPrompt";
 import ValidationError from "./classes/Errors/ValidationError";
-import ErrorsComponent from "./Errors";
+import ErrorComponent from "./Error";
+import SuccessComponent from "./Success";
 
 const SignUp = () => {
   const [nameValue, setName] = useState(null);
@@ -16,7 +17,9 @@ const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [emailValue, setEmail] = useState(null);
   const [passwordValue, setPassword] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePhoneNumberChange = (phoneNumberValue) => 
   {
@@ -87,12 +90,17 @@ const SignUp = () => {
         
       }
 
+      // Remove error message
+      setError();
       // Show correct success message
-      console.log(body);
+      setSuccessMessage("Registration Successful. Kindly Login");
     })
     .catch((error) =>
     {
-     setErrors(error.message);
+      //Remove any success message
+      setSuccessMessage();
+      //Show error message
+      setError(error.message);
     })
 
   }
@@ -113,8 +121,8 @@ const SignUp = () => {
         <DesktopAuthPrompt signup />
         <div className="auth-body body">
           <div className="auth-form-fields">
-            {/* {errors && <ErrorsComponent errors = {errors}/>} */}
-            {errors && console.log(errors)}
+            {error && <ErrorComponent error={error}/>}
+            {successMessage && <SuccessComponent message={successMessage}/>}
 
             <form  onSubmit={(e) => handleSubmit(e)}>
               <div>

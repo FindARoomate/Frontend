@@ -4,6 +4,8 @@ import closedEyeIcon from "./icons/closed-eye-icon.svg";
 import DesktopAuthPrompt from "./DesktopAuthPrompt";
 import MobileAuthPrompt from "./MobileAuthPrompt";
 import ValidationError from "./classes/Errors/ValidationError";
+import ErrorComponent from "./Error";
+import SuccessComponent from "./Success";
 
 const Login = () => {
   const [passwordInputType, setPasswordInputType] = useState("password");
@@ -12,7 +14,9 @@ const Login = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [emailValue, setEmail] = useState(null);
   const [passwordValue, setPassword] = useState(null);
-
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const handleLogin = (e) => 
   {
     e.preventDefault();
@@ -43,12 +47,17 @@ const Login = () => {
           throw new ValidationError("Incorrect Credentials")
         }
 
-        //show success message
-        console.log(body);
+      // Remove error message
+      setError();
+      // Show correct success message
+      setSuccessMessage("Login Successful. We'll redirect you later");
     })
     .catch((error) => 
     {
-      console.log(error.message);
+      //Remove any success message
+      setSuccessMessage();
+      //Show error message
+      setError(error.message);
     });
 
   }
@@ -89,6 +98,9 @@ const Login = () => {
         <DesktopAuthPrompt login />
         <div className="body auth-body login-body">
           <div style={{ margin: 0 }} className="auth-form-fields">
+          {error && <ErrorComponent error={error}/>}
+          {successMessage && <SuccessComponent message={successMessage}/>}
+
             <form onSubmit={(e) => handleLogin(e)}>
               <div>
                 <label>Email</label>
