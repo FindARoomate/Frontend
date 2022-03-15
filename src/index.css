@@ -270,6 +270,22 @@ button:disabled
   margin: 0;
 }
 
+.coming-soon-success-message .heading-text
+{
+  font-size: 15px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.coming-soon-success-message p
+{
+  font-size: 12px;
+  font-weight: 400;
+  color:#7D7D7D;
+  margin: 0;
+}
+
+
 /* Not found page - Mobile */
 
 .not-found-container
@@ -609,6 +625,16 @@ button:disabled
     height: auto;
   }
 
+  .coming-soon-success-message .heading-text
+  {
+    font-size: 27px;
+  }
+  
+  .coming-soon-success-message p
+  {
+    font-size: 24px;
+  }
+  
   /* Not found - Desktop */
   .not-found-container
   {
