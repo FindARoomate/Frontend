@@ -62,6 +62,9 @@ const SignUp = () => {
       "password": passwordValue
     }
 
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept", "application/json");
     //Send request to database
     fetch('http://find-a-roomate.herokuapp.com/auth/register/', 
     {
@@ -69,11 +72,7 @@ const SignUp = () => {
       body : JSON.stringify(formDetails),
       redirect: "follow",
       mode: "cors",
-      headers: 
-      {
-        "Content-Type" : "application/json",
-        "Accept" : "application/json"
-      }
+      headers: myHeaders
     })
     .then(async (res) => 
     {
