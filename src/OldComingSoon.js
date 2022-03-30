@@ -4,8 +4,6 @@ import { useState } from 'react';
 import ErrorComponent from "./Error";
 import Button from './components/ui/atoms/Button/Button';
 import Input from './components/ui/atoms/Input/Input';
-import FormGroup from './components/ui/molecules/FormGroup/FormGroup';
-import ComingSoonPageForm from './components/ui/organisms/ComingSoonPageForm/ComingSoonPageForm';
 
 const ComingSoon = () => 
 {
@@ -82,14 +80,15 @@ const ComingSoon = () =>
             <Header/>
             <div className="body coming-soon-body">
                 <div className="hero">
-                    
                     <div className="text">
                         <h1>Find The Perfect Roommate ...</h1>
                         <p>Connect with several rommmates that match your requirements.</p>
                     </div>
                     
                     <div className="coming-soon-form">
-                        <ComingSoonPageForm/>
+                        {error && <ErrorComponent error={error} />}
+                        { !waitlistJoined && formDetails()}
+                        { waitlistJoined && successMessage()}
                     </div>
                     
                 </div>
