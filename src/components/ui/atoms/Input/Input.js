@@ -1,4 +1,4 @@
-import styles from './Input.modules.css';
+import styles from './Input.module.css';
 
 const Input = ({placeholder, required, type, min=null, max=null, style = null}) => 
 {

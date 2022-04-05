@@ -1,4 +1,4 @@
-import styles from './H1.modules.css';
+import styles from './H1.module.css';
 
 const H1 = ({children, customStyle}) => 
 {

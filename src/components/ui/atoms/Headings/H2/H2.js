@@ -1,4 +1,4 @@
-import styles from './H2.modules.css';
+import styles from './H2.module.css';
 
 const H2 = ({children, customStyle}) => {
     return ( 

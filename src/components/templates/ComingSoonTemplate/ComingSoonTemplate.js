@@ -1,27 +1,36 @@
 import Header from '../../../Header';
 import ComingSoonPageForm from '../../../components/ui/organisms/ComingSoonPageForm/ComingSoonPageForm';
-import { useState } from 'react';
+import styles from './ComingSoonTemplate.module.css';
+import globalStyles from './../../../components/globalStyles.module.css';
+import H1 from './../../ui/atoms/Headings/H1/H1';
+import P from './../../ui/atoms/P/P';
+import Img from './../../ui/atoms/Img/Img';
 
 const ComingSoon = ({headingText, subText, image}) => {
     return ( 
-        <div className="coming-soon">
+        <div className = {styles.comingSoon}>
             <Header/>
-            <div className="body coming-soon-body">
-                <div className="hero">
-                    
-                    <div className="text">
-                        <h1>{headingText}</h1>
-                        <p>{subText}</p>
+            <div className= {`${globalStyles.body} ${styles.comingSoonBody}`}>
+                <div className={styles.comingSoonHero}>
+                    <div className={styles.text}>
+                        <H1>{headingText}</H1>
+                        <P customStyle={{fontSize: "24px"}}>{subText}</P>
                     </div>
                     
-                    <div className="coming-soon-form">
+                    <div className={styles.comingSoonForm}>
                         <ComingSoonPageForm/>
                     </div>
-                    c
                 </div>
-                <div className="launching-soon-image desktop-only">
-                    <img src={image} />
-
+                <div className={`${styles.launchingSoonImage} ${globalStyles.desktopOnly}`}>
+                    <Img 
+                    src={image} 
+                    customStyle=
+                    {
+                    {
+                        height: "419.4054870605469px",
+                        width: "417.29669189453125px"
+                    }
+                    }/>
                 </div>
                
             </div>

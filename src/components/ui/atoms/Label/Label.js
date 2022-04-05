@@ -1,4 +1,4 @@
-import styles from './Label.modules.css';
+import styles from './Label.module.css';
 
 const Label = (children) => {
     return ( 

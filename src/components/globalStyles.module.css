@@ -1,0 +1,18 @@
+.body
+{
+  padding: 40px 0px;
+}
+
+.desktopOnly
+{
+  display: block!important;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+  .body
+  {
+    padding: 70px 9.5%;
+  }
+}

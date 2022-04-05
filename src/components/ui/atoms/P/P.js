@@ -1,14 +1,8 @@
-import styles from './P.modules.css';
+import styles from './P.module.css';
 
-const P = ({children, type = null, customStyle, align = null}) => 
+const P = ({children, type = null, customStyle}) => 
 {
-
-    var style = 
-    {
-        color: '#000000',
-        textAlign: 'left'
-    };
-
+    const style = {};
     const setColorForType = (textType) => 
     {
         switch(textType)
@@ -27,37 +21,13 @@ const P = ({children, type = null, customStyle, align = null}) =>
         }
     }
 
-    const setTextAlign = (textAlign) => 
-    {
-        switch(textAlign)
-        {
-            case ('left'):
-                style.textAlign = 'left';
-                break;
-
-            case ('center'):
-                style.textAlign = 'center';
-                break;
-
-            case ('right'):
-                style.textAlign = 'right';
-                break;
-        }
-    }
-
-    //update style variable if customStyle variable exists
-    style = customStyle ? customStyle : style;
-
     //update text color if custom color is set by user
     type && setColorForType(type);
-
-    //update text align if set by user
-    align && setTextAlign(align);
 
     return ( 
         <p
         className={styles.p}
-        style={customStyle}
+        style={customStyle ? customStyle : style}
         >
             {children}
         </p>
