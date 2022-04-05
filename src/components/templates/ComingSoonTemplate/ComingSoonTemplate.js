@@ -14,7 +14,7 @@ const ComingSoon = ({headingText, subText, image}) => {
                 <div className={styles.comingSoonHero}>
                     <div className={styles.text}>
                         <H1>{headingText}</H1>
-                        <P customStyle={{fontSize: "24px"}}>{subText}</P>
+                        <P>{subText}</P>
                     </div>
                     
                     <div className={styles.comingSoonForm}>

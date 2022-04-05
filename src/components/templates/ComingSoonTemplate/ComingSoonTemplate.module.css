@@ -4,11 +4,6 @@
   min-height: 100vh;
 }
 
-.comingSoonBody
-{
-  padding: 70px 15px 10px 15px;
-}
-
 .comingSoonHero
 {
   display: flex;
@@ -31,8 +26,12 @@
   font-size:16px;
   color:#000000;
   font-weight: 400;
-  padding: 14px;
-  margin: 0;
+  text-align: center;
+}
+
+.text h1
+{
+  text-align: center;
 }
 
 .text .heading-bg-mobile
@@ -123,4 +122,16 @@
     width: 420px;
     height: auto;
   }
+
+  .text p
+  {
+    font-size:24px;
+    text-align: left;
+  }
+
+  .text h1
+  {
+    text-align: left;
+  }
+
 }

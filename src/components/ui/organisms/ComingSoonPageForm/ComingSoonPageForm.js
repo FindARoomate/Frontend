@@ -76,7 +76,7 @@ const ComingSoonPageForm = () => {
 
     return ( 
 
-        <div className={styles.ComingSoonPageForm}>
+        <div className={styles.comingSoonPageForm}>
             {error && <ErrorAlert message={error}/>}
             {!waitlistJoined && (<FormGroup inputs={inputs} p = {p} button = {button} handleSubmit = {handleSubmit}/>)}
             {waitlistJoined && <WaitlistSuccessMessage/>}
