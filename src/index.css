@@ -78,27 +78,6 @@ label
   text-align: left;
 }
 
-button
-{
-  background: #0029DD;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  text-overflow: none;
-  margin: 10px 0;
-  cursor: pointer;
-  width: 100%;
-
-}
-
-button:disabled
-{
-  background: #6682FF;
-}
 
 .logo
 {
@@ -388,12 +367,6 @@ button:disabled
     font-size: 20px;
   }
 
-  button
-  {
-    padding: 15px 30px;
-    font-size: 20px;
-    font-weight: 400;
-  }
 
   input, textarea
   {

@@ -8,10 +8,15 @@ const ComingSoonPageForm = () => {
 
     const [waitlistJoined, setWaitlistJoined] = useState(false);
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = (e) =>
     {
+        //prevent form submit
         e.preventDefault();
+
+        //set loading message
+        setIsLoading(true);
         
         const credentials = {email: e.target[0].value}
         console.log(credentials);
@@ -38,6 +43,8 @@ const ComingSoonPageForm = () => {
                 throw new Error(errorMessage);
             }
 
+            //remove loading message
+            setIsLoading(false)
             //remove error message
             setError()
             //show success message
@@ -45,6 +52,9 @@ const ComingSoonPageForm = () => {
         })
         .catch((error) => 
         {   
+            //remove loading message
+            setIsLoading(false);
+
             console.log(error);
             //show error message
             setError(error.message);
@@ -78,7 +88,7 @@ const ComingSoonPageForm = () => {
 
         <div className={styles.comingSoonPageForm}>
             {error && <ErrorAlert message={error}/>}
-            {!waitlistJoined && (<FormGroup inputs={inputs} p = {p} button = {button} handleSubmit = {handleSubmit}/>)}
+            {!waitlistJoined && (<FormGroup inputs={inputs} p = {p} button = {button} isLoading={isLoading} handleSubmit = {handleSubmit}/>)}
             {waitlistJoined && <WaitlistSuccessMessage/>}
         </div>
         
