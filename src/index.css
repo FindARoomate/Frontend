@@ -166,29 +166,6 @@ label
 }
 
 
-/* Not found page - Mobile */
-
-.not-found-container
-{
-  display:flex;
-  align-items: center;
-  flex-direction: column; 
-  justify-content: center;
-  padding: 10% 5%;
-  height: 80vh;
-}
-
-.not-found-container img 
-{
-  width: 270px;
-  height: 200px;
-}
-
-.not-found-container p
-{
-  max-width: 460px;
-}
-
 /* Contact page - Mobile */
 
 .contact-body h3
@@ -438,25 +415,7 @@ label
   {
     font-size: 24px;
   }
-  
-  /* Not found - Desktop */
-  .not-found-container
-  {
-    padding-top: 5%;
-  }
-
-  .not-found-container img 
-  {
-    width: 410px;
-    height: 300px;
-    margin-bottom: 10px;
-  }
-
-  .not-found-container p
-  {
-    max-width: 460px;
-  }
-
+   
   /* Contact page - Desktop */
   .contact-body
   {

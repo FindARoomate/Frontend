@@ -1,0 +1,52 @@
+
+.notFoundContainer
+{
+  display:flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  padding: 10% 5%;
+  height: 80vh;
+}
+
+.notFoundContainer img 
+{
+  width: 270px;
+  height: 200px;
+}
+
+.notFoundContainer p
+{
+  max-width: 460px;
+}
+
+.notFoundContainer button
+{
+  margin-top: 15px;
+}
+
+@media screen and (min-width: 760px) 
+{
+    .notFoundContainer
+    {
+      padding-top: 5%;
+    }
+
+    .notFoundContainer img 
+    {
+      width: 410px;
+      height: 300px;
+      margin-bottom: 10px;
+    }
+
+    .notFoundContainer p
+    {
+      max-width: 460px;
+    }
+
+    .notFoundContainer button
+    {
+      margin-top: 25px;
+    }
+
+}

@@ -27,12 +27,12 @@ const FormGroup = ({inputs, p, button, handleSubmit, isLoading}) =>
             </P>
 
             <form
-                className={isLoading && styles.isLoading}
+                className={isLoading ? styles.isLoading : ''}
                 onSubmit = {(e) => handleFormSubmit(e)}
             >
                 <GetInputs inputs={inputs} />
                 <Button>
-                    <span>{isLoading ? "Loading ..." : button.content}</span>
+                    <span>{isLoading ? "Loading..." : button.content}</span>
                 </Button>
             </form>
 

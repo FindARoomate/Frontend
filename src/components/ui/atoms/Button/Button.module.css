@@ -10,6 +10,7 @@ button
   text-overflow: none;
   cursor: pointer;
   width: 100%;
+  background: #0029DD;
 }
 
 button:disabled
