@@ -1,0 +1,19 @@
+.searchButton
+{
+    display: flex;
+    gap:0;
+
+}
+
+.searchButton input
+{
+    padding: 18px;
+    height: 64px;
+}
+
+.searchButton button
+{
+    padding: 18px;
+    height: 64px;
+    margin-left: -10px;
+}

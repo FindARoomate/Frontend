@@ -3,7 +3,6 @@ import Img from './../../atoms/Img/Img';
 import styles from './ImageTextSection.module.css';
 
 const ImageTextSection = ({heading, description, button, img, order, customStyle}) => {
-    
     return ( 
         <div
             className= {` ${styles.imageTextRow}

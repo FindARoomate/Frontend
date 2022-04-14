@@ -1,6 +1,6 @@
 import styles from './NotFoundTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
-import Header from '../../../Header';
+import Header from '../../ui/organisms/Header/Header';
 import Button from '../../ui/atoms/Button/Button';
 import P from '../../ui/atoms/P/P';
 import Img from '../../ui/atoms/Img/Img'

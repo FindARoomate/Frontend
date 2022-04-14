@@ -4,7 +4,7 @@ import styles from './MakeRoommateRequestLandingPage.module.css';
 import createProfileImage from './../../../../images/create-profile-section.svg';
 import makeRoommateRequestImage from './../../../../images/make-roomate-request-section.svg';
 import acceptRoommateConnection from './../../../../images/accept-roommate-connection-section.svg';
-
+import heroBackgroundImg from './../../../../images/make-roomate-request-hero-bg.png';
 
 const MakeRoommateRequestLandingPage = () => {
 
@@ -22,10 +22,9 @@ const MakeRoommateRequestLandingPage = () => {
         padding: "0"
     }
     const imgStyle = {}
-    const customStyle = {padding: "52px 0", alignItems: "center"}
+    var customStyle = {padding: "52px 0", alignItems: "center"}
 
     // Hero Section
-
     var heading =  {tag: "H1", text: "Find the perfect roommates..."}
     var description = {text: "A platform to allow people to connect with potential roommates", customStyle: {margin: "37.5px 0px", fontSize: "24px"}} 
     var button = {text: "Get Started", customStyle:{maxWidth: "208px", fontSize: "18px"}}

@@ -25,6 +25,7 @@ body {
 p
 {
   font-size: 13px;
+  margin: 10px 0;
   text-align: left;
 }
 
@@ -54,7 +55,6 @@ input, textarea
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   width: 100%;
-  margin: 10px 0;
 }
 
 input::placeholder, textarea::placeholder
@@ -120,31 +120,6 @@ p
 .desktop-only
 {
   display: none!important;
-}
-
-/* Coming soon page - Mobile */
-.coming-soon-header
-{
-  width: 100%;
-  padding: 17.5px 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.coming-soon-header .mobile-icon
-{
-  display: block;
-}
-
-.coming-soon-header .desktop-icon
-{
-  display: none;
-}
-
-.coming-soon-header .contact-us
-{
-  display: flex;
-  align-items: center;
 }
 
 
@@ -261,7 +236,6 @@ p
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
-
   
 
   input, textarea
@@ -293,38 +267,6 @@ p
     margin: 0px 8px;
   }
   
-  /* Coming soon page - desktop */
-  .coming-soon-header
-  {
-    padding: 30px 100px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .coming-soon-header .mobile-icon
-  {
-    display: none;
-  }
-
-  .coming-soon-header .desktop-icon
-  {
-    display: block;
-    margin:0px;
-    margin-right:8px;
-  }
-
-  .coming-soon-header .contact-us
-  {
-    font-size: 18px;
-    background: #0029DD;
-    padding: 18px 27px;
-    border-radius: 8px;
-  }
-  .coming-soon-header a
-  {
-    color: white;
-  }
-
   .coming-soon-success-message .heading-text
   {
     font-size: 27px;

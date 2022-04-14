@@ -1,4 +1,4 @@
-import Header from '../../../Header';
+import Header from '../../ui/organisms/Header/Header';
 import ComingSoonPageForm from '../../../components/ui/organisms/ComingSoonPageForm/ComingSoonPageForm';
 import styles from './ComingSoonTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';

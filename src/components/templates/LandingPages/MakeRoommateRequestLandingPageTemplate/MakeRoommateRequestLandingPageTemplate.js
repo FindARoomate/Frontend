@@ -1,16 +1,18 @@
 import ImageTextSection from '../../../ui/organisms/ImageTextSection/ImageTextSection';
 import globalStyles from './../../../../components/globalStyles.module.css';
 import styles from './MakeRoommateRequestLandingPageTemplate.module.css';
-import Header from './../../../../Header';
+import Header from '../../../ui/organisms/Header/Header';
 import H2 from '../../../ui/atoms/Headings/H2/H2';
 import TextButtonGroup from '../../../ui/molecules/TextButtonGroup/TextButtonGroup';
 import ContactUsTemplate from '../../ContactUsTemplate/ContactUsTemplate';
 import mobileContactIcon from './../../../../icons/mobile-contact-icon.svg';
 import Footer from '../../../ui/organisms/Footer/Footer';
+import heroBackgroundImg from './../../../../images/make-roomate-request-hero-bg.png';
 
 const MakeRoommateRequestLandingPageTemplate = (props) => {
 
     const {heroSection, createProfile, makeRoommateRequest, acceptConnection} = props;
+    
     const headingStyle = 
     {
         fontWeight: "bold", 
@@ -18,6 +20,15 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
         textAlign: "center", 
         fontFamily: "Open Sans", 
         color: "black"
+    }
+
+    const heroStyle = 
+    {
+        background: `url(${heroBackgroundImg})`,
+        backgroundRepeat: "no-repeat, repeat",
+        backgroundPosition: "bottom",
+        backgroundSize: "cover",
+        padding: "70px 6.5%"
     }
 
     const cta = 
@@ -33,7 +44,7 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                 fontWeight: "600",
                 textAlign: "center",
                 color: "black",
-                marginBottom: "62px"
+                marginBottom: "45px"
             }
         },
         button: 
@@ -49,7 +60,7 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
         }, 
         customStyle:
         {
-            padding: "53px 166px",
+            padding: "53px 11.5%",
             backgroundColor: "#F5F7FF",
             display: "flex",
             alignItems: "center",
@@ -110,21 +121,22 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
     return ( 
         <div className={styles.landingPage}>
             {/* Header */}
-            <Header/>
-            <div className= {`${globalStyles.body} ${styles.comingSoonBody}`}>
+            <Header customStyle={{background: "#F5F7FF"}}/>
+            
                 
-                {/* For Hero Section */}
-                <div className={styles.heroSection}>
-                    <ImageTextSection
-                        heading = {heroSection.heading}
-                        description = {heroSection.description}
-                        button = {heroSection.button}
-                        img = {heroSection.img}
-                        order = {heroSection.order}
-                        customStyle = {heroSection.customStyle ? heroSection.customStyle : {}}
-                    />
-                </div>
-
+            {/* For Hero Section */}
+            <div className={styles.heroSection}>
+                <ImageTextSection
+                    heading = {heroSection.heading}
+                    description = {heroSection.description}
+                    button = {heroSection.button}
+                    img = {heroSection.img}
+                    order = {heroSection.order}
+                    customStyle = {heroStyle}
+                />
+            </div>
+            
+            <div className= {`${globalStyles.body} ${styles.comingSoonBody}`}>
                 <div className={styles.howItWorks}>
 
                     {/* Heading */}
@@ -163,22 +175,22 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
             </div>
 
             <div>
-                    {/* CTA Section */}
-                    <TextButtonGroup
-                        heading = {cta.heading}
-                        description = {cta.description}
-                        button = {cta.button}
-                        customStyle = {cta.customStyle}
-                    />
+                {/* CTA Section */}
+                <TextButtonGroup
+                    heading = {cta.heading}
+                    description = {cta.description}
+                    button = {cta.button}
+                    customStyle = {cta.customStyle}
+                />
 
-                    {/* Contact Template */}
+                {/* Contact Template */}
 
-                    <ContactUsTemplate
-                        preheading = {contact.preheading}
-                        heading = {contact.heading}
-                        subheading = {contact.subheading}
-                        contactFields = {contact.contactFields}
-                    />
+                <ContactUsTemplate
+                    preheading = {contact.preheading}
+                    heading = {contact.heading}
+                    subheading = {contact.subheading}
+                    contactFields = {contact.contactFields}
+                />
             </div>
 
             {/* Footer */}

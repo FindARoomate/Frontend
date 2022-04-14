@@ -1,4 +1,5 @@
 import MakeRoommateRequestLandingPage from './components/pages/LandingPages/MakeRoommateRequestLandingPage/MakeRoommateRequestLandingPage';
+import FindRoommateRequestLandingPage from './components/pages/LandingPages/FindRoommateRequestLandingPage/FindRoommateRequestLandingPage';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import NotFound from './components/pages/NotFound/NotFound';
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path='/' element={<ComingSoon/>} />
           <Route path='/landing-page' element={<MakeRoommateRequestLandingPage/>} />
+          <Route path='/landing-page-2' element={<FindRoommateRequestLandingPage/>} />
           <Route path='/contact' element={<ContactUsTemplate/>} />
           {/* 
           <Route path='/sign-up' element={<SignUp/>} />

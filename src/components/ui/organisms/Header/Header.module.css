@@ -1,0 +1,25 @@
+
+/* Coming soon page - Mobile */
+.header
+{
+  width: 100%;
+  padding: 17.5px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 760px) 
+{
+  /* Coming soon page - desktop */
+  .header
+  {
+    padding: 30px 100px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .header a
+  {
+    color: white;
+  }
+}
