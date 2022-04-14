@@ -1,0 +1,24 @@
+.imageTextRow
+{
+    display:flex;
+    gap: 10%;
+}
+
+.imageFirst
+{
+  flex-direction: row-reverse;
+}
+
+.textFirst
+{
+  flex-direction: row;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+  .imageTextRow > * 
+  {
+    width:50%;
+  }
+}

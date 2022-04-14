@@ -2,6 +2,7 @@ import styles from './Img.module.css';
 
 const P = ({src, customStyle}) => 
 {
+
     return ( 
         <img
         className={styles.img}
@@ -9,6 +10,7 @@ const P = ({src, customStyle}) =>
         src = {src}
       />
      );
+
 }
  
 export default P;

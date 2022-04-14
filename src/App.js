@@ -1,9 +1,8 @@
-import Contact from './Contact';
-import ComingSoon from './components/pages/ComingSoon/ComingSoon';
+import MakeRoommateRequestLandingPage from './components/pages/LandingPages/MakeRoommateRequestLandingPage/MakeRoommateRequestLandingPage';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Login from './Login';
-import SignUp from './SignUp';
+import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import NotFound from './components/pages/NotFound/NotFound';
+import ContactUsTemplate from './components/templates/ContactUsTemplate/ContactUsTemplate';
 
 function App() {
   return (
@@ -11,7 +10,9 @@ function App() {
       <div className="App">
         <Routes>
           <Route path='/' element={<ComingSoon/>} />
-          {/* <Route path='/login' element={<Login/>} />
+          <Route path='/landing-page' element={<MakeRoommateRequestLandingPage/>} />
+          <Route path='/contact' element={<ContactUsTemplate/>} />
+          {/* 
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/contact' element={<Contact/>}/> */}
           <Route path='*' element={<NotFound/>} />

@@ -1,0 +1,24 @@
+.iconList
+{
+    display:flex;
+    gap: 90px;
+    align-items: center;
+    justify-content: center;
+}
+
+.footerBody
+{
+    padding: 23px 0 40px 0;
+}
+
+.footerBody p
+{
+    text-align: center;
+}
+
+.copyright p
+{
+    color: #7D7D7D;
+    font-size: 18px;
+    margin-top: 60px;
+}

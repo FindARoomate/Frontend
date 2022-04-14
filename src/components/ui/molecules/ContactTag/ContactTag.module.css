@@ -1,0 +1,35 @@
+.contactTag
+{
+    display: flex;
+    flex-direction: column;
+    background: #EBEEFC;
+    padding: 10px 18px;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    width: fit-content;
+    font-size: 13px;
+}
+
+.contactType img
+{
+    height: 15px;
+    width: auto;
+    margin-right: 5px;
+}
+
+.contactContent
+{
+  color:#0029DD;
+  margin-top: 2px;
+}
+
+@media screen and (min-width: 760px) 
+{ 
+    .contactTag
+    {
+        padding: 18px 23px;
+        padding-bottom: 15px;
+        font-size: 18px;  
+    }
+
+}

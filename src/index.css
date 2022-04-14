@@ -25,7 +25,6 @@ body {
 p
 {
   font-size: 13px;
-  margin: 10px 0;
   text-align: left;
 }
 
@@ -97,7 +96,7 @@ label
 }
 
 
-
+p
 .gray
 {
   color: #7D7D7D;
@@ -165,82 +164,6 @@ label
   margin: 0;
 }
 
-
-/* Contact page - Mobile */
-
-.contact-body h3
-{
-  color:#0029DD;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.contact-body h1
-{
-  font-weight: 600;
-  font-size: 18px;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.contact-body p
-{
-  font-size: 13px;
-  text-align: left;
-}
-
-.contact-body .contact-box
-{
-  display: flex;
-  flex-direction: column;
-  background: #EBEEFC;
-  padding: 10px 18px;
-  padding-bottom: 15px;
-  border-radius: 5px;
-  width: fit-content;
-  margin-top: 15px;
-  margin-bottom: 40px;
-  font-size: 13px;
-
-}
-
-
-.contact-body .contact-type
-{
-  display: flex;
-  gap: 5px;
-  margin-bottom: 2px;
-  align-items: center;
-}
-
-.contact-body .contact-box .contact-type img
-{
-  height: 10px;
-}
-
-.contact-body .contact-content
-{
-  color:#0029DD;
-  margin-top: 2px;
-}
-
-.contact-body .contact-form
-{
-  background: #EBEEFC;
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.contact-body .contact-form form input, textarea
-{
-  border: none;
-}
-
-.contact-body .contact-form textarea
-{
-  height: 200px;
-}
 
 /* Login page and Sign Up page- Mobile */
 
@@ -338,12 +261,8 @@ label
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
-  /* Universals - Desktop */
-  p
-  {
-    font-size: 20px;
-  }
 
+  
 
   input, textarea
   {
@@ -417,72 +336,7 @@ label
   }
    
   /* Contact page - Desktop */
-  .contact-body
-  {
-    display: flex;
-    gap: 100px;
-    justify-content: space-between;
-    padding-left: 15%;
-    padding-right: 15%;
-  }
-
-  .contact-body h3
-  {
-    font-size: 20px;
-  }
-  
-  .contact-body h1
-  {
-    font-size: 36px;
-  }
-  
-  .contact-body p
-  {
-    font-size: 24px;
-    font-weight: 300;
-  }
-  
-  .contact-body .contact-box
-  {
-    padding: 18px 23px;
-    padding-bottom: 15px;
-    margin-top: 28px;
-    margin-bottom: 40px;
-    font-size: 18px;  
-  }
-  
-  
-  .contact-body .contact-type
-  {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 2px;
-    align-items: center;
-  }
-  
-  .contact-body .contact-box .contact-type img
-  {
-    height: 15px;
-  }
-  
-  .contact-body .contact-content
-  {
-    color:#0029DD;
-    margin-top: 2px;
-  }
-  
-  .contact-body .contact-form
-  {
-    background: #EBEEFC;
-    padding: 20px;
-    border-radius: 5px;
-    width: 530px;
-  }
-  
-  .contact-body .contact-form textarea
-  {
-    height: 200px;
-  }
+ 
 
   /* Login and Sign Up pages - Desktop */
 
