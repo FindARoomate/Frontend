@@ -10,7 +10,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-import "./sliderStyles.module.css";
+import "swiper/css/pagination";
+import "./sliderStyles.css";
 
 // import required modules
 import { Navigation, Pagination } from "swiper";
@@ -35,32 +36,17 @@ const Card = () => {
 
         <div className={styles.card}>
             <div className={styles.top}>
-            <Swiper
-                navigation={true}
-                pagination={true}
-                modules={[Navigation, Pagination]}
-                className="mySwiper"
-            >
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-                <SwiperSlide>{img}</SwiperSlide>
-            </Swiper>
-                {/* <Img src={db} 
-                    customStyle=
-                    {
-                        {
-                            width: "100%", 
-                            maxHeight: "264px",
-                            borderRadius: "8px 8px 0px 0px"
-                        }
-                    }
-                /> */}
+                <Swiper
+                    navigation={true}
+                    pagination={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper"
+                >
+                    <SwiperSlide>{img}</SwiperSlide>
+                    <SwiperSlide>{img}</SwiperSlide>
+                    <SwiperSlide>{img}</SwiperSlide>
+                    <SwiperSlide>{img}</SwiperSlide>
+                </Swiper>
             </div>
             <div className={styles.bottom}>
                 {/* Image title */}

@@ -29,3 +29,29 @@
   height: 100%;
   object-fit: cover;
 }
+
+.swiper-button-prev, .swiper-button-next
+{
+    background: white;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    color: black;
+}
+
+.swiper-button-prev:after, .swiper-button-next:after
+{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.swiper-pagination-bullet
+{
+  background: white;
+  opacity: 100%;
+}
+
+.swiper-pagination-bullet-active
+{
+  background: #0029DD;
+}
