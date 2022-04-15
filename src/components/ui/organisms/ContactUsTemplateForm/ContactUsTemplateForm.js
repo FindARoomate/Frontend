@@ -30,7 +30,7 @@ const ContactUsTemplateForm = () => {
         },
     ]
     return ( 
-        <div>
+        <div className={styles.contactForm}>
             <FormGroup
                 inputs = {inputs}
                 button = {button}

@@ -1,40 +1,133 @@
 import FindRoommateRequestLandingPageHeroSection from '../../../ui/organisms/FindRoommateRequestLandingPageHeroSection/FindRoommateRequestLandingPageHeroSection';
+import FindRoommateRequestLandingPageCTA from '../../../ui/organisms/FindRoommateRequestLandingPageCTA/FindRoommateRequestLandingPageCTA';
 import globalStyles from './../../../../components/globalStyles.module.css';
-import DisplayCards from '../../../ui/organisms/DisplayCards/DisplayCards';
+import mobileContactIcon from './../../../../icons/mobile-contact-icon.svg';
+import ContactUsTemplate from '../../ContactUsTemplate/ContactUsTemplate';
 import styles from './FindRoommateRequestLandingPageTemplate.module.css';
+import Footer from '../../../ui/organisms/Footer/Footer';
 import Header from '../../../ui/organisms/Header/Header';
+import Button from '../../../ui/atoms/Button/Button';
 import H2 from '../../../ui/atoms/Headings/H2/H2';
+import DisplayCards from './DisplayCards';
 
-const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) => {
+const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) => 
+{
+    const contact = 
+    {
+        preheading:
+        {
+            text: "CONTACT US",
+            customStyle: 
+            {
+                fontSize: "40px",
+                fontFamily: "Open Sans",
+                fontWeight: "600",
+                textAlign: "center",
+                color: "black",
+            }
+        },
+        heading: 
+        {
+            text: "How can we help you?",
+            customStyle: 
+            {
+                fontSize: "40px",
+                fontFamily: "Open Sans",
+                fontWeight: "600",
+                textAlign: "center",
+                color: "black",
+            }
+        },
+        subheading: 
+        {
+            text: "Fill the form or send an email",
+            customStyle: 
+            {
+                fontSize: "40px",
+                fontFamily: "Open Sans",
+                fontWeight: "600",
+                textAlign: "center",
+                color: "black",
+            }
+        },
+        contactFields:
+        [
+            {
+                key: 1,
+                name: "Email Address",
+                icon: mobileContactIcon,
+                value: "contact@findaroommate.com"
+            }
+        ],
+    }
+
+
+    const buttonStyle =
+    {
+        width: "281px",
+        float: "right",
+        fontSize: "17px",
+        padding: "19px",
+        marginRight: "9%",
+        fontWeight: "400",
+        marginTop: "38px",
+        lineHeight: "18px"
+    }
+
+    const headerLinks = 
+    [
+        {
+            id: 1,
+            text: "Contact us",
+            path: '#contact-us'
+        },
+        {
+            id: 2,
+            text: "Create request",
+            path: '/create-request'
+        }
+    ]
+
     return ( 
         <div className={styles.landingPage}>
-            <Header/>
+            <Header
+                links = {headerLinks}
+                signIn = {true}
+                createAccount = {true}
+            />
             
             {/* For Hero Section */}
             <div className={styles.heroSection}>
                 <FindRoommateRequestLandingPageHeroSection/>
             </div>
 
-            <div className={`${globalStyles.body} ${styles.comingSoonBody}`}>
+            <div className={`${globalStyles.body} ${styles.landingPageBody}`}>
                 {/* For Explore Section */}
-                <H2
-                    customStyle=
-                    {{
-                            fontSize: "56px",
-                            fontWeight: "700",
-                            fontFamily: "Open Sans",
-                            color: "black",
-                            textAlign: "center"
-                        }}
-                >
-                    Explore
-                </H2>
+                <H2>Explore</H2>
 
                 {/* To display roommate request cards */}
-                <DisplayCards
-                    data={roommateRequests}
-                />
+                <div className={styles.roommateRequests}>
+                    <DisplayCards data={roommateRequests}/>
+                    <Button customStyle={buttonStyle}>View more requests</Button>
+                </div>
             </div>
+
+            {/* CTA */}
+            <FindRoommateRequestLandingPageCTA/>
+
+             {/* Contact Template */}
+
+             <ContactUsTemplate
+                    id = "contact-us"
+                    preheading = {contact.preheading}
+                    heading = {contact.heading}
+                    subheading = {contact.subheading}
+                    contactFields = {contact.contactFields}
+                />
+                
+            {/* Footer */}
+            <Footer/>
+
         </div>
      );
 }

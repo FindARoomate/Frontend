@@ -1,0 +1,19 @@
+.landingPageBody
+{
+    padding-top: 62px;
+    padding-bottom: 62px;
+}
+
+.landingPage h2
+{
+    font-size: 56px;
+    font-weight: 700;
+    font-family: Open Sans;
+    color: black;
+    text-align: center;
+}
+
+.roommateRequests
+{
+    padding: 16px 0 238px 0;
+}

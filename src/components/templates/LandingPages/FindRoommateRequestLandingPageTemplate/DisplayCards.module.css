@@ -1,0 +1,19 @@
+*
+{
+    box-sizing: border-box;
+}
+.displayCards
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.displayCards > *
+{
+    width: 32%;
+    max-width: 389px;
+    margin: 12px 0;
+}

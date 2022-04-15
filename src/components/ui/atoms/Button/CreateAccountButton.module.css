@@ -1,0 +1,12 @@
+.createAccount button
+{
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 20px;
+    background: #0029DD;
+    color: white;
+    font-weight: 600;
+    width: 187px;
+    max-width: 187px;
+}

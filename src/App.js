@@ -3,7 +3,7 @@ import FindRoommateRequestLandingPage from './components/pages/LandingPages/Find
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import NotFound from './components/pages/NotFound/NotFound';
-import ContactUsTemplate from './components/templates/ContactUsTemplate/ContactUsTemplate';
+import Header from './components/ui/organisms/Header/Header';
 
 function App() {
   return (
@@ -11,9 +11,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path='/' element={<ComingSoon/>} />
-          <Route path='/landing-page' element={<MakeRoommateRequestLandingPage/>} />
-          <Route path='/landing-page-2' element={<FindRoommateRequestLandingPage/>} />
-          <Route path='/contact' element={<ContactUsTemplate/>} />
+          <Route path='/create-request' element={<MakeRoommateRequestLandingPage/>} />
+          <Route path='/view-requests' element={<FindRoommateRequestLandingPage/>} />
           {/* 
           <Route path='/sign-up' element={<SignUp/>} />
           <Route path='/contact' element={<Contact/>}/> */}

@@ -1,0 +1,8 @@
+.contactForm input:nth-child(2)
+{
+    margin: 20px 0;
+}
+.contactForm textarea
+{
+    margin-bottom: 20px;
+}

@@ -117,12 +117,34 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
         ],
     }
 
+    const headerLinks = 
+    [
+        {
+            id: 1,
+            text: "Home",
+            path: '/create-request'
+        },
+        {
+            id: 2,
+            text: "How it works",
+            path: '/create-request'
+        },
+        {
+            id: 3,
+            text: "Contact us",
+            path: "#contact-us"
+        }
+    ]
+
 
     return ( 
         <div className={styles.landingPage}>
             {/* Header */}
-            <Header customStyle={{background: "#F5F7FF"}}/>
-            
+            <Header
+                customStyle={{background: "#F5F7FF"}}
+                links = {headerLinks}
+                signIn = {true}
+            />
                 
             {/* For Hero Section */}
             <div className={styles.heroSection}>
@@ -142,7 +164,13 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                     {/* Heading */}
                     <H2 customStyle={headingStyle}>How it works</H2>
 
-                    {/* Create Profile Section */}
+                    {/* Create Profile Section - Refactor to conditional*/}
+                    {createProfile && (
+                        <div>
+                            
+                        </div> 
+                    )}
+
                     <ImageTextSection
                             heading = {createProfile.heading}
                             description = {createProfile.description}

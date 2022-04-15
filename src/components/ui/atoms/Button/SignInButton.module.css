@@ -1,0 +1,13 @@
+.signIn button
+{
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 19px;
+    background: none;
+    border: 2px solid #0029DD;
+    color: #0029DD;
+    font-weight: 600;
+    width: 185px;
+    max-width: 187px;
+}
