@@ -1,7 +1,6 @@
 .imageTitle
 {
     display: flex;
-    align-items: center;
     gap: 5px;
 }
 
@@ -13,7 +12,7 @@
 
 .description p
 {
-    font-size: 16.25px;
+    font-size: 14px;
     font-weight: 600;
     color: #000E4A;
 }
@@ -43,7 +42,7 @@
 
 .card .bottom
 {
-    padding: 16px 26px 33px 26px;
+    padding: 16px 26px 30px 26px;
     border-radius: 0px 0px 8px 8px;
     /* border: 1px solid red; */
     margin: 0;
@@ -59,4 +58,22 @@
     padding: 12px;
     font-weight: 600;
     margin-top: 23px;
+}
+
+@media screen and (min-width: 760px) 
+{
+    .description p
+    {
+        font-size: 16.25px;
+    }
+
+    .card button
+    {
+        float:left;
+    }
+    
+    .card .bottom
+    {
+        padding: 16px 26px 90px 26px;
+    }
 }

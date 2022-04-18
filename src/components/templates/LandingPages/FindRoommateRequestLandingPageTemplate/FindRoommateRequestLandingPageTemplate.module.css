@@ -1,12 +1,12 @@
 .landingPageBody
 {
-    padding-top: 62px;
-    padding-bottom: 62px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .landingPage h2
 {
-    font-size: 56px;
+    font-size: 24px;
     font-weight: 700;
     font-family: Open Sans;
     color: black;
@@ -15,5 +15,48 @@
 
 .roommateRequests
 {
-    padding: 16px 0 238px 0;
+    padding: 16px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.roommateRequests button
+{
+    width: auto;
+    max-width: 281px;
+    font-size: 13px;
+    padding: 15px 25px; 
+    font-weight: 400;
+    margin-top: 38px;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .landingPageBody
+    {
+        padding-top: 42px;
+        padding-bottom: 62px;
+    }
+
+    .roommateRequests
+    {
+        padding: 26px 0 72px 0;
+    }
+    
+    .roommateRequests button
+    {
+        font-size: 18px;
+        padding: 20px 54px;
+        margin-right: 9%;
+        font-weight: 400;
+        margin-top: 38px;
+        line-height: 18px;
+    }
+
+    .landingPage h2
+    {
+        font-size: 56px;
+    }
+} 

@@ -10,7 +10,7 @@ const FindRoommateRequestLandingPageCTA = () => {
                 <H3>Not here to view roommate requests?</H3>
                 <P>If you have your own room and would like to find a roommate for yourself, you can create your own request.</P>
             </div>
-            <div>
+            <div className={styles.ctaButton}>
                 <Button>Create a roommate request</Button>
             </div>
         </div>

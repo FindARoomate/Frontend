@@ -2,18 +2,35 @@
 {
     box-sizing: border-box;
 }
+
 .displayCards
 {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .displayCards > *
 {
-    width: 32%;
-    max-width: 389px;
+    width: auto;
+    max-width: 80vw;
     margin: 12px 0;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .displayCards
+    {
+        justify-content: space-around;
+    }   
+
+    .displayCards > *
+    {
+        width: 32%;
+        max-width: 389px;
+        margin: 12px 0;
+    }
+    
 }

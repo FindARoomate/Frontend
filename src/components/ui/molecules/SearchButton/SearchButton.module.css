@@ -1,9 +1,30 @@
 .searchButton
 {
     display: flex;
-    gap:0;
-
+    align-items: center;
+    width: 100%;
+    justify-content: center;
 }
+
+.searchButton input
+{
+    padding: 16px;
+    height: 48px;
+    width: 72%;
+}
+
+.searchButton button
+{
+    padding: 16px;
+    height: 48px;
+    margin-left: -10px;
+    width: 28%;
+    /* max-width: 95px;  */
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
 
 .searchButton input
 {
@@ -16,4 +37,7 @@
     padding: 18px;
     height: 64px;
     margin-left: -10px;
+    max-width:176px;
+}
+
 }

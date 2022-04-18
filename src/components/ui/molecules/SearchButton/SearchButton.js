@@ -10,7 +10,7 @@ const SearchButton = ({placeholder}) => {
                 placeholder={placeholder}
             />
             <Button
-                customStyle={{maxWidth:"176px"}}
+                customStyle={{}}
             >Search</Button>
         </div>
      );

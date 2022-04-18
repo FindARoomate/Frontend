@@ -61,19 +61,6 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) =>
         ],
     }
 
-
-    const buttonStyle =
-    {
-        width: "281px",
-        float: "right",
-        fontSize: "17px",
-        padding: "19px",
-        marginRight: "9%",
-        fontWeight: "400",
-        marginTop: "38px",
-        lineHeight: "18px"
-    }
-
     const headerLinks = 
     [
         {
@@ -97,7 +84,7 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) =>
             />
             
             {/* For Hero Section */}
-            <div className={styles.heroSection}>
+            <div>
                 <FindRoommateRequestLandingPageHeroSection/>
             </div>
 
@@ -108,7 +95,7 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) =>
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
                     <DisplayCards data={roommateRequests}/>
-                    <Button customStyle={buttonStyle}>View more requests</Button>
+                    <Button>View more requests</Button>
                 </div>
             </div>
 

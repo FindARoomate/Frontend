@@ -1,14 +1,21 @@
 .hero
 {
     display: flex;
-    min-height: 80vh;
+    min-height: 60vh;
     align-items:center;
+    background: url('../../../../images/find-roommate-request-landing-page-hero-bg.svg');
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 45px 15px;
+
 }
 
 .hero h1
 {
     color: white;
-    margin-bottom: 40px;
+    font-size: 32px;
+    margin-bottom: 32px;
 }
 
 /* Tablet and Desktop view */
@@ -16,15 +23,16 @@
 {
     .hero
     {
-        background: url('../../../../images/find-roommate-request-landing-page-hero-bg.svg');
-        background-repeat: no-repeat, repeat;
-        background-position: center;
-        background-size: cover;
+        min-height: 80vh;
         padding: 70px 6.5%;
     }
     .hero > *
     {
         width: 50%
     }
-    
+    .hero h1
+    {
+        font-size: 60px;
+        margin-bottom: 40px;
+    }
 }
