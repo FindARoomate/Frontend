@@ -9,14 +9,6 @@ import globalStyles from './../../../../components/globalStyles.module.css';
 
 const Footer = () => {
 
-    const paragraphStyle = 
-    {
-        fontSize: "28px",
-        color: "#0029DD",
-        fontWeight: "600",
-        marginBottom: "25px"
-    }
-
     const icons = 
     [
         {
@@ -43,15 +35,16 @@ const Footer = () => {
 
     return ( 
         <div className= {`${globalStyles.body} ${styles.footerBody}`}>
-            
-            <P customStyle = {paragraphStyle}>Connect with us on</P>
-            
-            <div className={styles.iconList}>
-                <IconList icons={icons}/>
-            </div>
+            <div className={styles.footer}>
+                <P>Connect with us on</P>
+                
+                <div className={styles.iconList}>
+                    <IconList icons={icons}/>
+                </div>
 
-            <div className={styles.copyright}>
-                <P>Find a roommate.com © {new Date().getFullYear()}.</P>
+                <div className={styles.copyright}>
+                    <P>Find a roommate.com © {new Date().getFullYear()}.</P>
+                </div>
             </div>
         </div>
      );

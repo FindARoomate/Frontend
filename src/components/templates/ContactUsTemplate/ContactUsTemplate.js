@@ -16,10 +16,7 @@ const ContactUsTemplate = ({preheading, heading, subheading, contactFields}) =>
                 <div>
                     <H3>{preheading.text}</H3>
                     <H1>{heading.text}</H1>
-
-                    <P customStyle={{marginBottom: "28px",  fontSize: "24px", color: "#7D7D7D"}}>
-                        {subheading.text}
-                    </P>
+                    <P>{subheading.text}</P>
 
                     {/* Get All Contact Fields */}
                     {contactFields.map( (contact) => 

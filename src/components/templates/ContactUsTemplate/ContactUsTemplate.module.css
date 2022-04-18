@@ -1,5 +1,10 @@
 
 
+.contactBody
+{
+    padding-bottom: 63px;
+}
+
 .contactBody h3
 {
   color:#0029DD;
@@ -7,13 +12,15 @@
   font-weight: 700;
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;
+  margin-bottom: 10px;
 }
 
 .contactBody h1
 {
-  font-weight: 600;
+  font-weight: bold;
   font-size: 18px;
   font-family: 'Open Sans', sans-serif;
+  color: black;
 }
 
 .contactBody p
@@ -62,12 +69,13 @@
     .contactBody h3
     {
         font-size: 24px;
+        margin: 0;
     }
 
     .contactBody h1
     {
+      font-weight: 600;
         font-size: 36px;
-        color: black;
     }
 
 

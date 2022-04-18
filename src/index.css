@@ -22,13 +22,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p
-{
-  font-size: 13px;
-  margin: 10px 0;
-  text-align: left;
-}
-
 a
 {
   text-decoration: none;

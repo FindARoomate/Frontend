@@ -8,19 +8,12 @@ import ContactUsTemplate from '../../ContactUsTemplate/ContactUsTemplate';
 import mobileContactIcon from './../../../../icons/mobile-contact-icon.svg';
 import Footer from '../../../ui/organisms/Footer/Footer';
 import heroBackgroundImg from './../../../../images/make-roomate-request-hero-bg.png';
+import H3 from '../../../ui/atoms/Headings/H3/H3';
+import Button from '../../../ui/atoms/Button/Button';
 
 const MakeRoommateRequestLandingPageTemplate = (props) => {
 
     const {heroSection, createProfile, makeRoommateRequest, acceptConnection} = props;
-    
-    const headingStyle = 
-    {
-        fontWeight: "bold", 
-        fontSize:"48px", 
-        textAlign: "center", 
-        fontFamily: "Open Sans", 
-        color: "black"
-    }
 
     const heroStyle = 
     {
@@ -33,31 +26,17 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
 
     const cta = 
     {
-        heading: 
-        {
-            tag: "H3",
-            text: "Getting an ideal roommate doesn’t have to be stressful. Allow Findaroommate.com do the work for you!",
-            customStyle: 
+        heading: <H3 customStyle = {
             {
-                fontSize: "40px",
-                fontFamily: "Open Sans",
-                fontWeight: "600",
-                textAlign: "center",
-                color: "black",
-                marginBottom: "45px"
-            }
-        },
-        button: 
-        {
-            text: "Get Started",
-            customStyle: 
-            {
-                maxWidth: "208px",
-                padding: "17px 50px",
-                fontSize: "16px",
-                fontWeight: 600
-            }
-        }, 
+             
+            }}>
+            Getting an ideal roommate doesn't have to be stressful.<br></br>
+            Allow <span style={{color: "#0029DD"}}>Findaroommate.com</span> do the work for you!</H3>
+        ,
+        button: <Button customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>
+                    Get Started
+                </Button> 
+        , 
         customStyle:
         {
             padding: "53px 11.5%",
@@ -157,72 +136,72 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                     customStyle = {heroStyle}
                 />
             </div>
-            
-            <div className= {`${globalStyles.body} ${styles.comingSoonBody}`}>
+            <div className= {`${globalStyles.body} ${styles.makeRoommateRequestBody}`}>
                 <div className={styles.howItWorks}>
-
                     {/* Heading */}
-                    <H2 customStyle={headingStyle}>How it works</H2>
+                    <H2>How it works</H2>
 
                     {/* Create Profile Section - Refactor to conditional*/}
-                    {createProfile && (
-                        <div>
-                            
-                        </div> 
-                    )}
-
-                    <ImageTextSection
-                            heading = {createProfile.heading}
-                            description = {createProfile.description}
-                            button = {createProfile.button}
-                            img = {createProfile.img}
-                            order = {createProfile.order}
-                            customStyle = {createProfile.customStyle ? createProfile.customStyle : {}}
-                    />
-
+                    <div className={styles.createProfile}>
+                        <ImageTextSection
+                                heading = {createProfile.heading}
+                                description = {createProfile.description}
+                                button = {createProfile.button}
+                                img = {createProfile.img}
+                                order = {createProfile.order}
+                                customStyle = {createProfile.customStyle ? createProfile.customStyle : {}}
+                        />
+                    </div>
+                    
                     {/* Make Roommate Request Section */}
-                    <ImageTextSection
-                            heading = {makeRoommateRequest.heading}
-                            description = {makeRoommateRequest.description}
-                            button = {makeRoommateRequest.button}
-                            img = {makeRoommateRequest.img}
-                            order = {makeRoommateRequest.order}
-                            customStyle = {makeRoommateRequest.customStyle ? makeRoommateRequest.customStyle : {}}
-                    />
-
+                    <div className={styles.makeRequest}>
+                        <ImageTextSection
+                                heading = {makeRoommateRequest.heading}
+                                description = {makeRoommateRequest.description}
+                                button = {makeRoommateRequest.button}
+                                img = {makeRoommateRequest.img}
+                                order = {makeRoommateRequest.order}
+                                customStyle = {makeRoommateRequest.customStyle ? makeRoommateRequest.customStyle : {}}
+                        />
+                    </div>
+                    
                     {/* Accept Roommate Connection Section */}
-                    <ImageTextSection
-                            heading = {acceptConnection.heading}
-                            description = {acceptConnection.description}
-                            button = {acceptConnection.button}
-                            img = {acceptConnection.img}
-                            order = {acceptConnection.order}
-                            customStyle = {acceptConnection.customStyle ? acceptConnection.customStyle : {}}
+                    <div className={styles.acceptConnection}>
+                        <ImageTextSection
+                                heading = {acceptConnection.heading}
+                                description = {acceptConnection.description}
+                                button = {acceptConnection.button}
+                                img = {acceptConnection.img}
+                                order = {acceptConnection.order}
+                                customStyle = {acceptConnection.customStyle ? acceptConnection.customStyle : {}}
+                        />
+                    </div>
+                    
+                    </div>
+                </div>
+                <div>
+                {/* CTA Section */}
+                <div className={styles.cta}>
+                    <TextButtonGroup
+                        heading = {cta.heading}
+                        description = {cta.description}
+                        button = {cta.button}
+                        customStyle = {cta.customStyle}
                     />
                 </div>
-            </div>
-
-            <div>
-                {/* CTA Section */}
-                <TextButtonGroup
-                    heading = {cta.heading}
-                    description = {cta.description}
-                    button = {cta.button}
-                    customStyle = {cta.customStyle}
-                />
+                
+            </div>       
 
                 {/* Contact Template */}
-
                 <ContactUsTemplate
                     preheading = {contact.preheading}
                     heading = {contact.heading}
                     subheading = {contact.subheading}
                     contactFields = {contact.contactFields}
                 />
-            </div>
 
-            {/* Footer */}
-            <Footer/>
+                {/* Footer */}
+                <Footer/>
 
         </div>
      );

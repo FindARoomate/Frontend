@@ -8,6 +8,7 @@
     border-radius: 5px;
     width: fit-content;
     font-size: 13px;
+    margin: 17px 0px;
 }
 
 .contactType img
@@ -30,6 +31,7 @@
         padding: 18px 23px;
         padding-bottom: 15px;
         font-size: 18px;  
+        margin: 28px 0px;
     }
 
 }

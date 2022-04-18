@@ -1,16 +1,191 @@
 
-.howItWorks
+/* Hero Section */
+
+.heroSection
 {
-    padding: 52.5px 0;
+    flex-wrap: wrap;
 }
 
+/* .heroSection div
+{
+    padding: 70px 6.5%;
+} */
 .heroSection h1
 {
     letter-spacing: -1px;
 }
 
+.heroSection p
+{
+    font-size: 16px;
+    margin: 8px 0px 32px 0px;
+}
+
+.heroSection button
+{
+    margin-bottom: 40px;
+}
+
+/* How it works */
+.howItWorks
+{
+    padding: 0 0 52.5px 0;
+}
+
+.howItWorks h2
+{
+    font-weight: bold; 
+    font-size: 24px; 
+    text-align: center; 
+    font-family: 'Open Sans'; 
+    color: black;
+}
+
+.howItWorks h3
+{
+    color: black;
+    font-family: 'Open Sans';
+    font-size: 18px;
+}
+
+.howItWorks p
+{
+    margin: 8px 0px;
+    font-size: 14px;
+}
+
+.howItWorks button 
+{
+    background: none; 
+    color: #0029DD; 
+    opacity: 70%;
+    text-decoration: underline; 
+    text-align: left;
+    padding: 0;
+    font-size: 14px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.howItWorks img
+{
+    width: 218px;
+    height: auto;
+    margin-top: 40px;
+}
+
+.howItWorks .createProfile, .howItWorks .makeRequest, .howItWorks .acceptConnection
+{
+    padding: 20px 0;
+}
+
+/* Make Roommate Request Landing Page Template Body */
+.makeRoommateRequestBody
+{
+    padding: 0px 15px 10px 15px;;
+
+}
+
+/* CTA */
+.cta h3
+{
+    text-align: center;
+    color: black;
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
+    /* Hero section */
 
+    /* .heroSection div
+    {
+        padding: 70px 6.5%;
+    } */
+
+    .heroSection p
+    {
+        margin: 16px 0px 32px 0px;
+        font-size: 24px;    
+    }
+
+    .heroSection button
+    {
+        font-size: 18px;
+        margin-bottom: 0px;
+    }
+
+    /* How it works section */
+
+    .howItWorks
+    {
+        padding: 52.5px 0;
+    }
+
+    .howItWorks h2
+    {
+        font-size: 48px; 
+    }
+
+    .howItWorks h3
+    {
+        font-size:32px;
+        font-weight: 600;
+    }
+
+    .howItWorks p
+    {
+        margin: 26px 0px;
+        font-size: 24px;
+    }
+
+    .howItWorks button
+    {
+        font-size: 24px; 
+    }
+
+    .howItWorks img
+    {
+        width: 100%;
+        height: auto;
+    }
+
+    .howItWorks .createProfile img
+    {
+        max-width: 324px;
+    }
+
+    .howItWorks .makeRequest img
+    {
+        max-width: 511px;
+    }
+
+    .howItWorks .acceptConnection img
+    {
+        max-width: 546px;
+    }
+
+    .howItWorks .createProfile, .howItWorks .makeRequest, .howItWorks .acceptConnection
+    {
+        padding: 52px 0;
+    }
+
+    /* Make Roommate Request Landing Page Template Body */
+    .makeRoommateRequestBody
+    {
+        padding: 70px 6.5%;
+
+    }
+
+    /* CTA */
+    .cta h3
+    {
+        font-size: 40px;
+        margin-bottom: 45px;
+    }
+   
 }

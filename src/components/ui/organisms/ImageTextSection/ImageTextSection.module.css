@@ -2,6 +2,7 @@
 {
     display:flex;
     gap: 10%;
+    flex-wrap: wrap;
 }
 
 .imageFirst
@@ -17,12 +18,25 @@
 .img 
 {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.img img
+{
+  width: 80vw;
+  height: auto;
+  margin: 0 auto;
 }
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
+  .imageTextRow
+  {
+      flex-wrap: nowrap;
+  }
   .imageTextRow > * 
   {
     width:50%;

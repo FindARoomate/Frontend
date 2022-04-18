@@ -1,7 +1,7 @@
 button
 {
-  padding: 10px 15px;
-  font-size: 14px;
+  padding: 15px;
+  font-size: 13px;
   border-radius: 8px;
   border: none;
   color: white;
@@ -11,6 +11,8 @@ button
   cursor: pointer;
   width: 100%;
   background: #0029DD;
+  max-width: 170px;
+
 }
 
 button:disabled
@@ -26,5 +28,7 @@ button:disabled
     padding: 15px 30px;
     font-size: 20px;
     font-weight: 400;
+    width: 100%;
+    max-width: 208px;
   }
 }
