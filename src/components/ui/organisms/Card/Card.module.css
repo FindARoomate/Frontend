@@ -1,13 +1,14 @@
 .imageTitle
 {
     display: flex;
-    gap: 5px;
+    /* gap: 5px; */
     align-items: center;
 }
 
 .imageTitle p
 {
     font-size: 10.83px;
+    margin-left: 5px;
     color: #00082C;
 }
 
