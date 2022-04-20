@@ -13,9 +13,20 @@
 
 .displayCards > *
 {
-    width: auto;
-    max-width: 80vw;
+    width: 100%;
     margin: 12px 0;
+}
+
+.topSection p
+{
+    font-weight: bold;
+    margin: 4px 0;
+}
+
+.bottom
+{
+    padding: 32px 0;
+    text-align: center;
 }
 
 /* Tablet and Desktop view */
@@ -23,14 +34,26 @@
 {
     .displayCards
     {
-        justify-content: space-around;
+        justify-content: space-between;
     }   
 
     .displayCards > *
     {
-        width: 32%;
-        max-width: 389px;
+        width: 32.5%;
+        max-width: 390px;
         margin: 12px 0;
+    }
+
+    .topSection p
+    {
+        margin: 22px 0;
+    }
+
+    .bottom
+    {
+        text-align: right;
+        padding-top: 51px;
+        padding-bottom: 0px;
     }
     
 }

@@ -2,12 +2,19 @@
 {
     display: flex;
     gap: 5px;
+    align-items: center;
 }
 
 .imageTitle p
 {
     font-size: 10.83px;
     color: #00082C;
+}
+
+.description
+{
+    margin: 8px 0;
+
 }
 
 .description p
@@ -29,7 +36,7 @@
 .card
 {
     /* border: 1px solid black; */
-    border-radius: 8px;
+    border-radius: 16px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -37,13 +44,14 @@
 {
     margin: 0;
     padding: 0;
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 16px 16px 0px 0px;
+    background: transparent;
 }
 
 .card .bottom
 {
     padding: 16px 26px 30px 26px;
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 0px 16px 16px;
     /* border: 1px solid red; */
     margin: 0;
 }
@@ -57,11 +65,15 @@
     font-size: 12px;
     padding: 12px;
     font-weight: 600;
-    margin-top: 23px;
+    margin: 0;
 }
 
 @media screen and (min-width: 760px) 
 {
+    .description
+    {
+        margin: 16px 0px;
+    }
     .description p
     {
         font-size: 16.25px;

@@ -1,0 +1,24 @@
+.searchOptions
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.searchOptions .searchSelect
+{
+    margin: 8px 20px 8px 0;
+}
+
+@media screen and (min-width: 760px) 
+{
+    .searchOptions
+    {
+        flex-wrap: nowrap;
+    }
+    .searchOptions .searchSelect
+    {
+        margin: 8px 24px 8px 0px;
+    }
+    
+}

@@ -1,0 +1,20 @@
+.select
+{
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: 'Open Sans';
+    color: #7D7D7D;
+    border: 1px solid #7D7D7D;
+}
+
+
+@media screen and (min-width: 760px) 
+{
+    .select
+    {
+        padding: 15px 16px;
+        font-size: 20px;
+    }
+    
+}

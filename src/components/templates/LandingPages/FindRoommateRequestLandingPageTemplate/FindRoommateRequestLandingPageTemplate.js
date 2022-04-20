@@ -9,6 +9,7 @@ import Header from '../../../ui/organisms/Header/Header';
 import Button from '../../../ui/atoms/Button/Button';
 import H2 from '../../../ui/atoms/Headings/H2/H2';
 import DisplayCards from './DisplayCards';
+import { Link } from 'react-router-dom';
 
 const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) => 
 {
@@ -95,7 +96,9 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) =>
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
                     <DisplayCards data={roommateRequests}/>
-                    <Button>View more requests</Button>
+                    <Link to ="/view-more-requests">
+                        <Button>View more requests</Button>
+                    </Link>
                 </div>
             </div>
 

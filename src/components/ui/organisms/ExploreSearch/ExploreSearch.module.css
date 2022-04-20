@@ -1,0 +1,17 @@
+.queryTitle
+{
+    color: #0029DD;
+    font-weight: 600;
+    margin-top:8px;
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+
+@media screen and (min-width: 760px) 
+{
+    .queryTitle
+    {
+        margin:16px 0px;
+        font-size: 20px;
+    }
+}

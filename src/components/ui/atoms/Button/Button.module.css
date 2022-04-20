@@ -12,6 +12,7 @@ button
   width: 100%;
   background: #0029DD;
   max-width: 170px;
+  white-space: nowrap;
 
 }
 

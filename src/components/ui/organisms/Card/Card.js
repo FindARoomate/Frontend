@@ -25,7 +25,7 @@ const Card = () => {
             {
                 width: "100%", 
                 maxHeight: "264px",
-                borderRadius: "8px 8px 0px 0px"
+                borderRadius: "16px 16px 0px 0px"
             }
         }
     />
