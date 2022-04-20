@@ -10,6 +10,11 @@
     margin: 8px 20px 8px 0;
 }
 
+.searchOptions select
+{
+    background: #F5F7FF;
+}
+
 @media screen and (min-width: 760px) 
 {
     .searchOptions

@@ -34,7 +34,7 @@ const ViewMoreRoommateRequestsTemplate = () =>
                 createAccount = {true}
             />
 
-            <div className={`${globalStyles.body} ${styles.landingPageBody}`}>
+            <div className={`${globalStyles.body} ${styles.viewMoreRequestBody}`}>
 
                 <H2>Explore</H2>
                 <div className={styles.searchBar}>

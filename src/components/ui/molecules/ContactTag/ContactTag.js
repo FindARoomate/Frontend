@@ -5,7 +5,7 @@ const ContactTag = ({icon, name, value}) => {
         <div className={styles.contactTag}>
             <span className={styles.contactType}>
                 <img src={icon} className={styles.mobileContactIcon}/>
-                {name}
+                <p>{name}</p>
             </span>
             <span className={styles.contactContent}>
                 {value}
