@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchOptions from '../../molecules/Search/SearchOptions/SearchOptions';
 import styles from './ExploreSearch.module.css';
 import DisplaySearchTags from '../../molecules/Search/DisplaySearchTags/DisplaySearchTags';
@@ -36,21 +36,21 @@ const ExploreSearch = () =>
         }
     ]
 
+    useEffect(() => {
+        console.log(tagKeys)
+    }, [tagKeys])
+
     const showSelectTagsOnExplorePage = (data) =>{
     //     console.log("here");
     //     var temp = tagKeys ? tagKeys : [];
     //     temp[data[0]] = data[1];
     //     updateTagKeys(tagKeys => {
-    //         tagKeys[data[0]] = data[1]  
-    //     });
-
-        updateTagKeys(function(tagKeys)
-        {   
+    //         tagKeys[data[0]] = data[1]       
+    //     });]
             var key = data[0];
-            var value = data[1];
-            tagKeys[key] = value;          
-            return tagKeys;
-        });
+            var value = data[1]; 
+
+        updateTagKeys({...tagKeys, [key]: value});
         console.log(tagKeys);
     }
 
