@@ -36,10 +36,6 @@ const ExploreSearch = () =>
         }
     ]
 
-    useEffect(() => {
-        console.log(tagKeys)
-    }, [tagKeys])
-
     const showSelectTagsOnExplorePage = (data) =>{
     //     console.log("here");
     //     var temp = tagKeys ? tagKeys : [];
