@@ -1,7 +1,6 @@
 import styles from './ViewMoreRoommateRequestsTemplate.module.css';
 import Footer from '../../ui/organisms/Footer/Footer';
 import Header from '../../ui/organisms/Header/Header';
-import Button from '../../ui/atoms/Button/Button';
 import H2 from '../../ui/atoms/Headings/H2/H2';
 import DisplayCards from '../../templates/LandingPages/FindRoommateRequestLandingPageTemplate/DisplayCards';
 import globalStyles from './../../../components/globalStyles.module.css';
@@ -44,7 +43,7 @@ const ViewMoreRoommateRequestsTemplate = () =>
 
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
-                    <DisplayCards data={roommateRequests}/>
+                    <DisplayCards data={roommateRequests} pagination={true}/>
                 </div>
             </div>
 

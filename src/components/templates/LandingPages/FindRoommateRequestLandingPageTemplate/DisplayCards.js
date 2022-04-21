@@ -2,7 +2,7 @@ import P from "../../../ui/atoms/P/P";
 import Card from "../../../ui/organisms/Card/Card";
 import styles from './DisplayCards.module.css';
 
-const DisplayCards = () => {
+const DisplayCards = ({pagination}) => {
     return ( 
         <div className={styles.displayCardContainer}>
             <div className={styles.topSection}>
@@ -20,9 +20,12 @@ const DisplayCards = () => {
                     <Card/>
                     <Card/>
                 </div>
-                <div className={styles.bottom}>
-                    <P>Pagination should be here</P>
-                </div>
+                {pagination && (
+                     <div className={styles.bottom}>
+                     <P>Pagination should be here</P>
+                 </div>
+                )}
+               
             </div>
              
         </div>

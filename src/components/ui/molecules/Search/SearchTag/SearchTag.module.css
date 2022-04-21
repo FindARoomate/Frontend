@@ -1,0 +1,20 @@
+.searchTag
+{
+    background: #0029DD;
+    padding: 3px 7px;
+    border-radius: 100px;
+    width: fit-content;
+    color: white;
+    font-size: 10px;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .searchTag
+    {
+        font-size: 16px;
+        padding: 7px 15px;
+    }
+    
+}

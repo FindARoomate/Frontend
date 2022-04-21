@@ -1,16 +1,24 @@
 import Select from "../../../atoms/Select/Select";
 import styles from './SearchOptions.module.css';
+const SearchOptions = ({filters, showSelectTagsOnExplorePage}) => {
 
-const SearchOptions = ({filters}) => {
-    return (
+    const showSelectTags = (data) => 
+    {
+        showSelectTagsOnExplorePage(data);
+    }
+
+return (
 
         <div className={styles.searchOptions}>
             {
                 filters.map((filter) => 
                 {
                     return  (
-                        <div className={styles.searchSelect}>
-                            <Select key={filter.key} data={filter}/>
+                        <div key={filter.key} className={styles.searchSelect}>
+                            <Select
+                                data={filter} 
+                                showSelectTags={showSelectTags} 
+                            />
                         </div>
                     )
                 })
