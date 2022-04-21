@@ -3,23 +3,24 @@ import {Link} from 'react-router-dom';
 import styles from './Header.module.css';
 import SignInButton from '../../atoms/Button/SignInButton';
 import CreateAccountButton from '../../atoms/Button/CreateAccountButton';
-import { useState } from 'react';
+import {useState } from 'react';
+import Modal from '../Modal/Modal';
 
 const Header = ({customStyle, signIn, createAccount, links}) => {
 
     const [hamburgerState, updateHamburgerState] = useState(styles.close);
-    const [menuState, updateMenuState] = useState(styles.closeMobileMenu);
+    const [modalState, updateModalState] = useState(false);
 
     const handleClick = () => 
     {
         if (hamburgerState == styles.close)
         {
             updateHamburgerState(styles.open);//change the "X" icon back to hamburger
-            updateMenuState(styles.openMobileMenu);//appear the mobile menu
+            updateModalState(true);//open menu dialog
         }else
         {
+            updateModalState(false);//close menu dialog
             updateHamburgerState(styles.close);//change hamburger to "X" icon
-            updateMenuState(styles.closeMobileMenu);//disappear the mobile menu
         }
     }
     return ( 
@@ -30,10 +31,9 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                     <img src={logo} alt="logo" className="logo"/>
                 </Link>
             </div>
+            {/* Desktop Nav Bar */}
             <div className={styles.desktopNav}>
-
                 {/* Get all links */}
-
                 {links && links.map((link) => {
                     return (
                         <Link key={link.id} to={link.path}>{link.text}</Link>
@@ -42,10 +42,11 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                 {signIn && <SignInButton/>}
                 {createAccount && <CreateAccountButton/>}
             </div>
+
+            {/* Mobile Pop-up */}
             <div onClick={handleClick} className={`${styles.mobileNav} ${hamburgerState}`} >
                 <div className={styles.hamburger}></div>
-
-                <div className={`${styles.mobileMenu} ${menuState}`}>
+                <Modal open={modalState} >
                     {links && links.map((link) => {
                         return (
                             <Link key={link.id} to={link.path}>{link.text}</Link>
@@ -53,8 +54,7 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                     })}
                     {signIn && <SignInButton/>}
                     {createAccount && <CreateAccountButton/>}
-                </div>
-
+                </Modal>                
             </div>
         </header>
      );

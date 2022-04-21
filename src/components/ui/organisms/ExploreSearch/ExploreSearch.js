@@ -5,7 +5,7 @@ import DisplaySearchTags from '../../molecules/Search/DisplaySearchTags/DisplayS
 const ExploreSearch = () =>
 {
 
-    const [tagKeys, updateTagKeys] = useState(null);
+    const [tagKeys, updateTagKeys] = useState({});
 
     const filters = 
     [
@@ -36,12 +36,22 @@ const ExploreSearch = () =>
         }
     ]
 
-    const showSelectTagsOnExplorePage = (data) =>
-    {
-        console.log("here");
-        var temp = tagKeys ? tagKeys : [];
-        temp[data[0]] = data[1];
-        updateTagKeys(temp);
+    const showSelectTagsOnExplorePage = (data) =>{
+    //     console.log("here");
+    //     var temp = tagKeys ? tagKeys : [];
+    //     temp[data[0]] = data[1];
+    //     updateTagKeys(tagKeys => {
+    //         tagKeys[data[0]] = data[1]  
+    //     });
+
+        updateTagKeys(function(tagKeys)
+        {   
+            var key = data[0];
+            var value = data[1];
+            tagKeys[key] = value;          
+            return tagKeys;
+        });
+        console.log(tagKeys);
     }
 
     return ( 
@@ -52,7 +62,7 @@ const ExploreSearch = () =>
                 showSelectTagsOnExplorePage={showSelectTagsOnExplorePage}
             />
             {console.log(tagKeys)}
-            {tagKeys && <DisplaySearchTags tags={tagKeys}/>}
+            {<DisplaySearchTags tags={tagKeys}/>}
         </div>
      );
 }
