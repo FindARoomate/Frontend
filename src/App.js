@@ -3,8 +3,7 @@ import FindRoommateRequestLandingPage from './components/pages/LandingPages/Find
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import NotFound from './components/pages/NotFound/NotFound';
-import Header from './components/ui/organisms/Header/Header';
-import ViewMoreRoommateRequests from './components/pages/ViewMoreRoommateRequests/ViewMoreRoommateRequests';
+  import ViewMoreRoommateRequests from './components/pages/ViewMoreRoommateRequests/ViewMoreRoommateRequests';
 
 function App() {
   return (

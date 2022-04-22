@@ -1,11 +1,17 @@
 import styles from './Button.module.css';
 
-const Button = ({customStyle, children}) => 
+const Button = ({customStyle, children, handleOnClick}) => 
 {
+
+    const handleButtonClick = () => 
+    {
+        handleOnClick()
+    }
     return ( 
         <button
             className={styles.button}
             style={customStyle}
+            onClick = {handleButtonClick}
          >{children}</button>
      );
 }

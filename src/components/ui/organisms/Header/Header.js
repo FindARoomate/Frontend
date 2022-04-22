@@ -1,36 +1,42 @@
 import logo from './../../../../images/logo.svg';
 import {Link} from 'react-router-dom';
 import styles from './Header.module.css';
-import SignInButton from '../../atoms/Button/SignInButton';
-import CreateAccountButton from '../../atoms/Button/CreateAccountButton';
+import SignInButton from '../Auth/SignIn/SignInButton';
+import CreateAccountButton from '../Auth/CreateAccount/CreateAccountButton';
 import {useState } from 'react';
 import Modal from '../Modal/Modal';
+import SignInDialog from '../Auth/SignIn/SignInDialog';
 
 const Header = ({customStyle, signIn, createAccount, links}) => {
 
-    const [hamburgerState, updateHamburgerState] = useState(styles.close);
-    const [modalState, updateModalState] = useState(false);
 
-    const handleClick = () => 
+    const [signInModalState, updateSignInModalState] = useState(false);
+    const openSignInDialog = () => 
     {
-        if (hamburgerState == styles.close)
-        {
-            updateHamburgerState(styles.open);//change the "X" icon back to hamburger
-            updateModalState(true);//open menu dialog
-        }else
-        {
-            updateModalState(false);//close menu dialog
-            updateHamburgerState(styles.close);//change hamburger to "X" icon
-        }
+        updateModalState(false);//close mobile menu dialog
+        updateSignInModalState(true); //open sign in dialog (if open)
     }
+    const closeSignInDialog = () => 
+    {
+        updateSignInModalState(false);
+    }
+
+    const [modalState, updateModalState] = useState(false);
+    // Mobile Menu Dialog Box controls
+    const openMobileDialog  = () =>  updateModalState(true);//open menu dialog
+    const closeMobileDialog = () =>  updateModalState(false);//close menu dialog
+    
+
     return ( 
-        <header className={styles.header}
-        style = {customStyle ? customStyle : {}}>
+        <div className={styles.headerContainer}>
+
+        <header className={styles.header} style = {customStyle ? customStyle : {}}>
             <div className={styles.logo}>
                 <Link to="/">
                     <img src={logo} alt="logo" className="logo"/>
                 </Link>
             </div>
+
             {/* Desktop Nav Bar */}
             <div className={styles.desktopNav}>
                 {/* Get all links */}
@@ -39,24 +45,37 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                         <Link key={link.id} to={link.path}>{link.text}</Link>
                     )
                 })}
-                {signIn && <SignInButton/>}
+                {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}
                 {createAccount && <CreateAccountButton/>}
+            </div> 
+
+            {/* Harmburger Icon */}
+            <div onClick={openMobileDialog} className={styles.mobileNav} >
+                <div className={styles.hamburger}></div>
             </div>
 
+        </header>
+        <div>
             {/* Mobile Pop-up */}
-            <div onClick={handleClick} className={`${styles.mobileNav} ${hamburgerState}`} >
-                <div className={styles.hamburger}></div>
-                <Modal open={modalState} >
+            <div className={styles.mobileMenuModal}>
+                <Modal closeModal={closeMobileDialog} open={modalState} >
                     {links && links.map((link) => {
                         return (
                             <Link key={link.id} to={link.path}>{link.text}</Link>
                         )
                     })}
-                    {signIn && <SignInButton/>}
+                    {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}
                     {createAccount && <CreateAccountButton/>}
-                </Modal>                
+                </Modal>  
             </div>
-        </header>
+                              
+            {/* Sign In Pop-up */}
+            <div className={styles.signInModal}>
+                <SignInDialog open={signInModalState} closeModal={closeSignInDialog}/>
+            </div>
+            </div>
+           
+        </div>
      );
 }
  
