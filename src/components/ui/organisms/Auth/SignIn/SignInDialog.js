@@ -17,7 +17,7 @@ const SignInDialog = ({open, closeModal}) =>
             <div className={styles.signInDialog}>  
                 <div className={styles.heading}>
                     <H3>SIGN IN</H3>
-                    <P>Find and connect to your ideal roommate</P>
+                    <P>It's nice having you here again</P>
                 </div>
                 <div className={styles.form}>
                     <div className={styles.inputGroup}>
