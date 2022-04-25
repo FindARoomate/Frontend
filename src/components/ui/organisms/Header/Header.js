@@ -13,7 +13,7 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
 
     const handleClick = () => 
     {
-        if (hamburgerState == styles.close)
+        if (hamburgerState === styles.close)
         {
             updateHamburgerState(styles.open);//change the "X" icon back to hamburger
             updateModalState(true);//open menu dialog
