@@ -5,7 +5,7 @@ const H1 = ({children, customStyle}) =>
     return ( 
         <h1
         className={styles.h1}
-        styles={customStyle ? customStyle : {}}
+        style={customStyle ? customStyle : {}}
         >{children}</h1>
      );
 }

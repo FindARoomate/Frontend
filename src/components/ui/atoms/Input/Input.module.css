@@ -1,7 +1,7 @@
 
 input
 {
-  border-radius: 5px;
+  border-radius: 8px;
   background: white;
   padding: 10px 15px;
   border: 1px solid #7D7D7D;
@@ -9,20 +9,20 @@ input
   font-weight: 300;
   width: 100%;
   font-size: 12px;
-  color: #7D7D7D;
+  color: #0029DD;
 }
 
 input::placeholder
 {
+  color: #7D7D7D;
   font-weight: 300;
   font-size: 13px;
 }
 
-/* input:active, input:hover, input:visited, input:focus, input:disabled, input:checked, textarea:active,  textarea:focus
+input:active, input:hover, input:visited, input:focus, input:disabled, input:checked, textarea:active,  textarea:focus
 {
-  background: white;
   border: 1px solid #0029DD!important;
-} */
+}
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
@@ -32,6 +32,8 @@ input::placeholder
         font-size: 20px;
         font-weight: 300;
         width: 100%;
+        padding: 17px 21px;
+        color: #0029DD;
     }
 
     input::placeholder

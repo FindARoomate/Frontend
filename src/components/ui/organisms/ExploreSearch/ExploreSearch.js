@@ -9,27 +9,27 @@ const ExploreSearch = () => {
     {
       key: 1,
       name: "Gender",
-      values: ["Male", "Female", "Any"],
+      values: ["Male", "Female"],
     },
     {
       key: 2,
       name: "Religion",
-      values: ["Christian", "Muslim", "Any"],
+      values: ["Christian", "Muslim"],
     },
     {
       key: 3,
       name: "Room type",
-      values: ["Self contain", "3 bedroom flat", "Any"],
+      values: ["Self contain", "3 bedroom flat"],
     },
     {
       key: 4,
       name: "Personality",
-      values: ["Introvert", "Extrovert", "Any"],
+      values: ["Introvert", "Extrovert"],
     },
     {
       key: 5,
       name: "Price",
-      values: ["< #100k", "#100k - #250k", "#250k - #500k", ">#500k", "Any"],
+      values: ["< #100k", "#100k - #250k", "#250k - #500k", ">#500k"],
     },
   ];
 
