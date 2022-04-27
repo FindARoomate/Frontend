@@ -7,7 +7,7 @@ const ComingSoon = () => {
         <div>
             <ComingSoonTemplate
                 headingText="Find The Perfect Roommate..."
-                subText = "Connect with several roommates that match your requirements"
+                subText = "Saving you the stress of looking for an ideal roommate all by yourself"
                 image = {LaunchingSoonImage}
             />
         </div>

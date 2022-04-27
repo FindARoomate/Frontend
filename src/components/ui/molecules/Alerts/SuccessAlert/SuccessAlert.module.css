@@ -1,6 +1,36 @@
+.successAlert
+{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
 .successAlert p 
 {
-    font-size: 18px;
+    font-size: 13px;
     text-align: center;
     color: #4BB543;
+}
+
+.successAlert img
+{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .successAlert p
+    {
+        font-size: 17px;
+    }
+
+    .successAlert img
+    {
+        width: 20px;
+        height: 20px;
+    }
 }

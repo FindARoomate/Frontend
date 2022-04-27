@@ -6,13 +6,12 @@ import P from '../../../atoms/P/P';
 const SuccessAlert = ({message}) => {
     return ( 
         <div className={styles.successAlert}>
-        <P>
+        
             {/* <Img 
                 src={errorIcon}
                 customStyle={{width:'20px', height: '20px', marginRight: '10px'}}
             /> */}
-            {message}
-        </P>
+        <P>{message}</P>
     </div>
      );
 }

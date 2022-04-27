@@ -8,13 +8,8 @@ const ErrorAlert = ({message}) =>
     
     return ( 
     <div className={styles.errorAlert}>
-        <P>
-            <Img 
-                src={errorIcon}
-                customStyle={{width:'20px', height: '20px', marginRight: '10px'}}
-            />
-            {message}
-        </P> 
+        <Img src={errorIcon}/>
+        <P>{message}</P>
     </div>
      );
 }

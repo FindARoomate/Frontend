@@ -3,6 +3,11 @@
     font-size: 14px;
 }
 
+.comingSoonPageForm input
+{
+    border-radius: 5px;
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {

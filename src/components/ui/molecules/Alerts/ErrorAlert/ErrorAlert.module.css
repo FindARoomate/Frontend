@@ -1,8 +1,37 @@
-
+.errorAlert
+{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
 .errorAlert p
 {
-    font-size: 17px;
+    font-size: 13px;
     text-align: left;
     color: #ED1E2E;
     margin: 7px 0;
+}
+
+.errorAlert img
+{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .errorAlert p
+    {
+        font-size: 17px;
+    }
+
+    .errorAlert img
+    {
+        width: 20px;
+        height: 20px;
+    }
+
 }
