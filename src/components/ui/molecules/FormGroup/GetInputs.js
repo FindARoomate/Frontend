@@ -10,6 +10,7 @@ const GetInputs = ({inputs}) =>
                     type={input.type}
                     placeholder={input.placeholder}
                     required = {input.required}
+                    name={input.name}
                     />
                 );
             })

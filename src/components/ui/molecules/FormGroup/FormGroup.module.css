@@ -1,3 +1,18 @@
+.formGroup p
+{
+    margin-top: 2px;
+}
+
+.formGroup input
+{
+    border: none;
+}
+
+.formGroup button
+{
+    width: 100%;
+}
+
 .isLoading button
 {
     cursor: wait;
