@@ -2,6 +2,7 @@
 .signInDialog
 {
     width: 100%;
+    min-height: 75vh;
 }
 
 .heading
@@ -41,11 +42,13 @@
     border: 1px solid #7D7D7D;
     color: black;
     font-size: 14px;
+    border-radius: 5px;
 }
 
 .inputGroup input::placeholder
 {
     font-size: 10px;
+    color: rgba(125, 125, 125, 0.45);
 }
 
 .signInDialog button
@@ -100,6 +103,7 @@
 .bottom p
 {
     text-align: center;
+    font-size: 13px;
 }
 
 .bottom p a 
