@@ -22,11 +22,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* a
+a
 {
   text-decoration: none;
-  color: var(--dark-color);
-} */
+}
 /*
 h1,h2, h3
 {

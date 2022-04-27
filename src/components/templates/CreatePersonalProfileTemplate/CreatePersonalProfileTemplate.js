@@ -1,25 +1,12 @@
 import H1 from './../../ui/atoms/Headings/H1/H1';
 import styles from './CreatePersonalProfileTemplate.module.css';
-import Modal from './../../ui/organisms/Modal/Modal';
-import { useState } from 'react';
+import Header from '../../ui/organisms/Header/Header';
+const CreatePersonalProfileTemplate = ({children, navClasses}) => 
+{
 
-const CreatePersonalProfileTemplate = ({children, navClasses}) => {
-
-    // Create Account Menu Dialog Box controls
-    const [createPersonalProfileModalState, updateCreatePersonalProfileModalState] = useState(true);
-    // const openCreateAccountDialog = () => 
-    // {
-    //     updateModalState(false); //close mobile menu dialog
-    //     updateSignInModalState(false);//close sign in menu dialog
-    //     updateCreateAccountModalState(true); //open create account dialog
-    // }
-    const closeCreateAccountDialog = () => 
-    {
-        updateCreatePersonalProfileModalState(false);
-    }
-
-    return ( 
-        <Modal open={createPersonalProfileModalState} closeModal={closeCreateAccountDialog}>
+    return (
+        <div className={styles.personalProfileContainer}>
+            <Header/>
             <div className={styles.personalProfile}>
             <H1>CREATE PERSONAL PROFILE</H1>
             <div className={styles.formNavigationContainer}>
@@ -40,9 +27,8 @@ const CreatePersonalProfileTemplate = ({children, navClasses}) => {
                 <div className={styles.formNavigationDivider}></div>
             </div>
             {children}
-            </div>
-        </Modal>
-       
+            </div>       
+        </div> 
      );
 }
  

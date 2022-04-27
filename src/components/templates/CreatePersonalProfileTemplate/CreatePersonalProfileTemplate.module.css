@@ -1,3 +1,13 @@
+.personalProfile
+{
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 50px 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.25);
+}
+
 .personalProfile h1
 {
     font-size: 18px;
@@ -114,9 +124,13 @@
     color: #7D7D7D;
 }
 
+.form 
+{
+    height: auto;
+}
 .form button
 {
-    float:right;
+    /* float:right; */
     padding: 13px 35px;
     display: flex;
     flex-direction: row;
@@ -156,6 +170,19 @@
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
+    .personalProfileContainer
+    {
+        padding-bottom: 50px;
+    }
+    .personalProfile
+    {
+        max-width: 45.5vw;
+        margin: 0 auto;
+        padding: 50px 94px;
+        margin-top: 24px;
+        height: max-content;
+    }
+
     .personalProfile h1
     {
         font-size: 28px;

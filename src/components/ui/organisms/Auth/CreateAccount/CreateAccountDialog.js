@@ -1,80 +1,61 @@
-import { CREATE_ACCOUNT } from '../../../../routes';
-import styles from './CreateAccountDialog.module.css';
+import SuccessAlert from './../../../molecules/Alerts/SuccessAlert/SuccessAlert';
+import ErrorAlert from './../../../molecules/Alerts/ErrorAlert/ErrorAlert';
 import googleIcon from '../../../../../icons/google-icon.svg';
+import usePost from './../../../../../customHooks/usePost';
+import CreateAccountErrors from './CreateAccountErrors';
+import styles from './CreateAccountDialog.module.css';
+import { CREATE_ACCOUNT } from '../../../../routes';
 import Button from "../../../atoms/Button/Button";
-import H3 from "../../../atoms/Headings/H3/H3";
 import Input from '../../../atoms/Input/Input';
 import Label from '../../../atoms/Label/Label';
+import H3 from "../../../atoms/Headings/H3/H3";
+import { useState, useEffect } from 'react';
 import Img from '../../../atoms/Img/Img';
 import { Link } from "react-router-dom";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
-import { useState } from 'react';
 
 const CreateAccountDialog = ({open, closeModal}) => 
 {
 
     const placeholderFunction = () => {}
-    const [isAccountCreated, setIsAccountCreated] = useState(false);
-    const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const {isSuccess, data, isError, sendPostRequest} = usePost(CREATE_ACCOUNT)
 
     const handleSignUp = (e) => 
     {
-        //prevent form submit
         e.preventDefault();
-
-        //set loading message
         setIsLoading(true);
-        
-        const credentials = 
-        {
+        //trigger create account request to backend
+        sendPostRequest({
             email: e.target[0].value,
-            password: e.target[1].value        }
+            password: e.target[1].value,
+            confirm_password: e.target[2].value        
+        });        
+    }
 
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Accept", "application/json");
+    useEffect(() => 
+    {
+        //after getting a response from database, remove loading message
+        if(isSuccess || isError)
+        { 
+            setIsLoading(false); 
+          
+            // console.log(data.email[0])
+        }
+    }, [isError, isSuccess, data]);
 
-        fetch(CREATE_ACCOUNT,
-        {
-            method: "POST",
-            body: JSON.stringify(credentials),
-            redirect: "follow",
-            mode: "cors",
-            headers: myHeaders
-        })
-        .then (async (res) => 
-        {
-            const body = await res.json();
+    const showErrors = (errors) =>
+    {
+        const entries = Object.entries(errors);
+        console.log(entries);
 
-            if(!res.ok)
-            {
-                console.log(body);
-
-                var errorMessage = body.message;
-                // errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);//capitalize first letter
-                // throw new Error(body);
-            }
-
-            console.log(body);
-            //remove loading message
-            setIsLoading(false)
-            //remove error message
-            setError()
-            //show success message
-            setIsAccountCreated(true);
-        })
-        .catch((error) => 
-        {   
-            //remove loading message
-            setIsLoading(false);
-
-            console.log(error);
-            //show error message
-            setError(error.message);
-            //remove success message
-            setIsAccountCreated(false);
+        entries.map((error) => {
+           return (
+           <ErrorAlert 
+                key={error[0]}
+                message={error[1][0]}
+            />)
         });
     }
 
@@ -88,6 +69,8 @@ const CreateAccountDialog = ({open, closeModal}) =>
             </div>
             <div className={styles.form}>
                 <form onSubmit={(e) => handleSignUp(e)}>
+                    {isError &&  <CreateAccountErrors errors={data}/>}
+                    {isSuccess && <SuccessAlert message={data.message}/>}
                     <div className={styles.inputGroup}>
                         <Label>Email</Label>
                         <Input type="text" placeholder="Enter your email address"/>
