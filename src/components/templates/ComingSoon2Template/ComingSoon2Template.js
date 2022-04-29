@@ -6,29 +6,21 @@ import TextButtonGroup from '../../ui/molecules/TextButtonGroup/TextButtonGroup'
 import ContactUsTemplate from '../ContactUsTemplate/ContactUsTemplate';
 import mobileContactIcon from './../../../icons/mobile-contact-icon.svg';
 import Footer from '../../ui/organisms/Footer/Footer';
-import heroBackgroundImg from './../../../images/make-roomate-request-hero-bg.png';
 import H3 from '../../ui/atoms/Headings/H3/H3';
-import H1 from '../../ui/atoms/Headings/H1/H1';
-import P from '../../ui/atoms/P/P';
 import Button from '../../ui/atoms/Button/Button';
 import parentStyles from './../LandingPages/MakeRoommateRequestLandingPageTemplate/MakeRoommateRequestLandingPageTemplate.module.css'
 import Img from './../../ui/atoms/Img/Img';
 import ComingSoonPageForm from '../../ui/organisms/ComingSoonPageForm/ComingSoonPageForm';
 import styles from './ComingSoon2Template.module.css';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-const ComingSoon2Template = (props) => {
+const ComingSoon2Template = (props) => 
+{
+    AOS.init();//intilize on scroll animation
 
     const {heroSection, createProfile, makeRoommateRequest, acceptConnection, customHeader} = props;
-
-    const heroStyle = 
-    {
-        background: `url(${heroBackgroundImg})`,
-        backgroundRepeat: "no-repeat, repeat",
-        backgroundPosition: "bottom",
-        backgroundSize: "cover",
-        padding: "70px 6.5%"
-    }
 
     const cta = 
     {
@@ -136,57 +128,56 @@ const ComingSoon2Template = (props) => {
             {/* For Hero Section */}
             <div className={`${styles.heroSection} ${globalStyles.body}`}>
                 <div className={parentStyles.comingSoonHero}>
-                    <div className={parentStyles.text}>
+                    <div
+                        className={`${styles.text} ${parentStyles.text}`}
+                        data-aos="fade-right"
+                        data-aos-duration="1000"
+                    >
                         {heroSection.heading}
                         {heroSection.description}
                     </div>
                     
-                    <div className={styles.comingSoonForm}>
+                    <div 
+                        className={styles.comingSoonForm}
+                        data-aos="fade-up"
+                        data-aos-delay="500"
+                        data-aos-duration="1000"
+                    >
                         <ComingSoonPageForm/>
                     </div>
                 </div>
                 <div className={styles.heroImage}>
-                    <Img src={heroSection.img.src}/>
+                    <Img 
+                        data-aos="fade-left"
+                        data-aos-delay="750"
+                        data-aos-duration="1000"
+                        src={heroSection.img.src}
+                    />
                 </div>
             </div>
 
 
             <div className= {`${globalStyles.body} ${parentStyles.makeRoommateRequestBody}`}>
-                <div className={parentStyles.howItWorks} id="how-it-works">
+                <div className={`${parentStyles.howItWorks} ${styles.howItWorks}`} id="how-it-works">
                     {/* Heading */}
-                    <H2>How it works</H2>
+                    <H2
+                        data-aos="zoom-in"
+                        data-aos-duration="800"
+                    >How it works</H2>
 
                     {/* Create Profile Section - Refactor to conditional*/}
-                    <div className={parentStyles.createProfile}>
-                        <ImageTextSection
-                                heading = {createProfile.heading}
-                                description = {createProfile.description}
-                                img = {createProfile.img}
-                                order = {createProfile.order}
-                                customStyle = {createProfile.customStyle ? createProfile.customStyle : {}}
-                        />
+                    <div className={`${styles.createProfile} ${parentStyles.createProfile}`}>
+                        <ImageTextSection {...createProfile}/>
                     </div>
                     
                     {/* Make Roommate Request Section */}
-                    <div className={parentStyles.makeRequest}>
-                        <ImageTextSection
-                                heading = {makeRoommateRequest.heading}
-                                description = {makeRoommateRequest.description}
-                                img = {makeRoommateRequest.img}
-                                order = {makeRoommateRequest.order}
-                                customStyle = {makeRoommateRequest.customStyle ? makeRoommateRequest.customStyle : {}}
-                        />
+                    <div className={`${styles.makeRequest} ${parentStyles.makeRequest}`}>
+                        <ImageTextSection {...makeRoommateRequest} />
                     </div>
                     
                     {/* Accept Roommate Connection Section */}
-                    <div className={parentStyles.acceptConnection}>
-                        <ImageTextSection
-                                heading = {acceptConnection.heading}
-                                description = {acceptConnection.description}
-                                img = {acceptConnection.img}
-                                order = {acceptConnection.order}
-                                customStyle = {acceptConnection.customStyle ? acceptConnection.customStyle : {}}
-                        />
+                    <div className={`${styles.acceptConnection} ${parentStyles.acceptConnection}`}>
+                        <ImageTextSection {...acceptConnection} />
                     </div>
                     
                     </div>

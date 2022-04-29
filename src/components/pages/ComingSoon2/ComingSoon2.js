@@ -28,7 +28,7 @@ const ComingSoon2 = () =>
         the kind of person you would want for a roommate.</P>;
     var img = {src: createProfileImage}
     var order = "imageFirst"
-    const createProfile = {heading, description, button, img, order, customStyle}
+    const createProfile = {heading, description, img, order, customStyle}
 
     // Make Roommate Section
     var heading = <H3>2. Make a roommate <span style={{color: "#0029DD"}}>request</span></H3>
@@ -36,7 +36,7 @@ const ComingSoon2 = () =>
         with simliar requests and notify you when we find the ideal roommate for you.</P>;
     var img = {src: makeRoommateRequestImage}
     var order = "textFirst"
-    const makeRoommateRequest = {heading, description, button, img, order, customStyle}
+    const makeRoommateRequest = {heading, description, img, order, customStyle}
 
     // Accept Connection Section
     var heading =  <H3>3. <span style={{color: "#0029DD"}}>Connect</span> to your roommate</H3>
@@ -44,7 +44,7 @@ const ComingSoon2 = () =>
         contact details of your roommie and you get to talk off the app.</P>;
     var img = {src: acceptRoommateConnection}
     var order = "imageFirst"
-    const acceptConnection = {heading, description, button, img, order, customStyle}
+    const acceptConnection = {heading, description, img, order, customStyle}
     
     //Header
     const headerLinks = 
