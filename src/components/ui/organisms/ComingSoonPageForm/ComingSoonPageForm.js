@@ -42,7 +42,6 @@ const ComingSoonPageForm = () => {
 
             if(!res.ok)
             {
-                console.log(body);
                 var errorMessage = body.message;
                 errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);//capitalize first letter
                 throw new Error(errorMessage);

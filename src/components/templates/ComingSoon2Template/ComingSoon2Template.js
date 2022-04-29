@@ -145,7 +145,7 @@ const ComingSoon2Template = (props) => {
                         <ComingSoonPageForm/>
                     </div>
                 </div>
-                <div>
+                <div className={styles.heroImage}>
                     <Img src={heroSection.img.src}/>
                 </div>
             </div>

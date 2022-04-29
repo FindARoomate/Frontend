@@ -9,7 +9,7 @@
     padding-top: 40px;
 }
 
-.heroSection img
+.heroSection .heroImage img
 {
     max-width: 90vw;
     height: auto;
@@ -35,7 +35,7 @@
         flex-direction: row;
     }
 
-    .heroSection img 
+    .heroSection .heroImage img
     {
         margin-top: none;
     }
