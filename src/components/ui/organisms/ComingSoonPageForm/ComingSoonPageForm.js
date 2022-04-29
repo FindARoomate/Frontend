@@ -69,16 +69,16 @@ const ComingSoonPageForm = () => {
     [
         {
             "key": 1,
-            "type": "email",
-            "name": "email",
-            "placeholder": "E-mail",
+            "type": "text",
+            "name": "name",
+            "placeholder": "First Name",
             "required": true
         },
         {
             "key": 2,
-            "type": "text",
-            "name": "name",
-            "placeholder": "First Name",
+            "type": "email",
+            "name": "email",
+            "placeholder": "E-mail",
             "required": true
         }
     ];

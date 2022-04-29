@@ -1,6 +1,7 @@
 .footerBody
 {
     padding: 11px;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .footer p
@@ -43,6 +44,7 @@
     .footerBody
     {
         padding: 23px 0 40px 0;
+        box-shadow: none;
     }
 
     .footer p
