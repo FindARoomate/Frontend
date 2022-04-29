@@ -16,7 +16,6 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
     if(createAccount) areLinksAvailable = true;
     if(links) areLinksAvailable = true;
 
-
     // Create Account Menu Dialog Box controls
     const [createAccountModalState, updateCreateAccountModalState] = useState(false);
     const openCreateAccountDialog = () => 
@@ -46,7 +45,7 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
     // Mobile Menu Dialog Box controls
     const [modalState, updateModalState] = useState(false);
     const openMobileDialog  = () =>  updateModalState(true);//open menu dialog
-    const closeMobileDialog = () =>  updateModalState(false);//close menu dialog
+    const closeMobileDialog = () => updateModalState(false);//close menu dialog
     
 
     return ( 
@@ -86,7 +85,7 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                 <Modal closeModal={closeMobileDialog} open={modalState} >
                     {links && links.map((link) => {
                         return (
-                            <Link key={link.id} to={link.path}>{link.text}</Link>
+                            <Link onClick={closeMobileDialog} key={link.id} to={link.path}>{link.text}</Link>
                         )
                     })}
                     {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}

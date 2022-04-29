@@ -1,0 +1,38 @@
+.waitlist
+{
+    margin-top: 15px;
+}
+
+.waitlist .heading p
+{
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.waitlist .subheading p
+{
+    font-size: 12px;
+    font-weight: 400;
+    color: #7D7D7D;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .waitlist
+    {
+        margin-top: 40px;
+    }
+
+    .waitlist .heading p
+    {
+        font-size: 27px;
+    }
+    
+    .waitlist .subheading p
+    {
+        font-size: 24px;
+    }
+    
+}
