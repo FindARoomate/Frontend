@@ -18,7 +18,11 @@ const ComingSoonPageForm = () => {
         //set loading message
         setIsLoading(true);
         
-        const credentials = {email: e.target[0].value}
+        const credentials = 
+        {
+            email: e.target[0].value, 
+            name:  e.target[1].value
+        }
         console.log(credentials);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -38,6 +42,7 @@ const ComingSoonPageForm = () => {
 
             if(!res.ok)
             {
+                console.log(body);
                 var errorMessage = body.message;
                 errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);//capitalize first letter
                 throw new Error(errorMessage);
@@ -54,8 +59,6 @@ const ComingSoonPageForm = () => {
         {   
             //remove loading message
             setIsLoading(false);
-
-            console.log(error);
             //show error message
             setError(error.message);
             //remove success message
@@ -89,7 +92,7 @@ const ComingSoonPageForm = () => {
 
     const button = 
     {
-        "content": "Notify Me"
+        "content": "Join Waitlist"
     }
 
     return ( 

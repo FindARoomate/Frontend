@@ -1,17 +1,23 @@
-import ImageTextSection from '../../../ui/organisms/ImageTextSection/ImageTextSection';
-import globalStyles from './../../../../components/globalStyles.module.css';
-import styles from './MakeRoommateRequestLandingPageTemplate.module.css';
-import Header from '../../../ui/organisms/Header/Header';
-import H2 from '../../../ui/atoms/Headings/H2/H2';
-import TextButtonGroup from '../../../ui/molecules/TextButtonGroup/TextButtonGroup';
-import ContactUsTemplate from '../../ContactUsTemplate/ContactUsTemplate';
-import mobileContactIcon from './../../../../icons/mobile-contact-icon.svg';
-import Footer from '../../../ui/organisms/Footer/Footer';
-import heroBackgroundImg from './../../../../images/make-roomate-request-hero-bg.png';
-import H3 from '../../../ui/atoms/Headings/H3/H3';
-import Button from '../../../ui/atoms/Button/Button';
+import ImageTextSection from '../../ui/organisms/ImageTextSection/ImageTextSection';
+import globalStyles from './../../../components/globalStyles.module.css';
+import Header from '../../ui/organisms/Header/Header';
+import H2 from '../../ui/atoms/Headings/H2/H2';
+import TextButtonGroup from '../../ui/molecules/TextButtonGroup/TextButtonGroup';
+import ContactUsTemplate from '../ContactUsTemplate/ContactUsTemplate';
+import mobileContactIcon from './../../../icons/mobile-contact-icon.svg';
+import Footer from '../../ui/organisms/Footer/Footer';
+import heroBackgroundImg from './../../../images/make-roomate-request-hero-bg.png';
+import H3 from '../../ui/atoms/Headings/H3/H3';
+import H1 from '../../ui/atoms/Headings/H1/H1';
+import P from '../../ui/atoms/P/P';
+import Button from '../../ui/atoms/Button/Button';
+import parentStyles from './../LandingPages/MakeRoommateRequestLandingPageTemplate/MakeRoommateRequestLandingPageTemplate.module.css'
+import Img from './../../ui/atoms/Img/Img';
+import ComingSoonPageForm from '../../ui/organisms/ComingSoonPageForm/ComingSoonPageForm';
+import styles from './ComingSoon2Template.module.css';
+import { Link } from 'react-router-dom';
 
-const MakeRoommateRequestLandingPageTemplate = (props) => {
+const ComingSoon2Template = (props) => {
 
     const {heroSection, createProfile, makeRoommateRequest, acceptConnection, customHeader} = props;
 
@@ -33,9 +39,11 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
             Getting an ideal roommate doesn't have to be stressful.<br></br>
             Allow <span style={{color: "#0029DD"}}>Findaroommate.com</span> do the work for you!</H3>
         ,
-        button: <Button customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>
-                    Get Started
-                </Button> 
+        button: <Link to="/">
+                    <Button customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>
+                        Join Waitlist
+                    </Button>
+                </Link> 
         , 
         customStyle:
         {
@@ -101,56 +109,58 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
         {
             id: 1,
             text: "Home",
-            path: '/create-request'
+            path: '/'
         },
         {
             id: 2,
             text: "How it works",
-            path: '/create-request'
+            path: '/#how-it-works'
         },
         {
             id: 3,
             text: "Contact us",
-            path: "#contact-us"
+            path: "/#contact-us"
         }
     ]
 
 
     return ( 
-        <div className={styles.landingPage}>
+        <div className={parentStyles.landingPage}>
             {/* Header */}
-            {customHeader ? customHeader : 
-            (
-                <Header
-                    customStyle={{background: "#F5F7FF"}}
-                    links = {headerLinks}
-                    signIn = {true}
-                />
-            )}
+            <Header
+                customStyle={{background: "#F5F7FF"}}
+                links = {headerLinks}
+            />
             
                 
             {/* For Hero Section */}
-            <div className={styles.heroSection}>
-                <ImageTextSection
-                    heading = {heroSection.heading}
-                    description = {heroSection.description}
-                    button = {heroSection.button}
-                    img = {heroSection.img}
-                    order = {heroSection.order}
-                    customStyle = {heroStyle}
-                />
+            <div className={`${styles.heroSection} ${globalStyles.body}`}>
+                <div className={parentStyles.comingSoonHero}>
+                    <div className={parentStyles.text}>
+                        {heroSection.heading}
+                        {heroSection.description}
+                    </div>
+                    
+                    <div className={styles.comingSoonForm}>
+                        <ComingSoonPageForm/>
+                    </div>
+                </div>
+                <div>
+                    <Img src={heroSection.img.src}/>
+                </div>
             </div>
-            <div className= {`${globalStyles.body} ${styles.makeRoommateRequestBody}`}>
-                <div className={styles.howItWorks}>
+
+
+            <div className= {`${globalStyles.body} ${parentStyles.makeRoommateRequestBody}`}>
+                <div className={parentStyles.howItWorks} id="how-it-works">
                     {/* Heading */}
                     <H2>How it works</H2>
 
                     {/* Create Profile Section - Refactor to conditional*/}
-                    <div className={styles.createProfile}>
+                    <div className={parentStyles.createProfile}>
                         <ImageTextSection
                                 heading = {createProfile.heading}
                                 description = {createProfile.description}
-                                button = {createProfile.button}
                                 img = {createProfile.img}
                                 order = {createProfile.order}
                                 customStyle = {createProfile.customStyle ? createProfile.customStyle : {}}
@@ -158,11 +168,10 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                     </div>
                     
                     {/* Make Roommate Request Section */}
-                    <div className={styles.makeRequest}>
+                    <div className={parentStyles.makeRequest}>
                         <ImageTextSection
                                 heading = {makeRoommateRequest.heading}
                                 description = {makeRoommateRequest.description}
-                                button = {makeRoommateRequest.button}
                                 img = {makeRoommateRequest.img}
                                 order = {makeRoommateRequest.order}
                                 customStyle = {makeRoommateRequest.customStyle ? makeRoommateRequest.customStyle : {}}
@@ -170,11 +179,10 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                     </div>
                     
                     {/* Accept Roommate Connection Section */}
-                    <div className={styles.acceptConnection}>
+                    <div className={parentStyles.acceptConnection}>
                         <ImageTextSection
                                 heading = {acceptConnection.heading}
                                 description = {acceptConnection.description}
-                                button = {acceptConnection.button}
                                 img = {acceptConnection.img}
                                 order = {acceptConnection.order}
                                 customStyle = {acceptConnection.customStyle ? acceptConnection.customStyle : {}}
@@ -185,7 +193,7 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                 </div>
                 <div>
                 {/* CTA Section */}
-                <div className={styles.cta}>
+                <div className={parentStyles.cta}>
                     <TextButtonGroup
                         heading = {cta.heading}
                         description = {cta.description}
@@ -195,7 +203,7 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                 </div>
                 
             </div>       
-
+            <div id="contact-us">
                 {/* Contact Template */}
                 <ContactUsTemplate
                     preheading = {contact.preheading}
@@ -203,12 +211,15 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                     subheading = {contact.subheading}
                     contactFields = {contact.contactFields}
                 />
+            </div>
 
-                {/* Footer */}
-                <Footer/>
+              
+
+            {/* Footer */}
+            <Footer/>
 
         </div>
      );
 }
  
-export default MakeRoommateRequestLandingPageTemplate;
+export default ComingSoon2Template;

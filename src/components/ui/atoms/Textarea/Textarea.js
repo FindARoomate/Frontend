@@ -1,18 +1,17 @@
 import styles from './Textarea.module.css';
 
 
-const Textarea = ({rows, columns, customStyle, placeholder,defaultValue, children}) => {
+const Textarea = (props) => {
+
+    const {children, ...rest} = props
+
     return ( 
         <textarea 
             className={styles.textarea}
-            rows={rows}
-            columns = {columns}
-            style = {customStyle ? customStyle : {}}
-            defaultValue = {defaultValue ? defaultValue : ""}
-            placeholder = {placeholder ? placeholder : ""}
+            {...rest}
             >
-               {children}
-        </textarea>
+                {children}
+            </textarea>
      );
 }
  

@@ -24,10 +24,6 @@ const ComingSoon = ({headingText, subText, image}) => {
                 <div className={`${styles.launchingSoonImage} ${globalStyles.desktopOnly}`}>
                     <Img src={image}/>
                 </div>
-               {/* {
-                        height: "419.4054870605469px",
-                        width: "417.29669189453125px"
-                    } */}
             </div>
         </div>
      );

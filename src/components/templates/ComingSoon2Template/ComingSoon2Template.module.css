@@ -1,0 +1,46 @@
+.heroSection
+{
+    display: flex;
+    background: url("../../../images/make-roomate-request-hero-bg.svg");
+    background-repeat: no-repeat, repeat;
+    background-position: bottom;
+    background-size: cover;
+    flex-direction: column;
+    padding-top: 40px;
+}
+
+.heroSection img
+{
+    max-width: 90vw;
+    height: auto;
+    margin-top: 35px;
+}
+
+.heroSection button
+{
+    margin-top: 8px;
+}
+
+.heroSection .comingSoonForm
+{
+    padding: 10px 0;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .heroSection
+    {
+        gap: 96px;
+        flex-direction: row;
+    }
+
+    .heroSection img 
+    {
+        margin-top: none;
+    }
+    .heroSection > div
+    {
+        width: 50%;
+    }
+}

@@ -1,0 +1,83 @@
+.onboardingContainer
+{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10vh;
+}
+
+.onboarding
+{
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 50px 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.onboarding h1
+{
+    font-size: 18px;
+    text-align: center;
+    font-family:"Open Sans";
+}
+
+
+.onboarding img
+{
+    width: 170px;
+    height: auto;
+    margin-top: 64px;
+}
+
+.onboarding p 
+{
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 14px;
+    margin: 20px 0;
+}
+
+.onboarding button 
+{
+    font-weight: 600;
+    padding: 15px 42px;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .onboarding
+    {
+        max-width: 45.5vw;
+        padding: 50px 94px;
+        height: max-content;
+    }
+
+    .onboarding h1
+    {
+        font-size: 28px;
+    }
+
+    .onboarding img
+    {
+        margin-top: 95px;
+    }
+
+    .onboarding p
+    {
+        font-size: 20px;
+        margin: 40px 0;
+    }
+
+    .onboarding button 
+    {
+        font-weight: 600;
+        padding: 20px 42px;
+    }
+}

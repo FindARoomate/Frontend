@@ -52,7 +52,7 @@ const SignInDialog = ({open, closeModal}) =>
         <div className={styles.signInDialogContainer}>
 
         {/* move them to the on boarding screens on login */}
-        {isSuccess && <Navigate replace to="/bio-data"/>}
+        {isSuccess && <Navigate replace to="/create-profile-instruction"/>}
 
             <Modal open={open} closeModal={closeModal}>
             <div className={styles.signInDialog}>  

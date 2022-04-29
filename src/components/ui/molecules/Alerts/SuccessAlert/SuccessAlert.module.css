@@ -4,13 +4,14 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
+    margin: 7px 0;
 }
 
 .successAlert p 
 {
     font-size: 13px;
     text-align: center;
-    color: #4BB543;
+    color: #4BB543!important;
 }
 
 .successAlert img

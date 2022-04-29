@@ -1,5 +1,3 @@
-import mobileContactIcon from './../../../icons/mobile-contact-icon.svg';
-import Button from '../../ui/atoms/Button/Button';
 import styles from './ContactUsTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import ContactTag from '../../ui/molecules/ContactTag/ContactTag';

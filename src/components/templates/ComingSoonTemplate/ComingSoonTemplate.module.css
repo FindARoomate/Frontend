@@ -54,7 +54,7 @@
   width: 100vw;
 }
 
-.comingSoonBody img
+.comingSoonBody .launchingSoonImage img
 {
   width: 155px;
   height: auto;
@@ -127,7 +127,7 @@
   }
   
   /* Use atoms for this */
-  .comingSoonBody img
+  .comingSoonBody .launchingSoonImage img
   {
     width: 420px;
     height: auto;
