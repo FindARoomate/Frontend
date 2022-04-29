@@ -1,3 +1,7 @@
+.comingSoonContainer
+{
+    overflow-x: hidden;
+}
 .heroSection
 {
     display: flex;

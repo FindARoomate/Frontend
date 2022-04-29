@@ -117,7 +117,7 @@ const ComingSoon2Template = (props) =>
 
 
     return ( 
-        <div className={parentStyles.landingPage}>
+        <div className={`${parentStyles.landingPage}, ${styles.comingSoonContainer}`}>
             {/* Header */}
             <Header
                 customStyle={{background: "#F5F7FF"}}
