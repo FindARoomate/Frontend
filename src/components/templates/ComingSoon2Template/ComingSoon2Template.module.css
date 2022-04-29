@@ -223,6 +223,7 @@
     .heroSection .heroImage img
     {
         margin-top: none;
+        max-width: 100%;
     }
     .heroSection > div
     {

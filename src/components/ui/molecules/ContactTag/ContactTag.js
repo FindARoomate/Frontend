@@ -10,7 +10,7 @@ const ContactTag = ({icon, name, value}) =>
         <div
             data-aos="fade-right"
             data-aos-duration="1000"
-            data-aos-delay="1350"
+            data-aos-delay="1000"
             className={styles.contactTag}
         >
             <span className={styles.contactType}>

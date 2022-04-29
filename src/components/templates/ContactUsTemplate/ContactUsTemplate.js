@@ -18,8 +18,8 @@ const ContactUsTemplate = ({preheading, heading, subheading, contactFields}) =>
                 <div>
                     <H3
                         data-aos="zoom-in"
-                        data-aos-duration="1000"
-                        data-aos-delay="600"
+                        data-aos-duration="800"
+                        data-aos-delay="400"
                     >
                         {preheading.text}
                     </H3>
@@ -32,7 +32,7 @@ const ContactUsTemplate = ({preheading, heading, subheading, contactFields}) =>
                     <P
                         data-aos="zoom-in"
                         data-aos-duration="1000"
-                        data-aos-delay="1000"
+                        data-aos-delay="800"
                     >
                         {subheading.text}
                     </P>
