@@ -20,8 +20,8 @@ const ComingSoonPageForm = () => {
         
         const credentials = 
         {
-            email: e.target[0].value, 
-            name:  e.target[1].value
+            name:  e.target[0].value,
+            email: e.target[1].value, 
         }
         console.log(credentials);
         var myHeaders = new Headers();
