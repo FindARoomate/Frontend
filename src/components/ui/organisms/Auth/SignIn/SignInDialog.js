@@ -20,7 +20,7 @@ const SignInDialog = ({open, closeModal}) =>
     const placeholderFunction = () => {}
 
     const [isLoading, setIsLoading] = useState(false);
-    const {isSuccess, data, isError, sendPostRequest} = usePost(LOGIN)
+    const {isSuccess, isError, APIdata, sendPostRequest} = usePost(LOGIN)
 
     const handleSignIn = (e) => 
     {
@@ -40,12 +40,13 @@ const SignInDialog = ({open, closeModal}) =>
 
         if(isSuccess)
         {
-            localStorage.setItem("accessToken", data.access);  //add access token to localStorage
-            localStorage.setItem("refreshToken", data.refresh); //add refresh token to localStorage
-            console.log(data);
+            localStorage.setItem("accessToken", APIdata.access);  //add access token to localStorage
+            localStorage.setItem("refreshToken", APIdata.refresh); //add refresh token to localStorage
         }
+        console.log(APIdata);
 
-    }, [isError, isSuccess, data]);
+
+    }, [isError, isSuccess, APIdata]);
   
 
     return ( 
@@ -62,7 +63,7 @@ const SignInDialog = ({open, closeModal}) =>
                 </div>
                 <div className={styles.form}>
                     <form onSubmit={handleSignIn}>
-                        {isError && <ErrorAlert message= {data.detail}/>}
+                        {/* {isError && <ErrorAlert message= {APIdata}/>} */}
                         <div className={styles.inputGroup}>
                             <Label>Email</Label>
                             <Input type="text" placeholder="Enter your email address"/>

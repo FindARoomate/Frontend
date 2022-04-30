@@ -1,9 +1,9 @@
-import Img from './../../ui/atoms/Img/Img';
+import Img from './../../../ui/atoms/Img/Img';
 import { Navigate } from 'react-router-dom';
-import Button from '../../ui/atoms/Button/Button';
-import icon from './../../../icons/right-arrow-icon.svg';
-import CreatePersonalProfileTemplate from './../../templates/CreatePersonalProfileTemplate/CreatePersonalProfileTemplate'
-import createPersonalProfileStyles from './../../templates/CreatePersonalProfileTemplate/CreatePersonalProfileTemplate.module.css';
+import Button from './../../../ui/atoms/Button/Button';
+import icon from './../../../../icons/right-arrow-icon.svg';
+import CreatePersonalProfileTemplate from './../../../templates/CreatePersonalProfileTemplate/CreatePersonalProfileTemplate'
+import createPersonalProfileStyles from './../../../templates/CreatePersonalProfileTemplate/CreatePersonalProfileTemplate.module.css';
 import { useState } from 'react';
 
 const BioData = () => 

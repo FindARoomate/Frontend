@@ -1,5 +1,5 @@
-import OnboardingInstruction from "../../templates/OnboardingInstruction/OnboardingInstruction";
-import createProfileImg from './../../../images/create-profile-section.svg';
+import OnboardingInstruction from "./../../../templates/OnboardingInstruction/OnboardingInstruction";
+import createProfileImg from './../../../../images/create-profile-section.svg';
 
 const CreateProfileInstruction = () => 
 {

@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
-import BioData from './components/pages/BioData/BioData';
 import NotFound from './components/pages/NotFound/NotFound';
+import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import ComingSoon2 from './components/pages/ComingSoon2/ComingSoon2';
+import BioData from './components/pages/CreateProfile/BioData/BioData';
 import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
-import CreateProfileThankYou from './components/pages/CreateProfileThankYou/CreateProfileThankYou';
-import TellUsAboutYourself from './components/pages/TellUsAboutYourself/TellUsAboutYourself';
-import DefineIdealRoommate from './components/pages/DefineIdealRoommate/DefineIdealRoommate';
-import OnboardingInstruction from './components/templates/OnboardingInstruction/OnboardingInstruction';
+import TellUsAboutYourself from './components/pages/CreateProfile/TellUsAboutYourself/TellUsAboutYourself';
+import DefineIdealRoommate from './components/pages/CreateProfile/DefineIdealRoommate/DefineIdealRoommate';
 import ViewMoreRoommateRequests from './components/pages/ViewMoreRoommateRequests/ViewMoreRoommateRequests';
+import CreateProfileThankYou from './components/pages/CreateProfile/CreateProfileThankYou/CreateProfileThankYou';
+import CreateProfileInstruction from './components/pages/CreateProfile/CreateProfileInstruction/CreateProfileInstruction';
 import MakeRoommateRequestLandingPage from './components/pages/LandingPages/MakeRoommateRequestLandingPage/MakeRoommateRequestLandingPage';
 import FindRoommateRequestLandingPage from './components/pages/LandingPages/FindRoommateRequestLandingPage/FindRoommateRequestLandingPage';
-import CreateProfileInstruction from './components/pages/CreateProfileInstruction/CreateProfileInstruction';
-import ComingSoon from './components/pages/ComingSoon/ComingSoon';
+import CreateRooomateRequestInstruction from './components/pages/RoommateRequest/CreateRoommateRequestInstruction/CreateRoommateRequestInstruction';
+import RoomLocation from './components/pages/RoommateRequest/RoomLocation/RoomLocation';
 
 
 function App() 
@@ -50,7 +51,12 @@ function App()
           <Route path='/about-yourself' element={<TellUsAboutYourself/>} />
           <Route path='/create-profile-instruction' element={<CreateProfileInstruction/>} />
           <Route path='/create-profile-thankyou' element={<CreateProfileThankYou/>}/>
-          <Route path='/onboarding' element={<OnboardingInstruction/>}/>
+
+          {/* Roommate Request */}
+          <Route path='/create-roommate-request-instruction' element={<CreateRooomateRequestInstruction/>}/>
+          <Route path='/room-location' element={<RoomLocation/>}/>
+
+          {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
         </Routes>
       </div>
