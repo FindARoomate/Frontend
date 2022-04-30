@@ -5,6 +5,7 @@ const Modal = ({children, open, closeModal, customStyles}) =>
 {
     const modalRef = useRef(null);
     
+    
     useEffect(() => {
         const modalNode = modalRef.current;
 
