@@ -1,6 +1,6 @@
 import styles from './Label.module.css';
 
-const Label = (children) => {
+const Label = ({children}) => {
     return ( 
         <label
         className={styles.label}

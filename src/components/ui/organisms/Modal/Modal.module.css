@@ -2,9 +2,9 @@
 .modal
 {
   top:10vw;
-  max-width: 80vw;
+  width: 90vw;
   margin: 0 auto;
-  padding: 35px;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 20px 0.5px rgba(125, 125, 125, 0.45);
   background: white;
@@ -30,6 +30,36 @@
     background-color: rgba(0,0,0,0.5);
 }
 
+
+.closeIcon
+{
+  float:right;
+  cursor: pointer;
+  padding: 5px;
+  /* background: red; */
+}
+
+.closeIcon::before, .closeIcon::after
+{
+  position: absolute;
+  content: "";
+  width: 23px;
+  height: 1.5px;
+  background: #7D7D7D;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+}
+
+.closeIcon::before
+{
+  transform: rotate(45deg) translate(-6px, 4px);
+}
+
+.closeIcon::after
+{
+  transform: rotate(-45deg) translate(-4px, -6px);
+}
+
 @keyframes slide-up {
     0% {
       transform: translateY(100%);
@@ -41,5 +71,21 @@
 
 @media screen and (min-width: 760px) 
 {
- 
+  .modal
+  {
+    top:5vw;
+    width: 90vw;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0.5px rgba(125, 125, 125, 0.45);
+    background: white;
+    border: 0;
+    animation: slide-up .5s forwards, fade-in 500ms forwards;
+  }
+  .modal
+  {
+    width: 35vw!important;
+    padding: 45px 35px 70px 35px;
+  }
 }
