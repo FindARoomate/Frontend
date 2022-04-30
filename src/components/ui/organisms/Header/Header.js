@@ -6,14 +6,35 @@ import CreateAccountButton from '../Auth/CreateAccount/CreateAccountButton';
 import {useState } from 'react';
 import Modal from '../Modal/Modal';
 import SignInDialog from '../Auth/SignIn/SignInDialog';
+import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
 
 const Header = ({customStyle, signIn, createAccount, links}) => {
 
+    //variable to check if there are any links available
+    var areLinksAvailable = false;
+    if(signIn) areLinksAvailable = true;
+    if(createAccount) areLinksAvailable = true;
+    if(links) areLinksAvailable = true;
 
+    // Create Account Menu Dialog Box controls
+    const [createAccountModalState, updateCreateAccountModalState] = useState(false);
+    const openCreateAccountDialog = () => 
+    {
+        updateModalState(false); //close mobile menu dialog
+        updateSignInModalState(false);//close sign in menu dialog
+        updateCreateAccountModalState(true); //open create account dialog
+    }
+    const closeCreateAccountDialog = () => 
+    {
+        updateCreateAccountModalState(false);
+    }
+
+    // Sign In Menu Dialog Box controls
     const [signInModalState, updateSignInModalState] = useState(false);
     const openSignInDialog = () => 
     {
         updateModalState(false);//close mobile menu dialog
+        updateCreateAccountModalState(false);//close create account menu dialog
         updateSignInModalState(true); //open sign in dialog (if open)
     }
     const closeSignInDialog = () => 
@@ -21,10 +42,10 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
         updateSignInModalState(false);
     }
 
-    const [modalState, updateModalState] = useState(false);
     // Mobile Menu Dialog Box controls
+    const [modalState, updateModalState] = useState(false);
     const openMobileDialog  = () =>  updateModalState(true);//open menu dialog
-    const closeMobileDialog = () =>  updateModalState(false);//close menu dialog
+    const closeMobileDialog = () => updateModalState(false);//close menu dialog
     
 
     return ( 
@@ -46,13 +67,16 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                     )
                 })}
                 {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}
-                {createAccount && <CreateAccountButton/>}
+                {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
             </div> 
 
             {/* Harmburger Icon */}
-            <div onClick={openMobileDialog} className={styles.mobileNav} >
-                <div className={styles.hamburger}></div>
-            </div>
+            {areLinksAvailable && (
+                <div onClick={openMobileDialog} className={styles.mobileNav} >
+                    <div className={styles.hamburger}></div>
+                </div>
+            )}
+
 
         </header>
         <div>
@@ -61,17 +85,22 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                 <Modal closeModal={closeMobileDialog} open={modalState} >
                     {links && links.map((link) => {
                         return (
-                            <Link key={link.id} to={link.path}>{link.text}</Link>
+                            <Link onClick={closeMobileDialog} key={link.id} to={link.path}>{link.text}</Link>
                         )
                     })}
                     {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}
-                    {createAccount && <CreateAccountButton/>}
+                    {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
                 </Modal>  
             </div>
                               
             {/* Sign In Pop-up */}
             <div className={styles.signInModal}>
                 <SignInDialog open={signInModalState} closeModal={closeSignInDialog}/>
+            </div>
+
+             {/* Create Account In Pop-up */}
+             <div className={styles.createAccountModal}>
+                <CreateAccountDialog open={createAccountModalState} closeModal={closeCreateAccountDialog}/>
             </div>
             </div>
            

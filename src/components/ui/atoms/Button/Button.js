@@ -5,7 +5,10 @@ const Button = ({customStyle, children, handleOnClick}) =>
 
     const handleButtonClick = () => 
     {
-        handleOnClick()
+        if(handleOnClick)
+        {
+            handleOnClick();
+        }
     }
     return ( 
         <button

@@ -1,11 +1,14 @@
 import styles from './H1.module.css';
 
-const H1 = ({children, customStyle}) => 
+const H1 = (props) => 
 {
+    const {children, customStyle, ...rest} = props;
+
     return ( 
         <h1
         className={styles.h1}
-        styles={customStyle ? customStyle : {}}
+        style={customStyle ? customStyle : {}}
+        {...rest}
         >{children}</h1>
      );
 }

@@ -18,7 +18,11 @@ const ComingSoonPageForm = () => {
         //set loading message
         setIsLoading(true);
         
-        const credentials = {email: e.target[0].value}
+        const credentials = 
+        {
+            name:  e.target[0].value,
+            email: e.target[1].value, 
+        }
         console.log(credentials);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -54,8 +58,6 @@ const ComingSoonPageForm = () => {
         {   
             //remove loading message
             setIsLoading(false);
-
-            console.log(error);
             //show error message
             setError(error.message);
             //remove success message
@@ -67,7 +69,15 @@ const ComingSoonPageForm = () => {
     [
         {
             "key": 1,
+            "type": "text",
+            "name": "name",
+            "placeholder": "First Name",
+            "required": true
+        },
+        {
+            "key": 2,
             "type": "email",
+            "name": "email",
             "placeholder": "E-mail",
             "required": true
         }
@@ -81,7 +91,7 @@ const ComingSoonPageForm = () => {
 
     const button = 
     {
-        "content": "Notify Me"
+        "content": "Join Waitlist"
     }
 
     return ( 

@@ -1,40 +1,14 @@
-.isLoading button
+.formGroup p
 {
-    cursor: wait;
-    overflow: hidden;
-    position: relative;
+    margin-top: 2px;
 }
 
-.isLoading button::before
+.formGroup input
 {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150%;
-    height: 100%;
-    background: repeating-linear-gradient(
-            60deg,
-            transparent,
-            transparent .75rem,
-            #1540fd .75rem,
-            #1540fd 1.5rem);
-    animation: load 1s infinite linear
+    border: none;
 }
 
-.isLoading button span
+.formGroup button
 {
-    position: relative;
-}
-
-/* Loading button animation */
-
-@keyframes load{
-    0%{
-        transform: translateX(0)
-    }
-
-    100%{
-        transform: translateX(1.75rem);
-    }
+    width: 100%;
 }

@@ -1,10 +1,15 @@
+import { Link } from 'react-router-dom';
 import Img from './../../atoms/Img/Img';
 
 const IconList = ({icons}) => 
 {
     return ( 
         icons.map((icon) => {
-            return ( <Img key={icon.key} src = {icon.src}/>)
+            return ( 
+            <a key={icon.key} href={icon.link}>
+                <Img src = {icon.src}/>
+            </a>
+            )
         })
      );
 }

@@ -5,4 +5,37 @@
 .contactForm textarea
 {
     margin-bottom: 20px;
+    border: none;   
+}
+
+.contactForm textarea::placeholder, input::placeholder
+{
+    color: #7D7D7D;
+    font-weight: 300;
+}
+
+.contactForm .alert p
+{
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+@media screen and (min-width: 760px) 
+{   
+    .contactForm  textarea
+    {
+        font-size: 20px;
+    }
+
+    .contactForm  textarea::placeholder
+    {
+        font-size: 18px;
+    }
+
+    .contactForm .alert p
+    {
+        font-size: 18px;
+    }
+
+    
 }

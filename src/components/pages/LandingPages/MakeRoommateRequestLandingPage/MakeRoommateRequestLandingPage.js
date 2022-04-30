@@ -4,10 +4,8 @@ import styles from './MakeRoommateRequestLandingPage.module.css';
 import createProfileImage from './../../../../images/create-profile-section.svg';
 import makeRoommateRequestImage from './../../../../images/make-roomate-request-section.svg';
 import acceptRoommateConnection from './../../../../images/accept-roommate-connection-section.svg';
-import heroBackgroundImg from './../../../../images/make-roomate-request-hero-bg.png';
 import H1 from '../../../ui/atoms/Headings/H1/H1';
 import H3 from '../../../ui/atoms/Headings/H3/H3';
-import TextButtonGroup from '../../../ui/molecules/TextButtonGroup/TextButtonGroup';
 import P from '../../../ui/atoms/P/P';
 import Button from '../../../ui/atoms/Button/Button';
 const MakeRoommateRequestLandingPage = () => {

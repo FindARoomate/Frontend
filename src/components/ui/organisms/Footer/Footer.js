@@ -14,22 +14,26 @@ const Footer = () => {
         {
             key: 1,
             src: facebookIcon,
-            name: "Facebook Icon"
+            name: "Facebook Icon",
+            link: "https://web.facebook.com/Findaroommatecom-100316889345701",
         },
         {
             key: 2,
             src: instagramIcon,
-            name: "Instagram Icon"
+            name: "Instagram Icon",
+            link: "https://www.instagram.com/findaroommate_/"
         },
         {
             key: 3,
             src: twitterIcon,
-            name: "Twitter Icon"
+            name: "Twitter Icon",
+            link: "https://twitter.com/Findaroommate_"
         },
         {
             key: 4,
             src: linkedinIcon,
-            name: "Linkedin Icon"
+            name: "Linkedin Icon",
+            link: "https://www.linkedin.com/in/findaroommate"
         }
     ]
 

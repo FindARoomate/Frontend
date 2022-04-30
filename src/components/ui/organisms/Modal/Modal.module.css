@@ -19,6 +19,12 @@
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+.modal a
+{
+  color: #7D7D7D;
 }
 .modal a, .modal button
 {
@@ -35,7 +41,6 @@
 {
   float:right;
   cursor: pointer;
-  padding: 5px;
   /* background: red; */
 }
 
@@ -74,9 +79,7 @@
   .modal
   {
     top:5vw;
-    width: 90vw;
     margin: 0 auto;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 20px 0.5px rgba(125, 125, 125, 0.45);
     background: white;
@@ -85,7 +88,7 @@
   }
   .modal
   {
-    width: 35vw!important;
-    padding: 45px 35px 70px 35px;
+    width: 40vw;
+    padding: 50px 85px;
   }
 }

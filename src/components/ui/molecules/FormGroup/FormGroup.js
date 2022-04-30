@@ -12,7 +12,10 @@ const FormGroup = ({inputs, textareas, p, button, handleSubmit, isLoading}) =>
 
     const handleFormSubmit = (e) => 
     {
-        handleSubmit(e);
+        if(handleSubmit)
+        {
+            handleSubmit(e);
+        }
     }
 
     return ( 
@@ -23,7 +26,7 @@ const FormGroup = ({inputs, textareas, p, button, handleSubmit, isLoading}) =>
             </P>)}
 
             <form
-                className={isLoading ? styles.isLoading : ''}
+                className={isLoading ? "isLoading" : ''}
                 onSubmit = {(e) => handleFormSubmit(e)}
             >
                 {/* This way inputs and textareas display, but there is no way to control the order. 

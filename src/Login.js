@@ -44,8 +44,10 @@ const Login = () => {
 
         if(!res.ok)
         {
-          throw new ValidationError("Incorrect Credentials")
+          //throw new ValidationError("Incorrect Credentials")
         }
+
+        //console.log(body);
 
       // Remove error message
       setError();
@@ -57,7 +59,7 @@ const Login = () => {
       //Remove any success message
       setSuccessMessage();
       //Show error message
-      setError(error.message);
+      //setError(error.message);
     });
 
   }

@@ -1,8 +1,18 @@
 import styles from './ContactTag.module.css';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
-const ContactTag = ({icon, name, value}) => {
+const ContactTag = ({icon, name, value}) => 
+{
+    AOS.init();//intilize on scroll animation
+
     return ( 
-        <div className={styles.contactTag}>
+        <div
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="1000"
+            className={styles.contactTag}
+        >
             <span className={styles.contactType}>
                 <img src={icon} className={styles.mobileContactIcon}/>
                 <p>{name}</p>

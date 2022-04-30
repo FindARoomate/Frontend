@@ -13,7 +13,7 @@ import Button from '../../../ui/atoms/Button/Button';
 
 const MakeRoommateRequestLandingPageTemplate = (props) => {
 
-    const {heroSection, createProfile, makeRoommateRequest, acceptConnection} = props;
+    const {heroSection, createProfile, makeRoommateRequest, acceptConnection, customHeader} = props;
 
     const heroStyle = 
     {
@@ -119,11 +119,15 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
     return ( 
         <div className={styles.landingPage}>
             {/* Header */}
-            <Header
-                customStyle={{background: "#F5F7FF"}}
-                links = {headerLinks}
-                signIn = {true}
-            />
+            {customHeader ? customHeader : 
+            (
+                <Header
+                    customStyle={{background: "#F5F7FF"}}
+                    links = {headerLinks}
+                    signIn = {true}
+                />
+            )}
+            
                 
             {/* For Hero Section */}
             <div className={styles.heroSection}>
