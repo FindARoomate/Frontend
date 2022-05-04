@@ -161,6 +161,25 @@
     border: 1px solid #7D7D7D;
 }
 
+.buttonRow
+{   
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonRow button
+{   
+   font-weight: 600;
+   padding: 13px 35px;
+}
+
+.prevButton button
+{
+    background: white;
+    color: #0029DD;
+    border: 1px solid #0029DD;
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
@@ -227,5 +246,10 @@
         margin-right: 8px;
         width: 32px;
         height: 32px;
+    }
+
+    .buttonRow button
+    {   
+        padding: 19px 52px;
     }
 }

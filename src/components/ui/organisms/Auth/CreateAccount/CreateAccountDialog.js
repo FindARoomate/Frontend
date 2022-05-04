@@ -20,7 +20,7 @@ const CreateAccountDialog = ({open, closeModal}) =>
 
     const placeholderFunction = () => {}
     const [isLoading, setIsLoading] = useState(false);
-    const {isSuccess, data, isError, sendPostRequest} = usePost(CREATE_ACCOUNT)
+    const {isSuccess, APIdata, isError, sendPostRequest} = usePost(CREATE_ACCOUNT)
 
     const handleSignUp = (e) => 
     {
@@ -40,24 +40,8 @@ const CreateAccountDialog = ({open, closeModal}) =>
         if(isSuccess || isError)
         { 
             setIsLoading(false); 
-          
-            // console.log(data.email[0])
         }
-    }, [isError, isSuccess, data]);
-
-    const showErrors = (errors) =>
-    {
-        const entries = Object.entries(errors);
-        console.log(entries);
-
-        entries.map((error) => {
-           return (
-           <ErrorAlert 
-                key={error[0]}
-                message={error[1][0]}
-            />)
-        });
-    }
+    }, [isError, isSuccess, APIdata]);
 
     return ( 
         <div className={styles.createAccountDialogContainer}>
@@ -69,8 +53,8 @@ const CreateAccountDialog = ({open, closeModal}) =>
             </div>
             <div className={styles.form}>
                 <form onSubmit={(e) => handleSignUp(e)}>
-                    {isError &&  <CreateAccountErrors errors={data}/>}
-                    {isSuccess && <SuccessAlert message={data.message}/>}
+                    {/* {isError &&  <CreateAccountErrors errors={APIdata}/>} */}
+                    {isSuccess && <SuccessAlert message={APIdata.message}/>}
                     <div className={styles.inputGroup}>
                         <Label>Email</Label>
                         <Input type="text" placeholder="Enter your email address"/>

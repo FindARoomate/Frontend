@@ -15,10 +15,11 @@ const RoomLocation = () =>
             label: "Country",
             inputCategory: "select",
             inputName: "country",
+            required: true,
             data:
             {
                 key: 1,
-                name: "Gender",
+                name: "Country",
                 values: 
                 [
                     "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", 
@@ -31,10 +32,11 @@ const RoomLocation = () =>
             label: "State",
             inputCategory: "select",
             inputName: "state",
+            required: true,
             data:
             {
                 key: 1,
-                name: "state",
+                name: "State",
                 values: 
                 [
                     'Abuja',
@@ -82,10 +84,11 @@ const RoomLocation = () =>
             label: "City",
             inputCategory: "select",
             inputName: "city",
+            required: true,
             data:
             {
                 key: 1,
-                name: "city",
+                name: "City",
                 values: 
                 [ 
                     "Agege", "Ajegunle", "Akodo", "Apapa", "Badagry", "Ebute Ikorodu", "Ebute-Metta", "Ejirin", 
@@ -98,11 +101,13 @@ const RoomLocation = () =>
             key: 5,
             label: "Street Address",
             inputCategory: "textarea",
+            required: true,
             inputPlaceholder: "E.g 59, Baptist Street, Off Ademulegun road, NEPA, Ondo."
         },
     ];
 
-    const button = <Button>Next <Img src={icon}/></Button>
+    const nextButton = <Button>Next <Img src={icon}/></Button>
+
     const navClasses = 
     [
         style.active,
@@ -116,6 +121,7 @@ const RoomLocation = () =>
 
     const handleSubmit = (e) => 
     {
+        e.preventDefault();
         setIsFormSubmitted(true);
     }
     return ( 
@@ -123,7 +129,7 @@ const RoomLocation = () =>
             {isFormSubmitted && <Navigate replace to="/room-details"/>}
             <CreateRoommateRequestTemplate
                 inputs = {inputs}
-                button = {button}
+                nextButton = {nextButton}
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
                 description = "Where is your room located?"

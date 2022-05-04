@@ -3,7 +3,7 @@ import style from "../../../templates/CreateRoommateRequestTemplate/CreateRoomma
 import icon from './../../../../icons/right-arrow-icon.svg';
 import Button from "../../../ui/atoms/Button/Button";
 import Img from './../../../ui/atoms/Img/Img';
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 const RoomDetails = () => 
@@ -15,10 +15,11 @@ const RoomDetails = () =>
             label: "Room Type",
             inputCategory: "select",
             inputName: "room_type",
+            required: true,
             data:
             {
                 key: 1,
-                name: "room_type",
+                name: "Room Type",
                 values: 
                 [
                     "Self Contain", "2 Bedroom Flat", "3 Bedroom Flat", "Shortlet", "Single Room Apartment"
@@ -31,6 +32,7 @@ const RoomDetails = () =>
             inputName: "no_of_persons_to_occupy_apartment",
             inputCategory: "input",
             inputType: "number",
+            required: true,
             inputPlaceholder: "Please type in the total number of occupants in your room/apartment"
         },
         {
@@ -39,10 +41,11 @@ const RoomDetails = () =>
             inputName: "no_of_current_roommates",
             inputCategory: "input",
             inputType: "number",
+            required: true,
             inputPlaceholder: "Please type in the number of roommates you currently have"
         },
         {
-            key: 1,
+            key: 4,
             label: "Amenities: Kindly select all that apply",
             inputName: "gender",
             inputCategory: "checkboxInput",
@@ -66,7 +69,9 @@ const RoomDetails = () =>
         },
     ];
 
-    const button = <Button>Next <Img src={icon}/></Button>
+    const prevButton = <Link to="/room-location"><Button>Previous</Button></Link>
+    const nextButton = <Button>Next <Img src={icon}/></Button>
+
     const navClasses = 
     [
         style.visited,
@@ -80,14 +85,17 @@ const RoomDetails = () =>
 
     const handleSubmit = (e) => 
     {
+        e.preventDefault();
         setIsFormSubmitted(true);
     }
+
     return ( 
         <>
             {isFormSubmitted && <Navigate replace to="/room-pricing"/>}
             <CreateRoommateRequestTemplate
                 inputs = {inputs}
-                button = {button}
+                prevButton = {prevButton}
+                nextButton = {nextButton}
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
                 description = "Let's know the details of the room."

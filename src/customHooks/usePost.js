@@ -13,61 +13,27 @@ const usePost = (url, token) => {
   // add token to the header if it exists
   if (token) headersValue["Authorization"] = "Bearer " + token;
 
-  // const sendPostRequest = useCallback((credentials)=> {
-  //   fetch(url,
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify(credentials),
-  //       redirect: "follow",
-  //       mode: "cors",
-  //       headers: headersValue
-  //     })
-  //     .then (async (res) =>
-  //     {
-  //         const body = await (res.json());
-
-  //         if(!res.ok)
-  //         {
-  //           // console.log(body);
-  //           throw body;
-  //         }
-  //         setIsError(false);
-  //         setIsSuccess(true);
-  //         setAPIData(body);
-  //         console.log(APIdata);
-  //     })
-  //     .catch((error) =>
-  //     {
-  //         //log error
-  //         // console.log(error);
-
-  //         setIsSuccess(false)
-  //         setIsError(true); //Remove any success message
-  //         setAPIData(error);
-  //     });
-  // }, [url, token]);
-
-  const sendPostRequest = useCallback(
-    (credentials) => {
-      fetch(url, {
+  const sendPostRequest = useCallback((credentials) => {
+      
+    fetch(url, {
         method: "POST",
         body: JSON.stringify(credentials),
         redirect: "follow",
         mode: "cors",
         headers: headersValue,
       })
-        .then((res) => 
+        .then((res) =>  
         {
           const body = res.json();
-
-          if (!res.ok)
-          {
-            throw body;
-          }
-
+          
           return body;
+
+          // console.log(res);
+          // throw body;
         })
-        .then((data) => {
+        .then((data) => 
+        {
+          console.log(data);
           setAPIData(data);
           setIsSuccess(true);
           setIsError(false);
@@ -76,10 +42,11 @@ const usePost = (url, token) => {
         {
           setIsSuccess(false);
           setIsError(true); //Remove any success message
-          setAPIData(error);
+          setAPIData(error.message);
+          console.log(error);
         });
     },
-    [url, APIdata, headersValue]
+    [url, headersValue]
   );
 
   return { isError, isSuccess, APIdata, sendPostRequest };

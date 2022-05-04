@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Img from './../../../ui/atoms/Img/Img';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from './../../../ui/atoms/Button/Button';
 import icon from './../../../../icons/right-arrow-icon.svg';
 import CreatePersonalProfileTemplate from './../../../templates/CreatePersonalProfileTemplate/CreatePersonalProfileTemplate'
@@ -18,12 +18,13 @@ const TellUsAboutYourself = () =>
             inputName: "religion",
             inputCategory: "select",
             value: localStorage.getItem("religion"),
+            required: true,
             data:
-            {
-                key: 1,
-                name: "Religion",
-                values: ["Christian", "Muslim", "Other"]
-            }         
+            [
+                {key: 1, label: "Christian", value: "CHRISTIANITY"},
+                {key: 2, label: "Muslim", value: "ISLAM"},
+                {key: 3, label: "Other", value: "OTHER"}
+            ]
         },
         {
             key: 2,
@@ -31,12 +32,12 @@ const TellUsAboutYourself = () =>
             inputName: "personality",
             inputCategory: "select",
             value: localStorage.getItem("personality"),
-            data:
-            {
-                key: 1,
-                name: "Personality",
-                values: ["Introvert", "Extrovert"]
-            }      
+            required: true,
+            data:                
+            [
+                {key: 1, label: "Introvert", value: "INTROVERT"},
+                {key: 2, label: "Extrovert", value: "EXTROVERT"}
+            ]
         },
         {
             key: 3,
@@ -45,18 +46,23 @@ const TellUsAboutYourself = () =>
             inputCategory: "input",
             inputType: "text",
             inputPlaceholder: "e.g student / web developer / real estate manager",
-            value: localStorage.getItem("profession")
+            value: localStorage.getItem("profession"),
+            required: true
         },
         {
             key: 4,
-            label: "Short bio",
+            label: "Short Bio",
             inputCategory: "textarea",
+            inputName: "bio",
             inputPlaceholder: "E.g  I am a church girl and I love playing music out loud. Do not consider becoming my roommate if you hate loud music.",
-            value: localStorage.getItem("bio")
+            value: localStorage.getItem("bio"),
+            required: true
         },
     ]
 
-    const button = <Button>Next <Img src={icon}/> </Button>
+    const nextButton = <Button>Next <Img src={icon}/> </Button>
+    const previousButton = <Link to="/bio-data"><Button>Previous</Button></Link>
+
     const navClasses = 
     [
         createPersonalProfileStyles.notVisited,
@@ -64,13 +70,14 @@ const TellUsAboutYourself = () =>
         createPersonalProfileStyles.notVisited 
     ];
 
+    const handleInputChange = (name, value) => 
+    {
+        localStorage.setItem(name, value);
+    }
+
     const handleSubmit = (e) => 
     {
-        e.preventDefault();
-        localStorage.setItem("religion", e.target[0].value);//save name to localStorage
-        localStorage.setItem("personality", e.target[1].value);//save name to localStorage
-        localStorage.setItem("profession", e.target[2].value);//save name to localStorage
-        localStorage.setItem("bio", e.target[3].value);//save name to localStorage       
+        e.preventDefault();  
         setIsFormSubmitted(true);
     }
 
@@ -81,9 +88,11 @@ const TellUsAboutYourself = () =>
 
              <CreatePersonalProfileTemplate
                 inputs = {inputs}
-                button = {button}
+                nextButton = {nextButton}
+                previousButton = {previousButton}
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
+                handleInputChange = {handleInputChange}
             />
         </>
        

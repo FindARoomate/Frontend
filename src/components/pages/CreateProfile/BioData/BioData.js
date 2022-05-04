@@ -16,11 +16,12 @@ const BioData = () =>
         {
             key: 1,
             label: "Name",
-            inputName: "name",
+            inputName: "fullname",
             inputCategory: "input",
             inputType: "text",
             inputPlaceholder: "Firstname Lastname",
-            value: localStorage.getItem("name")
+            required: true,
+            value: localStorage.getItem("fullname")
         },
         {
             key: 2,
@@ -29,6 +30,7 @@ const BioData = () =>
             inputCategory: "input",
             inputType: "email",
             inputPlaceholder: "youremail@gmail.com",
+            required: true,
             value: localStorage.getItem("email")
         },
         {
@@ -37,7 +39,8 @@ const BioData = () =>
             inputName: "phone_number",
             inputCategory: "input",
             inputType: "number",
-            inputPlaceholder: "",
+            inputPlaceholder: "+234123345567",
+            required: true,
             value: localStorage.getItem("phone_number")
         },
         {
@@ -45,26 +48,33 @@ const BioData = () =>
             label: "Gender",
             inputCategory: "select",
             inputName: "gender",
+            required: true,
             value: localStorage.getItem("gender"),
             data:
-            {
-                key: 1,
-                name: "Gender",
-                values: ["Male", "Female"]
-            }
+            [
+                {key: 1, label: "Male", value: "MALE"},
+                {key: 2, label: "Female", value: "FEMALE"}
+            ]
         },
         {
             key: 5,
-            label: "Date of birth",
-            inputName: "date_of_birth",
-            inputCategory: "input",
-            inputType: "date",
-            inputPlaceholder: "",
-            value: localStorage.getItem("date_of_birth")
+            label: "Age Range",
+            inputName: "age_range",
+            inputCategory: "select",
+            required: true,
+            value: localStorage.getItem("age_range"),
+            data:
+            [
+                {key: 1, label: "< 16", value: "< 16"},
+                {key: 2, label: "16 - 20", value: "16 - 20"},
+                {key: 3, label: "21 - 25", value: "21 - 25"},
+                {key: 4, label: "25 - 30", value: "25 - 30"},
+                {key: 5, label: "> 30", value: "> 30"}
+            ]
         },
     ]
 
-    const button = <Button>Next <Img src={icon}/> </Button>
+    const nextButton = <Button>Next <Img src={icon}/> </Button>
     const navClasses = 
     [
         createPersonalProfileStyles.active,
@@ -72,15 +82,15 @@ const BioData = () =>
         createPersonalProfileStyles.notVisited
     ];
 
+    
+    const handleInputChange = (name, value) => 
+    {
+        localStorage.setItem(name, value);
+    }
+
     const handleSubmit = (e) => 
     {
         e.preventDefault();
-        localStorage.setItem("name", e.target[0].value);//save name to localStorage
-        localStorage.setItem("email", e.target[1].value);//save name to localStorage
-        localStorage.setItem("phone_number", e.target[2].value);//save name to localStorage
-        localStorage.setItem("gender", e.target[3].value);//save name to localStorage
-        localStorage.setItem("date_of_birth", e.target[4].value);//save name to localStorage
-       
         setIsFormSubmitted(true);
     }
 
@@ -91,9 +101,10 @@ const BioData = () =>
 
             <CreatePersonalProfileTemplate
                 inputs = {inputs}
-                button = {button}
+                nextButton = {nextButton}
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
+                handleInputChange = {handleInputChange}
             />
         </>
      );

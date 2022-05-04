@@ -1,20 +1,10 @@
 import styles from './Select.module.css';
 import { useState } from 'react';
 
-const Select = ({data, defaultOption, showSelectTags}) =>
+const Select = ({data, defaultOption, showSelectTags, handleFormInputChange, name, label, required}) =>
 {
     const [customStyles, updateCustomStyle] = useState({})
 
-    // var defaultSelectOption;
-
-    // if (defaultOption)
-    // {
-    //     defaultSelectOption = {defaultOption;
-    // }
-    // else
-    // {
-    //     defaultSelectOption = "";
-    // }
     const handleSelectChange = (e) => 
     {
         if(showSelectTags)
@@ -30,6 +20,11 @@ const Select = ({data, defaultOption, showSelectTags}) =>
             }
         }
 
+        if(handleFormInputChange)
+        {
+            handleFormInputChange(name, e.target.value);
+        }
+
     }
 
     return ( 
@@ -37,18 +32,17 @@ const Select = ({data, defaultOption, showSelectTags}) =>
                     onChange={(e) => handleSelectChange(e)}
                     className={styles.select} 
                     style={customStyles ? customStyles : {}}
+                    name={name}
+                    required = {required}
+                    defaultValue = {defaultOption}
                 >
 
-                <option defaultValue= {defaultOption ? true : false} value="0" disabled>{data.name}</option>
+                <option value="">{label}</option>
 
-                {data.values.map((value) => {
+                {data.map((option) => 
+                {
                     return (
-                    <option 
-                        key={value}
-                        defaultValue= {defaultOption === value}    
-                    >
-                        {value}
-                    </option>);
+                    <option key={option.key} value={option.value}>{option.label}</option>);
                 })}
             </select>
      );

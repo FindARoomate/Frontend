@@ -7,7 +7,16 @@ import Label from '../../ui/atoms/Label/Label';
 import Input from '../../ui/atoms/Input/Input';
 import P from '../../ui/atoms/P/P';
 
-const CreateRoommateRequestTemplate = ({inputs, button, navClasses, handleSubmit, description}) => 
+const CreateRoommateRequestTemplate = (
+    {
+        inputs, 
+        prevButton,
+        nextButton, 
+        navClasses, 
+        handleSubmit, 
+        description, 
+        handleFormInputChange
+    }) => 
 {
     const handleFormSubmit = (e) => 
     {
@@ -27,105 +36,122 @@ const CreateRoommateRequestTemplate = ({inputs, button, navClasses, handleSubmit
                 </div>
                 <div className={`${navClasses[2]} ${styles.singleNav}`}>
                 </div>
-                <div className={`${navClasses[2]} ${styles.singleNav}`}>
+                <div className={`${navClasses[3]} ${styles.singleNav}`}>
                 </div>
             </div>
             <div className={styles.description}><P>{description}</P></div>
         </div>
         
         <form onSubmit={handleFormSubmit} className={styles.form}>
-            {
-                inputs.map((input) => 
-                {
-                    //if it is an input field.
-                    if(input.inputCategory == "input")
-                    {
-                        return (
-                            <div key={input.key} className={styles.formGroup}>
-                                <Label>{input.label}</Label>
-                                <Input 
-                                    placeholder={input.inputPlaceholder}
-                                    type={input.inputType}
-                                    name={input.inputName}
-                                />
-                            </div>
-                        );
-                    }
+        {
+            inputs.map((input) => {
+              //if it is an input field.
+              if (input.inputCategory == "input") {
+                return (
+                  <div key={input.key} className={styles.formGroup}>
+                    <Label>{input.label}</Label>
+                    <Input 
+                      placeholder={input.inputPlaceholder}
+                      type={input.inputType}
+                      name={input.inputName}
+                      defaultValue = {input.value ? input.value : ""}
+                      required = {input.required}
+                      handleFormInputChange = {handleFormInputChange}
+                      />
+                  </div>
+                );
+              }
 
-                    //if it is a select field
-                    if(input.inputCategory == "select")
-                    {
-                        return (
-                            <div key={input.key} className={styles.formGroup}>
-                                <Label>{input.label}</Label>
-                                <Select data={input.data}/>
-                            </div>
-                        )
-                    }
+              //if it is a select field
+              if (input.inputCategory == "select")
+              {
+                return (
+                  <div key={input.key} className={styles.formGroup}>
+                    <Label>{input.label}</Label>
+                    <Select 
+                        defaultOption={input.value ? input.value : ""}
+                        data={input.data}
+                        name={input.inputName}
+                        required = {input.required}
+                        handleFormInputChange = {handleFormInputChange}
+                      />
+                  </div>
+                );
+              }
 
-                    //if it is a textarea
-                    if(input.inputCategory == "textarea")
-                    {
-                        return (
-                            <div key={input.key} className={styles.formGroup}>
-                                <Label>{input.label}</Label>
-                                <Textarea
-                                    rows="4"
-                                    placeholder={input.inputPlaceholder}
-                                />
-                            </div>
-                        )
-                    }
+              //if it is a textarea
+              if (input.inputCategory == "textarea") {
+                return (
+                  <div key={input.key} className={styles.formGroup}>
+                    <Label>{input.label}</Label>
+                    <Textarea
+                          rows="4"
+                          placeholder={input.inputPlaceholder}
+                          name = {input.inputName}
+                          required = {input.required}
+                          defaultValue = {input.value ? input.value : ""}
+                          handleFormInputChange = {handleFormInputChange}
+                          />
+                  </div>
+                );
+              }
 
-                    //if it is a radio input
-                    if(input.inputCategory == "radioInput")
-                    {
-                        return (
-                            <div className={styles.formGroup}>
-                            <Label>{input.label}</Label>
-                            {input.data.map((radio) => 
-                                {
-                                    return (
-                                        <div key={radio.value} className={styles.radioInputClass}>
-                                            <Input type="radio" name={radio.inputName} value={radio.value}/>
-                                            <Label>{radio.label}</Label>
-                                        </div>
-                                    )
-                                })
-                            }
+              //if it is a radio input
+              if (input.inputCategory == "radioInput") {
+                return (
+                  <div key={input.key} className={styles.formGroup}>
+                    <Label>{input.label}</Label>
+                    {input.data.map((radio) => {
+                      return (
+                        <div key={radio.key} className={styles.radioInputClass}>
+                          <Input
+                            type="radio"
+                            name={input.inputName}
+                            value={radio.value}
+                            required = {input.required}
+                            defaultChecked = {input.value == radio.value}
+                            handleFormInputChange = {handleFormInputChange}
+                          />
+                          <Label>{radio.label}</Label>
                         </div>
-                        )
-                    }
+                      );
+                    })}
+                  </div>
+                );
+              }
 
-                    //if it is a checkbox input 
-                    if(input.inputCategory == "checkboxInput")
-                    {
-                        return (
-                            <div className={styles.formGroup}>
-                            <Label>{input.label}</Label>
-
-                            <div className={styles.checkboxContainer}>
-                            {input.data.map((checkbox) => 
-                                {
-                                    return (
-                                        <div key={checkbox.value} className={styles.checkboxInputClass}>
-                                            <Input type="checkbox" name={checkbox.inputName} value={checkbox.value}/>
-                                            <Label>{checkbox.label}</Label>
-                                        </div>
-                                    )
-                                })
-                            }
-                            </div>
-                            
+              //if it is a checkbox input 
+              if(input.inputCategory == "checkboxInput")
+              {
+                  return (
+                      <div key={input.key} className={styles.formGroup}>
+                        <Label>{input.label}</Label>
+                        <div className={styles.checkboxContainer}>
+                        {
+                            input.data.map((checkbox) => 
+                            {
+                                return (
+                                    <div key={checkbox.value} className={styles.checkboxInputClass}>
+                                        <Input type="checkbox" name={checkbox.inputName} value={checkbox.value}/>
+                                        <Label>{checkbox.label}</Label>
+                                    </div>
+                                )
+                            })
+                        }
                         </div>
-                        )
-                    }
+                        
+                  </div>
+                  )
+              }
                     
                 })
             }
 
             {/* Submit form button */}
-           {button}
+            <div className={styles.buttonRow}>
+                <div className={styles.prevButton}>{prevButton ? prevButton : ""}</div>
+                <div className={styles.nextButton}>{nextButton ? nextButton : ""}</div>  
+            </div>
         </form>
 
         </div>       
