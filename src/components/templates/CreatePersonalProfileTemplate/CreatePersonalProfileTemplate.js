@@ -50,6 +50,7 @@ const CreatePersonalProfileTemplate = ({inputs, button, navClasses, handleSubmit
                                         placeholder={input.inputPlaceholder}
                                         type={input.inputType}
                                         name={input.inputName}
+                                        defaultValue = {input.value ? input.value : ""}
                                     />
                                 </div>
                             );
@@ -61,7 +62,10 @@ const CreatePersonalProfileTemplate = ({inputs, button, navClasses, handleSubmit
                             return (
                                 <div key={input.key} className={styles.formGroup}>
                                     <Label>{input.label}</Label>
-                                    <Select data={input.data}/>
+                                    <Select 
+                                        defaultValue={input.value ? input.value : ""}
+                                        data={input.data}
+                                    />
                                 </div>
                             )
                         }
@@ -75,6 +79,7 @@ const CreatePersonalProfileTemplate = ({inputs, button, navClasses, handleSubmit
                                     <Textarea
                                         rows="4"
                                         placeholder={input.inputPlaceholder}
+                                        defaultValue = {input.value ? input.value : ""}
                                     />
                                 </div>
                             )
@@ -89,8 +94,13 @@ const CreatePersonalProfileTemplate = ({inputs, button, navClasses, handleSubmit
                                 {input.data.map((radio) => 
                                     {
                                         return (
-                                            <div className={styles.radioInputClass}>
-                                                <Input type="radio" name={radio.inputName} value={radio.value}/>
+                                            <div key={radio.value} className={styles.radioInputClass}>
+                                                <Input 
+                                                    type="radio"
+                                                    name={input.inputName} 
+                                                    value={radio.value}
+                                                    defaultChecked = {radio.checked ? radio.checked : false}
+                                                />
                                                 <Label>{radio.label}</Label>
                                             </div>
                                         )

@@ -86,13 +86,37 @@ const CreateRoommateRequestTemplate = ({inputs, button, navClasses, handleSubmit
                             {input.data.map((radio) => 
                                 {
                                     return (
-                                        <div className={styles.radioInputClass}>
+                                        <div key={radio.value} className={styles.radioInputClass}>
                                             <Input type="radio" name={radio.inputName} value={radio.value}/>
                                             <Label>{radio.label}</Label>
                                         </div>
                                     )
                                 })
                             }
+                        </div>
+                        )
+                    }
+
+                    //if it is a checkbox input 
+                    if(input.inputCategory == "checkboxInput")
+                    {
+                        return (
+                            <div className={styles.formGroup}>
+                            <Label>{input.label}</Label>
+
+                            <div className={styles.checkboxContainer}>
+                            {input.data.map((checkbox) => 
+                                {
+                                    return (
+                                        <div key={checkbox.value} className={styles.checkboxInputClass}>
+                                            <Input type="checkbox" name={checkbox.inputName} value={checkbox.value}/>
+                                            <Label>{checkbox.label}</Label>
+                                        </div>
+                                    )
+                                })
+                            }
+                            </div>
+                            
                         </div>
                         )
                     }

@@ -3,7 +3,8 @@ import style from "../../../templates/CreateRoommateRequestTemplate/CreateRoomma
 import icon from './../../../../icons/right-arrow-icon.svg';
 import Button from "../../../ui/atoms/Button/Button";
 import Img from './../../../ui/atoms/Img/Img';
-
+import { Navigate } from "react-router-dom";
+import { useState } from "react";
 
 const RoomLocation = () => 
 {
@@ -110,18 +111,25 @@ const RoomLocation = () =>
         style.notVisited 
 
     ];
+
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
     const handleSubmit = (e) => 
     {
-        console.log(e.target)
+        setIsFormSubmitted(true);
     }
     return ( 
-        <CreateRoommateRequestTemplate
-        inputs = {inputs}
-        button = {button}
-        navClasses = {navClasses}
-        handleSubmit = {handleSubmit}
-        description = "Where is your room located?"
-        />
+        <>
+            {isFormSubmitted && <Navigate replace to="/room-details"/>}
+            <CreateRoommateRequestTemplate
+                inputs = {inputs}
+                button = {button}
+                navClasses = {navClasses}
+                handleSubmit = {handleSubmit}
+                description = "Where is your room located?"
+            />
+        </>
+        
      );
 }
  

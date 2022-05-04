@@ -17,6 +17,7 @@ const TellUsAboutYourself = () =>
             label: "Religion",
             inputName: "religion",
             inputCategory: "select",
+            value: localStorage.getItem("religion"),
             data:
             {
                 key: 1,
@@ -29,6 +30,7 @@ const TellUsAboutYourself = () =>
             label: "Personality",
             inputName: "personality",
             inputCategory: "select",
+            value: localStorage.getItem("personality"),
             data:
             {
                 key: 1,
@@ -42,13 +44,15 @@ const TellUsAboutYourself = () =>
             inputName: "profession",
             inputCategory: "input",
             inputType: "text",
-            inputPlaceholder: "e.g student / web developer / real estate manager"
+            inputPlaceholder: "e.g student / web developer / real estate manager",
+            value: localStorage.getItem("profession")
         },
         {
             key: 4,
             label: "Short bio",
             inputCategory: "textarea",
-            inputPlaceholder: "E.g  I am a church girl and I love playing music out loud. Do not consider becoming my roommate if you hate loud music."
+            inputPlaceholder: "E.g  I am a church girl and I love playing music out loud. Do not consider becoming my roommate if you hate loud music.",
+            value: localStorage.getItem("bio")
         },
     ]
 

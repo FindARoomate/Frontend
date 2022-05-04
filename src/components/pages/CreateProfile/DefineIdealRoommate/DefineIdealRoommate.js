@@ -64,12 +64,12 @@ const DefineIdealRoommate = () =>
                 {key: 5, label: "> 30", value: "> 30"},
             ]
         },
-        {
-            key: 5,
-            label: "Define your ideal roomate in words",
-            inputCategory: "textarea",
-            inputPlaceholder: "E.g  I’d love to have a neat roommate. I can not cope in a dirty environment."
-        },
+        // {
+        //     key: 5,
+        //     label: "Define your ideal roomate in words",
+        //     inputCategory: "textarea",
+        //     inputPlaceholder: "E.g  I’d love to have a neat roommate. I can not cope in a dirty environment."
+        // },
     ]
 
     const button = <Button>Next <Img src={icon}/> </Button>
@@ -83,11 +83,13 @@ const DefineIdealRoommate = () =>
     const handleSubmit = (e) => 
     {
         e.preventDefault();
-        localStorage.setItem("religion", e.target[0].value);//save name to localStorage
-        localStorage.setItem("personality", e.target[1].value);//save name to localStorage
-        localStorage.setItem("profession", e.target[2].value);//save name to localStorage
-        localStorage.setItem("bio", e.target[3].value);//save name to localStorage       
-        setIsFormSubmitted(true);
+        console.log(e.target[0].value);
+        console.log(e.target[1].value);
+        console.log(e.target[2].value);
+        console.log(e.target[3].value);
+        console.log(e.target[4].value);
+
+        // setIsFormSubmitted(true);
     }
 
     return ( 
