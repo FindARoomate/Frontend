@@ -16,16 +16,22 @@ const RoomLocation = () =>
             inputCategory: "select",
             inputName: "country",
             required: true,
+            value: localStorage.getItem("country"),
             data:
-            {
-                key: 1,
-                name: "Country",
-                values: 
-                [
-                    "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", 
-                    "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros", "Nigeria"
-                ]
-            }
+            [
+                {key: 1, label: "Algeria", value: "Algeria"},
+                {key: 2, label: "Angola", value: "Angola"},
+                {key: 3, label: "Benin", value: "Benin"},
+                {key: 4, label: "Botswana", value: "Botswana"},
+                {key: 5, label: "Burkina Faso", value: "Burkina Faso"},
+                {key: 6, label: "Burundi", value: "Burundi"},
+                {key: 7, label: "Cameroon", value: "Cameroon"},
+                {key: 8, label:  "Cape Verde", value:  "Cape Verde"},
+                {key: 9, label: "Central African Republic", value: "Central African Republic"},
+                {key: 10, label: "Chad", value: "Chad"},
+                {key: 11, label: "Comoros", value: "Comoros"},
+                {key: 12, label: "Nigeria", value: "Nigeria"},
+            ]
         },
         {
             key: 2,
@@ -33,51 +39,22 @@ const RoomLocation = () =>
             inputCategory: "select",
             inputName: "state",
             required: true,
+            value: localStorage.getItem("state"),
             data:
-            {
-                key: 1,
-                name: "State",
-                values: 
-                [
-                    'Abuja',
-                    'Abia',
-                    'Adamawa',
-                    'Akwa Ibom',
-                    'Anambra',
-                    'Bauchi',
-                    'Bayelsa',
-                    'Benue',
-                    'Borno',
-                    'Cross River',
-                    'Delta',
-                    'Ebonyi',
-                    'Edo',
-                    'Ekiti',
-                    'Enugu',
-                    'Gombe',
-                    'Imo',
-                    'Jigawa',
-                    'Kaduna',
-                    'Kano',
-                    'Katsina',
-                    'Kebbi',
-                    'Kogi',
-                    'Kwara',
-                    'Lagos',
-                    'Nassarawa',
-                    'Niger',
-                    'Ogun',
-                    'Ondo',
-                    'Osun',
-                    'Oyo',
-                    'Plateau',
-                    'Rivers',
-                    'Sokoto',
-                    'Taraba',
-                    'Yobe',
-                    'Zamfara'
-                ]
-            }
+            [
+                {key: 1, label: "Algeria", value: "Algeria"},
+                {key: 2, label: "Angola", value: "Angola"},
+                {key: 3, label: "Benin", value: "Benin"},
+                {key: 4, label: "Botswana", value: "Botswana"},
+                {key: 5, label: "Burkina Faso", value: "Burkina Faso"},
+                {key: 6, label: "Burundi", value: "Burundi"},
+                {key: 7, label: "Cameroon", value: "Cameroon"},
+                {key: 8, label:  "Cape Verde", value:  "Cape Verde"},
+                {key: 9, label: "Central African Republic", value: "Central African Republic"},
+                {key: 10, label: "Chad", value: "Chad"},
+                {key: 11, label: "Comoros", value: "Comoros"},
+                {key: 12, label: "Nigeria", value: "Nigeria"},
+            ]
         },
         {
             key: 3,
@@ -85,24 +62,31 @@ const RoomLocation = () =>
             inputCategory: "select",
             inputName: "city",
             required: true,
+            value: localStorage.getItem("city"),
             data:
-            {
-                key: 1,
-                name: "City",
-                values: 
-                [ 
-                    "Agege", "Ajegunle", "Akodo", "Apapa", "Badagry", "Ebute Ikorodu", "Ebute-Metta", "Ejirin", 
-                    "Epe", "Festac Town", "Ifako", "Ikeja", "Ikorodu", "Ikotun", "Ikoyi", "Lagos", "Makoko", "Mushin",
-                    "Ojota", "Oshodi", "Somolu", "Surulere"
-                ]
-            }
+            [
+                {key: 1, label: "Algeria", value: "Algeria"},
+                {key: 2, label: "Angola", value: "Angola"},
+                {key: 3, label: "Benin", value: "Benin"},
+                {key: 4, label: "Botswana", value: "Botswana"},
+                {key: 5, label: "Burkina Faso", value: "Burkina Faso"},
+                {key: 6, label: "Burundi", value: "Burundi"},
+                {key: 7, label: "Cameroon", value: "Cameroon"},
+                {key: 8, label:  "Cape Verde", value:  "Cape Verde"},
+                {key: 9, label: "Central African Republic", value: "Central African Republic"},
+                {key: 10, label: "Chad", value: "Chad"},
+                {key: 11, label: "Comoros", value: "Comoros"},
+                {key: 12, label: "Nigeria", value: "Nigeria"},
+            ]
         },
         {
             key: 5,
             label: "Street Address",
             inputCategory: "textarea",
+            inputName: "street_address",
             required: true,
-            inputPlaceholder: "E.g 59, Baptist Street, Off Ademulegun road, NEPA, Ondo."
+            inputPlaceholder: "E.g 59, Baptist Street, Off Ademulegun road, NEPA, Ondo.",
+            value: localStorage.getItem("street_address")
         },
     ];
 
@@ -124,6 +108,12 @@ const RoomLocation = () =>
         e.preventDefault();
         setIsFormSubmitted(true);
     }
+
+    const handleInputChange = (name, value) => 
+    {
+        localStorage.setItem(name, value);
+    }
+
     return ( 
         <>
             {isFormSubmitted && <Navigate replace to="/room-details"/>}
@@ -133,6 +123,7 @@ const RoomLocation = () =>
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
                 description = "Where is your room located?"
+                handleInputChange={handleInputChange}
             />
         </>
         

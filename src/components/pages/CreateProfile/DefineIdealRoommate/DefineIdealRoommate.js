@@ -136,6 +136,27 @@ const DefineIdealRoommate = () =>
             setIsLoading(false);
         }
 
+        //clear local storage data on success
+        if(isSuccess)
+        {
+            localStorage.removeItem("fullname");
+            localStorage.removeItem("religion");
+            localStorage.removeItem("gender");
+            localStorage.removeItem("phone_number");
+            localStorage.removeItem("personality");
+            localStorage.removeItem("profession");
+            localStorage.removeItem("bio");
+            localStorage.removeItem("age");
+            localStorage.removeItem("roomie_gender");
+            localStorage.removeItem("roomie_religion");
+            localStorage.removeItem("roomie_age");
+            localStorage.removeItem("roomie_personality");
+            localStorage.removeItem("roomate_description");
+
+            //set form submitted to true
+            setIsFormSubmitted(true);
+        }
+
         console.log(APIdata);
 
     }, [isError, isSuccess, APIdata]);

@@ -8,6 +8,14 @@ import { useState } from "react";
 
 const RoomDetails = () => 
 {
+    const convertToObject = (string) => 
+    {
+        if(string)
+        {
+            return string.split(",");
+        }
+    }
+
     const inputs = 
     [
         {
@@ -16,15 +24,15 @@ const RoomDetails = () =>
             inputCategory: "select",
             inputName: "room_type",
             required: true,
+            value: localStorage.getItem("room_type"),
             data:
-            {
-                key: 1,
-                name: "Room Type",
-                values: 
-                [
-                    "Self Contain", "2 Bedroom Flat", "3 Bedroom Flat", "Shortlet", "Single Room Apartment"
-                ]
-            }
+            [
+                {key: 1, label: "Self Contain", value: "Self Contain"},
+                {key: 2, label: "2 Bedroom Flat", value: "2 Bedroom Flat"},
+                {key: 3, label: "3 Bedroom Flat", value: "3 Bedroom Flat"},
+                {key: 4, label: "Shortlet", value: "Shortlet"},
+                {key: 5, label: "Single Room Apartment", value: "Single Room Apartment"},
+            ]
         },
         {
             key: 2,
@@ -33,7 +41,8 @@ const RoomDetails = () =>
             inputCategory: "input",
             inputType: "number",
             required: true,
-            inputPlaceholder: "Please type in the total number of occupants in your room/apartment"
+            inputPlaceholder: "Please type in the total number of occupants in your room/apartment",
+            value: localStorage.getItem("no_of_persons_to_occupy_apartment")
         },
         {
             key: 3,
@@ -42,13 +51,15 @@ const RoomDetails = () =>
             inputCategory: "input",
             inputType: "number",
             required: true,
-            inputPlaceholder: "Please type in the number of roommates you currently have"
+            inputPlaceholder: "Please type in the number of roommates you currently have",
+            value: localStorage.getItem("no_of_current_roommates")
         },
         {
             key: 4,
             label: "Amenities: Kindly select all that apply",
-            inputName: "gender",
+            inputName: "amenities",
             inputCategory: "checkboxInput",
+            value: convertToObject(localStorage.getItem("amenities")),
             data:
             [
                 {key: 1, label: "Personal bathroom", value: "Personal bathroom"},
@@ -89,6 +100,25 @@ const RoomDetails = () =>
         setIsFormSubmitted(true);
     }
 
+    const handleInputChange = (name, value) => 
+    {
+        localStorage.setItem(name, value);
+    }
+
+    const handleCheckboxChange = (name, data) => 
+    {
+        //converting the checkbox values in an array into a comma separated string so we can store in localStorage
+        var checkboxString = "";
+        const checkboxKeys = Object.keys(data);
+
+        checkboxKeys.forEach((key) => 
+        {
+            checkboxString += key + ",";
+        });
+
+        localStorage.setItem(name, checkboxString)
+    }
+
     return ( 
         <>
             {isFormSubmitted && <Navigate replace to="/room-pricing"/>}
@@ -99,6 +129,8 @@ const RoomDetails = () =>
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
                 description = "Let's know the details of the room."
+                handleInputChange={handleInputChange}
+                handleCheckboxChange = {handleCheckboxChange}
             />
         </>
         

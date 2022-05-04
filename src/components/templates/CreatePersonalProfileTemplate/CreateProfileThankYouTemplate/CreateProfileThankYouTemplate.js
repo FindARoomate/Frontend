@@ -5,6 +5,7 @@ import H3 from '../../../ui/atoms/Headings/H3/H3';
 import image from './../../../../images/create-profile-success-image.svg'
 import Img from './../../../ui/atoms/Img/Img';
 import Header from './../../../ui/organisms/Header/Header';
+import { Link } from 'react-router-dom';
 
 const CreateProfileThankYouTemplate = () => 
 {
@@ -18,8 +19,14 @@ const CreateProfileThankYouTemplate = () =>
                     <H3>You have successfully created your profile.</H3>
                     <H3>You can now proceed to creating a roommate request!</H3>
                 </div>
-                <Button>Create a roommate request now!</Button>
-                <Button>Return to homepage</Button>
+                <div className={styles.button}>
+                    <Link to="/create-roommate-request-instruction">
+                        <Button>Create a roommate request now!</Button>
+                    </Link>
+                </div>
+                <div className={styles.button}>
+                    <Button>Return to dashboard</Button>
+                </div>
             </div>
         </div>
     </div>

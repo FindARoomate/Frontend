@@ -28,7 +28,7 @@ const handleFormInputChange = (name, value) =>
     {
         handleInputChange(name, value);
     }
-};
+}
 
   return (
     <div className={styles.personalProfileContainer}>

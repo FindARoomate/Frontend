@@ -15,13 +15,32 @@ const CreateRoommateRequestTemplate = (
         navClasses, 
         handleSubmit, 
         description, 
-        handleFormInputChange
-    }) => 
-{
+        handleInputChange,
+        handleCheckboxChange
+    }) => {
+
     const handleFormSubmit = (e) => 
     {
         handleSubmit(e);
     }
+
+    const handleFormInputChange = (name, value) => 
+    {
+        if(handleInputChange)
+        {
+            handleInputChange(name, value);
+        }
+    }
+
+    const handleFormCheckboxChange = (name, data) =>
+    {
+      if(handleCheckboxChange)
+      {
+        handleCheckboxChange(name, data);
+      }
+    }
+
+    var checkboxObject = {};
 
     return ( 
         <div className={styles.roommateRequestContainer}>
@@ -44,9 +63,11 @@ const CreateRoommateRequestTemplate = (
         
         <form onSubmit={handleFormSubmit} className={styles.form}>
         {
-            inputs.map((input) => {
+            inputs.map((input) => 
+            {
               //if it is an input field.
-              if (input.inputCategory == "input") {
+              if (input.inputCategory == "input") 
+              {
                 return (
                   <div key={input.key} className={styles.formGroup}>
                     <Label>{input.label}</Label>
@@ -72,6 +93,7 @@ const CreateRoommateRequestTemplate = (
                         defaultOption={input.value ? input.value : ""}
                         data={input.data}
                         name={input.inputName}
+                        label={input.label}
                         required = {input.required}
                         handleFormInputChange = {handleFormInputChange}
                       />
@@ -80,7 +102,8 @@ const CreateRoommateRequestTemplate = (
               }
 
               //if it is a textarea
-              if (input.inputCategory == "textarea") {
+              if (input.inputCategory == "textarea")
+              {
                 return (
                   <div key={input.key} className={styles.formGroup}>
                     <Label>{input.label}</Label>
@@ -97,7 +120,8 @@ const CreateRoommateRequestTemplate = (
               }
 
               //if it is a radio input
-              if (input.inputCategory == "radioInput") {
+              if (input.inputCategory == "radioInput") 
+              {
                 return (
                   <div key={input.key} className={styles.formGroup}>
                     <Label>{input.label}</Label>
@@ -132,7 +156,29 @@ const CreateRoommateRequestTemplate = (
                             {
                                 return (
                                     <div key={checkbox.value} className={styles.checkboxInputClass}>
-                                        <Input type="checkbox" name={checkbox.inputName} value={checkbox.value}/>
+                                        <Input 
+                                          onClick = {(e) =>
+                                          { 
+                                            if(e.target.checked)
+                                            {
+                                              checkboxObject[checkbox.value] = checkbox.value;
+
+                                            }else
+                                            {
+                                              if(checkboxObject[checkbox.value])
+                                              {
+                                                delete checkboxObject[checkbox.value];
+                                              }
+                                            }
+
+                                            //send the new data to parent component
+                                            handleFormCheckboxChange(input.inputName, checkboxObject);
+
+                                          } }
+                                        type="checkbox" 
+                                        name={checkbox.inputName} 
+                                        checked={input.value ? input.value.indexOf(checkbox.value) != -1 : false}
+                                        />
                                         <Label>{checkbox.label}</Label>
                                     </div>
                                 )

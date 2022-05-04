@@ -24,12 +24,16 @@ const usePost = (url, token) => {
       })
         .then((res) =>  
         {
+          
           const body = res.json();
           
+          // if(!res.ok)
+          // {
+          //   throw body;
+          // }
+
           return body;
 
-          // console.log(res);
-          // throw body;
         })
         .then((data) => 
         {
@@ -40,10 +44,10 @@ const usePost = (url, token) => {
         })
         .catch((error) => 
         {
+          console.log(error);
           setIsSuccess(false);
           setIsError(true); //Remove any success message
           setAPIData(error.message);
-          console.log(error);
         });
     },
     [url, headersValue]
