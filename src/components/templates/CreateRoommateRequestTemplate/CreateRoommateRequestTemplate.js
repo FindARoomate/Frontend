@@ -16,7 +16,8 @@ const CreateRoommateRequestTemplate = (
         handleSubmit, 
         description, 
         handleInputChange,
-        handleCheckboxChange
+        handleCheckboxChange,
+        defaultCheckboxArray
     }) => {
 
     const handleFormSubmit = (e) => 
@@ -40,7 +41,7 @@ const CreateRoommateRequestTemplate = (
       }
     }
 
-    var checkboxObject = {};
+    var checkboxObject = defaultCheckboxArray ? defaultCheckboxArray : [];
 
     return ( 
         <div className={styles.roommateRequestContainer}>
@@ -161,14 +162,16 @@ const CreateRoommateRequestTemplate = (
                                           { 
                                             if(e.target.checked)
                                             {
-                                              checkboxObject[checkbox.value] = checkbox.value;
-
+                                              checkboxObject.push(checkbox.value);
                                             }else
                                             {
-                                              if(checkboxObject[checkbox.value])
+                                              const index = checkboxObject.indexOf(checkbox.value);
+
+                                              if(index > -1)
                                               {
-                                                delete checkboxObject[checkbox.value];
+                                                checkboxObject.splice(index, 1);
                                               }
+                  
                                             }
 
                                             //send the new data to parent component
@@ -177,7 +180,7 @@ const CreateRoommateRequestTemplate = (
                                           } }
                                         type="checkbox" 
                                         name={checkbox.inputName} 
-                                        checked={input.value ? input.value.indexOf(checkbox.value) != -1 : false}
+                                        defaultChecked={input.value ? input.value.indexOf(checkbox.value) != -1 : false}
                                         />
                                         <Label>{checkbox.label}</Label>
                                     </div>

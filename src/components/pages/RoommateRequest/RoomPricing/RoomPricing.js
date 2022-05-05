@@ -17,7 +17,8 @@ const RoomPricing = () =>
             inputCategory: "input",
             inputType: "date",
             inputPlaceholder: "Select a date",
-            required: true
+            required: true,
+            value: localStorage.getItem("how_soon_roommate_can_move_in")
         },
         {
             key: 2,
@@ -26,14 +27,17 @@ const RoomPricing = () =>
             inputCategory: "input",
             inputType: "number",
             inputPlaceholder: "E.g #120,000 yearly, blease type in the number of roommates you currently have",
-            required: true
+            required: true,
+            value: localStorage.getItem("yearly_rent")
         },
         {
             key: 3,
             label: "Are there additional costs?",
+            inputName: "additional_cost",
             inputCategory: "textarea",
             inputPlaceholder: "E.g We pay #5,000 monthly for the gym and #500 to use the washing machine for an hour.",
-            required: true
+            required: true,
+            value: localStorage.getItem("additional_cost")
         },
     ];
 
@@ -55,6 +59,12 @@ const RoomPricing = () =>
         e.preventDefault();
         setIsFormSubmitted(true);
     }
+
+    const handleInputChange = (name, value) => 
+    {
+        localStorage.setItem(name, value);
+    }
+    
     return ( 
         <>
             {isFormSubmitted && <Navigate replace to="/room-look"/>}
@@ -65,6 +75,7 @@ const RoomPricing = () =>
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
                 description = "Move-in date and pricing"
+                handleInputChange={handleInputChange}
             />
         </>
         

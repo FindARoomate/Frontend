@@ -16,6 +16,7 @@ import RoomLocation from './components/pages/RoommateRequest/RoomLocation/RoomLo
 import RoomDetails from './components/pages/RoommateRequest/RoomDetails/RoomDetails';
 import RoomPricing from './components/pages/RoommateRequest/RoomPricing/RoomPricing';
 import RoomLook from './components/pages/RoommateRequest/RoomLook/RoomLook';
+import CreateRoommateRequestThankYou from './components/pages/RoommateRequest/CreateRoommateRequestThankYou/CreateRoommateRequestThankYou';
 
 
 function App() 
@@ -61,7 +62,8 @@ function App()
           <Route path='/room-details' element={<RoomDetails/>}/>
           <Route path='/room-pricing' element={<RoomPricing/>}/>
           <Route path='/room-look' element={<RoomLook/>}/>
-
+          <Route path='/create-roommate-request-thankyou' element={<CreateRoommateRequestThankYou/>} />
+          
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
         </Routes>

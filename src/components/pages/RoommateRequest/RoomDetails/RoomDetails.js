@@ -16,6 +16,8 @@ const RoomDetails = () =>
         }
     }
 
+    const amenitiesArray = convertToObject(localStorage.getItem("amenities"))
+
     const inputs = 
     [
         {
@@ -59,7 +61,7 @@ const RoomDetails = () =>
             label: "Amenities: Kindly select all that apply",
             inputName: "amenities",
             inputCategory: "checkboxInput",
-            value: convertToObject(localStorage.getItem("amenities")),
+            value: amenitiesArray,
             data:
             [
                 {key: 1, label: "Personal bathroom", value: "Personal bathroom"},
@@ -108,10 +110,9 @@ const RoomDetails = () =>
     const handleCheckboxChange = (name, data) => 
     {
         //converting the checkbox values in an array into a comma separated string so we can store in localStorage
+        console.log(data);
         var checkboxString = "";
-        const checkboxKeys = Object.keys(data);
-
-        checkboxKeys.forEach((key) => 
+        data.forEach((key) => 
         {
             checkboxString += key + ",";
         });
@@ -131,6 +132,7 @@ const RoomDetails = () =>
                 description = "Let's know the details of the room."
                 handleInputChange={handleInputChange}
                 handleCheckboxChange = {handleCheckboxChange}
+                defaultCheckboxArray = {amenitiesArray}
             />
         </>
         
