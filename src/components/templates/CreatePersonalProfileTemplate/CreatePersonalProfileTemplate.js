@@ -38,11 +38,10 @@ const CreatePersonalProfileTemplate = ({
           </div>
           <div className={styles.formNavigationDivider}></div>
         </div>
-
         <form onSubmit={handleFormSubmit} className={styles.form}>
           {inputs.map((input) => {
             //if it is an input field.
-            if (input.inputCategory == "input") {
+            if (input.inputCategory === "input") {
               return (
                 <div key={input.key} className={styles.formGroup}>
                   <Label>{input.label}</Label>
@@ -56,7 +55,7 @@ const CreatePersonalProfileTemplate = ({
             }
 
             //if it is a select field
-            if (input.inputCategory == "select") {
+            if (input.inputCategory === "select") {
               return (
                 <div key={input.key} className={styles.formGroup}>
                   <Label>{input.label}</Label>
@@ -66,7 +65,7 @@ const CreatePersonalProfileTemplate = ({
             }
 
             //if it is a textarea
-            if (input.inputCategory == "textarea") {
+            if (input.inputCategory === "textarea") {
               return (
                 <div key={input.key} className={styles.formGroup}>
                   <Label>{input.label}</Label>
@@ -76,7 +75,7 @@ const CreatePersonalProfileTemplate = ({
             }
 
             //if it is a radio input
-            if (input.inputCategory == "radioInput") {
+            if (input.inputCategory === "radioInput") {
               return (
                 <div key={input.key} className={styles.formGroup}>
                   <Label>{input.label}</Label>
