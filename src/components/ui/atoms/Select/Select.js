@@ -1,7 +1,7 @@
 import styles from './Select.module.css';
 import { useState } from 'react';
 
-const Select = ({data, showSelectTags}) =>
+const Select = ({data, defaultOption, showSelectTags, handleFormInputChange, name, label, required}) =>
 {
     const [customStyles, updateCustomStyle] = useState({})
 
@@ -20,13 +20,29 @@ const Select = ({data, showSelectTags}) =>
             }
         }
 
+        if(handleFormInputChange)
+        {
+            handleFormInputChange(name, e.target.value);
+        }
+
     }
 
     return ( 
-                <select onChange={(e) => handleSelectChange(e)} className={styles.select} style={customStyles ? customStyles : {}}>
-                <option defaultValue value="0" disabled>{data.name}</option>
-                {data.values.map((value) => {
-                    return (<option key={value}>{value}</option>);
+                <select 
+                    onChange={(e) => handleSelectChange(e)}
+                    className={styles.select} 
+                    style={customStyles ? customStyles : {}}
+                    name={name}
+                    required = {required}
+                    defaultValue = {defaultOption}
+                >
+
+                <option value="">{label}</option>
+
+                {data.map((option) => 
+                {
+                    return (
+                    <option key={option.key} value={option.value}>{option.label}</option>);
                 })}
             </select>
      );

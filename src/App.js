@@ -13,6 +13,10 @@ import MakeRoommateRequestLandingPage from './components/pages/LandingPages/Make
 import FindRoommateRequestLandingPage from './components/pages/LandingPages/FindRoommateRequestLandingPage/FindRoommateRequestLandingPage';
 import CreateRooomateRequestInstruction from './components/pages/RoommateRequest/CreateRoommateRequestInstruction/CreateRoommateRequestInstruction';
 import RoomLocation from './components/pages/RoommateRequest/RoomLocation/RoomLocation';
+import RoomDetails from './components/pages/RoommateRequest/RoomDetails/RoomDetails';
+import RoomPricing from './components/pages/RoommateRequest/RoomPricing/RoomPricing';
+import RoomLook from './components/pages/RoommateRequest/RoomLook/RoomLook';
+import CreateRoommateRequestThankYou from './components/pages/RoommateRequest/CreateRoommateRequestThankYou/CreateRoommateRequestThankYou';
 
 
 function App() 
@@ -55,7 +59,11 @@ function App()
           {/* Roommate Request */}
           <Route path='/create-roommate-request-instruction' element={<CreateRooomateRequestInstruction/>}/>
           <Route path='/room-location' element={<RoomLocation/>}/>
-
+          <Route path='/room-details' element={<RoomDetails/>}/>
+          <Route path='/room-pricing' element={<RoomPricing/>}/>
+          <Route path='/room-look' element={<RoomLook/>}/>
+          <Route path='/create-roommate-request-thankyou' element={<CreateRoommateRequestThankYou/>} />
+          
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
         </Routes>

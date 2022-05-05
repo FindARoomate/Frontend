@@ -166,6 +166,24 @@
 
 }
 
+.buttonRow
+{   
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonRow button
+{   
+   font-weight: 600;
+   padding: 13px 35px;
+}
+
+.prevButton button
+{
+    background: white;
+    color: #0029DD;
+    border: 1px solid #0029DD;
+}
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
@@ -215,5 +233,10 @@
     .personalProfile .formGroup select
     {
         font-size: 16px;
+    }
+    
+    .buttonRow button
+    {   
+        padding: 19px 52px;
     }
 }

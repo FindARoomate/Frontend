@@ -13,30 +13,35 @@ import Img from "../../../atoms/Img/Img";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
 
-const SignInDialog = ({ open, closeModal }) => {
+const SignInDialog = ({ open, closeModal }) => 
+{
   const placeholderFunction = () => {};
 
   const [isLoading, setIsLoading] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
 
-  const handleSignIn = (e) => {
+  const handleSignIn = (e) => 
+  {
     e.preventDefault();
     setIsLoading(true);
     //trigger login request to backend
     sendPostRequest({ email: e.target[0].value, password: e.target[1].value });
   };
 
-  useEffect(() => {
+  useEffect(() => 
+  {
     //after getting a response from database, remove loading message
-    if (isSuccess || isError) {
+    if (isSuccess || isError) 
+    {
       setIsLoading(false);
     }
 
-    if (isSuccess) {
+    if (isSuccess) 
+    {
       localStorage.setItem("accessToken", APIdata.access); //add access token to localStorage
       localStorage.setItem("refreshToken", APIdata.refresh); //add refresh token to localStorage
     }
-    console.log(APIdata);
+
   }, [isError, isSuccess, APIdata]);
 
   return (

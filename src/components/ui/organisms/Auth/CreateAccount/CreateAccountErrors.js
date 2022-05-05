@@ -2,7 +2,7 @@ import ErrorAlert from './../../../molecules/Alerts/ErrorAlert/ErrorAlert';
 const CreateAccountErrors = ({errors}) => {
     
     const entries = Object.entries(errors);                 
-
+    console.log("here");
 
     return (   
         <div>
