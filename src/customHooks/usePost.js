@@ -22,25 +22,16 @@ const usePost = (url, token) => {
         mode: "cors",
         headers: headersValue,
       })
-        .then((res) =>  
-        {
-          
-          const body = res.json();
-          
-          // if(!res.ok)
-          // {
-          //   throw body;
-          // }
-
-          return body;
-
-        })
         .then((data) => 
         {
+          if (!data.ok) {
+            throw data.statusText
+          }
           console.log(data);
           setAPIData(data);
           setIsSuccess(true);
           setIsError(false);
+          
         })
         .catch((error) => 
         {
