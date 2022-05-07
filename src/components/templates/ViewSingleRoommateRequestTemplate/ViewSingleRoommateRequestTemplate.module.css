@@ -114,8 +114,8 @@
 .map 
 {
     height: 180px;
-    background-color: red;
-    margin: 16px 0;
+    border-radius: 8px;
+    margin: 16px 0px;
 }
 
 .additionalInformation
@@ -337,5 +337,11 @@
     .additionalInformation
     {
         margin-top: 40px;
+    }
+
+    .map 
+    {
+        height: 456px;
+        margin-top: 32px;
     }
 }

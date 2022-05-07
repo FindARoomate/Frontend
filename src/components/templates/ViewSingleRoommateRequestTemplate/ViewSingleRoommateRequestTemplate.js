@@ -1,4 +1,5 @@
 import P from '../../ui/atoms/P/P';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import Img from './../../ui/atoms/Img/Img';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import H2 from '../../ui/atoms/Headings/H2/H2';
@@ -10,9 +11,17 @@ import washingMachine from './../../../icons/washing-machine.svg';
 import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import displayPicture from './../../../images/view-single-roomate-display-picture.png';
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 
 const ViewSingleRoommateRequestTemplate = () => 
 {
+
+const Map = ReactMapboxGl({
+    accessToken:
+      'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'
+  });
+  
+
     return ( 
         <div className={styles.viewAll}>
             <Header/>
@@ -155,8 +164,20 @@ const ViewSingleRoommateRequestTemplate = () =>
                             <H2>Location</H2>
                             <P styles={styles.address}>12, Alagbaka street, Akure Ondo State, Nigeria</P>
                         </div>
-                        <div className={styles.map}>
-
+                        <div className={styles.map} id="single-roommate-request-map">
+                        <Map
+                            style="mapbox://styles/mapbox/streets-v9"
+                            containerStyle={{
+                                height: '100%',
+                                width: '100%',
+                                borderRadius: 'inherit',
+                            }}
+                        >
+                            <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+                                <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
+                            </Layer>
+                        </Map>
+                        
                         </div>
                     </div>
 
