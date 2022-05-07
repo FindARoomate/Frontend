@@ -12,6 +12,7 @@ import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import displayPicture from './../../../images/view-single-roomate-display-picture.png';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+ReactMapboxGl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default; // eslint-disable-line
 
 const ViewSingleRoommateRequestTemplate = () => 
 {
