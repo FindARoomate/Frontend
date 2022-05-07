@@ -6,7 +6,7 @@ import BioData from './components/pages/CreateProfile/BioData/BioData';
 import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 import TellUsAboutYourself from './components/pages/CreateProfile/TellUsAboutYourself/TellUsAboutYourself';
 import DefineIdealRoommate from './components/pages/CreateProfile/DefineIdealRoommate/DefineIdealRoommate';
-import ViewMoreRoommateRequests from './components/pages/ViewMoreRoommateRequests/ViewMoreRoommateRequests';
+import ViewAllRoommateRequests from './components/pages/ViewAllRoommateRequests/ViewAllRoommateRequests';
 import CreateProfileThankYou from './components/pages/CreateProfile/CreateProfileThankYou/CreateProfileThankYou';
 import CreateProfileInstruction from './components/pages/CreateProfile/CreateProfileInstruction/CreateProfileInstruction';
 import MakeRoommateRequestLandingPage from './components/pages/LandingPages/MakeRoommateRequestLandingPage/MakeRoommateRequestLandingPage';
@@ -17,6 +17,7 @@ import RoomDetails from './components/pages/RoommateRequest/RoomDetails/RoomDeta
 import RoomPricing from './components/pages/RoommateRequest/RoomPricing/RoomPricing';
 import RoomLook from './components/pages/RoommateRequest/RoomLook/RoomLook';
 import CreateRoommateRequestThankYou from './components/pages/RoommateRequest/CreateRoommateRequestThankYou/CreateRoommateRequestThankYou';
+import ViewSingleRoommateRequest from './components/pages/ViewSingleRoommateRequest/ViewSingleRoommateRequest';
 
 
 function App() 
@@ -49,7 +50,10 @@ function App()
           <Route path='/waitlist' element={<ComingSoon/>} />
           <Route path='/create-request' element={<MakeRoommateRequestLandingPage/>} />
           <Route path='/view-requests' element={<FindRoommateRequestLandingPage/>} />
-          <Route path='/view-more-requests' element={<ViewMoreRoommateRequests/>} />
+          <Route path='/view-all-requests' element={<ViewAllRoommateRequests/>} />
+          <Route path='/view-single-request' element={<ViewSingleRoommateRequest/>}/>
+
+          {/* Create Profile */}
           <Route path='/bio-data' element={<BioData/>}/>
           <Route path='/ideal-roommate' element={<DefineIdealRoommate/>} />
           <Route path='/about-yourself' element={<TellUsAboutYourself/>} />

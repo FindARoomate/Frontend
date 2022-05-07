@@ -1,0 +1,340 @@
+.viewSingleRequestBody
+{
+    padding-top: 24px;
+}
+
+.heading
+{
+    padding: 10px 20px;
+}
+
+.headingAndIcon
+{
+    display: flex;
+    align-items: center;
+}
+
+.headingAndIcon img
+{
+    padding: 6px 9.5px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 1px rgba(0, 14, 74, 0.2);
+    margin-right: 12px;
+}
+
+.headingAndIcon h1
+{
+    font-size: 20px;
+    font-family: "Open Sans";
+    font-weight: 600;
+    color: #000E4A;
+}
+
+.requestOwner p
+{
+    font-size: 14px;
+    color: #7D7D7D;
+}
+
+.requestOwner p span
+{
+    color: #0029DD;
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+
+
+.imageGroup
+{
+    background-color: red;
+    height:250px;
+    width: 100%;
+}
+
+.roomInformation h2
+{
+    font-family: "Open Sans";
+    color: #000E4A;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.roomInformation p 
+{
+    font-size: 12px;
+    color: #7D7D7D;
+}
+
+.roomInformation .singleRoomInformation
+{
+   padding: 8px 0px;
+}
+
+.roomInformation .singleRoomInformation h3
+{
+    font-family: "Open Sans";
+    color: #7D7D7D;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.roomInformation .singleRoomInformation p
+{
+    font-family: "Open Sans";
+    color: #000E4A;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.ammenitiesContainer h2
+{
+    font-size: 14px;
+}
+
+.ammenities
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.singleAmmenity
+{
+    display: flex;
+    align-items: center;
+    margin: 16px 0px 16px 0px;
+}
+
+.singleAmmenity img
+{
+    margin-right: 8px;
+}
+
+
+.map 
+{
+    height: 180px;
+    background-color: red;
+    margin: 16px 0;
+}
+
+.additionalInformation
+{
+    padding-top: 8px;
+}
+
+.mobileOwnerInformation
+{
+    display: flex;
+    padding: 20px 28px;
+    box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: white;
+}
+
+.mobileOwnerInformation .personalInfo
+{
+    display: flex;
+    width: 100%;
+}
+
+.mobileOwnerInformation .personalInfo img
+{
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.mobileOwnerInformation .personalInfo h3
+{
+    color: #000E4A;
+    font-size: 14px;
+}
+
+.mobileOwnerInformation .personalInfo p
+{
+    color: rgba(0, 41, 221, 0.75);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .heading
+    {
+        padding: 28px 100px 0px 100px;
+    }
+    .headingAndIcon h1
+    {
+        font-size: 32px;
+    }
+
+    .roomInformation p 
+    {
+        font-size: 24px;
+    }
+
+    .imageContainer
+    {
+        padding: 40px 100px;
+    }
+
+    .imageGroup
+    {
+        height: 345px;
+    }
+
+    .roomInformation h2
+    {
+        font-size: 32px;
+        /* margin-bottom: 8px; */
+    }
+
+
+    .mobileOwnerInformation
+    {
+        display: none;
+    }
+
+    .roomInformation .singleRoomInformationContainer
+    {
+        display: grid;
+        grid-template-columns: 63% 37%;
+        grid-column-gap: 57px; 
+    }
+
+    .roomInformation .singleRoomInformation
+    {
+        padding: 8px 0px;
+    }
+
+    .roomInformation .singleRoomInformation h3
+    {
+        font-size: 20px;
+    }
+
+    .roomInformation .singleRoomInformation p
+    {
+        font-size: 24px;
+    }
+
+    .ammenitiesContainer 
+    {
+        margin-top: 40px;
+    }
+
+    .ammenitiesContainer h2
+    {
+        font-size: 24px;
+    }
+
+    .ammenitiesContainer .ammenities
+    {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-column-gap:75px;
+    }
+
+    .singleAmmenity
+    {
+        margin: 16px 0px 16px 0px;
+    }
+    .singleAmmenity img
+    {
+       width: 24px;
+       height: auto;
+    }
+
+    .desktopOwnerInformation
+    {
+        max-width: 445px;
+        border-radius: 20px;
+        box-shadow: 5px 10px 10px rgba(0, 14, 74, 0.15); 
+        padding: 38px 60px;
+    }
+
+    
+    .desktopOwnerInformation .personalInfo
+    {
+        display: flex;
+        width: 100%;
+        margin-bottom: 35px;
+    }
+
+    .desktopOwnerInformation .personalInfo img
+    {
+        width: 75px;
+        height: auto;
+        margin-right: 8px;
+        border-radius: 50%;
+    }
+
+    .desktopOwnerInformation .personalInfo h3
+    {
+        color: #000E4A;
+        font-size: 24px;
+    }
+
+    .desktopOwnerInformation .personalInfo p
+    {
+        color: rgba(0, 41, 221, 0.75);
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .desktopOwnerInformation .information p
+    {
+        font-size: 16px;
+        margin-top:8px;
+    }
+
+    .desktopOwnerInformation .information .infoHeading
+    {
+        color: #000E4A;
+        font-weight: bold;
+    }
+
+    .desktopOwnerInformation .information .readMore
+    {
+        color: #0029DD;
+        text-decoration: underline;
+    }
+
+    .desktopOwnerInformation button
+    {
+        width: 100%;
+        font-weight: 700;
+        margin-top: 40px;
+    }
+
+    .roomInformation .topSection
+    {
+        display: flex;
+        gap: 11%;
+    }
+
+    .roomInformation .topSection > div
+    {
+        height: max-content;
+    }
+    .roomInformation .topSection .desktopOwnerInformation
+    {
+        width: 100%;
+    }
+
+    .location
+    {
+        margin-top: 40px;
+    }
+
+    .additionalInformation
+    {
+        margin-top: 40px;
+    }
+}

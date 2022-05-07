@@ -23,12 +23,12 @@ const RoomPricing = () =>
         {
             key: 2,
             label: "What's the yearly rent?",
-            inputName: "yearly_rent",
+            inputName: "rent_per_person",
             inputCategory: "input",
             inputType: "number",
             inputPlaceholder: "E.g #120,000 yearly, blease type in the number of roommates you currently have",
             required: true,
-            value: localStorage.getItem("yearly_rent")
+            value: localStorage.getItem("rent_per_person")
         },
         {
             key: 3,
