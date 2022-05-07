@@ -92,14 +92,11 @@
     font-size: 14px;
 }
 
-.ammenities
+.ammenitiesContainer .ammenities
 {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
-
 
 .singleAmmenity
 {
@@ -124,6 +121,11 @@
 .additionalInformation
 {
     padding-top: 8px;
+}
+
+.desktopOwnerInformation
+{
+    display: none;
 }
 
 .mobileOwnerInformation
@@ -235,9 +237,6 @@
 
     .ammenitiesContainer .ammenities
     {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 50% 50%;
         grid-column-gap:75px;
     }
 
@@ -253,6 +252,8 @@
 
     .desktopOwnerInformation
     {
+        display: block;
+        position: sticky;
         max-width: 445px;
         border-radius: 20px;
         box-shadow: 5px 10px 10px rgba(0, 14, 74, 0.15); 
