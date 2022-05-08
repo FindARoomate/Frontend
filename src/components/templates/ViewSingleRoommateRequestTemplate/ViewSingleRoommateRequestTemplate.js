@@ -1,5 +1,4 @@
 import P from '../../ui/atoms/P/P';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import Img from './../../ui/atoms/Img/Img';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import H2 from '../../ui/atoms/Headings/H2/H2';
@@ -12,15 +11,18 @@ import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import displayPicture from './../../../images/view-single-roomate-display-picture.png';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
-ReactMapboxGl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default; // eslint-disable-line
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl';
+import { Link } from 'react-router-dom';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
+// Map.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default; // eslint-disable-line
 
 const ViewSingleRoommateRequestTemplate = () => 
 {
 
-const Map = ReactMapboxGl({
-    accessToken:
-      'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'
-  });
+const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'});
   
 
     return ( 
@@ -28,8 +30,10 @@ const Map = ReactMapboxGl({
             <Header/>
             <div className={styles.heading}>
                 <div className={styles.headingAndIcon}>
-                    <Img src={backIcon}/>
-                    <H1>Female roommate needed in a self contain at Agbowo</H1>
+                    <Link>
+                        <Img src={backIcon}/>
+                        <H1>Female roommate needed in a self contain at Agbowo</H1>
+                    </Link>
                 </div>
                 <div className={styles.requestOwner}>
                         <P>Request created by <span className={styles.name}>Precious Faseyosan</span></P> 
@@ -166,19 +170,18 @@ const Map = ReactMapboxGl({
                             <P styles={styles.address}>12, Alagbaka street, Akure Ondo State, Nigeria</P>
                         </div>
                         <div className={styles.map} id="single-roommate-request-map">
-                        <Map
-                            style="mapbox://styles/mapbox/streets-v9"
-                            containerStyle={{
-                                height: '100%',
-                                width: '100%',
-                                borderRadius: 'inherit',
-                            }}
-                        >
-                            <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-                                <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
-                            </Layer>
-                        </Map>
-                        
+                            <Map
+                                style="mapbox://styles/mapbox/streets-v9"
+                                containerStyle={{
+                                    height: '100%',
+                                    width: '100%',
+                                    borderRadius: 'inherit'
+                                }}
+                                >
+                                <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+                                    <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
+                                </Layer>
+                            </Map>
                         </div>
                     </div>
 
