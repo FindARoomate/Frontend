@@ -13,7 +13,12 @@ const TellUsAboutYourself = () =>
     const inputs = 
     [
         {
-            key: 1,
+            inputName: "profile_picture",
+            inputCategory: "inputFile",
+            value: localStorage.getItem("profile_picture"),
+            required: true,
+        },
+        {
             label: "Religion",
             inputName: "religion",
             inputCategory: "select",
@@ -21,13 +26,12 @@ const TellUsAboutYourself = () =>
             required: true,
             data:
             [
-                {key: 1, label: "Christian", value: "CHRISTIANITY"},
-                {key: 2, label: "Muslim", value: "ISLAM"},
-                {key: 3, label: "Other", value: "OTHER"}
+                {label: "Christian", value: "CHRISTIANITY"},
+                {label: "Muslim", value: "ISLAM"},
+                {label: "Other", value: "OTHER"}
             ]
         },
         {
-            key: 2,
             label: "Personality",
             inputName: "personality",
             inputCategory: "select",
@@ -35,12 +39,11 @@ const TellUsAboutYourself = () =>
             required: true,
             data:                
             [
-                {key: 1, label: "Introvert", value: "INTROVERT"},
-                {key: 2, label: "Extrovert", value: "EXTROVERT"}
+                {label: "Introvert", value: "INTROVERT"},
+                {label: "Extrovert", value: "EXTROVERT"}
             ]
         },
         {
-            key: 3,
             label: "Profession",
             inputName: "profession",
             inputCategory: "input",
@@ -50,7 +53,6 @@ const TellUsAboutYourself = () =>
             required: true
         },
         {
-            key: 4,
             label: "Short Bio",
             inputCategory: "textarea",
             inputName: "bio",
