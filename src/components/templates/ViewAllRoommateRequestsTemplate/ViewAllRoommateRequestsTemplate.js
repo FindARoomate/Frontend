@@ -6,11 +6,10 @@ import DisplayCards from '../LandingPages/FindRoommateRequestLandingPageTemplate
 import globalStyles from './../../../components/globalStyles.module.css';
 import SearchBar from '../../ui/molecules/Search/SearchBar/SearchBar';
 import ExploreSearch from '../../ui/organisms/ExploreSearch/ExploreSearch';
+import P from '../../ui/atoms/P/P';
 
-const VViewAllRoommateRequestsTemplate = () => 
+const VViewAllRoommateRequestsTemplate = ({isSuccess, isError, roommateRequests}) => 
 {
-   
-    const roommateRequests = {}
     const headerLinks = 
     [
         {
@@ -43,7 +42,14 @@ const VViewAllRoommateRequestsTemplate = () =>
 
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
-                    <DisplayCards data={roommateRequests} pagination={true}/>
+                    {isError && (<P>Something bad happened. Please try again</P>)}
+                    {(isSuccess && roommateRequests) && (
+                        <DisplayCards 
+                            data={roommateRequests} 
+                            pagination={true}
+                        />)
+                    }
+                    {(isSuccess && !roommateRequests) && (<P>There are no roommates at this time</P>)}
                 </div>
             </div>
 

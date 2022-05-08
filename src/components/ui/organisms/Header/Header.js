@@ -51,7 +51,7 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
     return ( 
         <div className={styles.headerContainer}>
 
-        <header className={styles.header} style = {customStyle ? customStyle : {}}>
+        <header className={styles.header} style ={customStyle ? customStyle : {}}>
             <div className={styles.logo}>
                 <Link to="/">
                     <img src={logo} alt="logo" className="logo"/>

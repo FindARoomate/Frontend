@@ -34,6 +34,7 @@
 {
     font-size: 14px;
     color: #7D7D7D;
+    margin-top: 4px;
 }
 
 .requestOwner p span
@@ -171,9 +172,15 @@
     {
         padding: 28px 100px 0px 100px;
     }
+
     .headingAndIcon h1
     {
         font-size: 32px;
+    }
+
+    .requestOwner p
+    {
+        font-size: 24px;
     }
 
     .roomInformation p 

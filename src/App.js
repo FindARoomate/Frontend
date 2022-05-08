@@ -51,7 +51,7 @@ function App()
           <Route path='/create-request' element={<MakeRoommateRequestLandingPage/>} />
           <Route path='/view-requests' element={<FindRoommateRequestLandingPage/>} />
           <Route path='/view-all-requests' element={<ViewAllRoommateRequests/>} />
-          <Route path='/view-single-request' element={<ViewSingleRoommateRequest/>}/>
+          <Route path='/roommate-request/:id' element={<ViewSingleRoommateRequest/>}/>
 
           {/* Create Profile */}
           <Route path='/bio-data' element={<BioData/>}/>
