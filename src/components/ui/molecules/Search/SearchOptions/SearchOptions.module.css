@@ -1,13 +1,14 @@
 .searchOptions
 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(3, 105px);
+    column-gap: 15px;
+    row-gap: 15px;
 }
 
-.searchOptions .searchSelect
+.searchSelect select
 {
-    margin: 8px 20px 8px 0;
+    width: 100%;
 }
 
 .searchOptions select:checked 
@@ -19,11 +20,9 @@
 {
     .searchOptions
     {
-        flex-wrap: nowrap;
+        grid-template-columns: repeat(5, 180px);
+        column-gap: 24px;
     }
-    .searchOptions .searchSelect
-    {
-        margin: 8px 24px 8px 0px;
-    }
+
     
 }

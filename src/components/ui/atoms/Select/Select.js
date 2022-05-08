@@ -13,9 +13,7 @@ const Select = ({data, defaultOption, showSelectTags, handleFormInputChange, nam
             updateCustomStyle({background:"#F5F7FF"});
             if(tagValue != 0)
             {
-                var selectKey = data.key;
-                var tagInfo = [selectKey, tagValue];
-                
+                var tagInfo = [name, tagValue];
                 showSelectTags(tagInfo);
             }
         }
@@ -44,6 +42,7 @@ const Select = ({data, defaultOption, showSelectTags, handleFormInputChange, nam
                     return (
                     <option key={option.key} value={option.value}>{option.label}</option>);
                 })}
+
             </select>
      );
 }

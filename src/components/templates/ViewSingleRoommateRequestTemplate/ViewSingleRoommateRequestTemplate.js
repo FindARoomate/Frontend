@@ -30,10 +30,10 @@ const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWki
             <Header/>
             <div className={styles.heading}>
                 <div className={styles.headingAndIcon}>
-                    <Link>
+                    <Link to="/view-all-requests">
                         <Img src={backIcon}/>
-                        <H1>Female roommate needed in a self contain at Agbowo</H1>
                     </Link>
+                    <H1>Female roommate needed in a self contain at Agbowo</H1>
                 </div>
                 <div className={styles.requestOwner}>
                         <P>Request created by <span className={styles.name}>Precious Faseyosan</span></P> 

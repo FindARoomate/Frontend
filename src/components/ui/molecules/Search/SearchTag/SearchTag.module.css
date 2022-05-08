@@ -2,19 +2,72 @@
 {
     background: #0029DD;
     padding: 3px 7px;
+    padding-right: 14px;
     border-radius: 100px;
     width: fit-content;
     color: white;
     font-size: 10px;
 }
 
+.closeIcon
+{
+    position: relative;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.closeIcon::before, .closeIcon::after
+{
+    content: '';
+    position: absolute;
+    border-color: white;
+    border-style: solid;
+    border-width: 0.01px;
+    border-radius: 12px;
+    top: 0px;
+    right: -9px;
+    width: 7px;
+    background: white;
+}
+
+ .closeIcon::before
+{
+    transform:  rotate(-45deg) translate(10px, 0px);
+}
+
+
+.closeIcon::after
+{
+    transform: rotate(45deg) translate(0px, -10px);
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
+    .closeIcon::before, .closeIcon::after
+    {
+        right: -10px;
+        border-width: 0.5px;
+        width: 11.1px;
+        background: white;
+    }
+
+    .closeIcon::before
+    {
+        transform:  rotate(-45deg) translate(15px, 0px);
+    }
+    
+    
+    .closeIcon::after
+    {
+        transform: rotate(45deg) translate(0px, -15px);
+    }
+
     .searchTag
     {
         font-size: 16px;
         padding: 7px 15px;
+        padding-right: 20px;
     }
     
 }

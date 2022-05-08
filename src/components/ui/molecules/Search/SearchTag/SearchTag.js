@@ -1,9 +1,17 @@
 import styles from './SearchTag.module.css';
 
-const SearchTag = ({children}) => {
+const SearchTag = ({children, removeSearchTag}) => 
+{
+    function removeTag()
+    {
+        removeSearchTag(children)
+    }
     return ( 
         <div className={styles.searchTag}>
-            {children}
+            <div>{children[1]}</div>
+            <div className={styles.closeIcon}
+                onClick={removeTag}
+            ></div>
         </div>
      );
 }
