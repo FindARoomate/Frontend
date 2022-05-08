@@ -38,7 +38,7 @@ const usePost = (url, token) => {
           console.log(error);
           setIsSuccess(false);
           setIsError(true); //Remove any success message
-          setAPIData(error.message);
+          setAPIData(error);
         });
     },
     [url, headersValue]
