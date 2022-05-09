@@ -8,7 +8,7 @@ import SearchBar from '../../ui/molecules/Search/SearchBar/SearchBar';
 import ExploreSearch from '../../ui/organisms/ExploreSearch/ExploreSearch';
 import P from '../../ui/atoms/P/P';
 
-const VViewAllRoommateRequestsTemplate = ({isSuccess, isError, roommateRequests}) => 
+const ViewAllRoommateRequestsTemplate = ({isSuccess, isError, roommateRequests}) => 
 {
     const headerLinks = 
     [
@@ -61,4 +61,4 @@ const VViewAllRoommateRequestsTemplate = ({isSuccess, isError, roommateRequests}
      );
 }
  
-export default VViewAllRoommateRequestsTemplate;
+export default ViewAllRoommateRequestsTemplate;

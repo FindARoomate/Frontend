@@ -12,7 +12,7 @@ const ViewAllRoommateRequests = () =>
     const token = localStorage.getItem("accessToken");
     const dependencies = [];
     const {isError, isSuccess, APIData} = useGet(GET_ALL_ROOMMATE_REQUESTS, token, dependencies)
-
+    console.log(APIData);
     return ( 
         <ViewAllRoommateRequestsTemplate
             roommateRequests={APIData}

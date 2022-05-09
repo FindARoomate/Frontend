@@ -18,6 +18,7 @@ import RoomPricing from './components/pages/RoommateRequest/RoomPricing/RoomPric
 import RoomLook from './components/pages/RoommateRequest/RoomLook/RoomLook';
 import CreateRoommateRequestThankYou from './components/pages/RoommateRequest/CreateRoommateRequestThankYou/CreateRoommateRequestThankYou';
 import ViewSingleRoommateRequest from './components/pages/ViewSingleRoommateRequest/ViewSingleRoommateRequest';
+import Dashboard from './components/pages/Dashboard/Dashboard';
 
 
 function App() 
@@ -68,6 +69,9 @@ function App()
           <Route path='/room-look' element={<RoomLook/>}/>
           <Route path='/create-roommate-request-thankyou' element={<CreateRoommateRequestThankYou/>} />
           
+          {/* Dashboard related routes */}
+          <Route path='/dashboard' element={<Dashboard/>}/>
+
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
         </Routes>

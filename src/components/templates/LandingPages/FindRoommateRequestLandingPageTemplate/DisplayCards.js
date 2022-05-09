@@ -9,7 +9,7 @@ const DisplayCards = ({data, pagination}) =>
     return ( 
         <div className={styles.displayCardContainer}>
             <div className={styles.topSection}>
-                <P>21 results</P>
+                <P>{data.length + " results"}</P>
             </div>
             <div className={styles.displayCardBody}>
                 <div className={styles.displayCards}>

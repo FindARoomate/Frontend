@@ -62,7 +62,7 @@ const imgCustomStyle =
                     <P>{ownerName}</P>
                 </span>
                 <div className={styles.description}>
-                    <P>{title.substr(0, 50) + "... "}
+                    <P>{title ? title.substr(0, 50) + "... " : ""}
                         <Link to={moreInfoLink}>More info</Link>
                     </P>
                 </div>
