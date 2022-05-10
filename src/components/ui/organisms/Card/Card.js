@@ -59,7 +59,7 @@ const imgCustomStyle =
                 {/* Image title */}
                 <span className={cardStyles.imageTitle}> 
                     <Img src={thumbnail} customStyle={{width: "27px", height: "27px", borderRadius: "50%"}}/>
-                    <P>{ownerName}</P>
+                    <P customStyle={{color: "#00082C"}}>{ownerName}</P>
                 </span>
                 <div className={cardStyles.cardDescription}>
                     <P customStyle={{color: "#000E4A"}}>{title ? title.substr(0, 50) + "... " : ""}

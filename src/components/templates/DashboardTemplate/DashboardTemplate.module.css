@@ -201,10 +201,16 @@
         background-color: #0029DD;
     }
 
-    .contentBody .dashboardCards .active p, p:last-child
+    .dashboardCards .active p
     {
         color: white;
     }
+
+    .dashboardCards .active p:last-child
+    {
+        color: white;
+    }
+
    
     .dashboardCards .active .img
     {

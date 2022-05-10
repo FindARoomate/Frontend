@@ -104,9 +104,11 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests, isError, isSu
                         />)
                     }
                     {(isSuccess && !roommateRequests) && (<P>There are no roommates at this time</P>)}
-                    <Link to ="/view-all-requests">
-                        <Button>View more requests</Button>
-                    </Link>
+                    <div className={styles.viewAllRequests}>
+                        <Link to ="/view-all-requests">
+                            <Button>View more requests</Button>
+                        </Link>
+                    </div>
                 </div>
             </div>
 

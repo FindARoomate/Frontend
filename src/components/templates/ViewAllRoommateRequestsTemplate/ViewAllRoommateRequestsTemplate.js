@@ -45,7 +45,7 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess, isError, roommateRequests})
                     {isError && (<P>Something bad happened. Please try again</P>)}
                     {(isSuccess && roommateRequests) && (
                         <DisplayCards 
-                            data={roommateRequests} 
+                            data={roommateRequests.results} 
                             pagination={true}
                         />)
                     }

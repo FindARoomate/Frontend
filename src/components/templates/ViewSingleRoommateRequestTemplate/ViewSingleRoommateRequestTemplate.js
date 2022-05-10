@@ -10,11 +10,12 @@ import washingMachine from './../../../icons/washing-machine.svg';
 import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import displayPicture from './../../../images/view-single-roomate-display-picture.png';
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import ReactMapboxGl, { Marker, Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import marker from './../../../icons/marker.png';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -40,12 +41,12 @@ const headerLinks =
                 links = {headerLinks}
                 customStyle={{borderBottom: "1px solid rgba(125, 125, 125, 0.45)"}}
             />
-            <div className={styles.heading}>
+                 <div className={styles.heading}>
                 <div className={styles.headingAndIcon}>
                     <Link to="/view-all-requests">
                         <Img src={backIcon}/>
                     </Link>
-                    <H1>{roommateRequest.header}</H1>
+                    <H1>{roommateRequest.listing_title}</H1>
                 </div>
                 <div className={styles.requestOwner}>
                         <P>Request created by <span className={styles.name}>{roommateRequest.user.name}</span></P> 
@@ -150,7 +151,7 @@ const headerLinks =
                     <div className={styles.location}>
                         <div>
                             <H2>Location</H2>
-                            <P styles={styles.address}>{roommateRequest.street + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
+                            <P styles={styles.address}>{roommateRequest.street_address + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
                         </div>
                         <div className={styles.map} id="single-roommate-request-map">
                             <Map
@@ -161,8 +162,9 @@ const headerLinks =
                                     borderRadius: 'inherit'
                                 }}
                                 >
-                                <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-                                    <Feature coordinates={[roommateRequest.latitude, roommateRequest.longitude]} />
+                            
+                                <Layer type="line" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+                                    <Feature coordinates={[roommateRequest.longitude, roommateRequest.latitude]} />
                                 </Layer>
                             </Map>
                         </div>

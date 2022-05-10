@@ -13,4 +13,6 @@ export const CREATE_PROFILE = API_URL + '/profile/create/';
 // Roommate Requests
 export const GET_ALL_ROOMMATE_REQUESTS = API_URL + '/request/get/';
 
+export const GET_SINGLE_ROOMMATE_REQUEST = API_URL + '/request/get/';
+
 export const CREATE_ROOMMATE_REQUEST = API_URL + '/request/create/';

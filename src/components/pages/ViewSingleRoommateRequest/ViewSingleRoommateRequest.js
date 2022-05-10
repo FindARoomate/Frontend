@@ -1,15 +1,14 @@
 import { useParams } from 'react-router-dom';
 import useGet from '../../../customHooks/useGet';
-import { GET_SINGLE_ROOMMATE_REQUESTS } from '../../routes';
+import { GET_SINGLE_ROOMMATE_REQUEST } from '../../routes';
 import ViewSingleRoommateRequestTemplate from "../../templates/ViewSingleRoommateRequestTemplate/ViewSingleRoommateRequestTemplate";
 
 const ViewSingleRoommateRequest = () => 
 {
 
-    // const {id} = useParams();
-    // const url = GET_SINGLE_ROOMMATE_REQUESTS + "/" + id + "/";
-    // const token = localStorage.getItem("accessToken");
-    // const {isError, isSuccess, APIData} = useGet(url, token);
+    const {id} = useParams();
+    const url = GET_SINGLE_ROOMMATE_REQUEST + id + "/";
+    var {isError, isSuccess, APIData} = useGet(url);
 
     const header = "Female roommate needed in a self contain at Agbowo";
     const user = 
@@ -55,13 +54,20 @@ const ViewSingleRoommateRequest = () =>
         additional_information
     }
 
+    if(APIData) APIData["user"] = user;
 
-
-    return ( 
-        <ViewSingleRoommateRequestTemplate
-        roommateRequest = {roommateRequest}
-        />
-     );
+    if(APIData)
+    {
+        return ( 
+            <ViewSingleRoommateRequestTemplate
+            roommateRequest = {APIData}
+            />
+         );
+    }else 
+    {
+        return "Loading..."
+    }
+    
 }
  
 export default ViewSingleRoommateRequest;
