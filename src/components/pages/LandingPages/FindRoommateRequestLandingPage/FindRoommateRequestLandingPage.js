@@ -1,4 +1,7 @@
 import FindRoommateRequestLandingPageTemplate from '../../../templates/LandingPages/FindRoommateRequestLandingPageTemplate/FindRoommateRequestLandingPageTemplate';
+import { useState } from 'react';
+import useGet from '../../../../customHooks/useGet';
+import { GET_ALL_ROOMMATE_REQUESTS } from '../../../routes';
 
 const FindRoommateRequestLandingPage = () => 
 {
@@ -6,18 +9,16 @@ const FindRoommateRequestLandingPage = () =>
      var heading =  {tag: "H1", text: "Find the perfect roommates for you"}
      const heroSection = {heading}
 
-     const roommateRequests = 
-     [
-          {
-               id: 1,
-               author: "Precious",
-               Description: "Lorem ipsum dolor sit amet",
-               buttonText: "Connect now"
-          }
-     ]
+     const [roommateRequests, setRoommateRequests] = useState(null);
+    const token = localStorage.getItem("accessToken");
+    const dependencies = [];
+    const {isError, isSuccess, APIData} = useGet(GET_ALL_ROOMMATE_REQUESTS, null, dependencies)
+
     return ( 
         <FindRoommateRequestLandingPageTemplate
-          roommateRequests={roommateRequests}
+            roommateRequests={APIData ? APIData.results : null}
+            isSuccess = {isSuccess}
+            isError = {isError}
         />
      );
 }

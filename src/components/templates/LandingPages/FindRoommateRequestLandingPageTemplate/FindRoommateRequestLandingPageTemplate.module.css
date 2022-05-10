@@ -28,11 +28,11 @@
     margin: 35px auto;
 }
 
-.roommateRequests a
+/* .roommateRequests a
 {
     display: flex;
     align-items: center;
-}
+} */
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 

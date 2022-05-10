@@ -17,7 +17,6 @@ const useGet = (url, token, dependencies) =>
     const fetchFunction = async (url, headersValue) => 
     {
         const res = await fetch(url, {headers: headersValue });
-
         const body = await res.json();
         if(res.ok)
         {
@@ -29,8 +28,9 @@ const useGet = (url, token, dependencies) =>
             setIsError(true)
             setIsSuccess(false);
             setAPIData(body); 
+            
         }
-        
+
     }
 
     useEffect(() => 
@@ -38,8 +38,6 @@ const useGet = (url, token, dependencies) =>
         fetchFunction(url, headersValue);
 
     }, [...dependencies])
-
-    console.log("here");
 
     return {isError, isSuccess, APIData}
 }

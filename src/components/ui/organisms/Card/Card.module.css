@@ -12,20 +12,18 @@
     color: #00082C;
 }
 
-.description
+.cardDescription
 {
     margin: 8px 0;
-
 }
 
-.description p
+.cardDescription p
 {
     font-size: 14px;
     font-weight: 600;
-    color: #000E4A;
 }
 
-.description p a
+.cardDescription p a
 {
     text-decoration: underline;
     color: #0029DD;
@@ -59,7 +57,6 @@
 
 .card button
 {
-    width: 155px;
     background: white;
     border: 0.6px solid #0029DD;
     color: #0029DD;
@@ -71,11 +68,11 @@
 
 @media screen and (min-width: 760px) 
 {
-    .description
+    .cardDescription
     {
         margin: 16px 0px;
     }
-    .description p
+    .cardDescription p
     {
         font-size: 16.25px;
     }

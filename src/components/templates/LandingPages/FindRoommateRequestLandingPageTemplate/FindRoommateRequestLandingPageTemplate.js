@@ -10,8 +10,9 @@ import Button from '../../../ui/atoms/Button/Button';
 import H2 from '../../../ui/atoms/Headings/H2/H2';
 import DisplayCards from './DisplayCards';
 import { Link } from 'react-router-dom';
+import P from '../../../ui/atoms/P/P';
 
-const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) => 
+const FindRoommateRequestLandingPageTemplate = ({roommateRequests, isError, isSuccess}) => 
 {
     const contact = 
     {
@@ -95,7 +96,14 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) =>
 
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
-                    <DisplayCards data={roommateRequests} pagination={false}/>
+                {isError && (<P>Something bad happened. Please try again</P>)}
+                    {(isSuccess && roommateRequests) && (
+                        <DisplayCards 
+                            data={roommateRequests} 
+                            pagination={false}
+                        />)
+                    }
+                    {(isSuccess && !roommateRequests) && (<P>There are no roommates at this time</P>)}
                     <Link to ="/view-all-requests">
                         <Button>View more requests</Button>
                     </Link>

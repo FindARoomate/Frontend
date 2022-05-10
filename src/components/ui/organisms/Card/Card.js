@@ -1,12 +1,12 @@
 import P from "../../atoms/P/P";
 import Button from "../../atoms/Button/Button";
 import Img from "../../atoms/Img/Img";
-import styles from './Card.module.css';
+import cardStyles from './Card.module.css';
 import { Link } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
+// Import Swiper cardStyles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -30,8 +30,8 @@ const imgCustomStyle =
         
     return ( 
 
-        <div className={styles.card}>
-            <div className={styles.top}>
+        <div className={cardStyles.card}>
+            <div className={cardStyles.top}>
                 <Swiper
                     navigation={true}
                     pagination={true}
@@ -55,14 +55,14 @@ const imgCustomStyle =
                    
                 </Swiper>
             </div>
-            <div className={styles.bottom}>
+            <div className={cardStyles.bottom}>
                 {/* Image title */}
-                <span className={styles.imageTitle}> 
+                <span className={cardStyles.imageTitle}> 
                     <Img src={thumbnail} customStyle={{width: "27px", height: "27px", borderRadius: "50%"}}/>
                     <P>{ownerName}</P>
                 </span>
-                <div className={styles.description}>
-                    <P>{title ? title.substr(0, 50) + "... " : ""}
+                <div className={cardStyles.cardDescription}>
+                    <P customStyle={{color: "#000E4A"}}>{title ? title.substr(0, 50) + "... " : ""}
                         <Link to={moreInfoLink}>More info</Link>
                     </P>
                 </div>
