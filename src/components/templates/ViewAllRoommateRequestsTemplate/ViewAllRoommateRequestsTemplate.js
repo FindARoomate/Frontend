@@ -8,7 +8,7 @@ import SearchBar from '../../ui/molecules/Search/SearchBar/SearchBar';
 import ExploreSearch from '../../ui/organisms/ExploreSearch/ExploreSearch';
 import P from '../../ui/atoms/P/P';
 
-const ViewAllRoommateRequestsTemplate = ({isSuccess, isError, roommateRequests}) => 
+const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, roommateRequests = null}) => 
 {
     const headerLinks = 
     [
@@ -43,6 +43,7 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess, isError, roommateRequests})
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
                     {isError && (<P>Something bad happened. Please try again</P>)}
+                    {!(roommateRequests || isError || isSuccess) && (<P>Loading ...</P>)}
                     {(isSuccess && roommateRequests) && (
                         <DisplayCards 
                             data={roommateRequests.results} 

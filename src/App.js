@@ -51,10 +51,14 @@ function App()
     // <Router>
       <div className="App">
         <Routes>
+          {/* Waitlist Endpoints */}
           <Route path='/' element={<ComingSoon2/>} />
           <Route path='/waitlist' element={<ComingSoon/>} />
+
+          {/* Landing Pages */}
           <Route path='/create-request' element={<MakeRoommateRequestLandingPage/>} />
           <Route path='/view-requests' element={<FindRoommateRequestLandingPage/>} />
+          
           <Route path='/view-all-requests' element={<ViewAllRoommateRequests/>} />
           <Route path='/roommate-request/:id' element={<ViewSingleRoommateRequest/>}/>
 

@@ -106,10 +106,11 @@
     font-size: 13px;
 }
 
-.bottom p a 
+.bottom p span
 {
     text-decoration: underline;
     color: #0029DD;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 760px) 

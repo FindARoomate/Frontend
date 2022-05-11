@@ -12,28 +12,13 @@ import { useState, useEffect } from "react";
 import Img from "../../../atoms/Img/Img";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
-import CreateAccountDialog from "../CreateAccount/CreateAccountDialog";
 
-const SignInDialog = () => 
+const SignInDialog = ({ open, closeModal, openCreateAccountModal}) => 
 {
   const placeholderFunction = () => {};
 
   const [isLoading, setIsLoading] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
-
-  const [openModal, setOpenModal] = useState(false);
-  const [openCreateAccountModal, setOpenCreateAccountModal] = useState(false);
-
-  const openSignInDialog = () => 
-  {
-    setOpenModal(true);
-  }
-
-  const closeModal = () => 
-  {
-    console.log("here");
-    setOpenModal(false);
-  }
 
   const handleSignIn = (e) => 
   {
@@ -46,8 +31,7 @@ const SignInDialog = () =>
   const handleCreateAccountOnClick = (e) => 
   {
     e.preventDefault();
-    setOpenModal(false);
-    setOpenCreateAccountModal(true);
+    openCreateAccountModal();
   }
 
   useEffect(() => 
@@ -67,13 +51,11 @@ const SignInDialog = () =>
   }, [isError, isSuccess, APIdata]);
 
   return (
-    <>
-    <Button handleOnClick={openSignInDialog}>Sign In</Button>
     <div className={styles.signInDialogContainer}>
       {/* move them to the on boarding screens on login */}
       {isSuccess && <Navigate replace to="/create-profile-instruction" />}
 
-      <Modal open={openModal} closeModal={closeModal}>
+      <Modal open={open} closeModal={closeModal}>
         <div className={styles.signInDialog}>
           <div className={styles.heading}>
             <H3>SIGN IN</H3>
@@ -101,22 +83,16 @@ const SignInDialog = () =>
                   <Img src={googleIcon} />
                   <P>Continue with Google</P>
                 </Button>
-                {/* <P> */}
-                  {/* Don't have an account? <span onClick={handleCreateAccountOnClick}>Sign up</span> */}
-                {/* </P> */}
+                <P>
+                  Don't have an account? <span onClick={handleCreateAccountOnClick}>Sign up</span>
+                </P>
               </div>
             </form>
-            <CreateAccountDialog/>
-
           </div>
         </div>
       </Modal>
 
-      {openCreateAccountModal && <CreateAccountDialog/>}
-
     </div>
-    </>
-    
   );
 };
 

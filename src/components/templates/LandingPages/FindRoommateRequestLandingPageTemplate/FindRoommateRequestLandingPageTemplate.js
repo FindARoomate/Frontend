@@ -12,7 +12,7 @@ import DisplayCards from './DisplayCards';
 import { Link } from 'react-router-dom';
 import P from '../../../ui/atoms/P/P';
 
-const FindRoommateRequestLandingPageTemplate = ({roommateRequests, isError, isSuccess}) => 
+const FindRoommateRequestLandingPageTemplate = ({roommateRequests = null, isError = null, isSuccess = null}) => 
 {
     const contact = 
     {
@@ -96,10 +96,11 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests, isError, isSu
 
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
+                {!(isError || isSuccess || roommateRequests) && <P>Loading...</P>}
                 {isError && (<P>Something bad happened. Please try again</P>)}
                     {(isSuccess && roommateRequests) && (
                         <DisplayCards 
-                            data={roommateRequests} 
+                            data={roommateRequests.results} 
                             pagination={false}
                         />)
                     }
@@ -117,13 +118,14 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests, isError, isSu
 
              {/* Contact Template */}
 
+            <div id="contact-us">
              <ContactUsTemplate
-                    id = "contact-us"
                     preheading = {contact.preheading}
                     heading = {contact.heading}
                     subheading = {contact.subheading}
                     contactFields = {contact.contactFields}
                 />
+            </div>
                 
             {/* Footer */}
             <Footer/>

@@ -1,8 +1,7 @@
 import Button from "../../../atoms/Button/Button";
-import Modal from "../../Modal/Modal";
 import styles from './SignInButton.module.css';
-import { useState } from "react";
-const SignInButton = ({openSignInDialog}) => 
+
+const SignInButton = ({openSignInDialog, text=null}) => 
 {
 
     const handleOnClick = () =>
@@ -12,7 +11,7 @@ const SignInButton = ({openSignInDialog}) =>
 
     return (
         <div className={styles.signIn}>
-            <Button handleOnClick={handleOnClick}>Sign In</Button>
+            <Button handleOnClick={handleOnClick}>{text ? text: "Sign In"}</Button>
         </div> 
      );
 }

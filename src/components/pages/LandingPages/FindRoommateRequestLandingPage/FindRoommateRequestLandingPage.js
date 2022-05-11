@@ -5,18 +5,11 @@ import { GET_ALL_ROOMMATE_REQUESTS } from '../../../routes';
 
 const FindRoommateRequestLandingPage = () => 
 {
-     // Hero Section
-     var heading =  {tag: "H1", text: "Find the perfect roommates for you"}
-     const heroSection = {heading}
-
-     const [roommateRequests, setRoommateRequests] = useState(null);
-    const token = localStorage.getItem("accessToken");
-    const dependencies = [];
-    const {isError, isSuccess, APIData} = useGet(GET_ALL_ROOMMATE_REQUESTS, null, dependencies)
+    const {isError, isSuccess, APIData} = useGet(GET_ALL_ROOMMATE_REQUESTS);
 
     return ( 
         <FindRoommateRequestLandingPageTemplate
-            roommateRequests={APIData ? APIData.results : null}
+            roommateRequests={APIData}
             isSuccess = {isSuccess}
             isError = {isError}
         />
