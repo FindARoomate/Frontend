@@ -41,7 +41,9 @@
 {
   float:right;
   cursor: pointer;
-  /* background: red; */
+  background: red;
+  width: 30px;
+  height: 30px;
 }
 
 .closeIcon::before, .closeIcon::after

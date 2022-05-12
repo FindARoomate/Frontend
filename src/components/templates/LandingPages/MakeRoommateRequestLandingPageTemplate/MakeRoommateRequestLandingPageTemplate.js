@@ -10,10 +10,27 @@ import Footer from '../../../ui/organisms/Footer/Footer';
 import heroBackgroundImg from './../../../../images/make-roomate-request-hero-bg.png';
 import H3 from '../../../ui/atoms/Headings/H3/H3';
 import Button from '../../../ui/atoms/Button/Button';
+import SignInDialog from '../../../ui/organisms/Auth/SignIn/SignInDialog';
+import { useState } from 'react';
 
-const MakeRoommateRequestLandingPageTemplate = (props) => {
+const MakeRoommateRequestLandingPageTemplate = (props) => 
+{
 
     const {heroSection, createProfile, makeRoommateRequest, acceptConnection, customHeader} = props;
+
+    const [signInModalState, setSignInModalState] = useState(false);
+    const [createAccountModalState, setCreateAccountModalState] = useState(false);
+
+    const showSignInDialog = () => 
+    {
+        setSignInModalState(true);
+    }
+
+    const closeSignInModal = () => 
+    {
+        setSignInModalState(false);
+    }
+
 
     const heroStyle = 
     {
@@ -33,7 +50,7 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
             Getting an ideal roommate doesn't have to be stressful.<br></br>
             Allow <span style={{color: "#0029DD"}}>Findaroommate.com</span> do the work for you!</H3>
         ,
-        button: <Button customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>
+        button: <Button handleOnClick={showSignInDialog} customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>
                     Get Started
                 </Button> 
         , 
@@ -106,7 +123,7 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
         {
             id: 2,
             text: "How it works",
-            path: '/create-request'
+            path: '#how-it-works'
         },
         {
             id: 3,
@@ -128,7 +145,9 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                 />
             )}
             
-                
+            {/* Sign In Dialog */}
+            {/* <SignInDialog open={signInModalState} closeModal={closeSignInModal}/> */}
+
             {/* For Hero Section */}
             <div className={styles.heroSection}>
                 <ImageTextSection
@@ -141,7 +160,7 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
                 />
             </div>
             <div className= {`${globalStyles.body} ${styles.makeRoommateRequestBody}`}>
-                <div className={styles.howItWorks}>
+                <div className={styles.howItWorks} id="how-it-works">
                     {/* Heading */}
                     <H2>How it works</H2>
 
@@ -197,12 +216,15 @@ const MakeRoommateRequestLandingPageTemplate = (props) => {
             </div>       
 
                 {/* Contact Template */}
-                <ContactUsTemplate
-                    preheading = {contact.preheading}
-                    heading = {contact.heading}
-                    subheading = {contact.subheading}
-                    contactFields = {contact.contactFields}
-                />
+                <div id="contact-us">
+                    <ContactUsTemplate
+                        preheading = {contact.preheading}
+                        heading = {contact.heading}
+                        subheading = {contact.subheading}
+                        contactFields = {contact.contactFields}
+                    />
+                </div>
+                
 
                 {/* Footer */}
                 <Footer/>

@@ -5,6 +5,7 @@ import Header from "../../ui/organisms/Header/Header";
 import Select from "./../../ui/atoms/Select/Select";
 import Textarea from "./../../ui/atoms/Textarea/Textarea";
 import styles from "./CreatePersonalProfileTemplate.module.css";
+import {v4 as uuidv4} from 'uuid';
 
 const CreatePersonalProfileTemplate = (
   {
@@ -54,11 +55,12 @@ const handleFormInputChange = (name, value) =>
         </div>
         <form onSubmit={handleFormSubmit} className={styles.form}>
           {
-            inputs.map((input) => {
+            inputs.map((input) => 
+            {
               //if it is an input field.
               if (input.inputCategory == "input") {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     <Input 
                       placeholder={input.inputPlaceholder}
@@ -72,11 +74,29 @@ const handleFormInputChange = (name, value) =>
                 );
               }
 
+              //if it is a file input field
+              if(input.inputCategory == "inputFile")
+              {
+                return (
+                  <div key={uuidv4()} className={styles.formGroup}>
+                    <Label>{input.label ? input.label : input.label}</Label>
+                    <Input 
+                      placeholder={input.inputPlaceholder}
+                      type="file"
+                      name={input.inputName}
+                      defaultValue = {input.value ? input.value : ""}
+                      required = {input.required}
+                      handleFormInputChange = {handleFormInputChange}
+                      />
+                  </div>
+                )
+              }
+
               //if it is a select field
               if (input.inputCategory == "select")
               {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     <Select 
                         defaultOption={input.value ? input.value : ""}
@@ -91,9 +111,10 @@ const handleFormInputChange = (name, value) =>
               }
 
               //if it is a textarea
-              if (input.inputCategory == "textarea") {
+              if (input.inputCategory == "textarea") 
+              {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     <Textarea
                           rows="4"
@@ -108,9 +129,10 @@ const handleFormInputChange = (name, value) =>
               }
 
               //if it is a radio input
-              if (input.inputCategory == "radioInput") {
+              if (input.inputCategory == "radioInput")
+              {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     {input.data.map((radio) => {
                       return (

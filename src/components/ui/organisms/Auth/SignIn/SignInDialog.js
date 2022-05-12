@@ -1,7 +1,7 @@
 import ErrorAlert from "./../../../molecules/Alerts/ErrorAlert/ErrorAlert";
 import googleIcon from "../../../../../icons/google-icon.svg";
 import usePost from "./../../../../../customHooks/usePost";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Button from "../../../atoms/Button/Button";
 import H3 from "../../../atoms/Headings/H3/H3";
 import styles from "./SignInDialog.module.css";
@@ -12,13 +12,28 @@ import { useState, useEffect } from "react";
 import Img from "../../../atoms/Img/Img";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
+import CreateAccountDialog from "../CreateAccount/CreateAccountDialog";
 
-const SignInDialog = ({ open, closeModal }) => 
+const SignInDialog = () => 
 {
   const placeholderFunction = () => {};
 
   const [isLoading, setIsLoading] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [openCreateAccountModal, setOpenCreateAccountModal] = useState(false);
+
+  const openSignInDialog = () => 
+  {
+    setOpenModal(true);
+  }
+
+  const closeModal = () => 
+  {
+    console.log("here");
+    setOpenModal(false);
+  }
 
   const handleSignIn = (e) => 
   {
@@ -27,6 +42,13 @@ const SignInDialog = ({ open, closeModal }) =>
     //trigger login request to backend
     sendPostRequest({ email: e.target[0].value, password: e.target[1].value });
   };
+
+  const handleCreateAccountOnClick = (e) => 
+  {
+    e.preventDefault();
+    setOpenModal(false);
+    setOpenCreateAccountModal(true);
+  }
 
   useEffect(() => 
   {
@@ -45,11 +67,13 @@ const SignInDialog = ({ open, closeModal }) =>
   }, [isError, isSuccess, APIdata]);
 
   return (
+    <>
+    <Button handleOnClick={openSignInDialog}>Sign In</Button>
     <div className={styles.signInDialogContainer}>
       {/* move them to the on boarding screens on login */}
       {isSuccess && <Navigate replace to="/create-profile-instruction" />}
 
-      <Modal open={open} closeModal={closeModal}>
+      <Modal open={openModal} closeModal={closeModal}>
         <div className={styles.signInDialog}>
           <div className={styles.heading}>
             <H3>SIGN IN</H3>
@@ -77,15 +101,22 @@ const SignInDialog = ({ open, closeModal }) =>
                   <Img src={googleIcon} />
                   <P>Continue with Google</P>
                 </Button>
-                <P>
-                  Don't have an account? <Link to="/">Sign up</Link>
-                </P>
+                {/* <P> */}
+                  {/* Don't have an account? <span onClick={handleCreateAccountOnClick}>Sign up</span> */}
+                {/* </P> */}
               </div>
             </form>
+            <CreateAccountDialog/>
+
           </div>
         </div>
       </Modal>
+
+      {openCreateAccountModal && <CreateAccountDialog/>}
+
     </div>
+    </>
+    
   );
 };
 

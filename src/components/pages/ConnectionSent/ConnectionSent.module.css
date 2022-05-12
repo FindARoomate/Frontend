@@ -1,0 +1,18 @@
+@media screen and (min-width: 760px) 
+{
+    .content h2
+    {
+        font-family: "Open Sans";
+        color: black;
+        font-size: 24px;
+    }
+
+    .listBoxContainer
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+
+}

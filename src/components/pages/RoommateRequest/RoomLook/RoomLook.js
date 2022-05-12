@@ -31,7 +31,13 @@ const RoomLook = () =>
     const inputs = 
     [
         {
-            key: 2,
+            label: "Please add at least four pictures of different parts of your room e.g bedroom, kitchen, bathroom, balcony, etc. ",
+            inputName: "room_images",
+            inputCategory: "inputFile",
+            required: true,
+            value: localStorage.getItem("room_images")
+        },
+        {
             label: "Add a suitable title for your room listing",
             inputName: "listing_title",
             inputCategory: "input",
@@ -41,7 +47,6 @@ const RoomLook = () =>
             value: localStorage.getItem("listing_title")
         },
         {
-            key: 3,
             label: "Additional Information",
             inputCategory: "textarea",
             inputName: "additional_information",

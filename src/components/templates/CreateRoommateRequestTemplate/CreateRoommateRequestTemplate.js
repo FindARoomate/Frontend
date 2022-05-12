@@ -6,6 +6,7 @@ import H1 from '../../ui/atoms/Headings/H1/H1';
 import Label from '../../ui/atoms/Label/Label';
 import Input from '../../ui/atoms/Input/Input';
 import P from '../../ui/atoms/P/P';
+import {v4 as uuidv4} from 'uuid';
 
 const CreateRoommateRequestTemplate = (
     {
@@ -70,7 +71,7 @@ const CreateRoommateRequestTemplate = (
               if (input.inputCategory == "input") 
               {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     <Input 
                       placeholder={input.inputPlaceholder}
@@ -85,11 +86,29 @@ const CreateRoommateRequestTemplate = (
                 );
               }
 
+              //if it is a file input field
+              if(input.inputCategory == "inputFile")
+              {
+                return (
+                  <div key={uuidv4()} className={styles.formGroup}>
+                    <Label>{input.label ? input.label : input.label}</Label>
+                    <Input 
+                      placeholder={input.inputPlaceholder}
+                      type="file"
+                      name={input.inputName}
+                      defaultValue = {input.value ? input.value : ""}
+                      required = {input.required}
+                      handleFormInputChange = {handleFormInputChange}
+                      />
+                  </div>
+                )
+              }
+
               //if it is a select field
               if (input.inputCategory == "select")
               {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     <Select 
                         defaultOption={input.value ? input.value : ""}
@@ -107,7 +126,7 @@ const CreateRoommateRequestTemplate = (
               if (input.inputCategory == "textarea")
               {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     <Textarea
                           rows="4"
@@ -125,7 +144,7 @@ const CreateRoommateRequestTemplate = (
               if (input.inputCategory == "radioInput") 
               {
                 return (
-                  <div key={input.key} className={styles.formGroup}>
+                  <div key={uuidv4()} className={styles.formGroup}>
                     <Label>{input.label}</Label>
                     {input.data.map((radio) => {
                       return (
@@ -150,7 +169,7 @@ const CreateRoommateRequestTemplate = (
               if(input.inputCategory == "checkboxInput")
               {
                   return (
-                      <div key={input.key} className={styles.formGroup}>
+                      <div key={uuidv4()} className={styles.formGroup}>
                         <Label>{input.label}</Label>
                         <div className={styles.checkboxContainer}>
                         {

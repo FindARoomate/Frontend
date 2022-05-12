@@ -21,6 +21,7 @@
 {
     font-weight: bold;
     margin: 4px 0;
+    color: #000E4A;
 }
 
 .bottom
@@ -34,14 +35,15 @@
 {
     .displayCards
     {
-        justify-content: space-between;
+        justify-content: flex-start;
+        gap: 25px;
     }   
 
     .displayCards > *
     {
         width: 32.5%;
         max-width: 390px;
-        margin: 12px 0;
+        /* margin: 12px 0; */
     }
 
     .topSection p

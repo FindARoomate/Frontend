@@ -18,6 +18,11 @@ import RoomPricing from './components/pages/RoommateRequest/RoomPricing/RoomPric
 import RoomLook from './components/pages/RoommateRequest/RoomLook/RoomLook';
 import CreateRoommateRequestThankYou from './components/pages/RoommateRequest/CreateRoommateRequestThankYou/CreateRoommateRequestThankYou';
 import ViewSingleRoommateRequest from './components/pages/ViewSingleRoommateRequest/ViewSingleRoommateRequest';
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import ConnectionSent from './components/pages/ConnectionSent/ConnectionSent';
+import ConnectionReceived from './components/pages/ConnectionReceived/ConnectionReceived';
+import InactiveRequests from './components/pages/InactiveRequests/InactiveRequests';
+import ActiveRequests from './components/pages/ActiveRequests/ActiveRequests';
 
 
 function App() 
@@ -46,12 +51,16 @@ function App()
     // <Router>
       <div className="App">
         <Routes>
+          {/* Waitlist Endpoints */}
           <Route path='/' element={<ComingSoon2/>} />
           <Route path='/waitlist' element={<ComingSoon/>} />
+
+          {/* Landing Pages */}
           <Route path='/create-request' element={<MakeRoommateRequestLandingPage/>} />
           <Route path='/view-requests' element={<FindRoommateRequestLandingPage/>} />
+          
           <Route path='/view-all-requests' element={<ViewAllRoommateRequests/>} />
-          <Route path='/view-single-request' element={<ViewSingleRoommateRequest/>}/>
+          <Route path='/roommate-request/:id' element={<ViewSingleRoommateRequest/>}/>
 
           {/* Create Profile */}
           <Route path='/bio-data' element={<BioData/>}/>
@@ -67,6 +76,13 @@ function App()
           <Route path='/room-pricing' element={<RoomPricing/>}/>
           <Route path='/room-look' element={<RoomLook/>}/>
           <Route path='/create-roommate-request-thankyou' element={<CreateRoommateRequestThankYou/>} />
+          
+          {/* Dashboard related routes */}
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/connection-sent' element={<ConnectionSent/>}/>
+          <Route path='/connection-received' element={<ConnectionReceived/>}/>
+          <Route path='/inactive-requests' element={<InactiveRequests/>} />
+          <Route path='/active-requests' element={<ActiveRequests/>}/>
           
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
