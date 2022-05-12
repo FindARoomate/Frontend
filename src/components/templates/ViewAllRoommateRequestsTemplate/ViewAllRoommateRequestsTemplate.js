@@ -1,13 +1,13 @@
-import styles from './ViewMoreRoommateRequestsTemplate.module.css';
+import styles from './ViewAllRoommateRequestsTemplate.module.css';
 import Footer from '../../ui/organisms/Footer/Footer';
 import Header from '../../ui/organisms/Header/Header';
 import H2 from '../../ui/atoms/Headings/H2/H2';
-import DisplayCards from '../../templates/LandingPages/FindRoommateRequestLandingPageTemplate/DisplayCards';
+import DisplayCards from '../LandingPages/FindRoommateRequestLandingPageTemplate/DisplayCards';
 import globalStyles from './../../../components/globalStyles.module.css';
 import SearchBar from '../../ui/molecules/Search/SearchBar/SearchBar';
 import ExploreSearch from '../../ui/organisms/ExploreSearch/ExploreSearch';
 
-const ViewMoreRoommateRequestsTemplate = () => 
+const VViewAllRoommateRequestsTemplate = () => 
 {
    
     const roommateRequests = {}
@@ -55,4 +55,4 @@ const ViewMoreRoommateRequestsTemplate = () =>
      );
 }
  
-export default ViewMoreRoommateRequestsTemplate;
+export default VViewAllRoommateRequestsTemplate;

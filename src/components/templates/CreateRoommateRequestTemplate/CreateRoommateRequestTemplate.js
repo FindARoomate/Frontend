@@ -77,6 +77,7 @@ const CreateRoommateRequestTemplate = (
                       type={input.inputType}
                       name={input.inputName}
                       defaultValue = {input.value ? input.value : ""}
+                      {...input.inputProps}
                       required = {input.required}
                       handleFormInputChange = {handleFormInputChange}
                       />

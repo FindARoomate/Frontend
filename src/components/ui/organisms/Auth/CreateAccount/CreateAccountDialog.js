@@ -53,7 +53,7 @@ const CreateAccountDialog = ({open, closeModal}) =>
             </div>
             <div className={styles.form}>
                 <form onSubmit={(e) => handleSignUp(e)}>
-                    {/* {isError &&  <CreateAccountErrors errors={APIdata}/>} */}
+                    {isError &&  <CreateAccountErrors errors={APIdata}/>}
                     {isSuccess && <SuccessAlert message={APIdata.message}/>}
                     <div className={styles.inputGroup}>
                         <Label>Email</Label>

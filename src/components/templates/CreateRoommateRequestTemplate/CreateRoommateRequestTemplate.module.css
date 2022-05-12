@@ -131,9 +131,10 @@
 
 .checkboxContainer
 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    row-gap: 12px;
+    column-gap: 12px;
 }
 
 .checkboxInputClass

@@ -16,8 +16,10 @@ return (
                     return  (
                         <div key={filter.key} className={styles.searchSelect}>
                             <Select
-                                data={filter} 
+                                data={filter.data} 
                                 showSelectTags={showSelectTags} 
+                                name={filter.name}
+                                label={filter.label}
                             />
                         </div>
                     )

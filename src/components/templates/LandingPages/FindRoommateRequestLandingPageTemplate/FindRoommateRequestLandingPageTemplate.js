@@ -96,7 +96,7 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests}) =>
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
                     <DisplayCards data={roommateRequests} pagination={false}/>
-                    <Link to ="/view-more-requests">
+                    <Link to ="/view-all-requests">
                         <Button>View more requests</Button>
                     </Link>
                 </div>

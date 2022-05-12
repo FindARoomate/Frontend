@@ -56,7 +56,7 @@ const Card = () => {
                 </span>
                 <div className={styles.description}>
                     <P>Female roommate needed in a self contain at Agbowo... 
-                        <Link to="/">More info</Link>
+                        <Link to="/view-single-request">More info</Link>
                     </P>
                 </div>
                 <Button>Connect now</Button>

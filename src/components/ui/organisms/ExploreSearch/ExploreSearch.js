@@ -8,43 +8,72 @@ const ExploreSearch = () => {
   const filters = [
     {
       key: 1,
-      name: "Gender",
-      values: ["Male", "Female"],
+      label: "Gender",
+      name: "gender",
+      data:
+      [
+          {key: 1, label: "Male", value: "Male"},
+          {key: 2, label: "Female", value: "Female"},
+      ]
     },
     {
       key: 2,
-      name: "Religion",
-      values: ["Christian", "Muslim"],
+      label: "Religion",
+      name: "religion",
+      data:
+      [
+          {key: 1, label: "Christian", value: "Christian"},
+          {key: 2, label: "Muslim", value: "Muslim"},
+      ]
     },
     {
       key: 3,
-      name: "Room type",
-      values: ["Self contain", "3 bedroom flat"],
+      label: "Room Type",
+      name: "room_type",
+      data:
+      [
+          {key: 1, label: "Self contain", value: "Self contain"},
+          {key: 2, label: "3 bedroom flat", value: "3 bedroom flat"},
+      ]
     },
     {
       key: 4,
-      name: "Personality",
-      values: ["Introvert", "Extrovert"],
+      label: "Personality",
+      name: "personality",
+      data:
+      [
+          {key: 1, label: "Introvert", value: "Introvert"},
+          {key: 2, label: "Extrovert", value: "Extrovert"},
+      ]      
     },
     {
       key: 5,
-      name: "Price",
-      values: ["< #100k", "#100k - #250k", "#250k - #500k", ">#500k"],
+      label: "Price",
+      name: "price",
+      data:
+      [
+          {key: 1, label: "< #100k", value: "< #100k"},
+          {key: 2, label: "#100k - #250k", value: "#100k - #250k"},
+          {key: 3, label: "#250k - #500k", value: "#250k - #500k"},
+          {key: 4, label: "> #500k", value: "> #500k"},
+      ] 
     },
   ];
 
-  const showSelectTagsOnExplorePage = (data) => {
-    //     console.log("here");
-    //     var temp = tagKeys ? tagKeys : [];
-    //     temp[data[0]] = data[1];
-    //     updateTagKeys(tagKeys => {
-    //         tagKeys[data[0]] = data[1]
-    //     });]
-    var key = data[0];
+  const showSelectTagsOnExplorePage = (data) => 
+  {
+    var name = data[0];
     var value = data[1];
+    updateTagKeys({ ...tagKeys, [name]: value });
+  };
 
-    updateTagKeys({ ...tagKeys, [key]: value });
-    console.log(tagKeys);
+  const removeSearchTag = (data) => 
+  {
+    updateTagKeys((tagKeys) => 
+    {
+      delete tagKeys[data[0]];
+      return {...tagKeys}
+    });
   };
 
   return (
@@ -54,8 +83,12 @@ const ExploreSearch = () => {
         filters={filters}
         showSelectTagsOnExplorePage={showSelectTagsOnExplorePage}
       />
-      {console.log(tagKeys)}
-      {<DisplaySearchTags tags={tagKeys} />}
+      {
+        <DisplaySearchTags
+          tags={tagKeys} 
+          removeSearchTag={removeSearchTag}
+        />
+      }
     </div>
   );
 };

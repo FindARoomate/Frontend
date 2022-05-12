@@ -39,22 +39,30 @@ const RoomDetails = () =>
         {
             key: 2,
             label: "No of persons to occupy the apartment",
-            inputName: "no_of_persons_to_occupy_apartment",
+            inputName: "no_of_persons",
             inputCategory: "input",
             inputType: "number",
+            inputProps: 
+            {
+                min: 0
+            },
             required: true,
             inputPlaceholder: "Please type in the total number of occupants in your room/apartment",
-            value: localStorage.getItem("no_of_persons_to_occupy_apartment")
+            value: localStorage.getItem("no_of_persons")
         },
         {
             key: 3,
             label: "No of current roommates/flatmates",
-            inputName: "no_of_current_roommates",
+            inputName: "no_of_current_roomies",
             inputCategory: "input",
             inputType: "number",
+            inputProps: 
+            {
+                min: 0
+            },
             required: true,
             inputPlaceholder: "Please type in the number of roommates you currently have",
-            value: localStorage.getItem("no_of_current_roommates")
+            value: localStorage.getItem("no_of_current_roomies")
         },
         {
             key: 4,
