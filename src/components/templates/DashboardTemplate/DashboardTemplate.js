@@ -28,7 +28,6 @@ const DashboardTemplate = ({children}) =>
     ]
 
     const currentPath = window.location.pathname;
-    console.log(currentPath);
 
     return (  
     <div className={dashboardStyles.viewMoreRequests}>
@@ -43,7 +42,7 @@ const DashboardTemplate = ({children}) =>
                 <div className={dashboardStyles.sidebar}>
                     <div className={dashboardStyles.image}>
                         <Img src={dashboardImg}/>
-                        <div className={dashboardStyles.overlay}></div>
+                        {/* <div className={dashboardStyles.overlay}></div> */}
                     </div>
                     <div className={dashboardStyles.links}>
                         <ul>
@@ -91,8 +90,11 @@ const DashboardTemplate = ({children}) =>
                 <div className={dashboardStyles.mainContent}>
                     <div className={dashboardStyles.welcomePanel}>
                         <div className={dashboardStyles.welcomeMessage}>
-                            <P>Welcome back Precious</P>
-                            <P>Here is an overview of your activities</P>
+                            <Img src={dashboardImg}/>
+                            <div>
+                                <P>Welcome back Precious</P>
+                                <P>Here is an overview of your activities</P>
+                            </div>
                         </div>
                         <div className={dashboardStyles.notification}></div>
                     </div>

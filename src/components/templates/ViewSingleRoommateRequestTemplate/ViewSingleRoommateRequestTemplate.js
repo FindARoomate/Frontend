@@ -21,7 +21,7 @@ import marker from './../../../icons/marker.png';
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 
-const ViewSingleRoommateRequestTemplate = ({roommateRequest}) => 
+const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) => 
 {
 
 const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'});
@@ -46,10 +46,13 @@ const headerLinks =
                     <Link to="/view-all-requests">
                         <Img src={backIcon}/>
                     </Link>
-                    <H1>{roommateRequest.listing_title}</H1>
+                    <H1>{roommateRequest ? roommateRequest.listing_title : "Loading..."}</H1>
                 </div>
                 <div className={styles.requestOwner}>
-                        <P>Request created by <span className={styles.name}>{roommateRequest.user.name}</span></P> 
+                        <P>Request created by <span className={styles.name}>
+                            {roommateRequest ? roommateRequest.profile.fullname : "Loading..."}
+                            </span>
+                        </P> 
                 </div>
             </div>
 
@@ -59,137 +62,151 @@ const headerLinks =
                 </div>
             </div>
 
-            <div className={`${globalStyles.body} ${styles.viewSingleRequestBody}`}>
-                <div className={styles.roomInformation}>
-                    <div className={styles.topSection}>
-                        <div className={styles.roomDetailsAndAmmenities}>
-                            <H2>Room Details</H2>
 
-                            <div className={styles.singleRoomInformationContainer}>
-                                <div className={styles.singleRoomInformation}>
-                                    <H3>Room Type</H3>
-                                    <P>{roommateRequest.room_type}</P>
+                <div className={`${globalStyles.body} ${styles.viewSingleRequestBody}`}>
+                {roommateRequest ? (
+                <>            
+                    <div className={styles.roomInformation}>
+                        <div className={styles.topSection}>
+                            <div className={styles.roomDetailsAndAmmenities}>
+                                <H2>Room Details</H2>
+
+                                <div className={styles.singleRoomInformationContainer}>
+                                    <div className={styles.singleRoomInformation}>
+                                        <H3>Room Type</H3>
+                                        <P>{roommateRequest.room_type}</P>
+                                    </div>
+
+                                    <div className={styles.singleRoomInformation}>
+                                        <H3>Rent</H3>
+                                        <P>{roommateRequest.rent_per_person}</P>
+                                    </div>
+
+                                    <div className={styles.singleRoomInformation}>
+                                        <H3>Other Bills</H3>
+                                        <P>{roommateRequest.additional_cost}</P>
+                                    </div>
+
+                                    <div className={styles.singleRoomInformation}>
+                                        <H3>Availability</H3>
+                                        <P>{roommateRequest.availability}</P>
+                                    </div>
+
+                                    <div className={styles.singleRoomInformation}>
+                                        <H3>No of person to occupy the room</H3>
+                                        <P>{roommateRequest.no_of_persons}</P>
+                                    </div>
+
+                                    <div className={styles.singleRoomInformation}>
+                                        <H3>No of current roommates</H3>
+                                        <P>{roommateRequest.no_of_current_roomies}</P>
+                                    </div>
                                 </div>
 
-                                <div className={styles.singleRoomInformation}>
-                                    <H3>Rent</H3>
-                                    <P>{roommateRequest.rent_per_person}</P>
-                                </div>
+                                <div className={styles.ammenitiesContainer}>
+                                    <H2>Amenities</H2>
 
-                                <div className={styles.singleRoomInformation}>
-                                    <H3>Other Bills</H3>
-                                    <P>{roommateRequest.additional_cost}</P>
-                                </div>
-
-                                <div className={styles.singleRoomInformation}>
-                                    <H3>Availability</H3>
-                                    <P>{roommateRequest.availability}</P>
-                                </div>
-
-                                <div className={styles.singleRoomInformation}>
-                                    <H3>No of person to occupy the room</H3>
-                                    <P>{roommateRequest.no_of_persons}</P>
-                                </div>
-
-                                <div className={styles.singleRoomInformation}>
-                                    <H3>No of current roommates</H3>
-                                    <P>{roommateRequest.no_of_current_roomies}</P>
+                                    <div className={styles.ammenities}>
+                                        {roommateRequest.amenities.map((amenity) => 
+                                        {
+                                            return (
+                                                <div key = {uuidv4()} className={styles.singleAmmenity}>
+                                                    <Img src={washingMachine}/>
+                                                    <P>{amenity}</P>
+                                                </div>
+                                            )
+                                        })}
+                                        
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className={styles.ammenitiesContainer}>
-                                <H2>Amenities</H2>
-
-                                <div className={styles.ammenities}>
-                                    {roommateRequest.amenities.map((amenity) => 
-                                    {
-                                        return (
-                                            <div key = {uuidv4()} className={styles.singleAmmenity}>
-                                                <Img src={washingMachine}/>
-                                                <P>{amenity}</P>
-                                            </div>
-                                        )
-                                    })}
-                                    
+                            <div className={styles.desktopOwnerInformation}>
+                                <div className={styles.personalInfo}>
+                                    <Img src ={displayPicture} />
+                                    <span>
+                                        <H3>{roommateRequest.profile.name}</H3>
+                                        <P>{roommateRequest.profile.occupation}</P>
+                                    </span>
+                                </div>
+                                <div>
+                                    <div className={styles.information}>
+                                        <P>
+                                            <span className={styles.infoHeading}>Age group: </span>
+                                                {roommateRequest.profile.age_range + " years"}
+                                        </P>
+                                        <P>
+                                            <span className={styles.infoHeading}>Gender: </span>
+                                            {roommateRequest.profile.gender.toLowerCase()}
+                                        </P>
+                                        <P>
+                                            <span className={styles.infoHeading}>Personality Type: </span>
+                                            {roommateRequest.profile.personality.toLowerCase()}
+                                        </P>
+                                        <P><span className={styles.infoHeading}>Bio: </span>
+                                            {(roommateRequest.profile.bio.length < 82) ?
+                                                roommateRequest.profile.bio:
+                                            (<>
+                                                {roommateRequest.profile.bio.substr(0, 82) + "... "}
+                                                <span className={styles.readMore}>Read more</span>
+                                            </>
+                                            )}
+                                        </P>
+                                    </div>
+                                    <Button>Connect Now</Button>
                                 </div>
                             </div>
+                            
                         </div>
 
-                        <div className={styles.desktopOwnerInformation}>
-                            <div className={styles.personalInfo}>
-                                <Img src ={displayPicture} />
-                                <span>
-                                    <H3>{roommateRequest.user.name}</H3>
-                                    <P>{roommateRequest.user.occupation}</P>
-                                </span>
-                            </div>
+                        <div className={styles.location}>
                             <div>
-                                <div className={styles.information}>
-                                    <P>
-                                        <span className={styles.infoHeading}>Age group: </span>
-                                            {roommateRequest.user.age_group + " years"}
-                                    </P>
-                                    <P>
-                                        <span className={styles.infoHeading}>Gender: </span>
-                                        {roommateRequest.user.gender}
-                                    </P>
-                                    <P>
-                                        <span className={styles.infoHeading}>Personality Type: </span>
-                                        {roommateRequest.user.personality_type}
-                                    </P>
-                                    <P><span className={styles.infoHeading}>Bio: </span>
-                                        {roommateRequest.user.bio.substr(0, 82) + "... "}
-                                        <span className={styles.readMore}>Read more</span>
-                                    </P>
-                                </div>
-                                <Button>Connect Now</Button>
+                                <H2>Location</H2>
+                                <P styles={styles.address}>{roommateRequest.street_address + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
+                            </div>
+                            <div className={styles.map} id="single-roommate-request-map">
+                                <Map
+                                    style="mapbox://styles/mapbox/streets-v9"
+                                    containerStyle={{
+                                        height: '100%',
+                                        width: '100%',
+                                        borderRadius: 'inherit'
+                                    }}
+                                    >
+                                
+                                    <Layer type="line" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+                                        <Feature coordinates={[roommateRequest.longitude, roommateRequest.latitude]} />
+                                    </Layer>
+                                </Map>
                             </div>
                         </div>
+
+                        <div className={styles.additionalInformation}>
+                            <H2>Additional information about room</H2>
+                            <P>{roommateRequest.additional_information}</P></div>
                         
                     </div>
+                </>) : "Loading ..."}
 
-                    <div className={styles.location}>
-                        <div>
-                            <H2>Location</H2>
-                            <P styles={styles.address}>{roommateRequest.street_address + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
+                </div>
+                
+                {roommateRequest ? (
+                <> 
+                    <div className={styles.mobileOwnerInformation}>
+                        <div className={styles.personalInfo}>
+                            <Img src ={displayPicture} />
+                            <span>
+                                <H3>Precious Faseyosan</H3>
+                                <P>Student</P>
+                            </span>
                         </div>
-                        <div className={styles.map} id="single-roommate-request-map">
-                            <Map
-                                style="mapbox://styles/mapbox/streets-v9"
-                                containerStyle={{
-                                    height: '100%',
-                                    width: '100%',
-                                    borderRadius: 'inherit'
-                                }}
-                                >
-                            
-                                <Layer type="line" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-                                    <Feature coordinates={[roommateRequest.longitude, roommateRequest.latitude]} />
-                                </Layer>
-                            </Map>
+                        <div>
+                            <Button>Connect now</Button>
                         </div>
                     </div>
-
-                    <div className={styles.additionalInformation}>
-                        <H2>Additional information about room</H2>
-                        <P>{roommateRequest.additional_information}</P></div>
-                    
-                </div>
-                    
-            </div>
+                </>) : "Loading ..."}
             
-            <div className={styles.mobileOwnerInformation}>
-                <div className={styles.personalInfo}>
-                    <Img src ={displayPicture} />
-                    <span>
-                        <H3>Precious Faseyosan</H3>
-                        <P>Student</P>
-                    </span>
-                </div>
-                <div>
-                    <Button>Connect now</Button>
-                </div>
-            </div>
+
         </div>
      );
 }

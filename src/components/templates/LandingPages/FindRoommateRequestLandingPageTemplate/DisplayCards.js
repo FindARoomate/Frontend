@@ -3,13 +3,13 @@ import Card from "../../../ui/organisms/Card/Card";
 import styles from './DisplayCards.module.css';
 import dp from './../../../../images/card-display-picture.jpg';
 
-const DisplayCards = ({data, pagination}) => 
+const DisplayCards = ({data, pagination, count}) => 
 {
     const sliderImages = [dp, dp, dp, dp];
     return ( 
         <div className={styles.displayCardContainer}>
             <div className={styles.topSection}>
-                <P>{data.length + " results"}</P>
+                <P>{count + " results"}</P>
             </div>
             <div className={styles.displayCardBody}>
                 <div className={styles.displayCards}>

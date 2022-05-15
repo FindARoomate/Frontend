@@ -13,73 +13,139 @@ const ConnectionSent = () =>
 
                 <div className={styles.listBoxContainer}>
                     <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="declined"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="success"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="declined"
-                        dp={dp}
-                    />
-
-                    <ListBox
+                        link = "/connection-sent/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
                     <ListBox
+                        link = "/connection-sent/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
-
                     <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="declined"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="success"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="declined"
-                        dp={dp}
-                    />
-
-                    <ListBox
+                        link = "/connection-sent/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/connection-sent/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+                    
                 </div>
                
             </div>

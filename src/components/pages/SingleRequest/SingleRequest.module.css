@@ -1,0 +1,270 @@
+.backNavigation a
+ {
+     display: flex;
+     align-items: center;
+ }
+ 
+ .backNavigation img 
+ {
+     height: 14px;
+     width: auto;
+ }
+
+ .backNavigation span
+ {
+     font-size: 14px;
+     color: #000E4A;
+     margin-left: 8px;
+ }
+ 
+ .topBar
+ {       
+     display: flex;
+     flex-direction: row;
+     flex-wrap: nowrap;
+     justify-content: space-between;
+     padding: 21px 0;
+     align-items: center;
+ }
+
+ .topBar .editIcon button 
+ {
+    background-color: #F5F7FF;
+    color: #0029DD;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+ }
+
+ .topBar .editIcon button img
+ {
+    height: 15px;
+    width: auto;
+    margin-right: 4px;
+ }
+
+ .topBar .statistics
+ {
+    display: flex;
+    flex-direction: column-reverse;
+ }
+
+ .topBar .statistics .singleStatistic
+ {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+ }
+
+   
+ .topBar .statistics .singleStatistic p
+ {
+    font-size: 13px;
+    color: #000E4A;
+    text-decoration: underline;
+ }
+ 
+ .topBar .statistics .singleStatistic img
+ {
+    width: 12px;
+    height: auto;
+    margin-right: 4px;
+ }
+
+ .imageContainer
+ {
+     background-color: red;
+     border-radius: 8px;
+     height: 208px;
+     width: 100%;
+     margin: 24px 0;
+ }
+
+
+ .roomInfoContainer
+ {
+     padding: 9px 0 16px 0;
+ }
+
+ .roomInfoContainer h2
+ {
+    font-family: "Open Sans";
+    font-size: 16px;
+    color: #000E4A;
+    font-weight: 600;
+ }
+
+
+ .roomInfoContainer > div
+ {
+    padding: 8px 0;
+ }
+
+ .roomInfoRow
+ {
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 8px;
+ }
+
+ .roomInfo
+ {
+     display: flex;
+     flex-direction: column;
+ }
+
+ .roomInfo .label
+ {
+     font-size: 12px;
+     color: #7D7D7D;
+ }
+
+ .roomInfo .value
+ {
+     font-size: 14px;
+     font-weight: 600;
+     color: #000E4A;
+ }
+
+ .buttonGroup
+ {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     flex-wrap: wrap;
+ }
+
+
+ .buttonGroup button
+ {
+     padding: 13px;
+     font-weight: 600;
+ }
+
+ .buttonGroup .rejectButton button 
+ {
+     border: 1px solid #0029DD;
+     background-color: white;
+     color: #0029DD;
+ }
+
+ .buttonGroup .viewRequest a 
+ {
+     font-size: 14px;
+     text-decoration: underline;
+     color: #0029DD;
+ } 
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    
+    .backNavigation img 
+    {
+        height: 20px;
+        width: auto;
+    }
+
+    .backNavigation span
+    {
+        font-size: 20px;
+        margin-left: 16px;
+    }
+
+    .topBar
+    {       
+        padding: 21px 0;
+    }
+
+    .topBar .editIcon button 
+    {
+        font-size: 20px;
+        padding: 13px 23px;
+    }
+
+    .topBar .editIcon button img
+    {
+        height: 16.42px;
+        width: auto;
+        margin-right: 4px;
+    }
+
+    .topBar .statistics
+    {
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .topBar .statistics .singleStatistic:first-child
+    {
+        margin-right: 22px;
+    }
+
+    .topBar .statistics .singleStatistic
+    {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .topBar .statistics .singleStatistic p
+    {
+       font-size: 16px;
+    }
+
+    .topBar .statistics .singleStatistic img
+    {
+       width: 20px;
+       height: auto;
+    }
+
+    .imageContainer
+    {
+        height: 345px;
+        width: 100%;
+        margin-top: 13px;
+        margin-bottom: 41px;
+    }
+
+    .roomInfoContainer
+    {
+        padding: 28.5px 0 52.5px 0;
+    }
+
+    .roomInfoContainer > div
+    {
+        padding: 10.5px 0;
+    }
+    
+    .roomInfoRow
+    {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        column-gap: 15px;
+    }
+
+    .roomInfo .label
+    {
+        font-size: 20px;
+    }
+
+    .roomInfo .value
+    {
+        font-size: 24px;
+    }
+
+    .buttonGroup button
+    {
+        padding: 18px 61px;
+    }
+
+    .buttonGroup .viewRequest a 
+    {
+        font-size: 20px;
+    }
+}

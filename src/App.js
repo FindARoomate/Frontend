@@ -21,8 +21,11 @@ import ViewSingleRoommateRequest from './components/pages/ViewSingleRoommateRequ
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import ConnectionSent from './components/pages/ConnectionSent/ConnectionSent';
 import ConnectionReceived from './components/pages/ConnectionReceived/ConnectionReceived';
+import SingleConnectionReceived from './components/pages/SingleConnectionReceived/SingleConnectionReceived';
+import SingleConnectionSent from './components/pages/SingleConnectionSent/SingleConnectionSent';
 import InactiveRequests from './components/pages/InactiveRequests/InactiveRequests';
 import ActiveRequests from './components/pages/ActiveRequests/ActiveRequests';
+import SingleRequest from './components/pages/SingleRequest/SingleRequest';
 
 
 function App() 
@@ -83,7 +86,12 @@ function App()
           <Route path='/connection-received' element={<ConnectionReceived/>}/>
           <Route path='/inactive-requests' element={<InactiveRequests/>} />
           <Route path='/active-requests' element={<ActiveRequests/>}/>
-          
+
+
+          <Route path='/connection-received/1' element={<SingleConnectionReceived/>}/>
+          <Route path='/connection-sent/1' element={<SingleConnectionSent/>}/>
+          <Route path='/request/1' element={<SingleRequest/>}/>
+
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
         </Routes>

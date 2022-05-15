@@ -1,10 +1,10 @@
 
-.headerContainer
-{
-  position: relative;
-  min-height: 100px;
-  height: auto;
-}
+  .headerContainer
+  {
+    position: relative;
+    min-height: 59px;
+    height: auto;
+  }
 
 .header
 {
@@ -124,6 +124,11 @@
 
 @media screen and (min-width: 760px) 
 {
+  .headerContainer
+  {
+    min-height: 100px;
+  }
+  
   .header
   {
     width: 100%;

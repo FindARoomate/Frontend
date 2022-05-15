@@ -13,6 +13,7 @@ const ConnectionReceived = () =>
 
                 <div className={styles.listBoxContainer}>
                     <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="pending"
@@ -20,6 +21,7 @@ const ConnectionReceived = () =>
                     />
 
                     <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="declined"
@@ -27,6 +29,7 @@ const ConnectionReceived = () =>
                     />
 
                     <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="success"
@@ -34,19 +37,14 @@ const ConnectionReceived = () =>
                     />
 
                     <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="declined"
                         dp={dp}
                     />
-
-                    <ListBox
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-                    <ListBox
+                                        <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="pending"
@@ -54,6 +52,7 @@ const ConnectionReceived = () =>
                     />
 
                     <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="declined"
@@ -61,6 +60,7 @@ const ConnectionReceived = () =>
                     />
 
                     <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="success"
@@ -68,6 +68,22 @@ const ConnectionReceived = () =>
                     />
 
                     <ListBox
+                        link = "/connection-received/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="declined"
+                        dp={dp}
+                    />
+                                        <ListBox
+                        link = "/connection-received/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="pending"
+                        dp={dp}
+                    />
+
+                    <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
                         tag="declined"
@@ -75,9 +91,18 @@ const ConnectionReceived = () =>
                     />
 
                     <ListBox
+                        link = "/connection-received/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
-                        tag="pending"
+                        tag="success"
+                        dp={dp}
+                    />
+
+                    <ListBox
+                        link = "/connection-received/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="declined"
                         dp={dp}
                     />
                 </div>
