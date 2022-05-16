@@ -27,7 +27,6 @@ const FileInput = ({name, handleFormInputChange, ...rest}) =>
 
     return ( 
         <div className={styles.fileInput}>
-            {localStorage.getItem(name) && <>{localStorage.getItem(name)}</>}
             <label htmlFor={name}>
                 <Img src={img} />
                  {labelText ? labelText : (
