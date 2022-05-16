@@ -24,7 +24,14 @@ const ActiveRequests = () =>
                         link = "/request/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
-                        tag="pending"
+                        tag="declined"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/request/1"
+                        name = "Chikelue Ebube"
+                        description = "am a church girl and I love playing"
+                        tag="success"
                         dp={dp}
                     />
                     <ListBox
@@ -39,13 +46,20 @@ const ActiveRequests = () =>
                         link = "/request/1"
                         name = "Chikelue Ebube"
                         description = "am a church girl and I love playing"
-                        tag="pending"
+                        tag="declined"
                         dp={dp}
                     />
                     <ListBox
                         link = "/request/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
+                        tag="success"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/request/1"
+                        name = "Chikelue Ebube"
+                        description = "I am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
@@ -53,14 +67,21 @@ const ActiveRequests = () =>
                     <ListBox
                         link = "/request/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
+                        description = "I am a church girl and I love playing"
+                        tag="declined"
                         dp={dp}
                     />
                     <ListBox
                         link = "/request/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
+                        tag="success"
+                        dp={dp}
+                    />
+                    <ListBox
+                        link = "/request/1"
+                        name = "Chikelue Ebube"
+                        description = "I am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
@@ -68,71 +89,17 @@ const ActiveRequests = () =>
                     <ListBox
                         link = "/request/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
+                        description = "I am a church girl and I love playing"
+                        tag="declined"
                         dp={dp}
                     />
                     <ListBox
                         link = "/request/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
+                        description = "I am a church girl and I love playing"
+                        tag="success"
                         dp={dp}
                     />
-
-                    <ListBox
-                        link = "/request/1"
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-                    <ListBox
-                        link = "/request/1"
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        link = "/request/1"
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-                    <ListBox
-                        link = "/request/1"
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        link = "/request/1"
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-                    <ListBox
-                        link = "/request/1"
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-
-                    <ListBox
-                        link = "/request/1"
-                        name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
-                        tag="pending"
-                        dp={dp}
-                    />
-                    
                 </div>
                
             </div>

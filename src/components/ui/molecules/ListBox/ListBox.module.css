@@ -40,16 +40,16 @@
     {
         display: flex;
         flex-wrap: nowrap;
-        gap: 36px;
+        gap: 17.65px;
         align-items: center;
     }
 
     .listBox .tagAndIcon .tag
     {
-        padding: 8px 21px;
+        padding: 6px 16px;
         border-radius: 50px;
-        font-size: 13px;
-        line-height: 13px;
+        font-size: 10px;
+        line-height: 10px;
     }
 
     .listBox .tagAndIcon .pending
@@ -72,7 +72,7 @@
 
     .listBox .tagAndIcon .icon img
     {
-        height: 20px;
+        height: 10px;
         width: auto;
     }
 

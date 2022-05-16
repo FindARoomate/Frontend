@@ -15,7 +15,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
@@ -23,7 +23,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="declined"
                         dp={dp}
                     />
@@ -31,7 +31,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="success"
                         dp={dp}
                     />
@@ -39,14 +39,14 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="declined"
                         dp={dp}
                     />
                                         <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
@@ -54,7 +54,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="declined"
                         dp={dp}
                     />
@@ -62,7 +62,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="success"
                         dp={dp}
                     />
@@ -70,14 +70,14 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="declined"
                         dp={dp}
                     />
                                         <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="pending"
                         dp={dp}
                     />
@@ -85,7 +85,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="declined"
                         dp={dp}
                     />
@@ -93,7 +93,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="success"
                         dp={dp}
                     />
@@ -101,7 +101,7 @@ const ConnectionReceived = () =>
                     <ListBox
                         link = "/connection-received/1"
                         name = "Chikelue Ebube"
-                        description = "am a church girl and I love playing"
+                        description = "I am a church girl and I love playing"
                         tag="declined"
                         dp={dp}
                     />
