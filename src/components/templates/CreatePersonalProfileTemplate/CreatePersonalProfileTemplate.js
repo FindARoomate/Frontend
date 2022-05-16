@@ -6,6 +6,7 @@ import Select from "./../../ui/atoms/Select/Select";
 import Textarea from "./../../ui/atoms/Textarea/Textarea";
 import styles from "./CreatePersonalProfileTemplate.module.css";
 import {v4 as uuidv4} from 'uuid';
+import FileInput from "../../ui/atoms/FileInput/FileInput";
 
 const CreatePersonalProfileTemplate = (
   {
@@ -54,6 +55,8 @@ const handleFormInputChange = (name, value) =>
           <div className={styles.formNavigationDivider}></div>
         </div>
         <form onSubmit={handleFormSubmit} className={styles.form}>
+
+
           {
             inputs.map((input) => 
             {
@@ -79,15 +82,18 @@ const handleFormInputChange = (name, value) =>
               {
                 return (
                   <div key={uuidv4()} className={styles.formGroup}>
-                    <Label>{input.label ? input.label : input.label}</Label>
-                    <Input 
-                      placeholder={input.inputPlaceholder}
-                      type="file"
+                    <FileInput 
                       name={input.inputName}
-                      defaultValue = {input.value ? input.value : ""}
                       required = {input.required}
                       handleFormInputChange = {handleFormInputChange}
                       />
+
+                    {/* <Input 
+                      placeholder={input.inputPlaceholder}
+                      type="file"
+                      defaultValue = {input.value ? input.value : ""}
+                      handleFormInputChange = {handleFormInputChange}
+                      /> */}
                   </div>
                 )
               }
