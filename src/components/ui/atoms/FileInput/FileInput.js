@@ -1,5 +1,5 @@
 import Img from "../Img/Img";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
@@ -10,10 +10,7 @@ const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, ...res
 
     // console.log(fileValue);
 
-    if(fileValue)
-    {
-        setLabelText("A file already exists");
-    }
+    
 
     const handleOnChange = (e) => 
     {
@@ -22,13 +19,19 @@ const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, ...res
             setLabelText(`${e.target.files.length} files selected`)
         }
         
-        if(e.target.files.length == 1) 
+        if(e.target.files.length === 1) 
         {
             setLabelText(e.target.files[0].name);
         }
 
         handleFormChangeForFileInput(name, e.target.files);
     }
+    useEffect(() => {
+        if(fileValue)
+    {
+        setLabelText("A file already exists");
+    }
+    }, [fileValue])
 
     return ( 
         <div className={styles.fileInput}>

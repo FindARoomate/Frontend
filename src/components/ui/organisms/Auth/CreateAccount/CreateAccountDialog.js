@@ -63,7 +63,7 @@ const CreateAccountDialog = () =>
 
     return ( 
         <>
-            <Button handleOnClick={openCreateAccountDialog}>Create Account New</Button>
+            <Button handleOnClick={openCreateAccountDialog}>Create Account</Button>
 
             <div className={styles.createAccountDialogContainer}>
 

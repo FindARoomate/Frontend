@@ -21,6 +21,7 @@ const TellUsAboutYourself = () =>
 
     useEffect(() => 
     {
+        console.log(profileImage)
         let openRequest = indexedDB.open("files");
 
         //if the database does not exist
@@ -199,7 +200,7 @@ const TellUsAboutYourself = () =>
     return ( 
         <>
             {/* Direct to tell us about yourself screen */}
-            {isFormSubmitted && <Navigate replace to="/ideal-roommate"/>}
+            {/* {isFormSubmitted && <Navigate replace to="/ideal-roommate"/>} */}
 
              <CreatePersonalProfileTemplate
                 inputs = {inputs}
