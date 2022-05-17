@@ -4,9 +4,16 @@ import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
 
-const FileInput = ({name, handleFormInputChange, ...rest}) => 
+const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, ...rest}) => 
 {
     const [labelText, setLabelText] = useState(null);
+
+    // console.log(fileValue);
+
+    if(fileValue)
+    {
+        setLabelText("A file already exists");
+    }
 
     const handleOnChange = (e) => 
     {
@@ -19,10 +26,8 @@ const FileInput = ({name, handleFormInputChange, ...rest}) =>
         {
             setLabelText(e.target.files[0].name);
         }
-        console.log(e.target.files);
-        console.log(JSON.stringify(e.target.files));
 
-        // handleFormInputChange(name, JSON.stringify(e.target.files));
+        handleFormChangeForFileInput(name, e.target.files);
     }
 
     return ( 

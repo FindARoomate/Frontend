@@ -15,7 +15,8 @@ const CreatePersonalProfileTemplate = (
     nextButton, 
     navClasses, 
     handleSubmit, 
-    handleInputChange = null
+    handleInputChange = null,
+    handleFileInputChange = null
   }) => 
 {
  
@@ -30,6 +31,14 @@ const handleFormInputChange = (name, value) =>
     {
         handleInputChange(name, value);
     }
+}
+
+const handleFormChangeForFileInput = (name, value) => 
+{
+  if(handleFileInputChange)
+  {
+    handleFileInputChange(name, value);
+  }
 }
 
   return (
@@ -85,7 +94,8 @@ const handleFormInputChange = (name, value) =>
                     <FileInput 
                       name={input.inputName}
                       required = {input.required}
-                      handleFormInputChange = {handleFormInputChange}
+                      handleFormChangeForFileInput = {handleFormChangeForFileInput}
+                      fileValue = {input.value}
                       />
 
                     {/* <Input 

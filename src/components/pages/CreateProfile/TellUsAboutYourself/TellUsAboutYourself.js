@@ -5,17 +5,140 @@ import Button from './../../../ui/atoms/Button/Button';
 import icon from './../../../../icons/right-arrow-icon.svg';
 import CreatePersonalProfileTemplate from './../../../templates/CreatePersonalProfileTemplate/CreatePersonalProfileTemplate'
 import createPersonalProfileStyles from './../../../templates/CreatePersonalProfileTemplate/CreatePersonalProfileTemplate.module.css';
+import { useEffect } from 'react';
 
 const TellUsAboutYourself = () => 
 {
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+    const [profileImage, setProfileImage] = useState(null);
+    const [consoleLog, setConsoleLog] = useState("Initial");
+
+
+    const handleInputChange = (name, value) => 
+    {
+        localStorage.setItem(name, value);
+    }
+
+    useEffect(() => 
+    {
+        let openRequest = indexedDB.open("files");
+
+        //if the database does not exist
+        openRequest.onupgradeneeded = () => 
+        {
+            let db = openRequest.result;
+            db.createObjectStore("files");
+        }
+
+        openRequest.onsuccess = () => 
+        {
+            let db = openRequest.result;
+            let transaction = db.transaction("files", "readonly");
+            let files = transaction.objectStore("files");
+            let data = files.get("profile_picture");
+
+            data.onsuccess = () => 
+            {
+                setProfileImage(data.result);
+                console.log(data.result);
+                //return data.result;
+            }
+
+            data.onerror = () => 
+            {
+                console.log("Error", data.error);
+            }
+        }
+    }, []);
+
+    // const getImageFromIndexDb = (name) => 
+    // {
+    //     let openRequest = indexedDB.open("files");
+
+    //     //if the database does not exist
+    //     openRequest.onupgradeneeded = () => 
+    //     {
+    //         let db = openRequest.result;
+    //         db.createObjectStore("files");
+    //     }
+
+    //     openRequest.onsuccess = () => 
+    //     {
+    //         let db = openRequest.result;
+    //         let transaction = db.transaction("files");
+    //         let files = transaction.objectStore("files", "read");
+    //         let data = files.get(name);
+
+    //         data.onsuccess = () => 
+    //         {
+    //             console.log(data.result);
+    //             return data.result;
+    //         }
+
+    //         data.onerror = () => 
+    //         {
+    //             console.log("Error", data.error);
+    //         }
+    //     }
+
+    //     openRequest.onerror = () => 
+    //     {
+    //         console.log("Error", openRequest.error);
+    //     }
+    // }
+
+    const handleFileInputChange = (name, value) => 
+    {
+        //save to IndexDB
+        let openRequest = indexedDB.open("files");
+
+        //If the client has no database yet
+        openRequest.onupgradeneeded = () => 
+        {
+            let db = openRequest.result;
+            db.createObjectStore('files'); //creating the "objectStore" (table) with name of "files"
+        }
+
+        //If the database opened successfully
+        openRequest.onsuccess = () => 
+        {
+            let db = openRequest.result;
+            let transaction = db.transaction("files", "readwrite");
+            let files = transaction.objectStore("files");
+
+            let request = files.put(value, name);
+
+            request.onsuccess = () => 
+            {
+                console.log("Profile image temporarily stored");
+            }
+
+            request.onerror = () => 
+            {
+                console.log("Error", request.error);
+            }
+        }
+
+        //If there is an error with opening database.
+        openRequest.onerror = () => 
+        {
+            console.log("Error", openRequest.error);
+        }
+    }
+
+    const handleSubmit = (e) => 
+    {
+        e.preventDefault();  
+        setIsFormSubmitted(true);
+    }
+
 
     const inputs = 
     [
         {
             inputName: "profile_picture",
             inputCategory: "inputFile",
-            value: localStorage.getItem("profile_picture"),
+            value: profileImage,
             required: true,
         },
         {
@@ -72,17 +195,7 @@ const TellUsAboutYourself = () =>
         createPersonalProfileStyles.notVisited 
     ];
 
-    const handleInputChange = (name, value) => 
-    {
-        localStorage.setItem(name, value);
-    }
-
-    const handleSubmit = (e) => 
-    {
-        e.preventDefault();  
-        setIsFormSubmitted(true);
-    }
-
+   
     return ( 
         <>
             {/* Direct to tell us about yourself screen */}
@@ -95,6 +208,7 @@ const TellUsAboutYourself = () =>
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
                 handleInputChange = {handleInputChange}
+                handleFileInputChange = {handleFileInputChange}
             />
         </>
        
