@@ -1,0 +1,41 @@
+.expandedDashboardContainer
+{
+    min-height: 100vh;
+    background-color: #F5F7FF;
+    padding-bottom: 10px;
+}
+
+
+.contentContainer
+{
+    padding: 0 5.5vw;
+    padding-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.content
+{
+    padding: 23px 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0.5px rgba(125, 125, 125, 0.2);
+}
+
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .contentContainer
+    {
+        padding: 50px;
+        padding-bottom: 70px;;
+    }
+
+    .content
+    {
+        width: 682px;
+        padding: 28px 35px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+}

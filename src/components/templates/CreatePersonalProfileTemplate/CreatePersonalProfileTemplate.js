@@ -6,6 +6,7 @@ import Select from "./../../ui/atoms/Select/Select";
 import Textarea from "./../../ui/atoms/Textarea/Textarea";
 import styles from "./CreatePersonalProfileTemplate.module.css";
 import {v4 as uuidv4} from 'uuid';
+import FileInput from "../../ui/atoms/FileInput/FileInput";
 
 const CreatePersonalProfileTemplate = (
   {
@@ -14,7 +15,8 @@ const CreatePersonalProfileTemplate = (
     nextButton, 
     navClasses, 
     handleSubmit, 
-    handleInputChange = null
+    handleInputChange = null,
+    handleFileInputChange = null
   }) => 
 {
  
@@ -29,6 +31,14 @@ const handleFormInputChange = (name, value) =>
     {
         handleInputChange(name, value);
     }
+}
+
+const handleFormChangeForFileInput = (name, value) => 
+{
+  if(handleFileInputChange)
+  {
+    handleFileInputChange(name, value);
+  }
 }
 
   return (
@@ -54,6 +64,8 @@ const handleFormInputChange = (name, value) =>
           <div className={styles.formNavigationDivider}></div>
         </div>
         <form onSubmit={handleFormSubmit} className={styles.form}>
+
+
           {
             inputs.map((input) => 
             {
@@ -79,15 +91,19 @@ const handleFormInputChange = (name, value) =>
               {
                 return (
                   <div key={uuidv4()} className={styles.formGroup}>
-                    <Label>{input.label ? input.label : input.label}</Label>
-                    <Input 
+                    <FileInput 
+                      name={input.inputName}
+                      required = {input.required}
+                      handleFormChangeForFileInput = {handleFormChangeForFileInput}
+                      fileValue = {input.value}
+                      />
+
+                    {/* <Input 
                       placeholder={input.inputPlaceholder}
                       type="file"
-                      name={input.inputName}
                       defaultValue = {input.value ? input.value : ""}
-                      required = {input.required}
                       handleFormInputChange = {handleFormInputChange}
-                      />
+                      /> */}
                   </div>
                 )
               }

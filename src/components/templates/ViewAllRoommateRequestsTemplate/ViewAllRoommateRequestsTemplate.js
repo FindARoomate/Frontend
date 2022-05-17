@@ -47,6 +47,7 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, room
                     {(isSuccess && roommateRequests) && (
                         <DisplayCards 
                             data={roommateRequests.results} 
+                            count = {roommateRequests.count}
                             pagination={true}
                         />)
                     }

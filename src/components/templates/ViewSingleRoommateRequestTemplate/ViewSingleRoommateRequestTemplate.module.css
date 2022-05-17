@@ -303,6 +303,20 @@
         margin-top:8px;
     }
 
+    
+    .desktopOwnerInformation .information p:first-child, 
+    .desktopOwnerInformation .information p:nth-child(2), 
+    .desktopOwnerInformation .information p:nth-child(3) 
+    {
+        text-transform:capitalize;
+    }
+
+    .desktopOwnerInformation .information p
+    {
+        font-size: 16px;
+        margin-top:8px;
+    }
+
     .desktopOwnerInformation .information .infoHeading
     {
         color: #000E4A;

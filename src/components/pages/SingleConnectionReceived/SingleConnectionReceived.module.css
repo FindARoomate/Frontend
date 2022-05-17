@@ -1,0 +1,178 @@
+ .backNavigation a
+ {
+     display: flex;
+     align-items: center;
+ }
+
+
+ .backNavigation img 
+ {
+     height: 14px;
+     width: auto;
+ }
+
+ .backNavigation span
+ {
+     font-size: 14px;
+     color: #000E4A;
+     margin-left: 8px;
+ }
+
+ .profile 
+{
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.profile img
+{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.profile p 
+{
+    color: #000E4A;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+ .userInfoContainer
+ {
+     padding: 16px 0;
+ }
+
+ .userInfoContainer > div
+ {
+    padding: 8px 0;
+ }
+
+ .userInfoRow
+ {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    row-gap: 8px;
+ }
+
+ .userInfo
+ {
+     display: flex;
+     flex-direction: column;
+ }
+
+ .userInfo .label
+ {
+     font-size: 12px;
+     color: #7D7D7D;
+ }
+
+ .userInfo .value
+ {
+     font-size: 14px;
+     font-weight: 600;
+     color: #000E4A;
+ }
+
+
+ .buttonGroup
+ {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     flex-wrap: nowrap;
+ }
+
+ .buttonGroup button
+ {
+     padding: 13px;
+     font-weight: 600;
+ }
+
+ .buttonGroup .rejectButton button 
+ {
+     border: 1px solid #0029DD;
+     background-color: white;
+     color: #0029DD;
+ }
+
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+
+    .backNavigation a
+    {
+        display: flex;
+        align-items: center;
+    }
+    
+    .backNavigation img 
+    {
+        height: 20px;
+        width: auto;
+    }
+
+    .backNavigation span
+    {
+        font-size: 20px;
+        color: #000E4A;
+        margin-left: 16px;
+    }
+
+    .profile 
+    {
+        margin-top: 57px;
+    }
+
+    .profile img
+    {
+        height: 60px;
+        width: 60px;
+    }
+
+    .profile p 
+    {
+        font-size: 24px;
+    }
+
+    .userInfoContainer
+    {
+        padding: 28.5px 0 52.5px 0;
+    }
+
+    .userInfoRow
+    {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 35px;
+        padding: 10.5px 0;
+    }
+
+    .userInfo
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .userInfo .label
+    {
+        font-size: 20px;
+        color: #7D7D7D;
+    }
+
+    .userInfo .value
+    {
+        font-size: 24px;
+        font-weight: 600;
+        color: #000E4A;
+    }
+
+    .buttonGroup button
+    {
+        padding: 18px 61px;
+    }
+}

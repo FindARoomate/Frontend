@@ -2,12 +2,13 @@ import styles from './ListBox.module.css';
 import Img from "../../atoms/Img/Img";
 import P from '../../atoms/P/P';
 import forwardIcon from "../../../../icons/forward-icon.svg";
+import { Link } from 'react-router-dom';
 
-
-const ListBox = ({dp, name, description, tag}) =>
+const ListBox = ({dp, name, description, tag, link=""}) =>
 {
-    return (  
-        <div className={styles.listBox}>
+    return ( 
+        <Link to={link}>
+            <div className={styles.listBox}>
             <div className={styles.information}>
                 <Img src={dp}/>
                 <span>
@@ -45,6 +46,8 @@ const ListBox = ({dp, name, description, tag}) =>
                 </div>
             </div>
         </div>
+        </Link> 
+        
     );
 }
  

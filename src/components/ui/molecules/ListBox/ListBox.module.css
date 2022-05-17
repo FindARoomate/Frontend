@@ -2,7 +2,7 @@
     .listBox
     {
         border-radius: 8px;
-        padding: 24px 33px 24px 9px;
+        padding: 11px 10px 11px 3px;
         background: white;
         display: flex;
         justify-content: space-between;
@@ -18,22 +18,94 @@
 
     .listBox .information img
     {
-        width: 40px;
-        height: 40px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
     }
 
     .listBox .information .name
     {
-       font-size: 16px;
+       font-size: 10px;
        font-weight: 600;
        color: black;
     }
 
     .listBox .information .description
     {
-        font-size: 16px;
+        font-size: 10px;
         color:  rgba(125, 125, 125, 0.45);
+    }
+
+    .listBox .tagAndIcon
+    {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 17.65px;
+        align-items: center;
+    }
+
+    .listBox .tagAndIcon .tag
+    {
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 10px;
+        line-height: 10px;
+    }
+
+    .listBox .tagAndIcon .pending
+    {
+        background-color: #FEFCE2;
+        color: #E3DB0F;
+    }
+
+    .listBox .tagAndIcon .success
+    {
+        background-color: #E2FEE8;
+        color: #0CF542;
+    }
+
+    .listBox .tagAndIcon .declined
+    {
+        background-color: #FDE3E5;
+        color: #ED1E2E;
+    }
+
+    .listBox .tagAndIcon .icon img
+    {
+        height: 10px;
+        width: auto;
+    }
+
+    
+@media screen and (min-width: 760px) 
+{
+
+    .listBox
+    {
+        padding: 24px 33px 24px 9px;
+    }
+
+    .listBox .information
+    {
+        display: flex;
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+
+    .listBox .information img
+    {
+        width: 40px;
+        height: 40px;
+    }
+
+    .listBox .information .name
+    {
+       font-size: 16px;
+    }
+
+    .listBox .information .description
+    {
+        font-size: 16px;
     }
 
     .listBox .tagAndIcon
@@ -75,3 +147,5 @@
         height: 20px;
         width: auto;
     }
+
+}

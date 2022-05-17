@@ -1,6 +1,7 @@
 import styles from './CreateRoommateRequestTemplate.module.css'
-import Header from '../../ui/organisms/Header/Header';
+import FileInput from '../../ui/atoms/FileInput/FileInput';
 import Textarea from '../../ui/atoms/Textarea/Textarea';
+import Header from '../../ui/organisms/Header/Header';
 import Select from '../../ui/atoms/Select/Select';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import Label from '../../ui/atoms/Label/Label';
@@ -91,7 +92,13 @@ const CreateRoommateRequestTemplate = (
               {
                 return (
                   <div key={uuidv4()} className={styles.formGroup}>
-                    <Label>{input.label ? input.label : input.label}</Label>
+                      <FileInput 
+                        name={input.inputName}
+                        required = {input.required}
+                        handleFormInputChange = {handleFormInputChange}
+                        multiple
+                      />
+                    {/* <Label>{input.label ? input.label : input.label}</Label>
                     <Input 
                       placeholder={input.inputPlaceholder}
                       type="file"
@@ -99,7 +106,7 @@ const CreateRoommateRequestTemplate = (
                       defaultValue = {input.value ? input.value : ""}
                       required = {input.required}
                       handleFormInputChange = {handleFormInputChange}
-                      />
+                      /> */}
                   </div>
                 )
               }
