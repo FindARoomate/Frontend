@@ -5,8 +5,8 @@ import SignInButton from '../Auth/SignIn/SignInButton';
 import CreateAccountButton from '../Auth/CreateAccount/CreateAccountButton';
 import {useState } from 'react';
 import Modal from '../Modal/Modal';
-import SignInDialog from '../Auth/SignIn/SignInDialog';
-import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
+import SignInDialog from '../Auth/SignIn/SignInDialog old';
+import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog old';
 import Button from '../../atoms/Button/Button';
 
 const Header = ({customStyle, signIn, createAccount, links}) => {
@@ -17,34 +17,35 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
     if(createAccount) areLinksAvailable = true;
     if(links) areLinksAvailable = true;
 
+    const [openSignInModal, setOpenSignInModal] = useState(false);
 
 
     // Create Account Menu Dialog Box controls
-    const [createAccountModalState, updateCreateAccountModalState] = useState(false);
-    const openCreateAccountDialog = () => 
-    {
-        updateModalState(false); //close mobile menu dialog
-        updateSignInModalState(false);//close sign in menu dialog
-        updateCreateAccountModalState(true); //open create account dialog
-    }
-    const closeCreateAccountDialog = () => 
-    {
-        updateCreateAccountModalState(false);
-    }
+    // const [createAccountModalState, updateCreateAccountModalState] = useState(false);
+    // const openCreateAccountDialog = () => 
+    // {
+    //     updateModalState(false); //close mobile menu dialog
+    //     updateSignInModalState(false);//close sign in menu dialog
+    //     updateCreateAccountModalState(true); //open create account dialog
+    // }
+    // const closeCreateAccountDialog = () => 
+    // {
+    //     updateCreateAccountModalState(false);
+    // }
 
-    // Sign In Menu Dialog Box controls
-    const [signInModalState, updateSignInModalState] = useState(false);
+    // // Sign In Menu Dialog Box controls
+    // const [signInModalState, updateSignInModalState] = useState(false);
     const openSignInDialog = () => 
     {
-        updateModalState(false);//close mobile menu dialog
-        updateCreateAccountModalState(false);//close create account menu dialog
-        updateSignInModalState(true); //open sign in dialog (if open)
+        // updateModalState(false);//close mobile menu dialog
+        // updateCreateAccountModalState(false);//close create account menu dialog
+        // updateSignInModalState(true); //open sign in dialog (if open)
+        setOpenSignInModal(true);
     }
-
-    const closeSignInDialog = () => 
-    {
-        updateSignInModalState(false);
-    }
+    // const closeSignInDialog = () => 
+    // {
+    //     updateSignInModalState(false);
+    // }
 
     // Mobile Menu Dialog Box controls
     const [modalState, updateModalState] = useState(false);
@@ -71,8 +72,9 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                     )
                 })}
 
-                {signIn && <SignInButton  openSignInDialog={openSignInDialog}/>}
-                {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
+                {signIn &&  <SignInDialog/>}
+                {/* {signIn && <SignInButton  openSignInDialog={openSignInDialog}/>} */}
+                {/* {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>} */}
             </div> 
 
             {/* Harmburger Icon */}
@@ -93,29 +95,35 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
                             <Link onClick={closeMobileDialog} key={link.id} to={link.path}>{link.text}</Link>
                         )
                     })}
-                    {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}
-                    {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
+                    {/* {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}
+                    {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>} */}
                 </Modal>  
             </div>
                               
             {/* Sign In Pop-up */}
-            <div className={styles.signInModal}>
+            {/* <div className={styles.signInModal}>
                 <SignInDialog
                     open={signInModalState} 
                     closeModal={closeSignInDialog}
                     openCreateAccountModal={openCreateAccountDialog}
                     />
-            </div>
+            </div> */}
+
+            {/* {openSignInModal && (
+                <div className={styles.signInModal}>
+                <SignInDialog/>
+                </div>
+            )} */}
            
 
              {/* Create Account In Pop-up */}
-             <div className={styles.createAccountModal}>
+             {/* <div className={styles.createAccountModal}>
                 <CreateAccountDialog 
                     open={createAccountModalState} 
                     closeModal={closeCreateAccountDialog}
                     openSignInModal={openSignInDialog}
                     />
-            </div>
+            </div> */}
             </div>
            
         </div>

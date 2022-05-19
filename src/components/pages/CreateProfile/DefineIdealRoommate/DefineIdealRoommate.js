@@ -12,8 +12,12 @@ const DefineIdealRoommate = () =>
 {
     const [isLoading, setIsLoading] = useState(false);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-    const TOKEN = localStorage.getItem("accessToken");
-    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_PROFILE, TOKEN);
+
+    const token =  "Bearer " + localStorage.getItem("accessToken");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", token)
+    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_PROFILE, myHeaders);
+    const [profileImage, setProfileImage] = useState(null);
 
     const inputs = 
     [
@@ -103,30 +107,103 @@ const DefineIdealRoommate = () =>
         localStorage.setItem(name, value);
     }
 
+    useEffect(() => 
+    {
+        let openRequest = indexedDB.open("files");
+
+        openRequest.onupgradeneeded = () => 
+        {
+            let db = openRequest.result;
+            db.createObjectStore("files");
+        }
+
+        openRequest.onsuccess = () => 
+        {
+            let db = openRequest.result;
+            let transaction = db.transaction("files", "readonly");
+            let files = transaction.objectStore("files");
+            let data = files.get("profile_picture");
+
+            data.onsuccess = () => 
+            {
+                setProfileImage(data.result[0]);
+            }
+
+            data.onerror = () => 
+            {
+                console.log("Error", data.error);
+            }
+        }
+
+        openRequest.onerror = () => 
+        {
+            console.log("Error", openRequest.error)
+        }
+    }, []);
+       
+    const removeImageFromIDB = (name) => 
+    {
+        
+        let openRequest = indexedDB.open("files");
+
+        openRequest.onupgradeneeded = () => 
+        {
+            let db = openRequest.result;
+            db.createObjectStore("files");
+        }
+
+        openRequest.onsuccess = () => 
+        {
+            let db = openRequest.result;
+            let transaction = db.transaction("files", "readwrite");
+            let files = transaction.objectStore("files");
+            let data = files.delete(name);
+
+            data.onsuccess = () => 
+            {
+                console.log(data.result);
+                // setProfileImage(data.result);
+            }
+
+            data.onerror = () => 
+            {
+                console.log("Error", data.error);
+            }
+        }
+
+        openRequest.onerror = () => 
+        {
+            console.log("Error", openRequest.error)
+        }
+    }
+
     const handleSubmit = (e) => 
     {
         e.preventDefault();
         setIsLoading(true); //set state of loading button
 
-        const credentials = 
+        if(profileImage)
         {
-            "fullname": localStorage.getItem("fullname"),
-            "religion": localStorage.getItem("religion").toUpperCase(),
-            "gender": localStorage.getItem("gender"),
-            "phone_number": localStorage.getItem("phone_number"),
-            "personality": localStorage.getItem("personality").toUpperCase(),
-            "profession": localStorage.getItem("profession"),
-            "bio": localStorage.getItem("bio"),
-            "age": 13,//localStorage.getItem("age"),
-            "roomie_gender": localStorage.getItem("roomie_gender").toUpperCase(),
-            "roomie_religion": localStorage.getItem("roomie_religion").toUpperCase(),
-            "roomie_age": 14,//localStorage.getItem("roomie_age"),
-            "roomie_personality": localStorage.getItem("roomie_personality").toUpperCase(),
-            "roomate_description": localStorage.getItem("roomate_description"),
-        }
+            const formData = new FormData();
+            formData.append("fullname", localStorage.getItem("fullname"));
+            formData.append("religion", localStorage.getItem("religion").toUpperCase());
+            formData.append("gender", localStorage.getItem("gender"));
+            formData.append("phone_number", localStorage.getItem("phone_number"));
+            formData.append("personality", localStorage.getItem("personality").toUpperCase());
+            formData.append("profession", localStorage.getItem("profession"));
+            formData.append("bio", localStorage.getItem("bio"));
+            formData.append("age", 14);
+            formData.append("roomie_gender", localStorage.getItem("roomie_gender").toUpperCase());
+            formData.append("roomie_religion", localStorage.getItem("roomie_religion").toUpperCase());
+            formData.append("roomie_age", 13);
+            formData.append("roomie_personality", localStorage.getItem("roomie_personality").toUpperCase());
+            formData.append("roomate_description", localStorage.getItem("roomie_description"));
+            formData.append("profile_picture", profileImage);
 
-        //create profile record on backend
-        sendPostRequest(credentials);
+            //create profile record on backend
+            sendPostRequest(formData);
+        }
+       
     }
 
     useEffect(() => 
@@ -146,12 +223,15 @@ const DefineIdealRoommate = () =>
             localStorage.removeItem("personality");
             localStorage.removeItem("profession");
             localStorage.removeItem("bio");
-            localStorage.removeItem("age");
+            localStorage.removeItem("age_range");
             localStorage.removeItem("roomie_gender");
             localStorage.removeItem("roomie_religion");
             localStorage.removeItem("roomie_age");
             localStorage.removeItem("roomie_personality");
             localStorage.removeItem("roomate_description");
+
+            //delete image
+            removeImageFromIDB("profile_picture");
 
             //set form submitted to true
             setIsFormSubmitted(true);

@@ -1,30 +1,19 @@
 import { useCallback, useState } from "react";
 
-const usePost = (url, token) => 
+const usePost = (url, headersValue = {}) => 
 {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const [APIdata, setAPIData] = useState({});
 
-  var headersValue = 
+  const fetchFunction = async(formData) =>
   {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-  };
-
-  // add token to the header if it exists
-  if (token) headersValue["Authorization"] = "Bearer " + token;
-
-  const fetchFunction = async(credentials) =>
-  {
-
+    
     try 
     {
       const res = await fetch(url, {
         method: "POST",
-        body: JSON.stringify(credentials),
-        redirect: "follow",
-        mode: "cors",
+        body: formData,
         headers: headersValue,
       });
 
@@ -51,9 +40,9 @@ const usePost = (url, token) =>
     }
   }
     
-  const sendPostRequest = useCallback((credentials) => 
+  const sendPostRequest = useCallback((formData) => 
   {
-    fetchFunction(credentials);    
+    fetchFunction(formData);    
   },
     [url, headersValue]
   );

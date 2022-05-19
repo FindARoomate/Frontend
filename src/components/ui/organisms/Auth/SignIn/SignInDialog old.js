@@ -1,6 +1,6 @@
-import ErrorAlert from "./../../../molecules/Alerts/ErrorAlert/ErrorAlert";
+import ErrorAlert from "../../../molecules/Alerts/ErrorAlert/ErrorAlert";
 import googleIcon from "../../../../../icons/google-icon.svg";
-import usePost from "./../../../../../customHooks/usePost";
+import usePost from "../../../../../customHooks/usePost";
 import { Navigate } from "react-router-dom";
 import Button from "../../../atoms/Button/Button";
 import H3 from "../../../atoms/Headings/H3/H3";
@@ -12,14 +12,37 @@ import { useState, useEffect } from "react";
 import Img from "../../../atoms/Img/Img";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
+import CreateAccountDialog from "../CreateAccount/CreateAccountDialog old";
 
-const SignInDialog = ({ open, closeModal, openCreateAccountModal}) => 
+const SignInDialogOld = () => 
 {
   const placeholderFunction = () => {};
 
   const [isLoading, setIsLoading] = useState(false);
-  const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
 
+  const headers = 
+  {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  }
+
+  const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN, headers);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [openCreateAccountModal, setOpenCreateAccountModal] = useState(false);
+
+  const openSignInDialog = () => 
+  {
+    setOpenModal(true);
+  }
+
+  const closeModal = () => 
+  {
+    console.log("here");
+    setOpenModal(false);
+  }
+
+  
   const handleSignIn = (e) => 
   {
     e.preventDefault();
@@ -31,7 +54,8 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
   const handleCreateAccountOnClick = (e) => 
   {
     e.preventDefault();
-    openCreateAccountModal();
+    setOpenModal(false);
+    setOpenCreateAccountModal(true);
   }
 
   useEffect(() => 
@@ -51,11 +75,13 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
   }, [isError, isSuccess, APIdata]);
 
   return (
+    <>
+    <Button handleOnClick={openSignInDialog}>Sign In</Button>
     <div className={styles.signInDialogContainer}>
       {/* move them to the on boarding screens on login */}
       {isSuccess && <Navigate replace to="/create-profile-instruction" />}
 
-      <Modal open={open} closeModal={closeModal}>
+      <Modal open={openModal} closeModal={closeModal}>
         <div className={styles.signInDialog}>
           <div className={styles.heading}>
             <H3>SIGN IN</H3>
@@ -66,11 +92,11 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
               {isError && <ErrorAlert message= {APIdata.detail}/>}
               <div className={styles.inputGroup}>
                 <Label>Email</Label>
-                <Input type="text" placeholder="Enter your email address" />
+                <Input type="text" name="email" placeholder="Enter your email address" />
               </div>
               <div className={styles.inputGroup}>
                 <Label>Password</Label>
-                <Input type="text" placeholder="Enter your password" />
+                <Input type="text" name="password" placeholder="Enter your password" />
               </div>
               <Button handleOnClick={placeholderFunction}>
                 {isLoading ? "Loading..." : "Sign In"}
@@ -83,17 +109,23 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
                   <Img src={googleIcon} />
                   <P>Continue with Google</P>
                 </Button>
-                <P>
-                  Don't have an account? <span onClick={handleCreateAccountOnClick}>Sign up</span>
-                </P>
+                {/* <P> */}
+                  {/* Don't have an account? <span onClick={handleCreateAccountOnClick}>Sign up</span> */}
+                {/* </P> */}
               </div>
             </form>
+            <CreateAccountDialog/>
+
           </div>
         </div>
       </Modal>
 
+      {openCreateAccountModal && <CreateAccountDialog/>}
+
     </div>
+    </>
+    
   );
 };
 
-export default SignInDialog;
+export default SignInDialogOld;

@@ -21,7 +21,6 @@ const TellUsAboutYourself = () =>
 
     useEffect(() => 
     {
-        console.log(profileImage)
         let openRequest = indexedDB.open("files");
 
         //if the database does not exist
@@ -41,8 +40,6 @@ const TellUsAboutYourself = () =>
             data.onsuccess = () => 
             {
                 setProfileImage(data.result);
-                console.log(data.result);
-                //return data.result;
             }
 
             data.onerror = () => 
@@ -51,42 +48,6 @@ const TellUsAboutYourself = () =>
             }
         }
     }, []);
-
-    // const getImageFromIndexDb = (name) => 
-    // {
-    //     let openRequest = indexedDB.open("files");
-
-    //     //if the database does not exist
-    //     openRequest.onupgradeneeded = () => 
-    //     {
-    //         let db = openRequest.result;
-    //         db.createObjectStore("files");
-    //     }
-
-    //     openRequest.onsuccess = () => 
-    //     {
-    //         let db = openRequest.result;
-    //         let transaction = db.transaction("files");
-    //         let files = transaction.objectStore("files", "read");
-    //         let data = files.get(name);
-
-    //         data.onsuccess = () => 
-    //         {
-    //             console.log(data.result);
-    //             return data.result;
-    //         }
-
-    //         data.onerror = () => 
-    //         {
-    //             console.log("Error", data.error);
-    //         }
-    //     }
-
-    //     openRequest.onerror = () => 
-    //     {
-    //         console.log("Error", openRequest.error);
-    //     }
-    // }
 
     const handleFileInputChange = (name, value) => 
     {
@@ -200,7 +161,7 @@ const TellUsAboutYourself = () =>
     return ( 
         <>
             {/* Direct to tell us about yourself screen */}
-            {/* {isFormSubmitted && <Navigate replace to="/ideal-roommate"/>} */}
+            {isFormSubmitted && <Navigate replace to="/ideal-roommate"/>}
 
              <CreatePersonalProfileTemplate
                 inputs = {inputs}

@@ -4,13 +4,11 @@ import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
 
-const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, ...rest}) => 
+const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, required, multiple=false, ...rest}) => 
 {
-    const [labelText, setLabelText] = useState(null);
+    const [labelText, setLabelText] = useState("Upload a photo");
+    const [isInputRequired, setIsInputRequired] = useState(true); 
 
-    // console.log(fileValue);
-
-    
 
     const handleOnChange = (e) => 
     {
@@ -26,26 +24,43 @@ const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, ...res
 
         handleFormChangeForFileInput(name, e.target.files);
     }
-    useEffect(() => {
-        if(fileValue)
+
+    useEffect(() => 
     {
-        setLabelText("A file already exists");
-    }
-    }, [fileValue])
+        if(multiple)
+        {
+            setLabelText("Upload Photos");
+        }
+
+        if(fileValue)
+        {
+            setIsInputRequired(false);
+
+            if(fileValue.length == 1)
+            {
+                setLabelText(fileValue[0].name);
+            }else 
+            {
+                setLabelText(`${fileValue.length} files selected`);
+            }
+        }
+
+
+    }, [fileValue, multiple])
 
     return ( 
         <div className={styles.fileInput}>
             <label htmlFor={name}>
                 <Img src={img} />
-                 {labelText ? labelText : (
-                <span>Upload <br></br>a photo</span>
-                    )}
+                <span>{labelText}</span>
             </label>
             <Input 
                     type="file"
                     name={name}
                     id={name}
                     onChange={handleOnChange}
+                    // required={isInputRequired}
+                    multiple={multiple}
                     {...rest}
                 />
         </div>

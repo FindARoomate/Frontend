@@ -19,7 +19,8 @@ const CreateRoommateRequestTemplate = (
         description, 
         handleInputChange,
         handleCheckboxChange,
-        defaultCheckboxArray
+        defaultCheckboxArray,
+        handleFileInputChange
     }) => {
 
     const handleFormSubmit = (e) => 
@@ -42,6 +43,15 @@ const CreateRoommateRequestTemplate = (
         handleCheckboxChange(name, data);
       }
     }
+
+    const handleFormChangeForFileInput = (name, value) => 
+    {
+      if(handleFileInputChange)
+      {
+        handleFileInputChange(name, value);
+      }
+    }
+
 
     var checkboxObject = defaultCheckboxArray ? defaultCheckboxArray : [];
 
@@ -95,18 +105,10 @@ const CreateRoommateRequestTemplate = (
                       <FileInput 
                         name={input.inputName}
                         required = {input.required}
-                        handleFormInputChange = {handleFormInputChange}
+                        handleFormChangeForFileInput = {handleFormChangeForFileInput}
+                        fileValue = {input.value}
                         multiple
                       />
-                    {/* <Label>{input.label ? input.label : input.label}</Label>
-                    <Input 
-                      placeholder={input.inputPlaceholder}
-                      type="file"
-                      name={input.inputName}
-                      defaultValue = {input.value ? input.value : ""}
-                      required = {input.required}
-                      handleFormInputChange = {handleFormInputChange}
-                      /> */}
                   </div>
                 )
               }

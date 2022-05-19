@@ -5,7 +5,7 @@ import connectionSent from './../../../icons/connection-sent.svg';
 import activeRequest from './../../../icons/active-request.svg';
 import dashboardImg from './../../../images/dashboard-image.png';
 import overviewIcon from './../../../icons/overview-icon.svg';
-import Header from '../../ui/organisms/Header/Header';
+import Header from '../../ui/organisms/Header/Header old';
 import dashboardStyles from './DashboardTemplate.module.css';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';

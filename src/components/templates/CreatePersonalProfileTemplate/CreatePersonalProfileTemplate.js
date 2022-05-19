@@ -1,7 +1,7 @@
 import H1 from "./../../ui/atoms/Headings/H1/H1";
 import Input from "../../ui/atoms/Input/Input";
 import Label from "./../../ui/atoms/Label/Label";
-import Header from "../../ui/organisms/Header/Header";
+import Header from "../../ui/organisms/Header/Header old";
 import Select from "./../../ui/atoms/Select/Select";
 import Textarea from "./../../ui/atoms/Textarea/Textarea";
 import styles from "./CreatePersonalProfileTemplate.module.css";
@@ -97,13 +97,6 @@ const handleFormChangeForFileInput = (name, value) =>
                       handleFormChangeForFileInput = {handleFormChangeForFileInput}
                       fileValue = {input.value}
                       />
-
-                    {/* <Input 
-                      placeholder={input.inputPlaceholder}
-                      type="file"
-                      defaultValue = {input.value ? input.value : ""}
-                      handleFormInputChange = {handleFormInputChange}
-                      /> */}
                   </div>
                 )
               }

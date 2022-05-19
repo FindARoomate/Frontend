@@ -5,13 +5,18 @@ import { Link, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import usePost from "../../../../customHooks/usePost";
 import { CREATE_ROOMMATE_REQUEST } from "../../../routes";
+import { saveToIDB , getFromIDB} from "../../../../helperFunctions/indexDB";
 
 const RoomLook = () => 
 {
 
+    const [requestImages, setRequestImages] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const TOKEN = localStorage.getItem("accessToken");
-    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_ROOMMATE_REQUEST, TOKEN);
+
+    const token = "Bearer " + localStorage.getItem("accessToken");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", token);
+    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_ROOMMATE_REQUEST, myHeaders);
 
     const convert_to_array = (data) => 
     {
@@ -28,14 +33,156 @@ const RoomLook = () =>
 
         return new_array;
     }
+
+    const handleSubmit = (e) => 
+    {
+        e.preventDefault();     
+        setIsLoading(true);
+
+        if(requestImages)
+        {
+            const formData = new FormData();
+            formData.append("country", localStorage.getItem("country"));
+            formData.append("state", localStorage.getItem("state"));
+            formData.append("city", localStorage.getItem("city"));
+            formData.append("street_address", localStorage.getItem("street_address")); //gives issues if the street is a single word
+            formData.append("room_type", localStorage.getItem("room_type"));
+            formData.append("no_of_persons", localStorage.getItem("no_of_persons"));
+            formData.append("no_of_current_roomies", localStorage.getItem("no_of_current_roomies"));
+            formData.append("rent_per_person", localStorage.getItem("rent_per_person"));
+            formData.append("additional_cost", localStorage.getItem("additional_cost"));
+            formData.append("listing_title", localStorage.getItem("listing_title"));
+            formData.append("roomate_description", localStorage.getItem("roomie_description"));
+            formData.append("additional_information", localStorage.getItem("additional_information"));
+            formData.append("amenities", convert_to_array(localStorage.getItem("amenities")));
+            formData.append("date_to_move", localStorage.getItem("how_soon_roommate_can_move_in")); 
+
+            //append all images
+            for (let i = 0; i < requestImages.length; i++)
+            {
+                formData.append("request_images", requestImages[i]);
+            }
+            console.log("Button clicked");
+            sendPostRequest(formData);
+        }
+       
+        
+    }
+
+    const removeImageFromIDB = (name) => 
+    {
+        
+        let openRequest = indexedDB.open("files");
+
+        openRequest.onupgradeneeded = () => 
+        {
+            let db = openRequest.result;
+            db.createObjectStore("files");
+        }
+
+        openRequest.onsuccess = () => 
+        {
+            let db = openRequest.result;
+            let transaction = db.transaction("files", "readwrite");
+            let files = transaction.objectStore("files");
+            let data = files.delete(name);
+
+            data.onsuccess = () => 
+            {
+                console.log(data.result);
+                // setProfileImage(data.result);
+            }
+
+            data.onerror = () => 
+            {
+                console.log("Error", data.error);
+            }
+        }
+
+        openRequest.onerror = () => 
+        {
+            console.log("Error", openRequest.error)
+        }
+    }
+
+    useEffect(() => 
+    {
+
+        getFromIDB("files", "files", "request_images");
+
+        // console.log(data);
+        let openRequest = indexedDB.open("files");
+
+        //if the database does not exist
+        // openRequest.onupgradeneeded = () => 
+        // {
+        //     let db = openRequest.result;
+        //     db.createObjectStore("files");
+        // }
+
+        // openRequest.onsuccess = () => 
+        // {
+        //     let db = openRequest.result;
+        //     let transaction = db.transaction("files", "readonly");
+        //     let files = transaction.objectStore("files");
+        //     let data = files.get("request_images");
+
+        //     data.onsuccess = () => 
+        //     {
+        //         console.log(data.result);
+        //     }
+
+        //     data.onerror = () => 
+        //     {
+        //         console.log("Error", data.error);
+        //     }
+        // }
+
+        if(isSuccess)
+        {
+            // setIsFormSubmitted(true);
+
+             //delete information from localstorage
+            // localStorage.removeItem("country");
+            // localStorage.removeItem("state");
+            // localStorage.removeItem("city");
+            // localStorage.removeItem("street_address");
+            // localStorage.removeItem("room_type");
+            // localStorage.removeItem("no_of_persons");
+            // localStorage.removeItem("no_of_current_roomies");
+            // localStorage.removeItem("amenities");
+            // localStorage.removeItem("rent_per_person");
+            // localStorage.removeItem("additional_cost");
+            // localStorage.removeItem("listing_title");
+            // localStorage.removeItem("additional_information");
+        }
+        
+        if(isError)
+        {
+            // removeImageFromIDB("request_images");
+            // console.log(APIdata);
+        }
+    }, [isSuccess, isError, APIdata])
+       
+    const handleInputChange = (name, value) => 
+    {
+        localStorage.setItem(name, value);
+    }
+
+    
+    const handleFileInputChange = (name, value) => 
+    {
+       saveToIDB("files", "files", {name, value});
+    }
+
     const inputs = 
     [
         {
             label: "Please add at least four pictures of different parts of your room e.g bedroom, kitchen, bathroom, balcony, etc. ",
-            inputName: "room_images",
+            inputName: "request_images",
             inputCategory: "inputFile",
             required: true,
-            value: localStorage.getItem("room_images")
+            value: requestImages
         },
         {
             label: "Add a suitable title for your room listing",
@@ -69,60 +216,6 @@ const RoomLook = () =>
 
     // const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-
-    const handleSubmit = (e) => 
-    {
-        e.preventDefault();     
-        setIsLoading(true);
-        const credentials = 
-        {
-            country: localStorage.getItem("country"),
-            state: localStorage.getItem("state"),
-            city: localStorage.getItem("city"),
-            street_address: localStorage.getItem("street_address"),
-            room_type: localStorage.getItem("room_type"),
-            no_of_persons: localStorage.getItem("no_of_persons"),
-            no_of_current_roomies: localStorage.getItem("no_of_current_roomies"),
-            amenities: convert_to_array(localStorage.getItem("amenities")),
-            rent_per_person: localStorage.getItem("rent_per_person"),
-            additional_cost: localStorage.getItem("additional_cost"),
-            listing_title: localStorage.getItem("listing_title"),
-            additional_information: localStorage.getItem("additional_information")
-        }   
-        sendPostRequest(credentials);
-    }
-
-    useEffect(() => 
-    {
-        if(isSuccess)
-        {
-            // setIsFormSubmitted(true);
-
-             //delete information from localstorage
-            localStorage.removeItem("country");
-            localStorage.removeItem("state");
-            localStorage.removeItem("city");
-            localStorage.removeItem("street_address");
-            localStorage.removeItem("room_type");
-            localStorage.removeItem("no_of_persons");
-            localStorage.removeItem("no_of_current_roomies");
-            localStorage.removeItem("amenities");
-            localStorage.removeItem("rent_per_person");
-            localStorage.removeItem("additional_cost");
-            localStorage.removeItem("listing_title");
-            localStorage.removeItem("additional_information");
-        }
-        
-        if(isError)
-        {
-            console.log(APIdata);
-        }
-    }, [isSuccess, isError, APIdata])
-       
-    const handleInputChange = (name, value) => 
-    {
-        localStorage.setItem(name, value);
-    }
     return ( 
         <>
             {isSuccess && (<Navigate to="/create-roommate-request-thankyou"/>)}
@@ -134,6 +227,7 @@ const RoomLook = () =>
                 handleSubmit = {handleSubmit}
                 description = "What does your room look like?"
                 handleInputChange={handleInputChange}
+                handleFileInputChange = {handleFileInputChange}
             />
         </>
         

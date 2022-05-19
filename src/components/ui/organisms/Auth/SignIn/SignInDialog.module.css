@@ -133,6 +133,7 @@
 
     .inputGroup label
     {
+        display: block;
         font-size: 16px;
     }
 
