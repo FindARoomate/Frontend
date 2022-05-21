@@ -25,7 +25,8 @@ import SingleConnectionReceived from './components/pages/SingleConnectionReceive
 import SingleConnectionSent from './components/pages/SingleConnectionSent/SingleConnectionSent';
 import InactiveRequests from './components/pages/InactiveRequests/InactiveRequests';
 import ActiveRequests from './components/pages/ActiveRequests/ActiveRequests';
-import SingleRequest from './components/pages/SingleRequest/SingleRequest';
+import SingleActiveRequest from './components/pages/SingleActiveRequest/SingleActiveRequest';
+import SingleInactiveRequest from './components/pages/SingleInactiveRequest/SingleInactiveRequest';
 
 
 function App() 
@@ -90,7 +91,8 @@ function App()
 
           <Route path='/connection-received/1' element={<SingleConnectionReceived/>}/>
           <Route path='/connection-sent/1' element={<SingleConnectionSent/>}/>
-          <Route path='/request/1' element={<SingleRequest/>}/>
+          <Route path='/inactive-request/:id' element={<SingleInactiveRequest/>}/>
+          <Route path='/active-request/:id' element={<SingleActiveRequest/>}/>
 
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />

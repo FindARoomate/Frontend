@@ -10,9 +10,14 @@ import dashboardStyles from './DashboardTemplate.module.css';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';
 import P from '../../ui/atoms/P/P';
+import useGet from '../../../customHooks/useGet';
+import { GET_PROFILE } from '../../routes';
 
 const DashboardTemplate = ({children}) => 
 {
+    const token = localStorage.getItem("accessToken");
+    const {isSuccess, isError, APIData} = useGet(GET_PROFILE, token);
+  
     const headerLinks = 
     [
         {
@@ -41,14 +46,18 @@ const DashboardTemplate = ({children}) =>
                 <div className={dashboardStyles.sidebarContainer}>
                 <div className={dashboardStyles.sidebar}>
                     <div className={dashboardStyles.image}>
-                        <Img src={dashboardImg}/>
+                            {APIData && 
+                                    <Img src={APIData.image_url}/>
+                            }
                         {/* <div className={dashboardStyles.overlay}></div> */}
                     </div>
                     <div className={dashboardStyles.links}>
                         <ul>
                             <li className= {currentPath == "/dashboard" ? dashboardStyles.active : ""} >
                                 <Link to="/dashboard">
-                                    <span className={dashboardStyles.icon}><Img src={overviewIcon}/></span>
+                                    <span className={dashboardStyles.icon}>
+                                        <Img src={overviewIcon}/>
+                                        </span>
                                     <span className={dashboardStyles.text}>Overview</span>
                                 </Link>
                             </li>
@@ -92,7 +101,7 @@ const DashboardTemplate = ({children}) =>
                         <div className={dashboardStyles.welcomeMessage}>
                             <Img src={dashboardImg}/>
                             <div>
-                                <P>Welcome back Precious</P>
+                                <P>Welcome back {APIData && APIData.fullname}</P>
                                 <P>Here is an overview of your activities</P>
                             </div>
                         </div>

@@ -38,34 +38,37 @@
  }
 
 
- export const getFromIDB = (db, tableName, key) => 
- {
-    let openRequest = indexedDB.open(db);
-
-    //if the database does not exist
-    openRequest.onupgradeneeded = () => 
+ export const removeImageFromIDB = (db, tableName, key) => 
     {
-        let db = openRequest.result;
-        db.createObjectStore(tableName);
-    }
+        
+        let openRequest = indexedDB.open(db);
 
-    openRequest.onsuccess = () => 
-    {
-        let db = openRequest.result;
-        let transaction = db.transaction(tableName, "readonly");
-        let files = transaction.objectStore(tableName);
-        let data = files.get(key);
-
-        data.onsuccess = () => 
+        openRequest.onupgradeneeded = () => 
         {
-            return data.result;
+            let db = openRequest.result;
+            db.createObjectStore(tableName);
         }
 
-        data.onerror = () => 
+        openRequest.onsuccess = () => 
         {
-            console.log("Error", data.error);
+            let db = openRequest.result;
+            let transaction = db.transaction(tableName, "readwrite");
+            let files = transaction.objectStore(tableName);
+            let data = files.delete(key);
+
+            data.onsuccess = () => 
+            {
+                console.log("File(s) deleted");
+            }
+
+            data.onerror = () => 
+            {
+                console.log("Error", data.error);
+            }
+        }
+
+        openRequest.onerror = () => 
+        {
+            console.log("Error", openRequest.error)
         }
     }
-
-    //on error
- }

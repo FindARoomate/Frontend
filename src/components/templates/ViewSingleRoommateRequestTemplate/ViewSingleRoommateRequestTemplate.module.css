@@ -47,8 +47,8 @@
 
 .imageGroup
 {
-    background-color: red;
-    height:250px;
+    /* background-color: red; */
+    /* height:250px; */
     width: 100%;
 }
 
@@ -194,10 +194,10 @@
         padding: 40px 100px;
     }
 
-    .imageGroup
+    /* .imageGroup
     {
         height: 345px;
-    }
+    } */
 
     .roomInformation h2
     {

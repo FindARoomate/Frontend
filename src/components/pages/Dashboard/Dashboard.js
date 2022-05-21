@@ -1,8 +1,12 @@
 import DashboardTemplate from "../../templates/DashboardTemplate/DashboardTemplate";
 
-const Dashboard = () => {
+
+const Dashboard = () => 
+{
+
     return ( 
-       <DashboardTemplate/>
+       <DashboardTemplate
+       />
      );
 }
  

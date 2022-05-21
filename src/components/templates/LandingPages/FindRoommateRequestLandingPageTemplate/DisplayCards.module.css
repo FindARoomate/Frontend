@@ -30,6 +30,35 @@
     text-align: center;
 }
 
+.pagination .paginationBtn:first-child
+{
+    margin-right: 9px;
+}
+
+.pagination .paginationBtn:last-child
+{
+    margin-left: 9px;
+}
+
+.paginationBtn 
+{
+    cursor: pointer;
+    padding: 1.2px 9.45px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.paginationBtn img
+{
+    height: 8.4px;
+    width: auto;
+}
+
+.paginationContent a
+{
+    margin: 0 3.5px;
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
@@ -56,6 +85,32 @@
         text-align: right;
         padding-top: 51px;
         padding-bottom: 0px;
+    }
+
+    .pagination .paginationBtn:first-child
+    {
+        margin-right: 15px;
+    }
+
+    .pagination .paginationBtn:last-child
+    {
+        margin-left: 15px;
+    }
+
+    .paginationBtn 
+    {
+        padding: 9.5px 16px;
+    }
+
+    .paginationBtn img
+    {
+        height: 14px;
+        width: auto;
+    }
+
+    .paginationContent a
+    {
+        margin: 0 7px;
     }
     
 }

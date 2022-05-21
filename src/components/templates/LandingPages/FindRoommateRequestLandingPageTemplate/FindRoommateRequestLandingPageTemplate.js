@@ -101,6 +101,7 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests = null, isErro
                     {(isSuccess && roommateRequests) && (
                         <DisplayCards 
                             data={roommateRequests.results} 
+                            count={roommateRequests.count}
                             pagination={false}
                         />)
                     }

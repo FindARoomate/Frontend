@@ -5,31 +5,32 @@ import { Link, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import usePost from "../../../../customHooks/usePost";
 import { CREATE_ROOMMATE_REQUEST } from "../../../routes";
-import { saveToIDB , getFromIDB} from "../../../../helperFunctions/indexDB";
+import { saveToIDB, removeImageFromIDB} from "../../../../helperFunctions/indexDB";
+import useGetFromIDB from "../../../../helperFunctions/useGetFromIDB";
 
 const RoomLook = () => 
 {
 
-    const [requestImages, setRequestImages] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const {IDBData: requestImages, getIDBData} = useGetFromIDB();
 
     const token = "Bearer " + localStorage.getItem("accessToken");
+   
     var myHeaders = new Headers();
     myHeaders.append("Authorization", token);
+    
     const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_ROOMMATE_REQUEST, myHeaders);
 
     const convert_to_array = (data) => 
     {
         const data_array = data.split(",");
-
         const new_array = [];
+
         data_array.forEach((value) => 
         {
-            if(value)
-            {
-                new_array.push(value);
-            }
-        })
+            if(value) new_array.push(value);
+
+        });
 
         return new_array;
     }
@@ -62,6 +63,7 @@ const RoomLook = () =>
             {
                 formData.append("request_images", requestImages[i]);
             }
+
             console.log("Button clicked");
             sendPostRequest(formData);
         }
@@ -69,101 +71,41 @@ const RoomLook = () =>
         
     }
 
-    const removeImageFromIDB = (name) => 
-    {
-        
-        let openRequest = indexedDB.open("files");
-
-        openRequest.onupgradeneeded = () => 
-        {
-            let db = openRequest.result;
-            db.createObjectStore("files");
-        }
-
-        openRequest.onsuccess = () => 
-        {
-            let db = openRequest.result;
-            let transaction = db.transaction("files", "readwrite");
-            let files = transaction.objectStore("files");
-            let data = files.delete(name);
-
-            data.onsuccess = () => 
-            {
-                console.log(data.result);
-                // setProfileImage(data.result);
-            }
-
-            data.onerror = () => 
-            {
-                console.log("Error", data.error);
-            }
-        }
-
-        openRequest.onerror = () => 
-        {
-            console.log("Error", openRequest.error)
-        }
-    }
-
+   
     useEffect(() => 
     {
 
-        getFromIDB("files", "files", "request_images");
+        getIDBData("files", "files", "request_images");
 
-        // console.log(data);
-        let openRequest = indexedDB.open("files");
-
-        //if the database does not exist
-        // openRequest.onupgradeneeded = () => 
-        // {
-        //     let db = openRequest.result;
-        //     db.createObjectStore("files");
-        // }
-
-        // openRequest.onsuccess = () => 
-        // {
-        //     let db = openRequest.result;
-        //     let transaction = db.transaction("files", "readonly");
-        //     let files = transaction.objectStore("files");
-        //     let data = files.get("request_images");
-
-        //     data.onsuccess = () => 
-        //     {
-        //         console.log(data.result);
-        //     }
-
-        //     data.onerror = () => 
-        //     {
-        //         console.log("Error", data.error);
-        //     }
-        // }
 
         if(isSuccess)
         {
-            // setIsFormSubmitted(true);
-
-             //delete information from localstorage
-            // localStorage.removeItem("country");
-            // localStorage.removeItem("state");
-            // localStorage.removeItem("city");
-            // localStorage.removeItem("street_address");
-            // localStorage.removeItem("room_type");
-            // localStorage.removeItem("no_of_persons");
-            // localStorage.removeItem("no_of_current_roomies");
-            // localStorage.removeItem("amenities");
-            // localStorage.removeItem("rent_per_person");
-            // localStorage.removeItem("additional_cost");
-            // localStorage.removeItem("listing_title");
-            // localStorage.removeItem("additional_information");
+            setIsLoading(false);
+            //delete information from localstorage
+            localStorage.removeItem("country");
+            localStorage.removeItem("state");
+            localStorage.removeItem("city");
+            localStorage.removeItem("street_address");
+            localStorage.removeItem("room_type");
+            localStorage.removeItem("no_of_persons");
+            localStorage.removeItem("no_of_current_roomies");
+            localStorage.removeItem("amenities");
+            localStorage.removeItem("rent_per_person");
+            localStorage.removeItem("additional_cost");
+            localStorage.removeItem("listing_title");
+            localStorage.removeItem("additional_information");
+            removeImageFromIDB("files", "files", "request_images"); // delete roommate request images from IndexedDB
         }
         
         if(isError)
         {
-            // removeImageFromIDB("request_images");
-            // console.log(APIdata);
+            setIsLoading(false);
+            console.log(APIdata);
         }
+
     }, [isSuccess, isError, APIdata])
        
+
     const handleInputChange = (name, value) => 
     {
         localStorage.setItem(name, value);
@@ -205,6 +147,7 @@ const RoomLook = () =>
 
     const prevButton = <Link to="/room-pricing"><Button>Previous</Button></Link>
     const nextButton = <Button>Publish Request</Button>
+    const loadingButton = <Button>Loading...</Button>
 
     const navClasses = 
     [
@@ -222,7 +165,7 @@ const RoomLook = () =>
             <CreateRoommateRequestTemplate
                 inputs = {inputs}
                 prevButton = {prevButton}
-                nextButton = {nextButton}
+                nextButton = {isLoading ? loadingButton : nextButton}
                 navClasses = {navClasses}
                 handleSubmit = {handleSubmit}
                 description = "What does your room look like?"
