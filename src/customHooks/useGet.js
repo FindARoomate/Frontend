@@ -37,7 +37,7 @@ const useGet = (url, token = null, dependencies = []) =>
     {
         fetchFunction(url, headersValue);
 
-    }, [...dependencies])
+    }, [url, headersValue])
 
     return {isError, isSuccess, APIData}
 }

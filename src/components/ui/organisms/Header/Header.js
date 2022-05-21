@@ -7,12 +7,15 @@ import {useState } from 'react';
 import Modal from '../Modal/Modal';
 import SignInDialog from '../Auth/SignIn/SignInDialog';
 import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
-import Button from '../../atoms/Button/Button';
+import Img from './../../atoms/Img/Img';
+import dp from './../../../../images/dashboard-image.png';
+import P from '../../atoms/P/P';
 
 const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
 
+
     //variable to check if there are any links available
-    var areLinksAvailable = signIn || createAccount || links || mobileLinks;
+    var areLinksAvailable = signIn || createAccount || links || mobileLinks || localStorage.getItem("accessToken");
 
     // Create Account Menu Dialog Box controls
     const [createAccountModalState, updateCreateAccountModalState] = useState(false);
@@ -68,6 +71,13 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
 
                 {signIn && <SignInButton  openSignInDialog={openSignInDialog}/>}
                 {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
+                <div className={styles.headerProfile}>
+                    <Img src={dp}/>
+                    <span>
+                        <P>Precious Faseyosan</P>
+                        <Link to="/profile">View profile</Link>
+                    </span>
+                </div>
             </div> 
 
             {/* Harmburger Icon */}
@@ -83,6 +93,14 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
             {/* Mobile Pop-up */}
             <div className={styles.mobileMenuModal}>
                 <Modal closeModal={closeMobileDialog} open={modalState} >
+
+                <div className={styles.headerProfile}>
+                    <Img src={dp}/>
+                    <span>
+                        <P>Precious Faseyosan</P>
+                        <Link to="/profile">View profile</Link>
+                    </span>
+                </div>
 
                     {mobileLinks &&
                     <div className={styles.mobileOnlyLinks}>

@@ -11,7 +11,7 @@ import P from "../../ui/atoms/P/P";
 const ActiveRequests = () => 
 {
     const token = localStorage.getItem("accessToken");
-    const {isSuccess, isError, APIData} = useGet(USER_ACTIVE_REQUESTS, token);
+    const {APIData} = useGet(USER_ACTIVE_REQUESTS, token);
 
     return ( 
         <DashboardTemplate>
@@ -22,7 +22,7 @@ const ActiveRequests = () =>
                 {!APIData && "Loading..."}
                 {APIData && 
                     (
-                        (APIData.length == 0) ?
+                        (APIData.length === 0) ?
                             <P>You have no active requests at this moment</P> 
                         :
                         APIData.map((request) => 

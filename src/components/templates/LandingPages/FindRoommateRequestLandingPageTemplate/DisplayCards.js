@@ -19,8 +19,8 @@ const DisplayCards = ({data, pagination, count}) =>
     let pageId = new URLSearchParams(search).get('page');
     if(!pageId) pageId = 1;
     const nextPageId = parseInt(pageId)+1;
-    const prevPaginationUrl = (pageId == 1) ? "" : ("?page="+(pageId-1));
-    const nextPaginationUrl = (pageId==numOfPaginationPages) ? `${"?page="+numOfPaginationPages}` : `${"?page="+nextPageId}`;
+    const prevPaginationUrl = (pageId === 1) ? "" : ("?page="+(pageId-1));
+    const nextPaginationUrl = (pageId===numOfPaginationPages) ? `${"?page="+numOfPaginationPages}` : `${"?page="+nextPageId}`;
 
     const paginationPagesArray = [];
    for(let i = 0; i< numOfPaginationPages-1; i++)

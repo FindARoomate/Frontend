@@ -3,7 +3,7 @@ import NotFound from './components/pages/NotFound/NotFound';
 import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import ComingSoon2 from './components/pages/ComingSoon2/ComingSoon2';
 import BioData from './components/pages/CreateProfile/BioData/BioData';
-import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import TellUsAboutYourself from './components/pages/CreateProfile/TellUsAboutYourself/TellUsAboutYourself';
 import DefineIdealRoommate from './components/pages/CreateProfile/DefineIdealRoommate/DefineIdealRoommate';
 import ViewAllRoommateRequests from './components/pages/ViewAllRoommateRequests/ViewAllRoommateRequests';
@@ -27,6 +27,7 @@ import InactiveRequests from './components/pages/InactiveRequests/InactiveReques
 import ActiveRequests from './components/pages/ActiveRequests/ActiveRequests';
 import SingleActiveRequest from './components/pages/SingleActiveRequest/SingleActiveRequest';
 import SingleInactiveRequest from './components/pages/SingleInactiveRequest/SingleInactiveRequest';
+import Profile from './components/pages/Profile/Profile';
 
 
 function App() 
@@ -93,6 +94,9 @@ function App()
           <Route path='/connection-sent/1' element={<SingleConnectionSent/>}/>
           <Route path='/inactive-request/:id' element={<SingleInactiveRequest/>}/>
           <Route path='/active-request/:id' element={<SingleActiveRequest/>}/>
+
+          {/* Profile */}
+          <Route path='/profile' element={<Profile/>}/>
 
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />

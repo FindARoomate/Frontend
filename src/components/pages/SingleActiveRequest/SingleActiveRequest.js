@@ -9,11 +9,9 @@ const SingleActiveRequest = () =>
    
     const token = "Bearer " + localStorage.getItem("accessToken");
     const myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", token);
 
-    const {isSuccess, isError, APIData, sendPatchRequest} = usePatch(myHeaders);
+    const {isSuccess,  APIData, sendPatchRequest} = usePatch(myHeaders);
 
 
     const deactivateRequest = (id) => 

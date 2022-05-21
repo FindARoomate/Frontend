@@ -10,7 +10,7 @@ import washingMachine from './../../../icons/washing-machine.svg';
 import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import displayPicture from './../../../images/view-single-roomate-display-picture.png';
-import ReactMapboxGl, { Marker, Layer, Feature } from 'react-mapbox-gl';
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import { Link } from 'react-router-dom';
@@ -38,7 +38,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         //a fix for error thrown when amenities is null
         amenities = (roommateRequest.amenities == null) ? [] : roommateRequest.amenities;
         
-        roommateRequest.request_images.map((image) => 
+        roommateRequest.request_images.forEach((image) => 
         {
             <div key={uuidv4()}>
                 {image_array.push({src: image.image_url, width: 1, height: 1})}
@@ -154,7 +154,7 @@ const headerLinks =
                                     <H2>Amenities</H2>
 
                                     <div className={styles.ammenities}>
-                                        {(amenities.length == 0) && <P>No ammenities available</P>}
+                                        {(amenities.length === 0) && <P>No ammenities available</P>}
                                         {(amenities.length > 0) && amenities.map((amenity) => 
                                         {
                                             return (

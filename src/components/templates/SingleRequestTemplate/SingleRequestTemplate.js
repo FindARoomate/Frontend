@@ -34,7 +34,7 @@ const SingleRequest = ({btnText, handleButtonOnClick}) =>
 
     const token = localStorage.getItem("accessToken");
     const url = GET_SINGLE_ROOMMATE_REQUEST + id + '/'; 
-    const {isSuccess, isError, APIData} = useGet(url, token);
+    const {APIData} = useGet(url, token);
 
     const handleOnClick = () => 
     {
