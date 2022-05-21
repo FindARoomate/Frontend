@@ -9,15 +9,10 @@ import SignInDialog from '../Auth/SignIn/SignInDialog';
 import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
 import Button from '../../atoms/Button/Button';
 
-const Header = ({customStyle, signIn, createAccount, links}) => {
+const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
 
     //variable to check if there are any links available
-    var areLinksAvailable = false;
-    if(signIn) areLinksAvailable = true;
-    if(createAccount) areLinksAvailable = true;
-    if(links) areLinksAvailable = true;
-
-
+    var areLinksAvailable = signIn || createAccount || links || mobileLinks;
 
     // Create Account Menu Dialog Box controls
     const [createAccountModalState, updateCreateAccountModalState] = useState(false);
@@ -88,6 +83,17 @@ const Header = ({customStyle, signIn, createAccount, links}) => {
             {/* Mobile Pop-up */}
             <div className={styles.mobileMenuModal}>
                 <Modal closeModal={closeMobileDialog} open={modalState} >
+
+                    {mobileLinks &&
+                    <div className={styles.mobileOnlyLinks}>
+                        {mobileLinks.map((link) => {
+                        return (
+                            <Link onClick={closeMobileDialog} key={link.id} to={link.path}>{link.text}</Link>
+                        )
+                        })}
+                    </div>
+                    }
+
                     {links && links.map((link) => {
                         return (
                             <Link onClick={closeMobileDialog} key={link.id} to={link.path}>{link.text}</Link>

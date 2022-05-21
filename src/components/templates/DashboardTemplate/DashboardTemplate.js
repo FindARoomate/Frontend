@@ -4,8 +4,9 @@ import inactiveRequest from './../../../icons/inactive-request.svg';
 import connectionSent from './../../../icons/connection-sent.svg';
 import activeRequest from './../../../icons/active-request.svg';
 import dashboardImg from './../../../images/dashboard-image.png';
+import logoutIcon from './../../../icons/logout-icon.svg';
 import overviewIcon from './../../../icons/overview-icon.svg';
-import Header from '../../ui/organisms/Header/Header old';
+import Header from '../../ui/organisms/Header/Header';
 import dashboardStyles from './DashboardTemplate.module.css';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';
@@ -18,6 +19,19 @@ const DashboardTemplate = ({children}) =>
     const token = localStorage.getItem("accessToken");
     const {isSuccess, isError, APIData} = useGet(GET_PROFILE, token);
   
+    const imgLinkStyle = 
+    {
+        height: "14px",
+        width: "auto",
+        marginRight: "8.5px"
+    }
+
+    const logoutLinkStyle = 
+    {
+        color: "#0029DD",
+        textDecoration: "underline",
+    }
+
     const headerLinks = 
     [
         {
@@ -29,6 +43,40 @@ const DashboardTemplate = ({children}) =>
             id: 2,
             text: "Create request",
             path: '/create-request'
+        },
+        {
+            id: 3,
+            text: <><Img customStyle={imgLinkStyle} src={logoutIcon}/><span style={logoutLinkStyle}>Logout</span></>,
+            path: '/dashboard'
+        },
+
+    ]
+    const mobileLinks = 
+    [
+        {
+            id: 1,
+            text: <><Img customStyle={imgLinkStyle} src={overviewIcon}/>Overview</>,
+            path: '/dashboard'
+        },
+        {
+            id: 2,
+            text: <><Img customStyle={imgLinkStyle} src={connectionSent}/>Connection Sent</>,
+            path: '/connection-sent'
+        },
+        {
+            id: 3,
+            text: <><Img customStyle={imgLinkStyle} src={connectionReceived}/>Connection Received</>,
+            path: '/connection-received'
+        },
+        {
+            id: 4,
+            text: <><Img customStyle={imgLinkStyle} src={activeRequest}/>Active Request</>,
+            path: '/active-requests'
+        },
+        {
+            id: 5,
+            text: <><Img customStyle={imgLinkStyle} src={inactiveRequest}/>Inactive Request</>,
+            path: '/inactive-requests'
         }
     ]
 
@@ -37,6 +85,7 @@ const DashboardTemplate = ({children}) =>
     return (  
     <div className={dashboardStyles.viewMoreRequests}>
         <Header
+            mobileLinks={mobileLinks}
             links = {headerLinks}
             customStyle={{backgroundColor: '#F5F7FF',position:'fixed'}}
         />
@@ -88,7 +137,7 @@ const DashboardTemplate = ({children}) =>
                         </ul>
                         <div className={dashboardStyles.logout}>
                             <Link to="/">
-                                <span className={dashboardStyles.icon}><Img src={overviewIcon}/></span>
+                                <span className={dashboardStyles.icon}><Img src={logoutIcon}/></span>
                                 <span className={dashboardStyles.text}>Logout</span>
                             </Link>
                             

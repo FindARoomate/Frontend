@@ -30,6 +30,17 @@
   display: none;
 }
 
+.mobileOnlyLinks
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 0.5px solid rgba(125, 125, 125, 0.45);
+  border-bottom: 0.5px solid rgba(125, 125, 125, 0.45);
+  width: 100%;;
+}
+
 .mobileNav
 {
   display: flex;
