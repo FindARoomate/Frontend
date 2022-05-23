@@ -8,7 +8,7 @@ import styles from "./SignInDialog.module.css";
 import Input from "../../../atoms/Input/Input";
 import Label from "../../../atoms/Label/Label";
 import { LOGIN } from "../../../../routes";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import Img from "../../../atoms/Img/Img";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
@@ -69,7 +69,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
               {isError && <ErrorAlert message= {APIdata.detail}/>}
               <div className={styles.inputGroup}>
                 <Label>Email</Label>
-                <Input type="text" placeholder="Enter your email address" />
+                <Input type="text" placeholder="Enter your email address"/>
               </div>
               <div className={styles.inputGroup}>
                 <Label>Password</Label>
@@ -97,4 +97,4 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
   );
 };
 
-export default SignInDialog;
+export default memo(SignInDialog);

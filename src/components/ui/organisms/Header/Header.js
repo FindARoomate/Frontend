@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styles from './Header.module.css';
 import SignInButton from '../Auth/SignIn/SignInButton';
 import CreateAccountButton from '../Auth/CreateAccount/CreateAccountButton';
-import {useState } from 'react';
+import {useState, memo } from 'react';
 import Modal from '../Modal/Modal';
 import SignInDialog from '../Auth/SignIn/SignInDialog';
 import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
@@ -146,4 +146,4 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
      );
 }
  
-export default Header;
+export default memo(Header);

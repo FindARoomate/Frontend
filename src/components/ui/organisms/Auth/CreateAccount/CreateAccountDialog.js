@@ -10,7 +10,7 @@ import Button from "../../../atoms/Button/Button";
 import Input from '../../../atoms/Input/Input';
 import Label from '../../../atoms/Label/Label';
 import H3 from "../../../atoms/Headings/H3/H3";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import Img from '../../../atoms/Img/Img';
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
@@ -90,4 +90,4 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
      );
 }
  
-export default CreateAccountDialog;
+export default memo(CreateAccountDialog);
