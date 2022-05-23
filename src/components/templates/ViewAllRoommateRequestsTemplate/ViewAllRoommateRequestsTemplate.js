@@ -10,6 +10,11 @@ import P from '../../ui/atoms/P/P';
 
 const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, roommateRequests = null}) => 
 {
+    const handleOnBlur = (e) => 
+    {
+        console.log(e.target.value);
+    }
+
     const headerLinks = 
     [
         {
@@ -36,7 +41,10 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, room
 
                 <H2>Explore</H2>
                 <div className={styles.searchBar}>
-                    <SearchBar placeholder="Search by location"/>
+                    <SearchBar 
+                        placeholder="Search by location"
+                        handleOnBlur={handleOnBlur}
+                        />
                     <ExploreSearch/>
                 </div>
 

@@ -1,9 +1,9 @@
 /* Mobile menu information */
 .modal
 {
-  top:10vw;
   width: 90vw;
   margin: 0 auto;
+  margin-top: 10vw;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 20px 0.5px rgba(125, 125, 125, 0.45);
@@ -12,9 +12,44 @@
   animation: slide-up .5s forwards, fade-in 500ms forwards;
 }
 
+.closeIcon
+{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  float:right;
+  cursor: pointer;
+  border-radius: 4px;
+  background: rgba(125, 125, 125, 0.15);
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+}
+
+.closeIcon::before, .closeIcon::after
+{
+  position: absolute;
+  content: "";
+  width: 18px;
+  height: 1.5px;
+  background: #7D7D7D;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+}
+
+.closeIcon::before
+{
+  transform: rotate(45deg) translate(-1px, 6px);
+}
+
+.closeIcon::after
+{
+  transform: rotate(-45deg) translate(-6px, -1px);
+}
+
 .modalChildren
 {
-   display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -37,36 +72,6 @@
 }
 
 
-.closeIcon
-{
-  float:right;
-  cursor: pointer;
-  background: red;
-  width: 30px;
-  height: 30px;
-}
-
-.closeIcon::before, .closeIcon::after
-{
-  position: absolute;
-  content: "";
-  width: 23px;
-  height: 1.5px;
-  background: #7D7D7D;
-  border-radius: 25px;
-  transition: all .5s ease-in-out;
-}
-
-.closeIcon::before
-{
-  transform: rotate(45deg) translate(-6px, 4px);
-}
-
-.closeIcon::after
-{
-  transform: rotate(-45deg) translate(-4px, -6px);
-}
-
 @keyframes slide-up {
     0% {
       transform: translateY(100%);
@@ -88,9 +93,35 @@
     border: 0;
     animation: slide-up .5s forwards, fade-in 500ms forwards;
   }
+
   .modal
   {
     width: 40vw;
     padding: 50px 85px;
   }
+
+  .closeIcon
+  {
+    top: 29px;
+    right: 37px;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+  }
+
+  .closeIcon::before, .closeIcon::after
+  {
+    width: 23px;
+    height: 1.5px;
+  }
+    .closeIcon::before
+    {
+      transform: rotate(45deg) translate(12px, 8px);
+    }
+
+  .closeIcon::after
+  {
+    transform: rotate(-45deg) translate(-8px, 12px);
+  }
+
 }

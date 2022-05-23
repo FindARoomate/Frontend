@@ -10,7 +10,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "./sliderStyles.css";
 
 
 // import required modules
@@ -44,7 +43,7 @@ const imgCustomStyle =
                             return (
                             <SwiperSlide key={uuidv4()}>
                                 <Img 
-                                    src={imageLink}
+                                    src={imageLink.image_url}
                                     customStyle = {imgCustomStyle}
                                 />
                             </SwiperSlide>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useGet = (url, token = null, dependencies = []) => 
+const useGet = (url, token = null) => 
 {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -37,7 +37,7 @@ const useGet = (url, token = null, dependencies = []) =>
     {
         fetchFunction(url, headersValue);
 
-    }, [...dependencies])
+    }, [url, headersValue])
 
     return {isError, isSuccess, APIData}
 }

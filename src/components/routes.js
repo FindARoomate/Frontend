@@ -16,3 +16,14 @@ export const GET_ALL_ROOMMATE_REQUESTS = API_URL + '/request/get/';
 export const GET_SINGLE_ROOMMATE_REQUEST = API_URL + '/request/get/';
 
 export const CREATE_ROOMMATE_REQUEST = API_URL + '/request/create/';
+
+export const USER_INACTIVE_REQUESTS = API_URL + '/request/users/inactive/';
+
+export const USER_ACTIVE_REQUESTS = API_URL + '/request/users/active/';
+
+export const ACTIVATE_ROOMMATE_REQUEST = API_URL + '/request/activate/';
+
+export const DEACTIVATE_ROOMMATE_REQUEST = API_URL + '/request/deactivate/';
+
+// Profile
+export const GET_PROFILE = API_URL + '/profile/get/';

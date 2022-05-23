@@ -1,7 +1,13 @@
-.backNavigation a
+.backNavigation
+{
+    cursor: pointer;
+}
+
+.backNavigation
  {
      display: flex;
      align-items: center;
+     width: max-content;
  }
  
  .backNavigation img 
@@ -77,11 +83,19 @@
 
  .imageContainer
  {
-     background-color: red;
      border-radius: 8px;
-     height: 208px;
-     width: 100%;
+     height: 100%;
+     max-height: 208px;
+     width: auto; 
      margin: 24px 0;
+ } 
+
+.imageContainer img
+ {
+     border-radius: 8px;
+     width: auto;
+     height: 100%;
+     max-height: 208px;
  }
 
 
@@ -225,8 +239,9 @@
 
     .imageContainer
     {
-        height: 345px;
-        width: 100%;
+        width: auto;
+        height: 100%;
+        max-height: 345px;
         margin-top: 13px;
         margin-bottom: 41px;
     }

@@ -9,21 +9,33 @@ import H3 from '../../../ui/atoms/Headings/H3/H3';
 import P from '../../../ui/atoms/P/P';
 import Button from '../../../ui/atoms/Button/Button';
 import SignInDialog from '../../../ui/organisms/Auth/SignIn/SignInDialog';
+import CreateAccountDialog from '../../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
 import { useState } from 'react';
 const MakeRoommateRequestLandingPage = () => 
 {
+    // For sign in modal
     const [signInModalState, setSignInModalState] = useState(false);
+    const showSignInDialog = () => setSignInModalState(true);
+    const closeSignInModal = () => setSignInModalState(false);
 
-    const showSignInDialog = () => 
+
+    //For create account modal
+    const [createAccountModalState, setCreateAccountModalState] = useState(false);
+    const showCreateAccountDialog = () => setCreateAccountModalState(true);
+    const closeCreateAccountModal = () => setCreateAccountModalState(false);
+
+
+    const openSignInModal = () => 
     {
-        setSignInModalState(true);
+        closeCreateAccountModal();
+        showSignInDialog();
     }
 
-    const closeSignInModal = () => 
+    const openCreateAccountModal = () => 
     {
-        setSignInModalState(false);
+        closeSignInModal();
+        showCreateAccountDialog();
     }
-
 
     //For how it works section
     var customStyle = {alignItems: "center"}
@@ -65,17 +77,41 @@ const MakeRoommateRequestLandingPage = () =>
     const acceptConnection = {heading, description, button, img, order, customStyle}
     
 
+    // CTA Section
+    var heading = <H3 >Getting an ideal roommate doesn't have to be stressful.<br></br>Allow <span style={{color: "#0029DD"}}>GetARoommate.co</span> do the work for you!</H3>
+    var button = <Button handleOnClick={showSignInDialog} customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>Get Started</Button>     
+    var customStyle = 
+    {
+        padding: "53px 11.5%",
+        backgroundColor: "#F5F7FF",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+    }
+    const cta = {heading, button, customStyle}
+
+
 
     return ( 
         <div className={styles.landingPage}>
             
-            {/* <SignInDialog open={signInModalState} closeModal={closeSignInModal}/> */}
+            <SignInDialog 
+                open={signInModalState} 
+                closeModal={closeSignInModal}
+                openCreateAccountModal={openCreateAccountModal}
+                />
+            <CreateAccountDialog 
+                open={createAccountModalState}
+                closeModal={closeCreateAccountModal}
+                openSignInModal={openSignInModal}
+                />
 
             <MakeRoommateRequestLandingPageTemplate
                 heroSection={heroSection}
                 createProfile={createProfile}
                 makeRoommateRequest={makeRoommateRequest}
                 acceptConnection={acceptConnection}
+                cta = {cta}
             />
         </div>
 

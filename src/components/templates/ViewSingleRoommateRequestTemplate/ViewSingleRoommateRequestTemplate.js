@@ -10,12 +10,15 @@ import washingMachine from './../../../icons/washing-machine.svg';
 import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import displayPicture from './../../../images/view-single-roomate-display-picture.png';
-import ReactMapboxGl, { Marker, Layer, Feature } from 'react-mapbox-gl';
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import marker from './../../../icons/marker.png';
+import Gallery from "react-photo-gallery";
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+import { useState } from 'react';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -23,6 +26,28 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) => 
 {
+
+    let [photoIndex, setPhotoIndex] = useState(0);
+    let [isOpen, setIsOpen] = useState(false);
+
+    let amenities;
+    let image_array = [];
+
+    if (roommateRequest)
+    {
+        //a fix for error thrown when amenities is null
+        amenities = (roommateRequest.amenities == null) ? [] : roommateRequest.amenities;
+        
+        roommateRequest.request_images.forEach((image) => 
+        {
+            <div key={uuidv4()}>
+                {image_array.push({src: image.image_url, width: 1, height: 1})}
+            </div>
+        });
+    }
+
+
+
 
 const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'});
   
@@ -58,7 +83,29 @@ const headerLinks =
 
             <div className={styles.imageContainer}>
                 <div className={styles.imageGroup}>
+                    {roommateRequest ? <Gallery photos={image_array} onClick={() => setIsOpen(true)}/> : ""}
+                    {isOpen && (
+                        <Lightbox
+                            mainSrc={image_array[photoIndex].src}
+                            nextSrc={image_array[(photoIndex + 1) % image_array.length].src}
+                            prevSrc={image_array[(photoIndex + image_array.length - 1) % image_array.length].src}
+                            onCloseRequest={() => setIsOpen(false)}
+                            onMovePrevRequest={() =>
+                                setPhotoIndex((photoIndex) => 
+                                {
+                                    return (photoIndex + image_array.length - 1) % image_array.length;
 
+                                })
+                            }
+                            onMoveNextRequest={() =>
+                                setPhotoIndex((photoIndex) => 
+                                {
+                                    return (photoIndex + 1) % image_array.length;
+                                })
+                            }
+                        />
+                        )
+                    }
                 </div>
             </div>
 
@@ -89,7 +136,7 @@ const headerLinks =
 
                                     <div className={styles.singleRoomInformation}>
                                         <H3>Availability</H3>
-                                        <P>{roommateRequest.availability}</P>
+                                        <P>{roommateRequest.date_to_move}</P>
                                     </div>
 
                                     <div className={styles.singleRoomInformation}>
@@ -107,7 +154,8 @@ const headerLinks =
                                     <H2>Amenities</H2>
 
                                     <div className={styles.ammenities}>
-                                        {roommateRequest.amenities.map((amenity) => 
+                                        {(amenities.length === 0) && <P>No ammenities available</P>}
+                                        {(amenities.length > 0) && amenities.map((amenity) => 
                                         {
                                             return (
                                                 <div key = {uuidv4()} className={styles.singleAmmenity}>

@@ -1,0 +1,119 @@
+
+.backNavigation
+{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+
+.backNavigation img 
+{
+    height: 14px;
+    width: auto;
+}
+
+.backNavigation span
+{
+    font-size: 14px;
+    color: #000E4A;
+    margin-left: 8px;
+}
+
+.profileInfoContainer .profileInfoRow
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 0px;
+}
+
+.profileImageRow
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.profileImageContainer
+{
+    position: relative;
+}
+
+.profileImage img
+{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+
+.addProfileImageIcon
+{
+    bottom: 2px;
+    right: 6px;
+    position: absolute;
+}
+.addProfileImageIcon img 
+{
+    cursor: pointer;
+    width: 15.5px;
+    height: 15.5px;
+}
+
+.profileInfo .label
+{
+    display: block;
+    font-size: 12px;
+    color: #7D7D7D;
+}
+
+.profileInfo .value
+{
+    font-size: 14px;
+    font-weight: 600;
+    color: #000E4A;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+    .backNavigation img 
+    {
+        height: 20px;
+        width: auto;
+    }
+
+    .backNavigation span
+    {
+        font-size: 20px;
+        margin-left: 16px;
+    }
+
+    .addProfileImageIcon img 
+    {
+        width: 47px;
+        height: 47px;
+    }
+    
+    .addProfileImageIcon
+    {
+        bottom: 3px;
+        right: 10px;
+    }
+
+    .profileImage img
+    {
+        width: 208px;
+        height: 208px;
+    }
+
+    .profileInfo .label
+    {
+        font-size: 20px;
+    }
+
+    .profileInfo .value
+    {
+        font-size: 24px;
+    }
+}

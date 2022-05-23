@@ -59,7 +59,7 @@ const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, requir
                     name={name}
                     id={name}
                     onChange={handleOnChange}
-                    // required={isInputRequired}
+                    required={isInputRequired}
                     multiple={multiple}
                     {...rest}
                 />

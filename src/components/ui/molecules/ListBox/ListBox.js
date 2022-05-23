@@ -4,7 +4,7 @@ import P from '../../atoms/P/P';
 import forwardIcon from "../../../../icons/forward-icon.svg";
 import { Link } from 'react-router-dom';
 
-const ListBox = ({dp, name, description, tag, link=""}) =>
+const ListBox = ({dp, name, description, tag="", link=""}) =>
 {
     return ( 
         <Link to={link}>
