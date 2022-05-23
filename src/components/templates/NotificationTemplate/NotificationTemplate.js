@@ -2,7 +2,7 @@ import NotificationListItem from "../../ui/molecules/NotificationListItem/Notifi
 import DashboardTemplate from "../DashboardTemplate/DashboardTemplate";
 import dp from './../../../images/card-display-picture.jpg';
 import styles from './NotificationTemplate.module.css';
-npm
+
 const NotificationTemplate = () => {
     return ( 
         <DashboardTemplate

@@ -192,7 +192,7 @@ const DefineIdealRoommate = () =>
             formData.append("personality", localStorage.getItem("personality").toUpperCase());
             formData.append("profession", localStorage.getItem("profession"));
             formData.append("bio", localStorage.getItem("bio"));
-            formData.append("age", 14);
+            formData.append("age_range", localStorage.getItem("age_range"));
             formData.append("roomie_gender", localStorage.getItem("roomie_gender").toUpperCase());
             formData.append("roomie_religion", localStorage.getItem("roomie_religion").toUpperCase());
             formData.append("roomie_age", 13);

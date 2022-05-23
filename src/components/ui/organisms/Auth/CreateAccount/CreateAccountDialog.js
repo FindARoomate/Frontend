@@ -1,5 +1,6 @@
 import SuccessAlert from '../../../molecules/Alerts/SuccessAlert/SuccessAlert';
 import ErrorAlert from '../../../molecules/Alerts/ErrorAlert/ErrorAlert';
+import PasswordInput from './../../../atoms/Input/PasswordInput';
 import googleIcon from '../../../../../icons/google-icon.svg';
 import usePost from '../../../../../customHooks/usePost';
 import CreateAccountErrors from './CreateAccountErrors';
@@ -19,11 +20,7 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
 
     const placeholderFunction = () => {}
     const [isLoading, setIsLoading] = useState(false);
-    const headers =
-    {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    }
+    const headers = new Headers();
     const {isSuccess, APIdata, isError, sendPostRequest} = usePost(CREATE_ACCOUNT, headers)
 
     const handleSignUp = (e) => 
@@ -31,11 +28,13 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
         e.preventDefault();
         setIsLoading(true);
         //trigger create account request to backend
-        sendPostRequest({
-            email: e.target[0].value,
-            password: e.target[1].value,
-            confirm_password: e.target[2].value        
-        });        
+
+        const formData = new FormData();
+        formData.append("email", e.target[0].value);
+        formData.append("password", e.target[1].value);
+        formData.append("confirm_password", e.target[2].value);
+
+        sendPostRequest(formData);        
     }
 
     useEffect(() => 
@@ -71,11 +70,11 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
                     </div>
                     <div className={styles.inputGroup}>
                         <Label>Password</Label>
-                        <Input type="text" placeholder="Enter your password"/>
+                        <PasswordInput placeholder="Enter your password" />
                     </div>
                     <div className={styles.inputGroup}>
                         <Label>Confirm Password</Label>
-                        <Input type="text" placeholder="Enter your password again"/>
+                        <PasswordInput placeholder="Enter your password again" />
                     </div>
                 <Button handleOnClick={placeholderFunction}>{isLoading ? "Loading..." : "Sign Up"}</Button>
                 </form>

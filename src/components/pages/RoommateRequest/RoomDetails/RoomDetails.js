@@ -80,7 +80,7 @@ const RoomDetails = () =>
                 {key: 6, label: "Cooker", value: "Cooker"},
                 {key: 7, label: "Reading table & chair", value: "Reading table & chair"},
                 {key: 8, label: "Basketball court", value: "Basketball court"},
-                {key: 9, label: "Refrigirator", value: "Refrigirator"},
+                {key: 9, label: "Refrigerator", value: "Refrigerator"},
                 {key: 10, label: "Air Condition", value: "Air Condition"},
                 {key: 11, label: "Home theatre", value: "Home theatre"},
                 {key: 12, label: "Gym", value: "Gym"},

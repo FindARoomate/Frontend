@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import Img from "../../../atoms/Img/Img";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
+import PasswordInput from "../../../atoms/Input/PasswordInput";
 
 const SignInDialog = ({ open, closeModal, openCreateAccountModal}) => 
 {
@@ -72,7 +73,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
               </div>
               <div className={styles.inputGroup}>
                 <Label>Password</Label>
-                <Input type="text" placeholder="Enter your password" />
+                <PasswordInput placeholder="Enter your password" />
               </div>
               <Button>{isLoading ? "Loading..." : "Sign In"}</Button>
               <div className={styles.divider}>

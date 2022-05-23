@@ -78,7 +78,7 @@ const MakeRoommateRequestLandingPage = () =>
     
 
     // CTA Section
-    var heading = <H3 >Getting an ideal roommate doesn't have to be stressful.<br></br>Allow <span style={{color: "#0029DD"}}>Findaroommate.com</span> do the work for you!</H3>
+    var heading = <H3 >Getting an ideal roommate doesn't have to be stressful.<br></br>Allow <span style={{color: "#0029DD"}}>GetARoommate.co</span> do the work for you!</H3>
     var button = <Button handleOnClick={showSignInDialog} customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>Get Started</Button>     
     var customStyle = 
     {

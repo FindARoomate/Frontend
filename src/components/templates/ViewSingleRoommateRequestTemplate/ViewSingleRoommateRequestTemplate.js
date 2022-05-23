@@ -136,7 +136,7 @@ const headerLinks =
 
                                     <div className={styles.singleRoomInformation}>
                                         <H3>Availability</H3>
-                                        <P>{roommateRequest.availability}</P>
+                                        <P>{roommateRequest.date_to_move}</P>
                                     </div>
 
                                     <div className={styles.singleRoomInformation}>
