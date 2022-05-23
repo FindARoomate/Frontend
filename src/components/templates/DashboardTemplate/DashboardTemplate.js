@@ -14,10 +14,17 @@ import P from '../../ui/atoms/P/P';
 import useGet from '../../../customHooks/useGet';
 import { GET_PROFILE } from '../../routes';
 
-const DashboardTemplate = ({children}) => 
+const DashboardTemplate = ({
+        children,
+        showStatistics=true,
+        title = "Welcome back",
+        description = "Here is an overview of your activities"
+    }) => 
 {
     const token = localStorage.getItem("accessToken");
     const {APIData} = useGet(GET_PROFILE, token);
+
+    if(APIData && title == "Welcome back") title = "Welcome back " + APIData.fullname;
   
     const imgLinkStyle = 
     {
@@ -150,14 +157,15 @@ const DashboardTemplate = ({children}) =>
                         <div className={dashboardStyles.welcomeMessage}>
                             <Img src={dashboardImg}/>
                             <div>
-                                <P>Welcome back {APIData && APIData.fullname}</P>
-                                <P>Here is an overview of your activities</P>
+                                <P>{title}</P>
+                                <P>{description}</P>
                             </div>
                         </div>
                         <div className={dashboardStyles.notification}></div>
                     </div>
 
                     <div className={dashboardStyles.contentBody}>
+                        {showStatistics && (
                         <div className={dashboardStyles.dashboardCards}>
                             <Link to="/connection-sent">
                                 <div className={`${dashboardStyles.card} ${currentPath === "/connection-sent" ? dashboardStyles.active : ""}`}>
@@ -200,6 +208,7 @@ const DashboardTemplate = ({children}) =>
                             </Link>
 
                         </div>
+                        )}
                     </div>
                     <div className={dashboardStyles.content}>
                         {children}

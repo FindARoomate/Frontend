@@ -6,6 +6,11 @@
     justify-content: center;
 }
 
+.searchButton form 
+{
+    width: 100%;
+}
+
 .searchButton input
 {
     padding: 16px;

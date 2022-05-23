@@ -28,6 +28,7 @@ import ActiveRequests from './components/pages/ActiveRequests/ActiveRequests';
 import SingleActiveRequest from './components/pages/SingleActiveRequest/SingleActiveRequest';
 import SingleInactiveRequest from './components/pages/SingleInactiveRequest/SingleInactiveRequest';
 import Profile from './components/pages/Profile/Profile';
+import Notification from './components/pages/Notification/Notification';
 
 
 function App() 
@@ -97,6 +98,9 @@ function App()
 
           {/* Profile */}
           <Route path='/profile' element={<Profile/>}/>
+
+          {/* Notification */}
+          <Route path='/notifications' element={<Notification/>}/>
 
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />

@@ -14,7 +14,7 @@ const ViewAllRoommateRequests = () =>
     
     const [url, setURL] = useState(GET_ALL_ROOMMATE_REQUESTS);
 
-    const {isError, isSuccess, APIData} = useGet(url, null,[url])
+    const {isError, isSuccess, APIData} = useGet(url);
 
     useEffect(() => 
     {
