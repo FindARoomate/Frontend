@@ -41,6 +41,8 @@
  export const getFromIDB = (db, tableName, key) => 
  {
     let openRequest = indexedDB.open(db);
+    let result;
+    
 
     //if the database does not exist
     openRequest.onupgradeneeded = () => 
@@ -58,14 +60,18 @@
 
         data.onsuccess = () => 
         {
-            return data.result;
+            result = data?.result
+            console.log(result)
         }
 
         data.onerror = () => 
         {
             console.log("Error", data.error);
         }
+        
+        console.log(result)
     }
+    console.log(result)
 
     //on error
  }

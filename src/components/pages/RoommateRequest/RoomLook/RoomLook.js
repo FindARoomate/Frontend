@@ -108,7 +108,7 @@ const RoomLook = () =>
     useEffect(() => 
     {
 
-        getFromIDB("files", "files", "request_images");
+        console.log(getFromIDB("files", "files", "request_images"))
 
         // console.log(data);
         let openRequest = indexedDB.open("files");
