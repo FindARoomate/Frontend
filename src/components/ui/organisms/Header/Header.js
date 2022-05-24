@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styles from './Header.module.css';
 import SignInButton from '../Auth/SignIn/SignInButton';
 import CreateAccountButton from '../Auth/CreateAccount/CreateAccountButton';
-import {useState, memo } from 'react';
+import {useState, useEffect, memo } from 'react';
 import Modal from '../Modal/Modal';
 import SignInDialog from '../Auth/SignIn/SignInDialog';
 import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
@@ -11,7 +11,7 @@ import Img from './../../atoms/Img/Img';
 import dp from './../../../../images/dashboard-image.png';
 import P from '../../atoms/P/P';
 
-const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
+const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activePage}) => {
 
 
     //variable to check if there are any links available
@@ -48,102 +48,144 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
     const [modalState, updateModalState] = useState(false);
     const openMobileDialog  = () =>  updateModalState(true);//open menu dialog
     const closeMobileDialog = () => updateModalState(false);//close menu dialog
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [screenWidth, setScreenWidth] = useState(0);
+    let headerStyles;
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      const width = window.innerWidth;
+      setScrollPosition(position);
+      setScreenWidth(width);
+    };
+    useEffect(() => {
+      window.addEventListener("scroll", handleScroll);
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+    console.log(scrollPosition, screenWidth)
+    if (scrollPosition >= 386) {
+        headerStyles = "headerStyles"
+    }
     
+    
+    console.log(headerStyles)
+    return (
+      <div className={styles.headerContainer}>
+        <header
+          className={[styles.header, styles[headerStyles]].join(" ")}
+          style={{background: "fff"}}
+        >
+          <div className={styles.logo}>
+            <Link to="/">
+              <img src={logo} alt="logo" className="logo" />
+            </Link>
+          </div>
 
-    return ( 
-        <div className={styles.headerContainer}>
+          {/* Desktop Nav Bar */}
+          <div className={styles.desktopNav}>
+            {/* Get all links */}
+            {links &&
+              links.map((link) => {
+                return (
+                  <Link key={link.id} to={link.path}>
+                    {link.text}
+                  </Link>
+                );
+              })}
 
-        <header className={styles.header} style ={customStyle ? customStyle : {}}>
-            <div className={styles.logo}>
-                <Link to="/">
-                    <img src={logo} alt="logo" className="logo"/>
-                </Link>
-            </div>
-
-            {/* Desktop Nav Bar */}
-            <div className={styles.desktopNav}>
-                {/* Get all links */}
-                {links && links.map((link) => {
-                    return (
-                        <Link key={link.id} to={link.path}>{link.text}</Link>
-                    )
-                })}
-
-                {signIn && <SignInButton  openSignInDialog={openSignInDialog}/>}
-                {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
-                <div className={styles.headerProfile}>
-                    <Img src={dp}/>
-                    <span>
-                        <P>Precious Faseyosan</P>
-                        <Link to="/profile">View profile</Link>
-                    </span>
-                </div>
-            </div> 
-
-            {/* Harmburger Icon */}
-            {areLinksAvailable && (
-                <div onClick={openMobileDialog} className={styles.mobileNav} >
-                    <div className={styles.hamburger}></div>
-                </div>
+            {signIn && <SignInButton openSignInDialog={openSignInDialog} />}
+            {createAccount && (
+              <CreateAccountButton
+                openCreateAccountDialog={openCreateAccountDialog}
+              />
             )}
+            <div className={styles.headerProfile}>
+              <Img src={dp} />
+              <span>
+                <P>Precious Faseyosan</P>
+                <Link to="/profile">View profile</Link>
+              </span>
+            </div>
+          </div>
 
-
+          {/* Harmburger Icon */}
+          {areLinksAvailable && (
+            <div onClick={openMobileDialog} className={styles.mobileNav}>
+              <div className={styles.hamburger}></div>
+            </div>
+          )}
         </header>
         <div>
-            {/* Mobile Pop-up */}
-            <div className={styles.mobileMenuModal}>
-                <Modal closeModal={closeMobileDialog} open={modalState} >
+          {/* Mobile Pop-up */}
+          <div className={styles.mobileMenuModal}>
+            <Modal closeModal={closeMobileDialog} open={modalState}>
+              <div className={styles.headerProfile}>
+                <Img src={dp} />
+                <span>
+                  <P>Precious Faseyosan</P>
+                  <Link to="/profile">View profile</Link>
+                </span>
+              </div>
 
-                <div className={styles.headerProfile}>
-                    <Img src={dp}/>
-                    <span>
-                        <P>Precious Faseyosan</P>
-                        <Link to="/profile">View profile</Link>
-                    </span>
+              {mobileLinks && (
+                <div className={styles.mobileOnlyLinks}>
+                  {mobileLinks.map((link) => {
+                    return (
+                      <Link
+                        onClick={closeMobileDialog}
+                        key={link.id}
+                        to={link.path}
+                      >
+                        {link.text}
+                      </Link>
+                    );
+                  })}
                 </div>
+              )}
 
-                    {mobileLinks &&
-                    <div className={styles.mobileOnlyLinks}>
-                        {mobileLinks.map((link) => {
-                        return (
-                            <Link onClick={closeMobileDialog} key={link.id} to={link.path}>{link.text}</Link>
-                        )
-                        })}
-                    </div>
-                    }
+              {links &&
+                links.map((link) => {
+                  return (
+                    <Link
+                      onClick={closeMobileDialog}
+                      key={link.id}
+                      to={link.path}
+                    >
+                      {link.text}
+                    </Link>
+                  );
+                })}
+              {signIn && <SignInButton openSignInDialog={openSignInDialog} />}
+              {createAccount && (
+                <CreateAccountButton
+                  openCreateAccountDialog={openCreateAccountDialog}
+                />
+              )}
+            </Modal>
+          </div>
 
-                    {links && links.map((link) => {
-                        return (
-                            <Link onClick={closeMobileDialog} key={link.id} to={link.path}>{link.text}</Link>
-                        )
-                    })}
-                    {signIn && <SignInButton openSignInDialog={openSignInDialog}/>}
-                    {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
-                </Modal>  
-            </div>
-                              
-            {/* Sign In Pop-up */}
-            <div className={styles.signInModal}>
-                <SignInDialog
-                    open={signInModalState} 
-                    closeModal={closeSignInDialog}
-                    openCreateAccountModal={openCreateAccountDialog}
-                    />
-            </div>
-           
+          {/* Sign In Pop-up */}
+          <div className={styles.signInModal}>
+            <SignInDialog
+              open={signInModalState}
+              closeModal={closeSignInDialog}
+              openCreateAccountModal={openCreateAccountDialog}
+            />
+          </div>
 
-             {/* Create Account In Pop-up */}
-             <div className={styles.createAccountModal}>
-                <CreateAccountDialog 
-                    open={createAccountModalState} 
-                    closeModal={closeCreateAccountDialog}
-                    openSignInModal={openSignInDialog}
-                    />
-            </div>
-            </div>
-           
+          {/* Create Account In Pop-up */}
+          <div className={styles.createAccountModal}>
+            <CreateAccountDialog
+              open={createAccountModalState}
+              closeModal={closeCreateAccountDialog}
+              openSignInModal={openSignInDialog}
+            />
+          </div>
         </div>
-     );
+      </div>
+    );
 }
  
-export default Header;
+export default memo(Header);

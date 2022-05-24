@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import P from "../../atoms/P/P";
 import Button from "../../atoms/Button/Button";
 import Img from "../../atoms/Img/Img";
@@ -26,6 +27,7 @@ const imgCustomStyle =
     maxHeight: "264px",
     borderRadius: "16px 16px 0px 0px"
 }
+console.log("rerender card")
         
     return ( 
 
@@ -71,4 +73,4 @@ const imgCustomStyle =
      );
 }
  
-export default Card;
+export default memo(Card);

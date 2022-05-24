@@ -1,5 +1,4 @@
 import FindRoommateRequestLandingPageTemplate from '../../../templates/LandingPages/FindRoommateRequestLandingPageTemplate/FindRoommateRequestLandingPageTemplate';
-import { useState } from 'react';
 import useGet from '../../../../customHooks/useGet';
 import { GET_ALL_ROOMMATE_REQUESTS } from '../../../routes';
 

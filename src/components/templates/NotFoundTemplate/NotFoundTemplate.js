@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 const NotFoundTemplate = ({errorMessage, buttonMessage, imageUrl}) => {
     return ( 
         <div>
-            <Header/>
+            <Header activePage="notFound"/>
             <div className={`${globalStyles.body} ${styles.notFoundContainer}`}>
                 <Img src={imageUrl} alt="Not Found"/>
                 <P

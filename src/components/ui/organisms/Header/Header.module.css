@@ -13,8 +13,12 @@
   display: flex;
   justify-content: space-between;
   position:fixed;
-  background-color: white;
+  background-color: #F5F7FF;
   z-index: 999;
+  transition: 0.3s;
+}
+.headerStyles {
+  background-color: #fff;
 }
 
 .logo img

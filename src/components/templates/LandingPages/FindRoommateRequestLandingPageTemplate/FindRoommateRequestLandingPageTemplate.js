@@ -83,6 +83,7 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests = null, isErro
                 links = {headerLinks}
                 signIn = {true}
                 createAccount = {true}
+                activePage="findRoomates"
             />
             
             {/* For Hero Section */}
