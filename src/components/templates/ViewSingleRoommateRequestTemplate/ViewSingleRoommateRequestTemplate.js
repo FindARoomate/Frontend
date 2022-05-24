@@ -34,10 +34,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     let image_array = [];
 
     if (roommateRequest)
-    {
-        //a fix for error thrown when amenities is null
-        amenities = (roommateRequest.amenities == null) ? [] : roommateRequest.amenities;
-        
+    {        
         roommateRequest.request_images.forEach((image) => 
         {
             <div key={uuidv4()}>
@@ -46,12 +43,17 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         });
     }
 
+    const openLightBox = (e) => 
+    {
+        console.log(e);
+        setIsOpen(true);
+    }
 
 
 
-const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'});
+    const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'});
   
-const headerLinks = 
+    const headerLinks = 
     [
         {
             id: 1,
@@ -83,7 +85,7 @@ const headerLinks =
 
             <div className={styles.imageContainer}>
                 <div className={styles.imageGroup}>
-                    {roommateRequest ? <Gallery photos={image_array} onClick={() => setIsOpen(true)}/> : ""}
+                    {roommateRequest ? <Gallery photos={image_array} onClick={() => openLightBox}/> : ""}
                     {isOpen && (
                         <Lightbox
                             mainSrc={image_array[photoIndex].src}

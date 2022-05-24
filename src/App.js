@@ -2,10 +2,7 @@ import { useEffect } from 'react'
 import NotFound from './components/pages/NotFound/NotFound';
 import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import ComingSoon2 from './components/pages/ComingSoon2/ComingSoon2';
-import BioData from './components/pages/CreateProfile/BioData/BioData';
 import {Route, Routes, useLocation} from 'react-router-dom';
-import TellUsAboutYourself from './components/pages/CreateProfile/TellUsAboutYourself/TellUsAboutYourself';
-import DefineIdealRoommate from './components/pages/CreateProfile/DefineIdealRoommate/DefineIdealRoommate';
 import ViewAllRoommateRequests from './components/pages/ViewAllRoommateRequests/ViewAllRoommateRequests';
 import CreateProfileThankYou from './components/pages/CreateProfile/CreateProfileThankYou/CreateProfileThankYou';
 import CreateProfileInstruction from './components/pages/CreateProfile/CreateProfileInstruction/CreateProfileInstruction';
@@ -29,6 +26,7 @@ import SingleActiveRequest from './components/pages/SingleActiveRequest/SingleAc
 import SingleInactiveRequest from './components/pages/SingleInactiveRequest/SingleInactiveRequest';
 import Profile from './components/pages/Profile/Profile';
 import Notification from './components/pages/Notification/Notification';
+import CreateProfile from './components/pages/CreateProfile/CreateProfile';
 
 
 function App() 
@@ -69,10 +67,8 @@ function App()
           <Route path='/roommate-request/:id' element={<ViewSingleRoommateRequest/>}/>
 
           {/* Create Profile */}
-          <Route path='/bio-data' element={<BioData/>}/>
-          <Route path='/ideal-roommate' element={<DefineIdealRoommate/>} />
-          <Route path='/about-yourself' element={<TellUsAboutYourself/>} />
           <Route path='/create-profile-instruction' element={<CreateProfileInstruction/>} />
+          <Route path='/create-profile' element={<CreateProfile/>} />
           <Route path='/create-profile-thankyou' element={<CreateProfileThankYou/>}/>
 
           {/* Roommate Request */}

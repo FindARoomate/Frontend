@@ -4,19 +4,22 @@
     border-radius: 8px;
     font-size: 12px;
     font-family: 'Open Sans';
-    /* color: #7D7D7D; */
-    color: 
-    #000000;
+    color: #000000;
+    width: 100%;
     border: 1px solid #7D7D7D;
 }
 
+.select::placeholder
+{
+    color: rgba(125, 125, 125, 0.45);
+}
 
 @media screen and (min-width: 760px) 
 {
     .select
     {
         padding: 15px 16px;
-        font-size: 20px;
+        font-size: 16px;
     }
     
 }

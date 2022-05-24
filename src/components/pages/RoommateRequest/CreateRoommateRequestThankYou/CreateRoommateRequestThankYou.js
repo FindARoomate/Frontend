@@ -8,7 +8,7 @@ const CreateRoommateRequestThankYou = () =>
     const link1 = 
     {
         text: "View roommate requests",
-        link: "/create-roommate-request-instruction"
+        link: "/view-all-requests"
     };
     const link2 = 
     {

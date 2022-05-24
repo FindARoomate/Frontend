@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 
-const Button = ({customStyle, children, handleOnClick}) => 
+const Button = ({customStyle, children, handleOnClick, ...rest}) => 
 {
 
     const handleButtonClick = () => 
@@ -15,6 +15,7 @@ const Button = ({customStyle, children, handleOnClick}) =>
             className={styles.button}
             style={customStyle}
             onClick = {handleButtonClick}
+            {...rest}
          >{children}</button>
      );
 }

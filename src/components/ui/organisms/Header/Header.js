@@ -146,4 +146,4 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks}) => {
      );
 }
  
-export default memo(Header);
+export default Header;

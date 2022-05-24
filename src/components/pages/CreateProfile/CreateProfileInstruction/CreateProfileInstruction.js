@@ -6,7 +6,7 @@ const CreateProfileInstruction = () =>
     const title = "CREATE PERSONAL PROFILE";
     const description = `We are working hard to connect you to the perfect roommate for you.
     So, create your profile and we’ll match you with roommate(s) that fit your personality and lifestyle.`;
-    const link="/bio-data"
+    const link="/create-profile"
 
     return ( 
         <OnboardingInstruction

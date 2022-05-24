@@ -8,10 +8,10 @@ const CreateAccountErrors = ({errors}) =>
         <div>
             {entries.map((error) => {
                 return (
-                <ErrorAlert 
-                    key={error[0]}
-                    message={error[1][0]}
-                />)
+                <ErrorAlert key={error[0]}>
+                    {error[1][0]}
+                </ErrorAlert>
+                )
             })
             }
         </div>

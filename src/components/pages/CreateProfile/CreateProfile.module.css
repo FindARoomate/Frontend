@@ -1,0 +1,262 @@
+#formGroup1
+{
+    z-index: inherit;
+}
+
+.createProfile
+{
+    width: 90vw;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.25);
+    margin: 50px auto;
+    padding: 40px 30px;
+    border-radius: 8px;
+}
+
+.createProfile h1
+{
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Open Sans';
+    margin-bottom: 7px;
+}
+
+.createProfile .progressBar
+{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    max-width: 295px;
+    counter-reset: progressStep;
+    margin: 0 auto;
+}
+
+.createProfile .progressBar .currentProgress
+{
+    content: "";
+    position: absolute;
+    top: 50%;
+    background: repeat-x url('./../../../icons/progress-bar-active.svg');
+    height: 5px;
+    z-index: -1;
+    width: 0%;
+    transform: translateY(-50%);
+}
+
+.createProfile .progressBar::before
+{
+    content: "";
+    position: absolute;
+    top: 50%;
+    background: repeat-x url('./../../../icons/progress-bar-inactive.svg');
+    width: 100%;
+    height: 5px;
+    z-index: -1;
+    transform: translateY(-50%);
+}
+
+.createProfile .progressBar .progressStep
+{
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: 1px solid #7D7D7D;
+}
+
+.createProfile .progressBar .progressStep::before
+{
+    counter-increment: progressStep;
+    content: counter(progressStep);
+    font-size: 13px;
+    font-weight: 600;
+    color: #7D7D7D;
+}
+
+.createProfile .progressBar .progressStep::after
+{
+    content: attr(data-step-description);
+    position: absolute;
+    top: calc(100% + 10px);
+    text-align: center;
+    width: 100%;
+    max-width: 96px;
+    font-size: 12px;
+    color: #7D7D7D;
+}
+
+.createProfile .progressBar .progressStepActive
+{
+    outline: 1px solid #0029DD;
+}
+
+.createProfile .progressBar .progressStepActive::before,
+.createProfile .progressBar .progressStepActive::after,
+.createProfile .progressBar .progressStepVisited::after
+{
+    color: #0029DD;
+}
+
+.createProfile .progressBar .progressStepVisited
+{
+    outline: 1px solid #0029DD;
+    background-color: #0029DD;
+}
+
+.createProfile .progressBar .progressStepVisited::before
+{
+    color: white;
+}
+
+.createProfile .formGroup
+{
+    display: none;
+}
+
+.createProfile .formGroupForm 
+{
+    margin-top: 63px;
+}
+
+.createProfile .formGroup button
+{
+    width: max-content;
+    padding: 13px 35px;
+}
+
+
+.createProfile .formGroupActive
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 16px;
+}
+
+.createProfile .inputGroup
+{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.createProfile .inputGroup label
+{
+    color: #7D7D7D;
+}
+
+.createProfile .inputGroup .radioGroup
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 9px;
+    align-items: center;
+}
+
+.createProfile .inputGroup .radioGroup > *
+{
+    width: max-content;
+}
+
+.createProfile .inputGroup .radioGroup label,
+.createProfile .inputGroup .radioGroupLabel
+{
+    color: black;
+}
+
+
+.createProfile select
+{
+    font-size: 14px;
+}
+
+.createProfile select option
+{
+    color: #7D7D7D;
+}
+
+.createProfile .buttonGroup
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.createProfile .buttonGroup .submitButton
+{
+    display: flex;
+    align-items: center;
+}
+
+
+/* Desktop and Table View */
+@media screen and (min-width: 760px) 
+{
+    .createProfile
+    {
+        width: 47vw;
+        margin: 24px auto 50px;
+        padding: 50px 94px;
+        border-radius: 8px;
+    }
+
+    .createProfile h1
+    {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .createProfile .progressBar
+    {
+        width: 100%;
+        max-width: 462px;
+        margin-bottom: 45px;
+    }
+
+    .createProfile .progressBar .progressStep
+    {
+        width: 40px;
+        height: 40px;
+    }
+
+    .createProfile .progressBar .progressStep::before
+    {
+        font-size: 20px;
+    }
+
+    .createProfile .progressBar .progressStep::after
+    {
+        font-size: 16px;
+        max-width: 140px;
+    }
+
+    .createProfile .formGroupForm
+    {
+        margin-top: 90px;
+    }
+
+    .createProfile .formGroup button
+    {
+        padding: 19px 61px;
+    }
+
+    .createProfile .inputGroup
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .createProfile select
+    {
+        font-size: 16px;
+    }
+    
+}
+/* .createProfile .inputGroup
+{
+    margin: 12px 0px;
+} */

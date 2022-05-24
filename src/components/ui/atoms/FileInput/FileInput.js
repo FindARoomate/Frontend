@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
 
-const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, required, multiple=false, ...rest}) => 
+const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, required=true, multiple=false, ...rest}) => 
 {
     const [labelText, setLabelText] = useState("Upload a photo");
     const [isInputRequired, setIsInputRequired] = useState(true); 
@@ -22,7 +22,7 @@ const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, requir
             setLabelText(e.target.files[0].name);
         }
 
-        handleFormChangeForFileInput(name, e.target.files);
+        handleFormChangeForFileInput && handleFormChangeForFileInput(name, e.target.files);
     }
 
     useEffect(() => 

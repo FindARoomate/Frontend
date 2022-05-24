@@ -94,7 +94,7 @@ const DashboardTemplate = ({
         <Header
             mobileLinks={mobileLinks}
             links = {headerLinks}
-            customStyle={{backgroundColor: '#F5F7FF',position:'fixed'}}
+            customStyle={{backgroundColor: '#F5F7FF'}}
         />
 
         <div className={`${globalStyles.body} ${dashboardStyles.dashboardBody}`}>

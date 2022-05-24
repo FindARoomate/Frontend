@@ -1,8 +1,7 @@
 import styles from './Select.module.css';
 import { useState } from 'react';
-import {v4 as uuidv4} from 'uuid';
 
-const Select = ({data, defaultOption, showSelectTags, handleFormInputChange, name, label, required}) =>
+const Select = ({showSelectTags, handleFormInputChange, name, children, ...rest}) =>
 {
     const [customStyles, updateCustomStyle] = useState({})
 
@@ -28,23 +27,15 @@ const Select = ({data, defaultOption, showSelectTags, handleFormInputChange, nam
 
     return ( 
                 <select 
+                    className={styles.select}
                     onChange={(e) => handleSelectChange(e)}
-                    className={styles.select} 
                     style={customStyles ? customStyles : {}}
                     name={name}
-                    required = {required}
-                    defaultValue = {defaultOption}
+                    {...rest}
                 >
-
-                <option value="">{label}</option>
-
-                {data.map((option) => 
-                {
-                    return (
-                    <option key={uuidv4()} value={option.value}>{option.label}</option>);
-                })}
-
+                    {children}
             </select>
+                
      );
 }
  

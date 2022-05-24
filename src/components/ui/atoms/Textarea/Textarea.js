@@ -18,6 +18,7 @@ const Textarea = (props) => {
             onChange = {handleTextAreaChange}
             className={styles.textarea}
             {...rest}
+            name={name}
             >
                 {children}
             </textarea>

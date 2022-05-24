@@ -66,7 +66,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
           </div>
           <div className={styles.form}>
             <form onSubmit={handleSignIn}>
-              {isError && <ErrorAlert message= {APIdata.detail}/>}
+              {isError && <ErrorAlert>{APIdata.detail}</ErrorAlert>}
               <div className={styles.inputGroup}>
                 <Label>Email</Label>
                 <Input type="text" placeholder="Enter your email address"/>

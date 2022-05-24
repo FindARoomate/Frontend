@@ -11,7 +11,6 @@ import { useLocation } from "react-router-dom";
 
 const DisplayCards = ({data, pagination, count}) => 
 {
-
     const numOfPaginationPages = Math.ceil(count/15);
 
     //getting pagination links
@@ -36,13 +35,14 @@ const DisplayCards = ({data, pagination, count}) =>
             <div className={styles.displayCardBody}>
                 <div className={styles.displayCards}>
                 {
+
                     data.map((singleData) => 
                     {
                         return (
                         <Card 
                             key={singleData.id}
                             title={singleData.listing_title}
-                            ownerName="Precious Faseyosan"
+                            ownerName={singleData.profile.fullname}
                             moreInfoLink={"/roommate-request/"+singleData.id}
                             sliderImages = {singleData.request_images}
                             thumbnail = {dp}

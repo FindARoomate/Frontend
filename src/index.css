@@ -69,6 +69,17 @@ a
         transform: translateX(1.75rem);
     }
 }
+
+.ml-auto
+{
+  margin-left: auto;
+}
+
+.mr-auto
+{
+  margin-right: auto;
+}
+
 /*
 h1,h2, h3
 {

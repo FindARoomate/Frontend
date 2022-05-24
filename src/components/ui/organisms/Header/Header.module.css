@@ -12,6 +12,9 @@
   padding: 17.5px 20px;
   display: flex;
   justify-content: space-between;
+  position:fixed;
+  background-color: white;
+  z-index: 999;
 }
 
 .logo img
