@@ -64,13 +64,10 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activeP
         window.removeEventListener("scroll", handleScroll);
       };
     }, []);
-    console.log(scrollPosition, screenWidth)
     if (scrollPosition >= 386) {
         headerStyles = "headerStyles"
     }
     
-    
-    console.log(headerStyles)
     return (
       <div className={styles.headerContainer}>
         <header
