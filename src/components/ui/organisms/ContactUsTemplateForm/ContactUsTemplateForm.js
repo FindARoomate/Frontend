@@ -2,7 +2,7 @@ import { CONTACT } from "../../../routes";
 import usePost from "../../../../customHooks/usePost";
 import FormGroup from "../../molecules/FormGroup/FormGroup";
 import styles from './ContactUsTemplateForm.module.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import ErrorAlert from "./../../molecules/Alerts/ErrorAlert/ErrorAlert";
 import SuccessAlert from "./../../molecules/Alerts/SuccessAlert/SuccessAlert";
 
@@ -85,4 +85,4 @@ const ContactUsTemplateForm = () =>
      );
 }
  
-export default ContactUsTemplateForm;
+export default memo(ContactUsTemplateForm);

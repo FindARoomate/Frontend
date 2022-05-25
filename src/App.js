@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import NotFound from './components/pages/NotFound/NotFound';
 import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import ComingSoon2 from './components/pages/ComingSoon2/ComingSoon2';
@@ -35,7 +35,7 @@ function App()
 
   const { pathname, hash, key } = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // if not a hash link, scroll to top
     if (hash === '') {
       window.scrollTo(0, 0);
@@ -46,7 +46,7 @@ function App()
         const id = hash.replace('#', '');
         const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView();
+          element.scrollIntoView({behavior: "smooth"});
         }
       }, 0);
     }
