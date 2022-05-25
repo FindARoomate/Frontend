@@ -1,4 +1,4 @@
-export const API_URL = 'http://find-a-roomate.herokuapp.com';
+export const API_URL = 'https://find-a-roomate.herokuapp.com';
 
 export const JOIN_WAITLIST = API_URL+'/auth/join-waitlist/';
 
