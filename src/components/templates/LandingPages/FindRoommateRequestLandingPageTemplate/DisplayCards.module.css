@@ -17,11 +17,31 @@
     margin: 12px 0;
 }
 
-.topSection p
+.topSection
+{
+    margin: 4px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+
+.topSection p 
+{
+    color: #000E4A;
+}
+
+.topSection p:first-child
 {
     font-weight: bold;
-    margin: 4px 0;
-    color: #000E4A;
+}
+
+.topSection p:last-child
+{
+    font-weight: normal;
+    font-family: "Inter";
+    margin-left: 10px;
+    font-size: 14px;
 }
 
 .bottom
@@ -75,9 +95,17 @@
         /* margin: 12px 0; */
     }
 
-    .topSection p
+    .topSection
     {
         margin: 22px 0;
+    }
+
+    .topSection p:last-child
+    {
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 16px;
+        margin-left: 23px;
     }
 
     .bottom

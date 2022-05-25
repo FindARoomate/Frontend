@@ -3,7 +3,7 @@
     {
         border-radius: 8px;
         padding: 11px 10px 11px 3px;
-        background: white;
+        background: #F5F7FF;
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
@@ -14,138 +14,97 @@
         display: flex;
         gap: 10px;
         flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
     }
 
-    .listBox .information img
+    
+    .listBox .information .infoAndImage
+    {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .listBox .information .infoAndImage img
     {
         width: 20px;
         height: 20px;
         border-radius: 50%;
     }
 
-    .listBox .information .name
+    .listBox .information .infoAndImage .nameAndTime
     {
-       font-size: 10px;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+    }
+
+    .listBox .information .infoAndImage .name
+    {
+       font-size: 12px;
        font-weight: 600;
        color: black;
     }
 
-    .listBox .information .description
+    .listBox .information .infoAndImage .description
     {
         font-size: 10px;
-        color:  rgba(125, 125, 125, 0.45);
+        color: #000000;;
     }
 
-    .listBox .tagAndIcon
+    .listBox .information .infoAndImage .description a
     {
-        display: flex;
-        flex-wrap: nowrap;
-        gap: 17.65px;
-        align-items: center;
+        text-decoration: underline;
+        color: rgba(0, 41, 221, 0.7);;
+        margin-left: 10px;
     }
 
-    .listBox .tagAndIcon .tag
+    .listBox .information .time
     {
-        padding: 6px 16px;
-        border-radius: 50px;
+        color: #7D7D7D;
         font-size: 10px;
-        line-height: 10px;
     }
-
-    .listBox .tagAndIcon .pending
-    {
-        background-color: #FEFCE2;
-        color: #E3DB0F;
-    }
-
-    .listBox .tagAndIcon .success
-    {
-        background-color: #E2FEE8;
-        color: #0CF542;
-    }
-
-    .listBox .tagAndIcon .declined
-    {
-        background-color: #FDE3E5;
-        color: #ED1E2E;
-    }
-
-    .listBox .tagAndIcon .icon img
-    {
-        height: 10px;
-        width: auto;
-    }
-
     
 @media screen and (min-width: 760px) 
 {
 
     .listBox
     {
-        padding: 24px 33px 24px 9px;
+        padding: 20px 24px;
     }
 
-    .listBox .information
+    /* .listBox .information
     {
         display: flex;
-        gap: 10px;
-        flex-wrap: nowrap;
+    } */
+
+    .listBox .information .infoAndImage
+    {
+        gap: 16px;
     }
 
-    .listBox .information img
+    .listBox .information .infoAndImage img
     {
         width: 40px;
         height: 40px;
     }
 
-    .listBox .information .name
+    .listBox .information .infoAndImage .name
     {
-       font-size: 16px;
+       font-size: 20px;
     }
 
-    .listBox .information .description
+    .listBox .information .infoAndImage .description
     {
         font-size: 16px;
     }
 
-    .listBox .tagAndIcon
+    .listBox .information .time
     {
-        display: flex;
-        flex-wrap: nowrap;
-        gap: 36px;
-        align-items: center;
-    }
-
-    .listBox .tagAndIcon .tag
-    {
-        padding: 8px 21px;
-        border-radius: 50px;
-        font-size: 13px;
-        line-height: 13px;
-    }
-
-    .listBox .tagAndIcon .pending
-    {
-        background-color: #FEFCE2;
-        color: #E3DB0F;
-    }
-
-    .listBox .tagAndIcon .success
-    {
-        background-color: #E2FEE8;
-        color: #0CF542;
-    }
-
-    .listBox .tagAndIcon .declined
-    {
-        background-color: #FDE3E5;
-        color: #ED1E2E;
-    }
-
-    .listBox .tagAndIcon .icon img
-    {
-        height: 20px;
-        width: auto;
+        font-size: 14px;
     }
 
 }

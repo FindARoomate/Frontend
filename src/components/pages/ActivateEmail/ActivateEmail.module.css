@@ -1,0 +1,85 @@
+.activateEmail
+{
+    background-color: #F5F7FF;
+}
+
+.body
+{ 
+    width: 100%;
+    max-width: 871px;
+    margin: 0 auto;
+    background-color: white;
+    min-height: 100vh;
+}
+
+.activateEmail .content
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.activateEmail .content img 
+{
+    padding-top: 25px;
+    margin-bottom: 30px;
+}
+
+.activateEmail .content h1
+{
+    font-family: "Open Sans";
+    font-weight: bold;
+    color: #000E4A;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.activateEmail .content p
+{
+    color: #000E4A;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.activateEmail .content button
+{
+    font-weight: 600;
+    padding: 15px 37px;
+}
+
+/* Tablet and Desktop view */
+@media screen and (min-width: 760px) 
+{
+
+    .body
+    { 
+       padding-top: 0px;
+    }
+
+
+    .activateEmail .content img 
+    {
+        padding-top: 50px;
+        margin-bottom: 56px;
+    }
+
+    .activateEmail .content h1
+    {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .activateEmail .content p
+    {
+        font-size: 20px;
+        margin-bottom: 36px;
+    }
+
+    .activateEmail .content button
+    {
+        font-size: 20px;
+        padding: 18px 100px;
+    }
+}

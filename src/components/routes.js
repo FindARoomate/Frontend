@@ -1,10 +1,16 @@
-export const API_URL = 'https://find-a-roomate.herokuapp.com';
+export const API_URL = 'http://find-a-roomate.herokuapp.com';
 
 export const JOIN_WAITLIST = API_URL+'/auth/join-waitlist/';
+
+// Authentication endpoints
 
 export const CREATE_ACCOUNT = API_URL+'/auth/register/';
 
 export const LOGIN = API_URL+'/auth/login/';
+
+export const CONFIRM_EMAIL = API_URL + '/auth/activate/';
+
+
 
 export const CONTACT = API_URL + '/auth/contact-us/';
 

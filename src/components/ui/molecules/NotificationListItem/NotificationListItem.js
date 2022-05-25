@@ -1,53 +1,33 @@
+import globalStyles from './../../../globalStyles.module.css';
 import styles from './NotificationListItem.module.css';
+import { Link } from 'react-router-dom';
 import Img from "../../atoms/Img/Img";
 import P from '../../atoms/P/P';
-import forwardIcon from "../../../../icons/forward-icon.svg";
-import { Link } from 'react-router-dom';
 
 const NotificationListItem = ({dp, name, description, tag="", link=""}) =>
 {
     return ( 
-        <Link to={link}>
             <div className={styles.listBox}>
             <div className={styles.information}>
-                <Img src={dp}/>
-                <span>
-                    <P className={styles.name}>{name}</P>
-                    <P className={styles.description}>{description.slice(0, 35)+"..."}</P>
-                </span>
-            </div>
-            <div className={styles.tagAndIcon}>
-                {
-                    (tag.toUpperCase() == "PENDING" ) && (
-                        <div className={`${styles.tag} ${styles.pending}`}>
-                            Pending
-                        </div>
-                    )
-                }
+                <div className={styles.infoAndImage}>
+                    <Img src={dp}/>
+                    <span>
+                        <span className={styles.nameAndTime}>
+                            <P className={styles.name}>{name}</P>
+                            <div className={`${styles.time} ${globalStyles.mobileOnly}`}>2 hours ago</div>
+                        </span>
 
-                {
-                    (tag.toUpperCase() == "DECLINED" ) && (
-                        <div className={`${styles.tag} ${styles.declined}`}>
-                            Declined
-                        </div>
-                    )
-                }
-
-                {
-                    (tag.toUpperCase() == "SUCCESS" ) && (
-                        <div className={`${styles.tag} ${styles.success}`}>
-                            Success
-                        </div>
-                    )
-                }
-
-                <div className={styles.icon}>
-                    <Img src={forwardIcon} />
+                        <P className={styles.description}>
+                            {description.slice(0, 40)+"..."}
+                            <Link to={link}>View details</Link>
+                        </P>
+                    </span>
+                </div>
+                <div className={`${styles.time} ${globalStyles.desktopOnly}`}>
+                    2 hours ago
                 </div>
             </div>
-        </div>
-        </Link> 
-        
+        </div>        
     );
 }
  

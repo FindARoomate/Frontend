@@ -13,14 +13,15 @@ import {Link} from 'react-router-dom';
 import P from '../../ui/atoms/P/P';
 import useGet from '../../../customHooks/useGet';
 import { GET_PROFILE } from '../../routes';
-import settingsIcon from './../../../icons/setting-icon.svg';
+import notificationIcon from './../../../icons/notification-icon.svg';
 
 const DashboardTemplate = ({
         children,
         showStatistics=true,
         title = "Welcome back",
         description = "Here is an overview of your activities",
-        dashboardIcon = settingsIcon
+        dashboardIcon = notificationIcon,
+        dashboardIconLink = "/notifications"
     }) => 
 {
     const token = localStorage.getItem("accessToken");
@@ -165,9 +166,11 @@ const DashboardTemplate = ({
                                 <P>{description}</P>
                             </div>
                         </div>
+                        <Link to={dashboardIconLink}>
                         <div className={dashboardStyles.notification}>
-                            <Img src={dashboardIcon}/>
-                        </div>  
+                                <Img src={dashboardIcon}/>
+                        </div> 
+                        </Link> 
                     </div>
 
                     <div className={dashboardStyles.contentBody}>

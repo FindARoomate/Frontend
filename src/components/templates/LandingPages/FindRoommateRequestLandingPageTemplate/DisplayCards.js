@@ -31,6 +31,7 @@ const DisplayCards = ({data, pagination, count}) =>
         <div className={styles.displayCardContainer}>
             <div className={styles.topSection}>
                 <P>{count + " results"}</P>
+                <P className={styles.pageCount}>{`(Page ${pageId} of ${numOfPaginationPages})`}</P>
             </div>
             <div className={styles.displayCardBody}>
                 <div className={styles.displayCards}>

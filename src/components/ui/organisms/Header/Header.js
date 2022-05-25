@@ -48,6 +48,8 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activeP
     const [modalState, updateModalState] = useState(false);
     const openMobileDialog  = () =>  updateModalState(true);//open menu dialog
     const closeMobileDialog = () => updateModalState(false);//close menu dialog
+
+
     const [scrollPosition, setScrollPosition] = useState(0);
     const [screenWidth, setScreenWidth] = useState(0);
     let headerStyles;
@@ -57,6 +59,7 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activeP
       setScrollPosition(position);
       setScreenWidth(width);
     };
+
     useEffect(() => {
       window.addEventListener("scroll", handleScroll);
   
@@ -64,15 +67,17 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activeP
         window.removeEventListener("scroll", handleScroll);
       };
     }, []);
+    
     if (scrollPosition >= 386) {
         headerStyles = "headerStyles"
+        customStyle = {}
     }
     
     return (
       <div className={styles.headerContainer}>
         <header
           className={[styles.header, styles[headerStyles]].join(" ")}
-          style={{background: "fff"}}
+          style={customStyle}
         >
           <div className={styles.logo}>
             <Link to="/">

@@ -8,6 +8,11 @@
   display: none;
 }
 
+.mobileOnly
+{
+  display: inherit;
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
@@ -19,5 +24,10 @@
   .desktopOnly
   {
     display: inherit;
+  }
+
+  .mobileOnly
+  {
+    display: none;
   }
 }

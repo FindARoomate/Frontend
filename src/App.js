@@ -65,7 +65,7 @@ function App()
           <Route path='/view-requests' element={<FindRoommateRequestLandingPage/>} />
           
           {/* Confirm Email */}
-          <Route path='/confirm-email' element={<ActivateEmail/>} />
+          <Route path='/confirm-email/:uid/:token' element={<ActivateEmail/>} />
 
           {/* View Roommate Request Screens */}
           <Route path='/view-all-requests' element={<ViewAllRoommateRequests/>} />
