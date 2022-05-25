@@ -58,7 +58,7 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests = null, isErro
                 key: 1,
                 name: "Email Address",
                 icon: mobileContactIcon,
-                value: "contact@findaroommate.com"
+                value: <a href="mailto:contact@findaroommate.com">contact@findaroommate.com</a>
             }
         ],
     }

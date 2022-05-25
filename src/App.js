@@ -27,6 +27,7 @@ import SingleInactiveRequest from './components/pages/SingleInactiveRequest/Sing
 import Profile from './components/pages/Profile/Profile';
 import Notification from './components/pages/Notification/Notification';
 import CreateProfile from './components/pages/CreateProfile/CreateProfile';
+import ActivateEmail from './components/pages/ActivateEmail/ActivateEmail';
 
 
 function App() 
@@ -63,6 +64,10 @@ function App()
           <Route path='/create-request' element={<MakeRoommateRequestLandingPage/>} />
           <Route path='/view-requests' element={<FindRoommateRequestLandingPage/>} />
           
+          {/* Confirm Email */}
+          <Route path='/confirm-email' element={<ActivateEmail/>} />
+
+          {/* View Roommate Request Screens */}
           <Route path='/view-all-requests' element={<ViewAllRoommateRequests/>} />
           <Route path='/roommate-request/:id' element={<ViewSingleRoommateRequest/>}/>
 

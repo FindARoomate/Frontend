@@ -13,18 +13,22 @@ import {Link} from 'react-router-dom';
 import P from '../../ui/atoms/P/P';
 import useGet from '../../../customHooks/useGet';
 import { GET_PROFILE } from '../../routes';
+import settingsIcon from './../../../icons/setting-icon.svg';
 
 const DashboardTemplate = ({
         children,
         showStatistics=true,
         title = "Welcome back",
-        description = "Here is an overview of your activities"
+        description = "Here is an overview of your activities",
+        dashboardIcon = settingsIcon
     }) => 
 {
     const token = localStorage.getItem("accessToken");
     const {APIData} = useGet(GET_PROFILE, token);
 
-    if(APIData && title == "Welcome back") title = "Welcome back " + APIData.fullname;
+    console.log(APIData);
+
+    if(APIData && title == "Welcome back") title = "Welcome back " + APIData.data.fullname;
   
     const imgLinkStyle = 
     {
@@ -161,7 +165,9 @@ const DashboardTemplate = ({
                                 <P>{description}</P>
                             </div>
                         </div>
-                        <div className={dashboardStyles.notification}></div>
+                        <div className={dashboardStyles.notification}>
+                            <Img src={dashboardIcon}/>
+                        </div>  
                     </div>
 
                     <div className={dashboardStyles.contentBody}>

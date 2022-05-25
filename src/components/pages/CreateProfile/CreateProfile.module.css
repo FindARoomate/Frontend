@@ -238,6 +238,16 @@
         margin-top: 90px;
     }
 
+    .createProfile .formGroupActive
+    {
+        gap: 24px;
+    }
+
+    .createProfile #formGroup3
+    {
+        gap: 40px;
+    }
+
     .createProfile .formGroup button
     {
         padding: 19px 61px;

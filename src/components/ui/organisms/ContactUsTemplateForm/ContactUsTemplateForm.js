@@ -38,20 +38,19 @@ const ContactUsTemplateForm = () =>
         },
     ]
 
-    const {data, isError, isSuccess, sendPostRequest} = usePost(CONTACT)
+    const {APIdata, isError, isSuccess, sendPostRequest} = usePost(CONTACT)
 
     const handleSubmit = (e) =>
     {
         e.preventDefault();
         setIsLoading(true);
-        let credentials = 
-        {
-            name: e.target[0].value,
-            email: e.target[1].value,
-            message: e.target[2].value
-        }
 
-        sendPostRequest(credentials);
+        const formData = new FormData();
+        formData.append("name", e.target[0].value);
+        formData.append("email", e.target[1].value);
+        formData.append("message", e.target[2].value);
+
+        sendPostRequest(formData);
     }
 
     useEffect(() => 
@@ -61,17 +60,20 @@ const ContactUsTemplateForm = () =>
             setIsLoading(false);
         }
 
-    }, [data, isError, isSuccess])
+    }, [APIdata, isError, isSuccess])
 
     return ( 
         <div className={styles.contactForm}>
-            {isSuccess && (<div className={styles.alert}>
-                                <SuccessAlert message={data.success}/>
-                            </div>)}
+            {isSuccess && (
+            <div className={styles.alert}>
+                <SuccessAlert message={APIdata.success}/>
+            </div>)}
             
-            {isError && (<div className={styles.alert}>
-                                <ErrorAlert message={data.error}/>
-                            </div>)}
+            {isError && (
+            <div className={styles.alert}>
+                <ErrorAlert> {APIdata.error}</ErrorAlert>
+            </div>)}
+
             <FormGroup
                 inputs = {inputs}
                 button = {button}

@@ -29,7 +29,7 @@ const ComingSoon2Template = (props) =>
              
             }}>
             Getting an ideal roommate doesn't have to be stressful.<br></br>
-            Allow <span style={{color: "#0029DD"}}>Findaroommate.com</span> do the work for you!</H3>
+            Allow <Link to="/" style={{color: "#0029DD"}}>Findaroommate.com</Link> do the work for you!</H3>
         ,
         button: <Link to="/">
                     <Button customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>
@@ -91,7 +91,7 @@ const ComingSoon2Template = (props) =>
                 key: 1,
                 name: "Email Address",
                 icon: mobileContactIcon,
-                value: "contact@findaroommate.com"
+                value: <a href="mailto:contact@findaroommate.com">contact@findaroommate.com</a>
             }
         ],
     }

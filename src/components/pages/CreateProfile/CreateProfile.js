@@ -246,8 +246,7 @@ const CreateProfile = () =>
             </div>
         </div>
 
-        <div className={`${styles.formGroup}`}>
-
+        <div className={`${styles.formGroup}`} id={styles.formGroup3}>
             <div className={styles.inputGroup}>
                 <Label name="roomie_gender" className={styles.radioGroupLabel}>I need a ________ roommate</Label>
                 <span className={styles.radioGroup}>

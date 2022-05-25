@@ -11,6 +11,8 @@ import Button from '../../../ui/atoms/Button/Button';
 import SignInDialog from '../../../ui/organisms/Auth/SignIn/SignInDialog';
 import CreateAccountDialog from '../../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 const MakeRoommateRequestLandingPage = () => 
 {
     // For sign in modal
@@ -78,7 +80,7 @@ const MakeRoommateRequestLandingPage = () =>
     
 
     // CTA Section
-    var heading = <H3 >Getting an ideal roommate doesn't have to be stressful.<br></br>Allow <span style={{color: "#0029DD"}}>GetARoommate.co</span> do the work for you!</H3>
+    var heading = <H3 >Getting an ideal roommate doesn't have to be stressful.<br></br>Allow <Link to="/" style={{color: "#0029DD"}}>GetARoommate.co</Link> do the work for you!</H3>
     var button = <Button handleOnClick={showSignInDialog} customStyle={{maxWidth: "208px", padding: "17px 50px", fontSize: "16px", fontWeight: 600}}>Get Started</Button>     
     var customStyle = 
     {

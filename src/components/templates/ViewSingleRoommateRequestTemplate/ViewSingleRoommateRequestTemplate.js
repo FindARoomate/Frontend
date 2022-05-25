@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Gallery from "react-photo-gallery";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -30,11 +30,12 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     let [photoIndex, setPhotoIndex] = useState(0);
     let [isOpen, setIsOpen] = useState(false);
 
-    let amenities;
     let image_array = [];
 
     if (roommateRequest)
-    {        
+    {   
+        if(!roommateRequest.amenities) roommateRequest.amenities = [];
+
         roommateRequest.request_images.forEach((image) => 
         {
             <div key={uuidv4()}>
@@ -43,11 +44,10 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         });
     }
 
-    const openLightBox = (e) => 
-    {
-        console.log(e);
+    const openLightBox = useCallback((event, { photo, index }) => {
+        setPhotoIndex(index);
         setIsOpen(true);
-    }
+      }, []);
 
 
 
@@ -85,7 +85,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
 
             <div className={styles.imageContainer}>
                 <div className={styles.imageGroup}>
-                    {roommateRequest ? <Gallery photos={image_array} onClick={() => openLightBox}/> : ""}
+                    {roommateRequest ? <Gallery photos={image_array} onClick={openLightBox}/> : ""}
                     {isOpen && (
                         <Lightbox
                             mainSrc={image_array[photoIndex].src}
@@ -156,8 +156,8 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                     <H2>Amenities</H2>
 
                                     <div className={styles.ammenities}>
-                                        {(amenities.length === 0) && <P>No ammenities available</P>}
-                                        {(amenities.length > 0) && amenities.map((amenity) => 
+                                        {(roommateRequest.amenities.length === 0) && <P>No ammenities available</P>}
+                                        {(roommateRequest.amenities.length > 0) && roommateRequest.amenities.map((amenity) => 
                                         {
                                             return (
                                                 <div key = {uuidv4()} className={styles.singleAmmenity}>
