@@ -7,6 +7,7 @@ import useGet from "../../../customHooks/useGet";
 import { USER_INACTIVE_REQUESTS } from "../../routes";
 import {v4 as uuidv4} from 'uuid';
 import P from "../../ui/atoms/P/P";
+import { Link } from "react-router-dom";
 
 const InactiveRequests = () => 
 {
