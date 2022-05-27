@@ -27,7 +27,7 @@ const InactiveRequests = () =>
                 {APIData && 
                     (
                         (APIData.length == 0) ?
-                            <P>You have no inactive requests at this moment</P> 
+                        <P className={styles.noRequestMessage}>You have no inactive requests at this moment. <Link to="/create-roommate-request-instruction">Request for a roommate now</Link></P> 
                         :
                         APIData.map((request) => 
                         {

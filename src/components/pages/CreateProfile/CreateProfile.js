@@ -106,7 +106,7 @@ const CreateProfile = () =>
             formData.append("roomie_age", 13);
             formData.append("roomie_personality", document.querySelector("input[name='roomie_personality']").value);
             formData.append("roomate_description", document.querySelector("textarea[name='roomate_description']").value);
-            formData.append("profile_picture", document.querySelector("input[name='profile_picture']").value);
+            formData.append("profile_picture", document.querySelector("input[name='profile_picture']").files[0]);
 
             //create profile record on backend
             sendPostRequest(formData);

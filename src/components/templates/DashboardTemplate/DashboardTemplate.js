@@ -112,9 +112,9 @@ const DashboardTemplate = ({
                 <div className={dashboardStyles.sidebar}>
                     <div className={dashboardStyles.image}>
                             {APIData && 
-                                    <Img src={APIData.image_url}/>
+                                    <Img src={dashboardImg}/>
+                                    // <Img src={APIData.data.image_url}/>
                             }
-                        {/* <div className={dashboardStyles.overlay}></div> */}
                     </div>
                     <div className={dashboardStyles.links}>
                         <ul>
