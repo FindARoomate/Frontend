@@ -7,7 +7,7 @@ const CreateRooomateRequestInstruction = () =>
     const description = `We are aware that searching for an ideal roommate might be hard at times. We
                         are here to save the stress. Only give us some information about your room and we’ll post
                         it live on our website. You’ll soon be able to connect to potential roommates!`;
-    const url = "/room-location";
+    const url = "/create-roommate-request";
     const linkText = "Get started now";
     return ( 
         <OnboardingInstruction

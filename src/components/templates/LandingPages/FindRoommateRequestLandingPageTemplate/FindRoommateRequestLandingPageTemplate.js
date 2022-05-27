@@ -99,19 +99,26 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests = null, isErro
                 <div className={styles.roommateRequests}>
                 {!(isError || isSuccess || roommateRequests) && <P>Loading...</P>}
                 {isError && (<P>Something bad happened. Please try again</P>)}
-                    {(isSuccess && roommateRequests) && (
-                        <DisplayCards 
-                            data={roommateRequests.results} 
-                            count={roommateRequests.count}
-                            pagination={false}
-                        />)
-                    }
-                    {(isSuccess && !roommateRequests) && (<P>There are no roommates at this time</P>)}
-                    <div className={styles.viewAllRequests}>
-                        <Link to ="/view-all-requests">
-                            <Button>View more requests</Button>
-                        </Link>
-                    </div>
+                
+                {roommateRequests!=null &&      
+                <>
+                    {(isSuccess && roommateRequests.count > 0) && (
+                        <>
+                            <DisplayCards 
+                                data={roommateRequests.results} 
+                                count={roommateRequests.count}
+                                pagination={false}
+                            />
+                            <div className={styles.viewAllRequests}>
+                                <Link to ="/view-all-requests">
+                                    <Button>View more requests</Button>
+                                </Link>
+                            </div>
+                        </>
+                        )}
+                    {(isSuccess && roommateRequests.count < 1) && (<P>There are no roommate requests at this time</P>)}
+                </>           
+                }
                 </div>
             </div>
 

@@ -76,7 +76,7 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
                         <Label>Confirm Password</Label>
                         <PasswordInput placeholder="Enter your password again" />
                     </div>
-                <Button handleOnClick={placeholderFunction}>{isLoading ? "Loading..." : "Sign Up"}</Button>
+                <Button className={isLoading ? "isLoading": ""}>{isLoading ? "Loading..." : "Sign Up"}</Button>
                 </form>
             </div>
             <div className={styles.divider}><span>or</span></div>

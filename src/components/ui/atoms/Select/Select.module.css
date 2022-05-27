@@ -1,3 +1,8 @@
+.selectContainer
+{
+    position: relative;
+}
+
 .select
 {
     padding: 12px 8px;
@@ -7,6 +12,33 @@
     color: #000000;
     width: 100%;
     border: 1px solid #7D7D7D;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/*To remove button from IE11, thank you Matt */
+.select::-ms-expand {
+    display: none;
+}
+
+.selectContainer:after
+{
+    content: ">";
+    font-size: 12px;
+    font-family:'Nanum Gothic', sans-serif;
+    position: absolute;
+    top: calc(50% - 9px);
+    background-color: white;
+    padding: 0 8px 6px 8px;
+    right: 2px;
+    color: #7D7D7D;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    pointer-events: none;
+    display: block;
 }
 
 .select::placeholder
@@ -14,12 +46,22 @@
     color: rgba(125, 125, 125, 0.45);
 }
 
+
 @media screen and (min-width: 760px) 
 {
     .select
     {
         padding: 15px 16px;
         font-size: 16px;
+    }
+
+    .selectContainer:after
+    {
+        content: ">";
+        font-size: 14px;
+        padding: 0 9px 6px 9px;
+        top: calc(50% - 10px);
+        right: 8px;
     }
     
 }

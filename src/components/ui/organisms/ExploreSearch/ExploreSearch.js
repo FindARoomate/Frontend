@@ -1,61 +1,71 @@
 import { useState, useEffect } from "react";
-import SearchOptions from "../../molecules/Search/SearchOptions/SearchOptions";
 import styles from "./ExploreSearch.module.css";
+import SearchOptions from "../../molecules/Search/SearchOptions/SearchOptions";
 import DisplaySearchTags from "../../molecules/Search/DisplaySearchTags/DisplaySearchTags";
+import {v4 as uuidv4} from 'uuid';
+
 const ExploreSearch = () => {
   const [tagKeys, updateTagKeys] = useState({});
 
   const filters = [
     {
-      key: 1,
+      key: uuidv4(),
       label: "Gender",
       name: "gender",
       data:
       [
-          {key: 1, label: "Male", value: "Male"},
-          {key: 2, label: "Female", value: "Female"},
+          {key: uuidv4(), label: "Gender", value: ""},
+          {key: uuidv4(), label: "Male", value: "Male"},
+          {key: uuidv4(), label: "Female", value: "Female"},
       ]
     },
     {
-      key: 2,
+      key: uuidv4(),
       label: "Religion",
       name: "religion",
       data:
       [
-          {key: 1, label: "Christian", value: "Christian"},
-          {key: 2, label: "Muslim", value: "Muslim"},
+          {key: uuidv4(), label: "Religion", value: ""},
+          {key: uuidv4(), label: "Christian", value: "Christian"},
+          {key: uuidv4(), label: "Muslim", value: "Muslim"},
       ]
     },
     {
-      key: 3,
+      key: uuidv4(),
       label: "Room Type",
       name: "room_type",
       data:
       [
-          {key: 1, label: "Self contain", value: "Self contain"},
-          {key: 2, label: "3 bedroom flat", value: "3 bedroom flat"},
+          {key: uuidv4(), label: "Room Type", value: ""},
+          {key: uuidv4(), label: "Self contain", value: "Self contain"},
+          {key: uuidv4(), label: "2 Bedroom Flat", value: "2 Bedroom Flat"},
+          {key: uuidv4(), label: "3 bedroom flat", value: "3 bedroom flat"},
+          {key: uuidv4(), label: "Shortlet", value: "Shortlet"},
+          {key: uuidv4(), label: "Single Room Apartment", value: "Single Room Apartment"}
       ]
     },
     {
-      key: 4,
+      key: uuidv4(),
       label: "Personality",
       name: "personality",
       data:
       [
-          {key: 1, label: "Introvert", value: "Introvert"},
-          {key: 2, label: "Extrovert", value: "Extrovert"},
+          {key: uuidv4(), label: "Personality", value: ""},
+          {key: uuidv4(), label: "Introvert", value: "INTROVERT"},
+          {key: uuidv4(), label: "Extrovert", value: "EXTROVERT"},
       ]      
     },
     {
-      key: 5,
+      key: uuidv4(),
       label: "Price",
       name: "price",
       data:
       [
-          {key: 1, label: "< #100k", value: "< #100k"},
-          {key: 2, label: "#100k - #250k", value: "#100k - #250k"},
-          {key: 3, label: "#250k - #500k", value: "#250k - #500k"},
-          {key: 4, label: "> #500k", value: "> #500k"},
+          {key: uuidv4(), label: "Price", value: ""},
+          {key: uuidv4(), label: "< #100k", value: "< #100k"},
+          {key: uuidv4(), label: "#100k - #250k", value: "#100k - #250k"},
+          {key: uuidv4(), label: "#250k - #500k", value: "#250k - #500k"},
+          {key: uuidv4(), label: "> #500k", value: "> #500k"},
       ] 
     },
   ];

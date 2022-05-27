@@ -2,7 +2,7 @@ import styles from './Input.module.css';
 
 const Input = (props) => 
 {
-    const {handleFormInputChange, name, type, placeholder} = props;
+    const {handleFormInputChange, name, type, placeholder, ...rest} = props;
 
     const handleInputChange = (e) =>
     {
@@ -21,7 +21,7 @@ const Input = (props) =>
             type={type}
             name={name}
             placeholder={placeholder}
-            {...props}
+            {...rest}
         />
      );
 }

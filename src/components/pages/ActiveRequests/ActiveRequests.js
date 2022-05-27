@@ -7,6 +7,7 @@ import { USER_ACTIVE_REQUESTS } from "../../routes";
 import useGet from "../../../customHooks/useGet";
 import {v4 as uuidv4} from 'uuid';
 import P from "../../ui/atoms/P/P";
+import { Link } from "react-router-dom";
 
 const ActiveRequests = () => 
 {
@@ -23,13 +24,13 @@ const ActiveRequests = () =>
                 {APIData && 
                     (
                         (APIData.length === 0) ?
-                            <P>You have no active requests at this moment</P> 
+                            <P className={styles.noRequestMessage}>You have no active requests at this moment. <Link to="/create-roommate-request-instruction">Request for a roommate now</Link></P> 
                         :
                         APIData.map((request) => 
                         {
                         return ( <ListBox
                             key = {uuidv4()}
-                            link = {`/active-request/${request.id}`}
+                            link = {`/request/${request.id}`}
                             name = {request.listing_title}
                             description = {request.additional_information}
                             dp={dp}

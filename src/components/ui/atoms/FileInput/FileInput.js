@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
 
-const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, required=true, multiple=false, ...rest}) => 
+const FileInput = ({name, fileValue = null, required=true, multiple=false, onChange, ...rest}) => 
 {
     const [labelText, setLabelText] = useState("Upload a photo");
     const [isInputRequired, setIsInputRequired] = useState(true); 
@@ -12,6 +12,7 @@ const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, requir
 
     const handleOnChange = (e) => 
     {
+
         if(e.target.files.length > 1)
         {
             setLabelText(`${e.target.files.length} files selected`)
@@ -21,8 +22,7 @@ const FileInput = ({name, handleFormChangeForFileInput, fileValue = null, requir
         {
             setLabelText(e.target.files[0].name);
         }
-
-        handleFormChangeForFileInput && handleFormChangeForFileInput(name, e.target.files);
+       onChange(name, e.target.files);
     }
 
     useEffect(() => 

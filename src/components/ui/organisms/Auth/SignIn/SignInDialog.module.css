@@ -113,6 +113,7 @@
     cursor: pointer;
 }
 
+/* Desktop and Table view */
 @media screen and (min-width: 760px) 
 {
     .heading h3

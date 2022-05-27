@@ -11,7 +11,7 @@ const Profile = () =>
     
     return ( 
         <ProfileTemplate
-            data={APIData}
+            profile={APIData}
         />
      );
 }

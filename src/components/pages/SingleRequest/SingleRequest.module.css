@@ -96,6 +96,7 @@
      width: auto;
      height: 100%;
      max-height: 208px;
+     cursor: pointer;
  }
 
 
@@ -172,6 +173,32 @@
      text-decoration: underline;
      color: #0029DD;
  } 
+
+ .successMessage
+ {
+     color: #0CF542;
+     padding: 14px;
+     width: 100%;
+     background-color:  #E2FEE8;
+     font-weight: 700;
+     font-size:13px;
+     border-radius: 8px;
+     margin: 10px 0;
+     text-transform: capitalize;
+     text-align: center;
+ }
+
+ .errorMessage
+ {
+     color: #a51b1b;
+     padding: 14px;
+     width: 100%;
+     background-color:  #ffaeae;
+     font-weight: 700;
+     font-size:13px;
+     border-radius: 8px;
+     margin: 10px 0;
+ }
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
@@ -280,6 +307,18 @@
 
     .buttonGroup .viewRequest a 
     {
+        font-size: 20px;
+    }
+
+    .successMessage
+    {
+        padding: 18px;
+        font-size: 20px;
+    }
+
+    .errorMessage
+    {
+        padding: 18px;
         font-size: 20px;
     }
 }

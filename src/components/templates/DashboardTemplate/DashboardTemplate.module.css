@@ -131,7 +131,7 @@
     border-radius: 50%;
 }
 
-.dashboardBody .card:first-child .img img
+.dashboardBody .card:first-child img
 {
     width: 15px;
     height: auto;
@@ -203,7 +203,7 @@
 
     .sidebar
     {
-        
+        background: white;
         border-radius: 8px;
         position: fixed;
     }
@@ -211,7 +211,9 @@
     .sidebar .image 
     {
         position: relative;
-        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0;
         margin: 0;
         border-bottom-right-radius:0px;
@@ -220,10 +222,9 @@
 
     .sidebar .image img
     {
-        height: 250px;
-        width: 100%;
-        border-bottom-right-radius:0px;
-        border-bottom-left-radius:0px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
     }
 
     .sidebar .image .overlay
@@ -239,7 +240,6 @@
     .sidebar .links 
     {
         margin-top: 0;
-        background: white;
         padding: 12px 36px 24px 32px;
     }
 
@@ -357,19 +357,37 @@
         margin-bottom: 0px;
     }
 
-    .dashboardBody .card:first-child .img , .card:nth-child(2) .img
+    .dashboardBody a:first-child .card .img , .dashboardBody a:nth-child(2) .card .img
     {
-        padding: 28px 30px;
+        padding: 27.1px 31.3px;
     }
 
-    .dashboardBody .card:first-child .img , .card:nth-child(3) .img
+    .dashboardBody a:nth-child(3) .card .img
     {
-        padding: 28px 28px;
+        padding: 26.6px 29px;
     }
 
-    .dashboardBody .card:first-child .img , .card:nth-child(4) .img
+    .dashboardBody a:nth-child(4) .card .img
     {
-        padding: 28px 31px;
+        padding: 26.78px 31.95px;
+    }
+
+    .dashboardBody a:first-child .card img, .dashboardBody a:nth-child(2) .card img
+    {
+        width: 25.41px;
+        height: auto;
+    }
+
+    .dashboardBody a:nth-child(3) .card img
+    {
+        width: 30px;
+        height: auto;
+    }
+
+    .dashboardBody a:nth-child(4) .card img
+    {
+        width: 24.1px;
+        height: auto;
     }
 
     .content 

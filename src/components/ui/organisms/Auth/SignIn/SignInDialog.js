@@ -56,7 +56,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
   return (
     <div className={styles.signInDialogContainer}>
       {/* move them to the on boarding screens on login */}
-      {isSuccess && <Navigate replace to="/create-profile-instruction" />}
+      {isSuccess &&  ((APIdata.data.last_login) ? <Navigate to="/dashboard"/> : <Navigate to="/create-profile-instruction" />)}
 
       <Modal open={open} closeModal={closeModal}>
         <div className={styles.signInDialog}>
@@ -75,7 +75,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
                 <Label>Password</Label>
                 <PasswordInput placeholder="Enter your password" />
               </div>
-              <Button>{isLoading ? "Loading..." : "Sign In"}</Button>
+              <Button className={isLoading ? "isLoading": ""}>{isLoading ? "Loading..." : "Sign In"}</Button>
               <div className={styles.divider}>
                 <span>or</span>
               </div>

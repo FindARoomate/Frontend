@@ -7,6 +7,7 @@ import Button from '../../ui/atoms/Button/Button';
 import Header from '../../ui/organisms/Header/Header';
 import globalStyles from './../../globalStyles.module.css';
 import mailConfirmedIcon from './../../../icons/mail-confirmed.svg';
+import invalidLinkIcon from './../../../icons/invalid-activation-link.svg';
 import { Link, useParams } from 'react-router-dom';
 import useGet from '../../../customHooks/useGet';
 
@@ -28,17 +29,28 @@ const ActivateEmail = () =>
                 <div className={`${globalStyles.body} ${styles.content}`}>
                 {!APIData ? <P>Loading...</P> : 
                 <>
-                 {isError && <P customStyle={{color:"red"}}>{APIData.error}</P>}
+                    {isError && (
+                        <div className={styles.error}>
+                            <Img src={invalidLinkIcon}/>
+                            <H1>Activation link is invalid!</H1>
+                            <P>This means your email address has been already activated. You can now proceed to finding and connecting to your ideal roommate. </P>
+                            <div className={styles.buttonGroup}>
+                                <Link to="/"><Button>Log in to my account</Button></Link>
+                                <Link to="/"><Button>Take me to GetARoommate.co</Button></Link>
+                            </div>
+                            
+                        </div>
+                    )}                
                     {isSuccess && (
-                        <>
-                            <Img src={mailConfirmedIcon}/>
-                            <H1>Your email has been successfully activated!</H1>
-                            <P>You can now proceed to finding and connecting to your ideal roommate.</P>
-                            <Link to="/">
-                                <Button>Take me to GetARoommate.co</Button>
-                            </Link>
-                        </>
-                    )}
+                    <div className={styles.success}>
+                        <Img src={mailConfirmedIcon}/>
+                        <H1>Your email has been successfully activated!</H1>
+                        <P>You can now proceed to finding and connecting to your ideal roommate.</P>
+                        <Link to="/">
+                            <Button>Take me to GetARoommate.co</Button>
+                        </Link>
+                    </div>
+                )}
                 </>}
                 </div>
                 </div>

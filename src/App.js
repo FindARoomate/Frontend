@@ -8,12 +8,8 @@ import CreateProfileThankYou from './components/pages/CreateProfile/CreateProfil
 import CreateProfileInstruction from './components/pages/CreateProfile/CreateProfileInstruction/CreateProfileInstruction';
 import MakeRoommateRequestLandingPage from './components/pages/LandingPages/MakeRoommateRequestLandingPage/MakeRoommateRequestLandingPage';
 import FindRoommateRequestLandingPage from './components/pages/LandingPages/FindRoommateRequestLandingPage/FindRoommateRequestLandingPage';
-import CreateRooomateRequestInstruction from './components/pages/RoommateRequest/CreateRoommateRequestInstruction/CreateRoommateRequestInstruction';
-import RoomLocation from './components/pages/RoommateRequest/RoomLocation/RoomLocation';
-import RoomDetails from './components/pages/RoommateRequest/RoomDetails/RoomDetails';
-import RoomPricing from './components/pages/RoommateRequest/RoomPricing/RoomPricing';
-import RoomLook from './components/pages/RoommateRequest/RoomLook/RoomLook';
-import CreateRoommateRequestThankYou from './components/pages/RoommateRequest/CreateRoommateRequestThankYou/CreateRoommateRequestThankYou';
+import CreateRooomateRequestInstruction from './components/pages/CreateRoommateRequest/CreateRoommateRequestInstruction/CreateRoommateRequestInstruction';
+import CreateRoommateRequestThankYou from './components/pages/CreateRoommateRequest/CreateRoommateRequestThankYou/CreateRoommateRequestThankYou';
 import ViewSingleRoommateRequest from './components/pages/ViewSingleRoommateRequest/ViewSingleRoommateRequest';
 import Dashboard from './components/pages/Dashboard/Dashboard';
 import ConnectionSent from './components/pages/ConnectionSent/ConnectionSent';
@@ -22,12 +18,12 @@ import SingleConnectionReceived from './components/pages/SingleConnectionReceive
 import SingleConnectionSent from './components/pages/SingleConnectionSent/SingleConnectionSent';
 import InactiveRequests from './components/pages/InactiveRequests/InactiveRequests';
 import ActiveRequests from './components/pages/ActiveRequests/ActiveRequests';
-import SingleActiveRequest from './components/pages/SingleActiveRequest/SingleActiveRequest';
-import SingleInactiveRequest from './components/pages/SingleInactiveRequest/SingleInactiveRequest';
+import SingleRequest from './components/pages/SingleRequest/SingleRequest';
 import Profile from './components/pages/Profile/Profile';
 import Notification from './components/pages/Notification/Notification';
 import CreateProfile from './components/pages/CreateProfile/CreateProfile';
 import ActivateEmail from './components/pages/ActivateEmail/ActivateEmail';
+import CreateRoommateRequest from './components/pages/CreateRoommateRequest/CreateRoommateRequest';
 
 
 function App() 
@@ -78,10 +74,7 @@ function App()
 
           {/* Roommate Request */}
           <Route path='/create-roommate-request-instruction' element={<CreateRooomateRequestInstruction/>}/>
-          <Route path='/room-location' element={<RoomLocation/>}/>
-          <Route path='/room-details' element={<RoomDetails/>}/>
-          <Route path='/room-pricing' element={<RoomPricing/>}/>
-          <Route path='/room-look' element={<RoomLook/>}/>
+          <Route path='/create-roommate-request' element={<CreateRoommateRequest/>} />
           <Route path='/create-roommate-request-thankyou' element={<CreateRoommateRequestThankYou/>} />
           
           {/* Dashboard related routes */}
@@ -94,8 +87,7 @@ function App()
 
           <Route path='/connection-received/1' element={<SingleConnectionReceived/>}/>
           <Route path='/connection-sent/1' element={<SingleConnectionSent/>}/>
-          <Route path='/inactive-request/:id' element={<SingleInactiveRequest/>}/>
-          <Route path='/active-request/:id' element={<SingleActiveRequest/>}/>
+          <Route path='/request/:id' element={<SingleRequest/>}/>
 
           {/* Profile */}
           <Route path='/profile' element={<Profile/>}/>

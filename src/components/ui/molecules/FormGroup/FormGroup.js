@@ -25,10 +25,7 @@ const FormGroup = ({inputs, textareas, p, button, handleSubmit, isLoading}) =>
                 {p.content}
             </P>)}
 
-            <form
-                className={isLoading ? "isLoading" : ''}
-                onSubmit = {(e) => handleFormSubmit(e)}
-            >
+            <form onSubmit = {(e) => handleFormSubmit(e)}>
                 {/* This way inputs and textareas display, but there is no way to control the order. 
                 A better solution will be to have a GetFields component and put all the fields in a single array. 
                 We can now have a "type" key. This will determine whether it is an input field, a textarea or a checkbox
@@ -37,8 +34,8 @@ const FormGroup = ({inputs, textareas, p, button, handleSubmit, isLoading}) =>
                 {inputs && <GetInputs inputs={inputs} />}
                 {textareas && <GetTextareas textareas={textareas}/>}
 
-                <Button>
-                    <span>{isLoading ? "Loading..." : button.content}</span>
+                <Button className={isLoading ? "isLoading" : ""}>
+                    {isLoading ? "Loading..." : button.content}
                 </Button>
             </form>
 

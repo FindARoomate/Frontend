@@ -1,0 +1,224 @@
+#formGroup1
+{
+    z-index: inherit;
+}
+
+
+.createRoommateRequest
+{
+    width: 90vw;
+    box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.25);
+    margin: 50px auto;
+    padding: 40px 30px;
+    border-radius: 8px;
+}
+
+.createRoommateRequest h1
+{
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Open Sans';
+    margin-bottom: 7px;
+}
+
+.createRoommateRequest .progressBarContainer
+{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+}
+.createRoommateRequest .progressBarContainer .progressBar
+{
+    width: 100%;
+    height: 4px;
+    background-color: #E0E6FF;
+}
+
+.createRoommateRequest .progressBarContainer .progressBarActive
+{
+    background-color:#0029DD;
+}
+
+.createRoommateRequest .progressBarContainer .progressBarVisited
+{
+    background-color: #0029DD;
+}
+
+.createRoommateRequest .formGroup
+{
+    display: none;
+}
+
+.createRoommateRequest .formGroupForm 
+{
+    margin-top: 63px;
+}
+
+.createRoommateRequest .formGroup button
+{
+    width: max-content;
+    padding: 13px 35px;
+}
+
+
+.createRoommateRequest .formGroupActive
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 16px;
+}
+
+.createRoommateRequest .inputGroup
+{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.createRoommateRequest .inputGroup label
+{
+    color: #7D7D7D;
+}
+
+.createRoommateRequest .inputGroup .radioGroup
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 9px;
+    align-items: center;
+}
+
+.createRoommateRequest .inputGroup .radioGroup > *
+{
+    width: max-content;
+}
+
+.createRoommateRequest .inputGroup .radioGroup label,
+.createRoommateRequest .inputGroup .radioGroupLabel
+{
+    color: black;
+}
+
+
+.checkboxContainer
+{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    row-gap: 12px;
+    column-gap: 12px;
+}
+
+.checkboxInputClass
+{
+    display: flex;
+    flex-direction: row;
+    /* margin-top: 8px; */
+    align-items: center;
+}
+
+.checkboxInputClass label
+{
+    width: 100%;
+    color: #000000!important;
+    font-size: 12px;
+}
+
+.checkboxInputClass input
+{
+    width: fit-content;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    border: 1px solid #7D7D7D;
+}
+
+
+.createRoommateRequest select
+{
+    font-size: 14px;
+}
+
+.createRoommateRequest select option
+{
+    color: #7D7D7D;
+}
+
+.createRoommateRequest .buttonGroup
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.createRoommateRequest .buttonGroup .submitButton
+{
+    display: flex;
+    align-items: center;
+}
+
+
+/* Desktop and Table View */
+@media screen and (min-width: 760px) 
+{
+    .createRoommateRequest
+    {
+        width: 47vw;
+        margin: 24px auto 50px;
+        padding: 50px 94px;
+        border-radius: 8px;
+    }
+
+    .createRoommateRequest h1
+    {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .createRoommateRequest .formGroupForm
+    {
+        margin-top: 90px;
+    }
+
+    .createRoommateRequest .formGroupActive
+    {
+        gap: 24px;
+    }
+
+    .createRoommateRequest #formGroup3
+    {
+        gap: 40px;
+    }
+
+    .createRoommateRequest .formGroup button
+    {
+        padding: 19px 61px;
+    }
+
+    .createRoommateRequest .inputGroup
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .checkboxInputClass label
+    {
+        font-size: 16px;
+    }
+
+    .checkboxInputClass input
+    {
+        margin-right: 8px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .createRoommateRequest select
+    {
+        font-size: 16px;
+    }
+    
+}

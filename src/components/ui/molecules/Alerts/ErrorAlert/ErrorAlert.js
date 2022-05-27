@@ -3,11 +3,11 @@ import styles from './ErrorAlert.module.css';
 import Img from '../../../atoms/Img/Img';
 import P from '../../../atoms/P/P';
 
-const ErrorAlert = ({children}) => 
+const ErrorAlert = ({customStyle, children, ...rest}) => 
 {
     
     return ( 
-    <div className={styles.errorAlert}>
+    <div className={styles.errorAlert} {...rest}>
         <Img src={errorIcon}/>
         <P>{children}</P>
     </div>

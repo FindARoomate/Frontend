@@ -25,7 +25,7 @@ const Select = ({showSelectTags, handleFormInputChange, name, children, ...rest}
 
     }
 
-    return ( 
+    return ( <span className={styles.selectContainer}>
                 <select 
                     className={styles.select}
                     onChange={(e) => handleSelectChange(e)}
@@ -34,8 +34,8 @@ const Select = ({showSelectTags, handleFormInputChange, name, children, ...rest}
                     {...rest}
                 >
                     {children}
-            </select>
-                
+                </select>
+            </span>
      );
 }
  

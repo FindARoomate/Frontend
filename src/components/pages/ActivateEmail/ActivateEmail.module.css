@@ -12,6 +12,7 @@
     min-height: 100vh;
 }
 
+
 .activateEmail .content
 {
     display: flex;
@@ -19,6 +20,21 @@
     align-items: center;
     justify-content: center;
 }
+
+.activateEmail .content .success, .activateEmail .content .error
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.activateEmail .content .success p, .activateEmail .content .error p
+{
+    max-width: 500px;
+
+}
+
 
 .activateEmail .content img 
 {
@@ -36,6 +52,11 @@
     margin-bottom: 12px;
 }
 
+.activateEmail .content .error h1
+{
+   color: #ED1E2E;
+}
+
 .activateEmail .content p
 {
     color: #000E4A;
@@ -43,11 +64,33 @@
     margin-bottom: 18px;
 }
 
+.activateEmail .content a
+{
+    width: 100%;
+} 
+
 .activateEmail .content button
 {
-    font-weight: 600;
+    font-weight: bold;
     padding: 15px 37px;
+    width: 100%;
 }
+
+.buttonGroup
+{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.buttonGroup a:last-child button
+{
+    background-color: white;
+    color: #0029DD;
+    border: 1px solid #0029DD;
+}
+
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
@@ -61,14 +104,14 @@
 
     .activateEmail .content img 
     {
-        padding-top: 50px;
-        margin-bottom: 56px;
+        padding-top: 0px;
+        margin-bottom: 36px;
     }
 
     .activateEmail .content h1
     {
         font-size: 28px;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
     }
 
     .activateEmail .content p
@@ -81,5 +124,10 @@
     {
         font-size: 20px;
         padding: 18px 100px;
+    }
+
+    .buttonGroup
+    {
+        gap: 18px;
     }
 }

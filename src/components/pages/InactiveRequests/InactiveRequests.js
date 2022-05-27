@@ -33,7 +33,7 @@ const InactiveRequests = () =>
                         {
                         return ( <ListBox
                             key = {uuidv4()}
-                            link = {`/inactive-request/${request.id}`}
+                            link = {`/request/${request.id}`}
                             name = {request.listing_title}
                             description = {request.additional_information}
                             dp={dp}

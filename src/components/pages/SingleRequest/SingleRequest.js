@@ -1,47 +1,90 @@
-import SingleConnectionReceivedTemplate from '../SingleConnectionReceivedTemplate/SingleConnectionReceivedTemplate';
+import SingleConnectionReceivedTemplate from '../../templates/SingleConnectionReceivedTemplate/SingleConnectionReceivedTemplate';
+import { ACTIVATE_ROOMMATE_REQUEST, DEACTIVATE_ROOMMATE_REQUEST } from "../../routes";
 import { GET_SINGLE_ROOMMATE_REQUEST } from "../../routes";
 import tickSquare from './../../../icons/tick-square.svg';
 import alertIcon from './../../../icons/alert-icon.svg';
 import editIcon from './../../../icons/edit-icon.svg';
 import backIcon from './../../../icons/back-icon.svg';
+import usePatch from "../../../customHooks/usePatch";
+import "./../../ui/organisms/Card/sliderStyles.css"; //slider styles
+import { Swiper, SwiperSlide } from 'swiper/react'; // Import Swiper React components
 import Button from '../../ui/atoms/Button/Button';
 import useGet from "../../../customHooks/useGet";
 import {Link, useParams} from 'react-router-dom';
-import styles from './SingleRequestTemplate.module.css';
+import styles from './SingleRequest.module.css';
+import { Navigation, Pagination } from "swiper";
+import Lightbox from 'react-image-lightbox';
 import Img from '../../ui/atoms/Img/Img';
+import { v4 as uuidv4 } from 'uuid';
 import P from '../../ui/atoms/P/P';
-
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper cardStyles
-import "swiper/css";
+import { useEffect } from 'react';
+import { useState } from 'react';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "./../../ui/organisms/Card/sliderStyles.css";
+import "swiper/css";
 
 
-// import required modules
-import { Navigation, Pagination } from "swiper";
-import { v4 as uuidv4 } from 'uuid';
-
-
-const SingleRequest = ({btnText, handleButtonOnClick}) => 
+const SingleRequest = () => 
 {
-
-
+    // Get request
     const {id} = useParams();
-
     const token = localStorage.getItem("accessToken");
     const url = GET_SINGLE_ROOMMATE_REQUEST + id + '/'; 
     const {APIData} = useGet(url, token);
+    
+    // Activate or deactivate request
+    const updateToken = "Bearer " + token;
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", updateToken);
+    const {isSuccess: updateSuccess, isError: updateError, APIData: updateData, sendPatchRequest} = usePatch(myHeaders);
+
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleOnClick = () => 
     {
-        if(handleButtonOnClick)
+        setIsLoading(true);
+
+        //deactivate request
+        if(APIData && APIData.is_active)
         {
-            handleButtonOnClick(id)
+            const url = DEACTIVATE_ROOMMATE_REQUEST + id + '/'; 
+
+            const formData = new FormData();
+            formData.append("is_active", false);
+
+            sendPatchRequest(url, formData);
         }
+
+        //activate request
+        if(APIData && !APIData.is_active)
+        {
+            const url = ACTIVATE_ROOMMATE_REQUEST + id + '/'; 
+
+            const formData = new FormData();
+            formData.append("is_active", true);
+
+            sendPatchRequest(url, formData);
+        }
+    }
+
+    useEffect (() => 
+    {
+        if(updateSuccess || updateError) setIsLoading(false);
+
+        console.log(updateData);
+
+    }, [updateData, updateSuccess, updateError]);
+
+    const [isLightBoxOpen, setIsLightBoxOpen] = useState(false);
+    const [photoIndex, setPhotoIndex] = useState(0);
+    
+    const requestImages = APIData && APIData.request_images;
+
+    const openLightBox = (index) => 
+    {
+        setIsLightBoxOpen(true);//open lightbox
+        setPhotoIndex(index);
     }
 
     return ( 
@@ -74,12 +117,13 @@ const SingleRequest = ({btnText, handleButtonOnClick}) =>
                     modules={[Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    {APIData && APIData.request_images.map((imageLink) => 
+                    {APIData && requestImages.map((imageLink, index) => 
                     {
                         return (
                         <SwiperSlide key={uuidv4()}>
                             <Img 
                                 src={imageLink.image_url}
+                                onClick = {() => openLightBox(index)}
                             />
                         </SwiperSlide>
                         )
@@ -88,6 +132,28 @@ const SingleRequest = ({btnText, handleButtonOnClick}) =>
                     }
                    
                 </Swiper>
+                {isLightBoxOpen && (
+                    <Lightbox
+                        mainSrc={requestImages[photoIndex].image_url}
+                        nextSrc={requestImages[(photoIndex + 1) % requestImages.length].image_url}
+                        prevSrc={requestImages[(photoIndex + requestImages.length - 1) % requestImages.length].image_url}
+                        onCloseRequest={() => setIsLightBoxOpen(false)}
+                        onMovePrevRequest={() =>
+                            setPhotoIndex((photoIndex) => 
+                            {
+                                return (photoIndex + requestImages.length - 1) % requestImages.length;
+
+                            })
+                        }
+                        onMoveNextRequest={() =>
+                            setPhotoIndex((photoIndex) => 
+                            {
+                                return (photoIndex + 1) % requestImages.length;
+                            })
+                        }
+                    />
+                    )
+                    }
                 </div>
 
                 <div className={styles.roomInfoContainer}>
@@ -142,11 +208,24 @@ const SingleRequest = ({btnText, handleButtonOnClick}) =>
                             View Request Page
                         </Link>
                     </div>
-                    <div className={styles.rejectButton}>
-                        <Button handleOnClick={handleOnClick}>{btnText}</Button>
-                    </div>
-                    
+                    {APIData &&
+                        (APIData.is_active ? 
+                            <div className={styles.rejectButton}>
+                                <Button handleOnClick={handleOnClick} className={isLoading ? "isLoading" : ""}>
+                                    {isLoading ? "Loading..." : "Deactivate Request"}
+                                </Button>
+                            </div>
+                            :
+                            <div className={styles.acceptButton}>
+                                <Button handleOnClick={handleOnClick} className={isLoading ? "isLoading" : ""}>
+                                    {isLoading ? "Loading..." : "Activate Request"}
+                                </Button>
+                            </div>
+                        )
+                    }
                 </div>
+                {updateSuccess && <div className={styles.successMessage}>{updateData.detail}</div>}
+                {updateError && <div className={styles.errorMessage}>Something bad happened. Please try again</div>}
 
             </SingleConnectionReceivedTemplate>
         );

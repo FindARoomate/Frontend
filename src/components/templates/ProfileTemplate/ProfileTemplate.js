@@ -6,7 +6,7 @@ import backIcon from './../../../icons/back-icon.svg';
 import styles from './ProfileTemplate.module.css';
 import Img from './../../ui/atoms/Img/Img';
 
-const ProfileTemplate = ({data = null}) => {
+const ProfileTemplate = ({profile = null}) => {
     return ( 
         <SingleConnectionReceivedTemplate>
              <div className={styles.backNavigation} onClick={() => window.history.back()}>
@@ -29,7 +29,7 @@ const ProfileTemplate = ({data = null}) => {
                     <div className={styles.profileInfoRow}>
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Name</span>
-                            <span className={styles.value}>{data ? data.fullname : "Loading..."}</span>
+                            <span className={styles.value}>{profile ? profile.data.fullname : "Loading..."}</span>
                         </div>
                         <div className={styles.editIcon}>
                             <Img src={editIcon}/>
@@ -38,7 +38,7 @@ const ProfileTemplate = ({data = null}) => {
                     <div className={styles.profileInfoRow}>
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Phone number</span>
-                            <span className={styles.value}>{data ? data.phone_number : "Loading..."}</span>
+                            <span className={styles.value}>{profile ? profile.data.phone_number : "Loading..."}</span>
                         </div>
                         <div className={styles.editIcon}>
                             <Img src={editIcon}/>
@@ -47,7 +47,7 @@ const ProfileTemplate = ({data = null}) => {
                     <div className={styles.profileInfoRow}>
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Email</span>
-                            <span className={styles.value}>{data ? data.phone_number : "Loading..."}</span>
+                            <span className={styles.value}>{profile ? profile.email : "Loading..."}</span>
                         </div>
                         <div className={styles.editIcon}>
                             <Img src={editIcon}/>
@@ -57,7 +57,7 @@ const ProfileTemplate = ({data = null}) => {
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Gender</span>
                             <span className={styles.value} style={{textTransform: "capitalize"}}>
-                                {data ? data.gender.toLowerCase() : "Loading..."}
+                                {profile ? profile.data.gender.toLowerCase() : "Loading..."}
                             </span>
                         </div>
                         <div className={styles.editIcon}>
@@ -67,7 +67,7 @@ const ProfileTemplate = ({data = null}) => {
                     <div className={styles.profileInfoRow}>
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Profession</span>
-                            <span className={styles.value}>{data ? data.profession : "Loading..."}</span>
+                            <span className={styles.value}>{profile ? profile.data.profession : "Loading..."}</span>
                         </div>
                         <div className={styles.editIcon}>
                             <Img src={editIcon}/>
@@ -76,7 +76,7 @@ const ProfileTemplate = ({data = null}) => {
                     <div className={styles.profileInfoRow}>
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Age range</span>
-                            <span className={styles.value}>{data ? data.age_range : "Loading..."}</span>
+                            <span className={styles.value}>{profile ? profile.data.age_range : "Loading..."}</span>
                         </div>
                         <div className={styles.editIcon}>
                             <Img src={editIcon}/>
@@ -86,7 +86,7 @@ const ProfileTemplate = ({data = null}) => {
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Religion</span>
                             <span className={styles.value} style={{textTransform: "capitalize"}}>
-                                {data ? data.religion.toLowerCase() : "Loading..."}
+                                {profile ? profile.data.religion.toLowerCase() : "Loading..."}
                             </span>
                         </div>
                         <div className={styles.editIcon}>
@@ -97,7 +97,7 @@ const ProfileTemplate = ({data = null}) => {
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Personality</span>
                             <span className={styles.value} style={{textTransform: "capitalize"}}>
-                                {data ? data.personality.toLowerCase() : "Loading..."}
+                                {profile ? profile.data.personality.toLowerCase() : "Loading..."}
                             </span>
                         </div>
                         <div className={styles.editIcon}>
@@ -107,7 +107,7 @@ const ProfileTemplate = ({data = null}) => {
                     <div className={styles.profileInfoRow}>
                         <div className={styles.profileInfo}>
                             <span className={styles.label}>Short Bio</span>
-                            <span className={styles.value}>{data ? data.bio: "Loading..."}</span>
+                            <span className={styles.value}>{profile ? profile.data.bio: "Loading..."}</span>
                         </div>
                         <div className={styles.editIcon}>
                             <Img src={editIcon}/>

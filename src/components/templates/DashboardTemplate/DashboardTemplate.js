@@ -1,3 +1,7 @@
+import activeConnectionReceived from './../../../icons/active-connection-received.svg';
+import activeInactiveRequest from './../../../icons/active-inactive-request.svg';
+import activeConnectionSent from './../../../icons/active-connection-sent.svg';
+import activeActiveRequest from './../../../icons/active-active-request.svg';
 import connectionReceived from './../../../icons/connection-received.svg';
 import globalStyles from './../../../components/globalStyles.module.css';
 import inactiveRequest from './../../../icons/inactive-request.svg';
@@ -54,7 +58,7 @@ const DashboardTemplate = ({
         {
             id: 2,
             text: "Create request",
-            path: '/create-request'
+            path: '/create-roommate-request'
         },
         {
             id: 3,
@@ -179,7 +183,7 @@ const DashboardTemplate = ({
                             <Link to="/connection-sent">
                                 <div className={`${dashboardStyles.card} ${currentPath === "/connection-sent" ? dashboardStyles.active : ""}`}>
                                     <div className={dashboardStyles.img}>
-                                        <Img src={connectionSent}/>
+                                        <Img src={currentPath === "/connection-sent" ? activeConnectionSent : connectionSent}/>
                                     </div>
                                     <P>Connection sent</P>
                                     <P>5</P>
@@ -189,7 +193,7 @@ const DashboardTemplate = ({
                            <Link to="/connection-received">
                             <div className={`${dashboardStyles.card} ${currentPath === "/connection-received" ? dashboardStyles.active : ""}`}>
                                 <div className={dashboardStyles.img}>
-                                    <Img src={connectionReceived}/>
+                                    <Img src={currentPath === "/connection-received" ? activeConnectionReceived : connectionReceived}/>
                                 </div>
                                 <P>Connection received</P>
                                 <P>4</P>
@@ -199,7 +203,7 @@ const DashboardTemplate = ({
                             <Link to="/active-requests">
                             <div className={`${dashboardStyles.card} ${currentPath === "/active-requests" ? dashboardStyles.active : ""}`}>
                                 <div className={dashboardStyles.img}>
-                                    <Img src={activeRequest}/>
+                                    <Img src={currentPath === "/active-requests" ? activeActiveRequest : activeRequest}/>
                                 </div>
                                 <P>Active request</P>
                                 <P>1</P>
@@ -209,7 +213,7 @@ const DashboardTemplate = ({
                             <Link to="/inactive-requests">
                             <div className={`${dashboardStyles.card} ${currentPath === "/inactive-requests" ? dashboardStyles.active : ""}`}>
                                 <div className={dashboardStyles.img}>
-                                    <Img src={inactiveRequest}/>
+                                    <Img src={currentPath === "/inactive-requests" ? activeInactiveRequest : inactiveRequest}/>
                                 </div>
                                 <P>Inactive request</P>
                                 <P>5</P>
