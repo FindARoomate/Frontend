@@ -13,6 +13,8 @@ import Img from "../../../atoms/Img/Img";
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
 import PasswordInput from "../../../atoms/Input/PasswordInput";
+import { UserContext } from "../../../../context";
+import { useContext } from "react";
 
 const SignInDialog = ({ open, closeModal, openCreateAccountModal}) => 
 {
@@ -37,6 +39,23 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
     openCreateAccountModal();
   }
 
+  //update context
+  {
+    const {isUserLoggedIn, setIsUserLoggedIn} = useContext(UserContext);
+
+    const updateContext = () => 
+    {
+      console.log("Before: ", isUserLoggedIn);
+      localStorage.setItem("isUserLoggedIn", true);
+      setIsUserLoggedIn(true);
+    }
+
+    {isSuccess && updateContext()}
+
+    console.log("After: ", isUserLoggedIn);
+
+   }
+
   useEffect(() => 
   {
     //after getting a response from database, remove loading message
@@ -44,6 +63,8 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
     {
       setIsLoading(false);
     }
+
+    console.log(APIdata);
 
     if (isSuccess) 
     {
@@ -55,6 +76,20 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
 
   return (
     <div className={styles.signInDialogContainer}>
+      {/* Update react context */}
+      {/* {isSuccess && 
+       <UserContext.Consumer>
+        {
+          ({isUserLoggedIn, setIsUserLoggedIn}) => 
+          {
+            console.log("Before: ", isUserLoggedIn);
+            localStorage.setItem("isUserLoggedIn", true);
+            setIsUserLoggedIn(true);
+            console.log("After: ", isUserLoggedIn);
+          }
+        }
+      </UserContext.Consumer>
+      } */}
       {/* move them to the on boarding screens on login */}
       {isSuccess &&  ((APIdata.data.last_login) ? <Navigate to="/dashboard"/> : <Navigate to="/create-profile-instruction" />)}
 

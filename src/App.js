@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, createContext} from 'react'
 import NotFound from './components/pages/NotFound/NotFound';
 import ComingSoon from './components/pages/ComingSoon/ComingSoon';
 import ComingSoon2 from './components/pages/ComingSoon2/ComingSoon2';
@@ -28,7 +28,6 @@ import CreateRoommateRequest from './components/pages/CreateRoommateRequest/Crea
 
 function App() 
 {
-
   const { pathname, hash, key } = useLocation();
 
   useLayoutEffect(() => {

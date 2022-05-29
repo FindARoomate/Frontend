@@ -5,6 +5,8 @@ import useGet from '../../../customHooks/useGet';
 import { GET_ALL_ROOMMATE_REQUESTS } from '../../routes';
 import ViewAllRoommateRequestsTemplate from '../../templates/ViewAllRoommateRequestsTemplate/ViewAllRoommateRequestsTemplate';
 import { useLocation } from 'react-router-dom';
+import { TestContext } from '../../context';
+import Button from '../../ui/atoms/Button/Button';
 
 const ViewAllRoommateRequests = () =>
 {
@@ -25,12 +27,16 @@ const ViewAllRoommateRequests = () =>
     }, [pageId]);
 
     
+    
 
-     return(<ViewAllRoommateRequestsTemplate
-            roommateRequests={APIData}
-            isSuccess = {isSuccess}
-            isError = {isError}
-        />);
+     return(
+
+            <ViewAllRoommateRequestsTemplate
+                roommateRequests={APIData}
+                isSuccess = {isSuccess}
+                isError = {isError}
+            />
+    );
 
 }
  

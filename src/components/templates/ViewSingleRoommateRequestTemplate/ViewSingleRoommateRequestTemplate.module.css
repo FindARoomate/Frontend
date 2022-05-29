@@ -165,6 +165,26 @@
     font-weight: 400;
 }
 
+.connectionSentNotification
+{
+    padding: 11px 21px;
+    color: #51545D;
+    background-color: #F9FAFF;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-direction: nowrap;
+    gap: 0;
+}
+
+.connectionSentNotification .closeIcon
+{
+  cursor: pointer;
+  font-size: 18px;
+  color: black;
+  font-family: 'Nanum Gothic', sans-serif;;
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
@@ -365,5 +385,11 @@
     {
         height: 456px;
         margin-top: 32px;
+    }
+
+    .connectionSentNotification
+    {
+        font-size: 15px;
+        margin-bottom: 35px;
     }
 }

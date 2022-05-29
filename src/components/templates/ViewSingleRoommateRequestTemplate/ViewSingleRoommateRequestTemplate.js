@@ -18,7 +18,9 @@ import { v4 as uuidv4 } from 'uuid';
 import Gallery from "react-photo-gallery";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
-import { useState, useCallback } from 'react';
+import { useState, useCallback} from 'react';
+import {CREATE_CONNECTION_REQUEST} from './../../routes';
+import usePost from './../../../customHooks/usePost';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -26,6 +28,10 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) => 
 {
+    const token =  "Bearer " + localStorage.getItem("accessToken");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", token);
+    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_CONNECTION_REQUEST, myHeaders);
 
     let [photoIndex, setPhotoIndex] = useState(0);
     let [isOpen, setIsOpen] = useState(false);
@@ -34,8 +40,6 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
 
     if (roommateRequest)
     {   
-        if(!roommateRequest.amenities) roommateRequest.amenities = [];
-
         roommateRequest.request_images.forEach((image) => 
         {
             <div key={uuidv4()}>
@@ -49,8 +53,25 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         setIsOpen(true);
       }, []);
 
+      const [shouldShowForm, setShouldShowForm] = useState(true);
+      const closeMessage = () => 
+      {
+        setShouldShowForm(false);
+      }
 
+      const sendConnectionRequest = () => 
+      {
+        const formData = new FormData();
+        formData.append("user", 2);
+        formData.append("roomate_request", roommateRequest.id);
+        sendPostRequest(formData);
+      }
 
+      useState(() => 
+      {
+          console.log(APIdata);
+      })
+ 
     const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'});
   
     const headerLinks = 
@@ -172,11 +193,21 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                             </div>
 
                             <div className={styles.desktopOwnerInformation}>
+                                {shouldShowForm && 
+                                    <div className={styles.connectionSentNotification}>
+                                        <div className={styles.content}>
+                                            You have successfully sent a connection request to Precious Faseyosan. We will notify you when she accepts or declines your connection request.
+                                        </div>
+                                        <div className={styles.closeIcon} onClick={closeMessage}>
+                                            x
+                                        </div>  
+                                    </div>
+                                }   
                                 <div className={styles.personalInfo}>
                                     <Img src ={displayPicture} />
                                     <span>
-                                        <H3>{roommateRequest.profile.name}</H3>
-                                        <P>{roommateRequest.profile.occupation}</P>
+                                        <H3>{roommateRequest.profile.fullname}</H3>
+                                        <P>{roommateRequest.profile.profession}</P>
                                     </span>
                                 </div>
                                 <div>
@@ -203,7 +234,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                             )}
                                         </P>
                                     </div>
-                                    <Button>Connect Now</Button>
+                                    <Button handleOnClick={sendConnectionRequest}>Connect Now</Button>
                                 </div>
                             </div>
                             

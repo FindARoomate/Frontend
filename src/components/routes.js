@@ -31,5 +31,8 @@ export const ACTIVATE_ROOMMATE_REQUEST = API_URL + '/request/activate/';
 
 export const DEACTIVATE_ROOMMATE_REQUEST = API_URL + '/request/deactivate/';
 
+//Connection endpoints
+export const CREATE_CONNECTION_REQUEST = API_URL + '/connections/create/';
+
 // Profile
 export const GET_PROFILE = API_URL + '/profile/get/';
