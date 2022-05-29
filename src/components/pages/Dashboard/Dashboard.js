@@ -4,10 +4,6 @@ import { useContext } from "react";
 
 const Dashboard = () => 
 {
-  // const {isUserLoggedIn} = useContext(UserContext);
-
-  // console.log("After: ", isUserLoggedIn);
-
     return ( 
        <DashboardTemplate
        />

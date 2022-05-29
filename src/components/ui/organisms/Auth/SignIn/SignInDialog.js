@@ -16,7 +16,7 @@ import PasswordInput from "../../../atoms/Input/PasswordInput";
 import { UserContext } from "../../../../context";
 import { useContext } from "react";
 
-const SignInDialog = ({ open, closeModal, openCreateAccountModal}) => 
+const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = null, message = null}) => 
 {
   const [isLoading, setIsLoading] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
@@ -51,8 +51,6 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
     }
 
     {isSuccess && updateContext()}
-
-    console.log("After: ", isUserLoggedIn);
 
    }
 
@@ -90,11 +88,20 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal}) =>
         }
       </UserContext.Consumer>
       } */}
+      
       {/* move them to the on boarding screens on login */}
-      {isSuccess &&  ((APIdata.data.last_login) ? <Navigate to="/dashboard"/> : <Navigate to="/create-profile-instruction" />)}
+      {isSuccess &&  ((APIdata.data.last_login) ? 
+      <>
+        {/* Redirect to dashboard page or a page defined by another component */}
+        {redirectTo ?  <Navigate to={redirectTo}/> : <Navigate to="/dashboard"/>}
+      </> : 
+      // Redirect to profile page on first login
+      <Navigate to="/create-profile-instruction" />
+      )}
 
       <Modal open={open} closeModal={closeModal}>
         <div className={styles.signInDialog}>
+          {message && <ErrorAlert>{message}</ErrorAlert>}
           <div className={styles.heading}>
             <H3>SIGN IN</H3>
             <P>It's nice having you here again</P>

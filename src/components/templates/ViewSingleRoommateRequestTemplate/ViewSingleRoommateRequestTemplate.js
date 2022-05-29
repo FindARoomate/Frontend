@@ -21,6 +21,10 @@ import 'react-image-lightbox/style.css'; // This only needs to be imported once 
 import { useState, useCallback} from 'react';
 import {CREATE_CONNECTION_REQUEST} from './../../routes';
 import usePost from './../../../customHooks/usePost';
+import { useContext } from 'react';
+import { UserContext } from '../../context';
+import CreateAccountDialog from './../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
+import SignInDialog from './../../ui/organisms/Auth/SignIn/SignInDialog';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -35,6 +39,34 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
 
     let [photoIndex, setPhotoIndex] = useState(0);
     let [isOpen, setIsOpen] = useState(false);
+
+    let [isLoading, setIsLoading] = useState(false);
+
+    const {isUserLoggedIn} = useContext(UserContext);
+
+    // For sign in modal
+    const [signInModalState, setSignInModalState] = useState(false);
+    const showSignInDialog = () => setSignInModalState(true);
+    const closeSignInModal = () => setSignInModalState(false);
+
+
+    //For create account modal
+    const [createAccountModalState, setCreateAccountModalState] = useState(false);
+    const showCreateAccountDialog = () => setCreateAccountModalState(true);
+    const closeCreateAccountModal = () => setCreateAccountModalState(false);
+
+
+    const openSignInModal = () => 
+    {
+        closeCreateAccountModal();
+        showSignInDialog();
+    }
+
+    const openCreateAccountModal = () => 
+    {
+        closeSignInModal();
+        showCreateAccountDialog();
+    }
 
     let image_array = [];
 
@@ -61,16 +93,33 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
 
       const sendConnectionRequest = () => 
       {
-        const formData = new FormData();
-        formData.append("user", 2);
-        formData.append("roomate_request", roommateRequest.id);
-        sendPostRequest(formData);
+        //Check if user is logged in
+        if(!isUserLoggedIn)
+        {
+            // Open Sign In Dialog
+            openSignInModal();
+
+        }else
+        {
+            setIsLoading(true);
+
+            const formData = new FormData();
+            formData.append("user", 3);
+            formData.append("roomate_request", roommateRequest.id);
+            sendPostRequest(formData);
+        }
+
+        
       }
 
       useState(() => 
       {
           console.log(APIdata);
-      })
+          if(isSuccess || isError)
+          {
+              setIsLoading(false);
+          }
+      }, [APIdata])
  
     const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'});
   
@@ -234,7 +283,10 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                             )}
                                         </P>
                                     </div>
-                                    <Button handleOnClick={sendConnectionRequest}>Connect Now</Button>
+                                    <Button 
+                                        handleOnClick={sendConnectionRequest}
+                                        className={isLoading ? "isLoading": ""}
+                                    >{isLoading ? "Loading..." : "Connect Now"}</Button>
                                 </div>
                             </div>
                             
@@ -282,11 +334,30 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                             </span>
                         </div>
                         <div>
-                            <Button>Connect now</Button>
+                        <Button 
+                            handleOnClick={sendConnectionRequest}
+                            className={isLoading ? "isLoading": ""}
+                        >{isLoading ? "Loading..." : "Connect Now"}</Button>
                         </div>
                     </div>
                 </>) : "Loading ..."}
             
+
+            <SignInDialog 
+                open={signInModalState} 
+                closeModal={closeSignInModal}
+                openCreateAccountModal={openCreateAccountModal}
+                redirectTo = {window.location.pathname}
+                message = "You need to login before you can make a connection request"
+            />
+
+            <CreateAccountDialog 
+                open={createAccountModalState}
+                closeModal={closeCreateAccountModal}
+                openSignInModal={openSignInModal}
+                redirectTo = {window.location.pathname}
+                message = "You need to login before you can make a connection request"
+            />
 
         </div>
      );
