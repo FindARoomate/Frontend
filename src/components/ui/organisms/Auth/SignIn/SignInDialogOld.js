@@ -16,82 +16,68 @@ import PasswordInput from "../../../atoms/Input/PasswordInput";
 import { UserContext } from "../../../../context";
 import { useContext } from "react";
 
-const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = null, message = null}) => 
+const SignInDialogOld = ({ open, closeModal, openCreateAccountModal, redirectTo = null, message = null}) => 
 {
   const [isLoading, setIsLoading] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
 
   const handleSignIn = (e) => 
   {
-    e.preventDefault();
-    setIsLoading(true);
-
-    //trigger login request to backend
-    const formData = new FormData();
-    formData.append("email", e.target[0].value);
-    formData.append("password", e.target[1].value)
-    sendPostRequest(formData);
+    // e.preventDefault();
+    // setIsLoading(true);
+    // //trigger login request to backend
+    // const formData = new FormData();
+    // formData.append("email", e.target[0].value);
+    // formData.append("password", e.target[1].value)
+    // sendPostRequest(formData);
+    
   };
 
   const handleCreateAccountOnClick = (e) => 
   {
-    e.preventDefault();
-    openCreateAccountModal();
+    // e.preventDefault();
+    // openCreateAccountModal();
   }
 
   //update context
-  const {setUserProfile, setIsUserLoggedIn} = useContext(UserContext);
+  // const {isUserLoggedIn, setIsUserLoggedIn} = useContext(UserContext);
 
-  const updateContext = (user_id, data) => 
-  {
-    localStorage.setItem("isUserLoggedIn", true);
-    localStorage.setItem("fullname", data.fullname);
-    localStorage.setItem("image_url", data.image_url);
-    localStorage.setItem("profile_id", data.id);
-    localStorage.setItem("user_id", user_id);
-
-    setIsUserLoggedIn(true);
-    setUserProfile(
-      {
-        "fullname": data.fullname,
-        "image_url": data.image_url,
-        "profile_id": data.id,
-        "user_id": user_id
-      }
-    )
-  }
+  // const updateContext = () => 
+  // {
+  //   localStorage.setItem("isUserLoggedIn", true);
+  //   setIsUserLoggedIn(true);
+  // }
 
   useEffect(() => 
   {
     //after getting a response from database, remove loading message
-    if (isSuccess || isError) 
-    {
-      setIsLoading(false);
-      console.log(APIdata);
-    }
+    // if (isSuccess || isError) 
+    // {
+    //   setIsLoading(false);
+    // }
 
-    if (isSuccess) 
-    {
-      // Close Modal if you are trying to redirect to the same page
-      if(redirectTo == window.location.pathname)
-      {
-        closeModal();
-      }
+    // console.log(APIdata);
 
-      updateContext(APIdata.data.id, APIdata.data.profile_data);
-      localStorage.setItem("accessToken", APIdata.access); //add access token to localStorage
-      localStorage.setItem("refreshToken", APIdata.refresh); //add refresh token to localStorage
-    }
+    // if (isSuccess) 
+    // {
+    //   // updateContext();
+    //   localStorage.setItem("accessToken", APIdata.access); //add access token to localStorage
+    //   localStorage.setItem("refreshToken", APIdata.refresh); //add refresh token to localStorage
+    // }
 
   }, [isError, isSuccess, APIdata]);
 
   return (
     <div className={styles.signInDialogContainer}>
-                  
-      {isSuccess &&  
-      (
-        (APIdata.data.last_login) ? (!redirectTo && <Navigate to="/dashboard"/>) : <Navigate to="/create-profile-instruction" />
-      )}
+            
+      {/* move them to the on boarding screens on login */}
+      {/* {isSuccess &&  ((APIdata.data.last_login) ? 
+      <>
+        {/* Redirect to custom page else fall back to dashboard */}
+        {/* {redirectTo ?  <Navigate to={redirectTo}/> : <Navigate to="/dashboard"/>} */}
+      {/* </> : 
+      <Navigate to="/create-profile-instruction" />  // Redirect to profile page on first login
+      )} */}
 
       <Modal open={open} closeModal={closeModal}>
         <div className={styles.signInDialog}>
@@ -112,7 +98,8 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
                 <PasswordInput placeholder="Enter your password" />
               </div>
 
-              <Button className={isLoading ? "isLoading": ""}>{isLoading ? "Loading..." : "Sign In"}</Button>
+              <Button handleOnClick={() => <Navigate to="/roommate-request/1"/>}>Navigate</Button>
+              {/* <Button className={isLoading ? "isLoading": ""}>{isLoading ? "Loading..." : "Sign In"}</Button> */}
               <div className={styles.divider}>
                 <span>or</span>
               </div>
@@ -134,4 +121,4 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
   );
 };
 
-export default memo(SignInDialog);
+export default memo(SignInDialogOld);

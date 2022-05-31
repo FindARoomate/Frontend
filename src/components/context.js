@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { createContext } from "react";
 
+// Function to check if user is logged in based on their time their token is meant to expire
+const checkIfUserIsLoggedIn = () =>
+{
+    return localStorage.getItem("isUserLoggedIn") ? localStorage.getItem("isUserLoggedIn") : false;
+}
+
 export const UserContext = createContext({
-    isUserLoggedIn: false,
+    isUserLoggedIn: checkIfUserIsLoggedIn(),
     setIsUserLoggedIn: () => {},
     isProfileCreated: false,
     setIsProfileCreated: () => {} ,
-    userProfile: {},
+    userProfile: {"Hi": "me"},
     setUserProfile : () => {}
 });
 

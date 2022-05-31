@@ -16,15 +16,19 @@ const useGet = (url, token = null) =>
 
     const fetchFunction = async (url, headersValue) => 
     {
-        const res = await fetch(url, {headers: headersValue });
+        const res = await fetch(url, {headers:  headersValue });
+
         const body = await res.json();
+
         if(res.ok)
         {
+            console.log("success here")
             setIsError(false);
             setIsSuccess(true);
             setAPIData(body);
         }else
         {
+            console.log("error here")
             setIsError(true)
             setIsSuccess(false);
             setAPIData(body); 
@@ -37,7 +41,7 @@ const useGet = (url, token = null) =>
     {
         fetchFunction(url, headersValue);
 
-    }, [url, token])
+    }, [url, token]);
 
     return {isError, isSuccess, APIData}
 }

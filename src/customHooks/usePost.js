@@ -28,7 +28,7 @@ const usePost = (url, headersValue = {}) =>
         setAPIData(data);
         setIsSuccess(true);
         setIsError(false);
-        console.log(data)
+        // console.log(data)
       }
 
     }catch(error)
@@ -36,7 +36,7 @@ const usePost = (url, headersValue = {}) =>
       setAPIData(error);
       setIsSuccess(false);
       setIsError(true); //Remove any success message
-      console.log(error);
+      // console.log(error);
     }
   }
     
@@ -44,8 +44,9 @@ const usePost = (url, headersValue = {}) =>
   {
     fetchFunction(formData);    
   },
-    [url, headersValue]
+    [fetchFunction]
   );
+
 
   return { isError, isSuccess, APIdata, sendPostRequest };
 };

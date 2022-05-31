@@ -10,9 +10,13 @@ import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
 import Img from './../../atoms/Img/Img';
 import dp from './../../../../images/dashboard-image.png';
 import P from '../../atoms/P/P';
+import { useContext } from 'react';
+import { UserContext } from '../../../context';
 
 const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activePage}) => {
 
+    //get user info
+    const {isUserLoggedIn, userProfile} = useContext(UserContext);
 
     //variable to check if there are any links available
     var areLinksAvailable = signIn || createAccount || links || mobileLinks || localStorage.getItem("accessToken");
@@ -103,13 +107,16 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activeP
                 openCreateAccountDialog={openCreateAccountDialog}
               />
             )}
-            <div className={styles.headerProfile}>
-              <Img src={dp} />
-              <span>
-                <P>Precious Faseyosan</P>
-                <Link to="/profile">View profile</Link>
-              </span>
-            </div>
+            { isUserLoggedIn &&
+              <div className={styles.headerProfile}>
+                <Img src={userProfile.image_url} />
+                <span>
+                  <P>{userProfile.fullname}</P>
+                  <Link to="/profile">View profile</Link>
+                </span>
+              </div>
+            }
+            
           </div>
 
           {/* Harmburger Icon */}
@@ -123,13 +130,16 @@ const Header = ({customStyle, signIn, createAccount, links, mobileLinks, activeP
           {/* Mobile Pop-up */}
           <div className={styles.mobileMenuModal}>
             <Modal closeModal={closeMobileDialog} open={modalState}>
+            
+            {isUserLoggedIn &&
               <div className={styles.headerProfile}>
-                <Img src={dp} />
+                <Img src={userProfile.image_url} />
                 <span>
-                  <P>Precious Faseyosan</P>
+                  <P>{userProfile.fullname}</P>
                   <Link to="/profile">View profile</Link>
                 </span>
               </div>
+            }
 
               {mobileLinks && (
                 <div className={styles.mobileOnlyLinks}>

@@ -18,6 +18,8 @@ import P from '../../ui/atoms/P/P';
 import useGet from '../../../customHooks/useGet';
 import { GET_PROFILE } from '../../routes';
 import notificationIcon from './../../../icons/notification-icon.svg';
+import { useContext } from 'react';
+import { UserContext } from '../../context';
 
 const DashboardTemplate = ({
         children,
@@ -28,12 +30,10 @@ const DashboardTemplate = ({
         dashboardIconLink = "/notifications"
     }) => 
 {
-    const token = localStorage.getItem("accessToken");
-    const {APIData} = useGet(GET_PROFILE, token);
+    
+    const {userProfile} = useContext(UserContext);
 
-    console.log(APIData);
-
-    if(APIData && title == "Welcome back") title = "Welcome back " + APIData.data.fullname;
+    if(title == "Welcome back") title = "Welcome back " + userProfile.fullname;
   
     const imgLinkStyle = 
     {
@@ -111,10 +111,7 @@ const DashboardTemplate = ({
                 <div className={dashboardStyles.sidebarContainer}>
                 <div className={dashboardStyles.sidebar}>
                     <div className={dashboardStyles.image}>
-                            {APIData && 
-                                    <Img src={dashboardImg}/>
-                                    // <Img src={APIData.data.image_url}/>
-                            }
+                        <Img src={userProfile.image_url}/>
                     </div>
                     <div className={dashboardStyles.links}>
                         <ul>
