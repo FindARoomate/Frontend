@@ -84,8 +84,8 @@ function App()
           <Route path='/active-requests' element={<ActiveRequests/>}/>
 
 
-          <Route path='/connection-received/1' element={<SingleConnectionReceived/>}/>
-          <Route path='/connection-sent/1' element={<SingleConnectionSent/>}/>
+          <Route path='/connection-received/:id' element={<SingleConnectionReceived/>}/>
+          <Route path='/connection-sent/:id' element={<SingleConnectionSent/>}/>
           <Route path='/request/:id' element={<SingleRequest/>}/>
 
           {/* Profile */}

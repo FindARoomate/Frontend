@@ -312,7 +312,7 @@ const CreateRoommateRequest = () =>
                 </div>
 
                 <div className={styles.inputGroup}>
-                    <Label name="rent_per_person">Rent per person?</Label>
+                    <Label name="rent_per_person">Rent per person (in naira)?</Label>
                     <Input  name="rent_per_person" type="text" placeholder="Please enter the rent each person is to pay" {...formik.getFieldProps('rent_per_person')}/>
                     {!nextButtonClicked && ((formik.touched.rent_per_person && formik.errors.rent_per_person) &&<ErrorAlert>{formik.errors.rent_per_person}</ErrorAlert>)}
                     {nextButtonClicked && (formik.errors.rent_per_person && <ErrorAlert>{formik.errors.rent_per_person}</ErrorAlert>)}

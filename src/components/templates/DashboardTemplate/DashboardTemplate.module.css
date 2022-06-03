@@ -274,16 +274,18 @@
         color: #7D7D7D;
     }
 
+    /* .sidebar .logout
+    {
+    } */
+
     .sidebar .logout
     {
         margin-top: 44px;
-    }
-
-    .sidebar .logout a
-    {
         display: flex;
         align-items: center;
         gap: 8px;
+        color: #0029DD;
+        cursor: pointer;
     }
 
     .mainContent

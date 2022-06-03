@@ -101,8 +101,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
             setIsLoading(true);
 
             const formData = new FormData();
-            formData.append("user", 3);
-            formData.append("roomate_request", roommateRequest.id);
+            formData.append("request_id", roommateRequest.id);
             sendPostRequest(formData);
         }
       }
@@ -247,7 +246,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                 {showConnectionSuccessMessage && 
                                     <div className={styles.connectionSentNotification}>
                                         <div className={styles.content}>
-                                            You have successfully sent a connection request to Precious Faseyosan. We will notify you when she accepts or declines your connection request.
+                                            You have successfully sent a connection request to {roommateRequest.profile.fullname}. We will notify you when your connection request has been attended to.
                                         </div>
                                         <div className={styles.closeIcon} onClick={closeConnectionSuccessMessage}>
                                             x
@@ -255,7 +254,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                     </div>
                                 }   
                                 <div className={styles.personalInfo}>
-                                    <Img src ={displayPicture} />
+                                    <Img src ={roommateRequest.profile.image_url} />
                                     <span>
                                         <H3>{roommateRequest.profile.fullname}</H3>
                                         <P>{roommateRequest.profile.profession}</P>

@@ -24,7 +24,7 @@ export const createProfileValidation =
  Yup.object({
         fullname: Yup.string().required('Fullname is required'),
         email: Yup.string().email('Must be a valid email').required('Email is required'),
-        phone_number: Yup.string().max(13, 'Phone number must be at most 13 characters')
+        phone_number: Yup.string().max(14, 'Phone number must be at most 14 characters')
                     .matches(/^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/,
                     'Oops. This doesn\'t look like a valid phone number')
                     .required("Phone number is required"),

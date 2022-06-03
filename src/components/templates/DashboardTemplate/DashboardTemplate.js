@@ -4,21 +4,21 @@ import activeConnectionSent from './../../../icons/active-connection-sent.svg';
 import activeActiveRequest from './../../../icons/active-active-request.svg';
 import connectionReceived from './../../../icons/connection-received.svg';
 import globalStyles from './../../../components/globalStyles.module.css';
+import LogoutDialog from '../../ui/organisms/LogoutDialog/LogoutDialog';
+import notificationIcon from './../../../icons/notification-icon.svg';
 import inactiveRequest from './../../../icons/inactive-request.svg';
 import connectionSent from './../../../icons/connection-sent.svg';
-import activeRequest from './../../../icons/active-request.svg';
 import dashboardImg from './../../../images/dashboard-image.png';
-import logoutIcon from './../../../icons/logout-icon.svg';
+import activeRequest from './../../../icons/active-request.svg';
 import overviewIcon from './../../../icons/overview-icon.svg';
-import Header from '../../ui/organisms/Header/Header';
 import dashboardStyles from './DashboardTemplate.module.css';
+import logoutIcon from './../../../icons/logout-icon.svg';
+import Header from '../../ui/organisms/Header/Header';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';
 import P from '../../ui/atoms/P/P';
-import useGet from '../../../customHooks/useGet';
-import { GET_PROFILE } from '../../routes';
-import notificationIcon from './../../../icons/notification-icon.svg';
-import { useContext } from 'react';
+
+import { useContext, useState } from 'react';
 import { UserContext } from '../../context';
 
 const DashboardTemplate = ({
@@ -42,12 +42,6 @@ const DashboardTemplate = ({
         marginRight: "8.5px"
     }
 
-    const logoutLinkStyle = 
-    {
-        color: "#0029DD",
-        textDecoration: "underline",
-    }
-
     const headerLinks = 
     [
         {
@@ -59,14 +53,9 @@ const DashboardTemplate = ({
             id: 2,
             text: "Create request",
             path: '/create-roommate-request'
-        },
-        {
-            id: 3,
-            text: <><Img customStyle={imgLinkStyle} src={logoutIcon}/><span style={logoutLinkStyle}>Logout</span></>,
-            path: '/dashboard'
-        },
-
+        }
     ]
+
     const mobileLinks = 
     [
         {
@@ -97,6 +86,11 @@ const DashboardTemplate = ({
     ]
 
     const currentPath = window.location.pathname;
+    
+    // Create Account Menu Dialog Box controls
+    const [logoutModalState, setLogoutModalState] = useState(false);
+    const closeLogoutDialog = () => setLogoutModalState(false);
+    const openLogoutDialog = () => setLogoutModalState(true);
 
     return (  
     <div className={dashboardStyles.viewMoreRequests}>
@@ -104,6 +98,8 @@ const DashboardTemplate = ({
             mobileLinks={mobileLinks}
             links = {headerLinks}
             customStyle={{backgroundColor: '#F5F7FF'}}
+            showProfile = {true}
+            showLogout = {true}
         />
 
         <div className={`${globalStyles.body} ${dashboardStyles.dashboardBody}`}>
@@ -149,11 +145,8 @@ const DashboardTemplate = ({
                             </li>
                         </ul>
                         <div className={dashboardStyles.logout}>
-                            <Link to="/">
-                                <span className={dashboardStyles.icon}><Img src={logoutIcon}/></span>
-                                <span className={dashboardStyles.text}>Logout</span>
-                            </Link>
-                            
+                            <span className={dashboardStyles.icon}><Img src={logoutIcon}/></span>
+                            <span onClick={openLogoutDialog} className={dashboardStyles.text}>Logout</span>
                         </div>
                     </div>
                 </div>
@@ -226,6 +219,13 @@ const DashboardTemplate = ({
                 </div>
             </div>
         </div>
+
+        {/* Logout pop-up */}
+        <LogoutDialog
+            open={logoutModalState}
+            closeModal={closeLogoutDialog}
+        />
+
     </div>
     );
 }

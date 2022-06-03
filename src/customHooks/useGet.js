@@ -22,17 +22,16 @@ const useGet = (url, token = null) =>
 
         if(res.ok)
         {
-            console.log("success here")
             setIsError(false);
             setIsSuccess(true);
             setAPIData(body);
+            console.log(body);
         }else
         {
-            console.log("error here")
             setIsError(true)
             setIsSuccess(false);
             setAPIData(body); 
-            
+            console.log(body);
         }
 
     }

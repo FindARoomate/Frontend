@@ -3,14 +3,17 @@ import dp from './../../../images/card-display-picture.jpg';
 import styles from './SingleConnectionSent.module.css';
 import backIcon from './../../../icons/back-icon.svg';
 import Button from '../../ui/atoms/Button/Button';
-import H1 from '../../ui/atoms/Headings/H1/H1';
 import H2 from '../../ui/atoms/Headings/H2/H2';
+import H1 from '../../ui/atoms/Headings/H1/H1';
+import { UserContext } from "../../context";
 import Img from '../../ui/atoms/Img/Img';
 import { Link } from 'react-router-dom';
-
+import { useContext} from "react";
 
 const SingleConnectionSent = () => 
 {
+    const {connectionsSent} = useContext(UserContext);
+    console.log(connectionsSent);
     return ( 
             <SingleConnectionReceivedTemplate>
                 <div className={styles.backNavigation}>

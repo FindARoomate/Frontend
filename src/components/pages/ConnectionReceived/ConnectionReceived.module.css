@@ -13,7 +13,29 @@
     gap: 16px;
 }
 
+.tabs
+{
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    background-color: white;
+    border-radius: 8px;
+    width: fit-content;
+    color: #7D7D7D;
+}
 
+.tabs .tab:hover
+{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.activeTab 
+{
+    color: #0029DD;
+    font-weight: 600;
+    text-decoration: underline;
+}
 
 @media screen and (min-width: 760px) 
 {
@@ -29,6 +51,11 @@
         flex-direction: column;
         gap: 16px;
     } */
-
+    .tabs
+    {
+        padding: 21px 30px;
+        gap: 48px;
+        margin-bottom: 24px;
+    } 
 
 }
