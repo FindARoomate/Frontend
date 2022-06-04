@@ -26,7 +26,7 @@ const ListBox = ({dp, name, description, tag="", link=""}) =>
                 }
 
                 {
-                    (tag.toUpperCase() == "DECLINED" ) && (
+                    (tag.toUpperCase() == "REJECTED" ) && (
                         <div className={`${styles.tag} ${styles.declined}`}>
                             Declined
                         </div>
@@ -34,9 +34,9 @@ const ListBox = ({dp, name, description, tag="", link=""}) =>
                 }
 
                 {
-                    (tag.toUpperCase() == "SUCCESS" ) && (
+                    (tag.toUpperCase() == "ACCEPTED" ) && (
                         <div className={`${styles.tag} ${styles.success}`}>
-                            Success
+                            Accepted
                         </div>
                     )
                 }

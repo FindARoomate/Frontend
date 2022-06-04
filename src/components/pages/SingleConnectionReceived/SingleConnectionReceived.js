@@ -1,21 +1,33 @@
 import SingleConnectionReceivedTemplate from '../../templates/SingleConnectionReceivedTemplate/SingleConnectionReceivedTemplate';
+import { ACCEPT_CONNECTION, REJECT_CONNECTION } from '../../routes';
 import dp from './../../../images/card-display-picture.jpg';
 import styles from './SingleConnectionReceived.module.css';
 import backIcon from './../../../icons/back-icon.svg';
+import usePatch from '../../../customHooks/usePatch';
+import { Link, useParams } from 'react-router-dom';
 import Button from '../../ui/atoms/Button/Button';
+import { useEffect, useState } from 'react';
 import { UserContext } from "../../context";
 import Img from './../../ui/atoms/Img/Img';
-import { Link, useParams } from 'react-router-dom';
 import P from './../../ui/atoms/P/P';
 import { useContext} from "react";
-import { useEffect, useState } from 'react';
 
 const SingleConnectionReceived = () => 
 {
     const {connectionsReceived} = useContext(UserContext);
     const {id: connection_id} = useParams();
+    console.log(connection_id);
     const [connectionData, setConnectionData] = useState(null);
+    console.log(connectionData);
+    const [isAcceptButtonLoading, setIsAcceptButtonLoading] = useState(false);
+    const [isRejectButtonLoading, setIsRejectButtonLoading] = useState(false);
 
+    // Sending Post Request
+    const headers = new Headers();
+    headers.append("Accept", "application/json");
+    headers.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
+    const {isError, isSuccess, APIData, sendPatchRequest} = usePatch(headers);
+    
 
     const getConnection = () => 
     {
@@ -23,36 +35,69 @@ const SingleConnectionReceived = () =>
 
         Object.values(connectionsReceived).every((connection_type) =>
         {
-            if(connection_type.length > 0)
+            connection_type.every((single_connection) => 
             {
-                connection_type.every((single_connection) => 
+                if(single_connection.id == connection_id)
                 {
-                    if(single_connection.id == connection_id)
-                    {
-                        connection_data = single_connection;
-                        return false;
-                    }else
-                    {
-                        return true;
-                    }
-                });
+                    connection_data = single_connection;
+                    return false;
+                }
 
-                return false;
-            }else 
-            {
+                console.log(single_connection);
                 return true;
-            }
+            });
+
+            return true;
 
         });       
 
         return connection_data;
     }
 
+    /*
+
+        IMPORTANT: DON'T ALLOW USERS TO SEND "ACCEPT REQUEST" request and while that is running, click "REJECT REQUEST"
+        YOU CAN MAKE THE OTHER BUTTON DISABLED, WHILE ONE RUNS OR ELSE WE'LL JUST GIVE OURSELVES UNNECESSARY PROBLEMS
+
+    */
+
+    const acceptConnection = () => 
+    {
+        setIsAcceptButtonLoading(true);
+        setIsRejectButtonLoading(false);
+
+        const formData = new FormData();
+        formData.append("status", "ACCEPTED");
+        sendPatchRequest(ACCEPT_CONNECTION + connection_id + "/", formData);
+
+        console.log("Accept connection");
+    }
+
+    const rejectConnection = () => 
+    {
+        setIsAcceptButtonLoading(false);
+        setIsRejectButtonLoading(true);
+
+        const formData = new FormData();
+        formData.append("status", "REJECTED");
+        sendPatchRequest(REJECT_CONNECTION + connection_id + "/", formData);
+
+        console.log("Reject connection");
+    }
+
     useEffect(() => 
     {
+        // Getting Connection Data From Context
         setConnectionData(getConnection());
-        console.log(connectionData);
-    }, [connection_id]);
+
+        // Listen for response from Accept Request
+        if(isSuccess || isError)
+        {
+            setIsAcceptButtonLoading(false);
+            setIsRejectButtonLoading(false);
+        }
+
+    }, [connection_id, isSuccess, isError, APIData]);
 
     return ( 
             <SingleConnectionReceivedTemplate>
@@ -116,13 +161,24 @@ const SingleConnectionReceived = () =>
 
                 <div className={styles.buttonGroup}>
                     <div className={styles.rejectButton}>
-                        <Button>Reject Request</Button>
+                        <Button 
+                            handleOnClick={rejectConnection}
+                            className={isRejectButtonLoading ? "isLoading" : ""}
+                        >
+                            {isRejectButtonLoading ? "Loading..." : "Reject Request"}
+                        </Button>
                     </div>
                     <div className={styles.acceptButton}>
-                        <Button>Accept Request</Button>
+                        <Button
+                            handleOnClick={acceptConnection}
+                            className={isAcceptButtonLoading ? "isLoading" : ""}
+                        >
+                            {isAcceptButtonLoading ? "Loading..." : "Accept Request"}
+                        </Button>
                     </div>
                 </div>
-
+                {isSuccess && <div className={styles.successMessage}>{APIData.detail}</div>}
+                {isError && <div className={styles.errorMessage}>Something bad happened. Please try again</div>}
             </SingleConnectionReceivedTemplate>
         );
 }

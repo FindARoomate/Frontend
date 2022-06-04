@@ -109,7 +109,7 @@ const ConnectionReceived = () =>
                             link = {"/connection-received/"+datum.id}
                             name = {datum.sender_data[0].fullname}
                             description = {datum.roomate_request.listing_title}
-                            tag="pending"
+                            tag={datum.status}
                             dp={datum.roomate_request.request_images[0].image_url}
                         />)
                     }) }

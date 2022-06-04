@@ -104,7 +104,7 @@ const ConnectionSent = () =>
                     {
                         return (<ListBox
                             key = {uuidv4()}
-                            link = "/connection-sent/1"
+                            link = {"/connection-sent/" + datum.id}
                             name = {datum.roomate_request.profile.fullname}
                             description = {datum.roomate_request.listing_title}
                             tag="pending"
