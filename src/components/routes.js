@@ -42,5 +42,7 @@ export const ACCEPT_CONNECTION = API_URL + '/connections/accept/';
 
 export const REJECT_CONNECTION = API_URL + '/connections/reject/';
 
+export const STATISTICS = API_URL + '/statistics/';
+
 // Profile
 export const GET_PROFILE = API_URL + '/profile/get/';

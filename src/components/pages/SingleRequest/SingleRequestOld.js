@@ -9,7 +9,6 @@ import usePatch from "../../../customHooks/usePatch";
 import "./../../ui/organisms/Card/sliderStyles.css"; //slider styles
 import { Swiper, SwiperSlide } from 'swiper/react'; // Import Swiper React components
 import Button from '../../ui/atoms/Button/Button';
-import Select from '../../ui/atoms/Select/Select';
 import useGet from "../../../customHooks/useGet";
 import {Link, useParams} from 'react-router-dom';
 import styles from './SingleRequest.module.css';
@@ -23,8 +22,6 @@ import { useState } from 'react';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css";
-import Input from '../../ui/atoms/Input/Input';
-import Textarea from '../../ui/atoms/Textarea/Textarea';
 
 
 const SingleRequest = () => 
@@ -163,19 +160,11 @@ const SingleRequest = () =>
                     <div className={styles.roomInfoRow}>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Room Type</span>
-                            <Select defaultValue={APIData ? APIData.room_type : ""}>        
-                                <option value={"Self Contain"}>Self Contain</option>
-                                <option value={"2 Bedroom Flat"}>2 Bedroom Flat</option>
-                                <option value={"3 Bedroom Flat"}>3 Bedroom Flat</option>
-                                <option value={"Shortlet"}>Shortlet</option>
-                                <option value={"Single Room Apartment"}>Single Room Apartment</option>
-                            </Select>
                             <span className={styles.value}>{APIData ? APIData.room_type : "Loading..."}</span>
                         </div>
 
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Rent</span>
-                            ₦ <Input defaultValue={APIData ? APIData.rent_per_person : ""}/> /Year
                             <span className={styles.value}>{APIData ? "₦ " + APIData.rent_per_person + "/Year": "Loading..."}</span>
                         </div>
                     </div>
@@ -183,16 +172,11 @@ const SingleRequest = () =>
                     <div className={styles.roomInfoRow}>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Other bills</span>
-                            <Textarea
-                                defaultValue={APIData ? APIData.additional_cost : ""}
-                            >
-                            </Textarea>
                             <span className={styles.value}>{APIData ? APIData.additional_cost : "Loading..."}</span>
                         </div>
 
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Availability</span>
-                            <Input type="date" defaultValue={APIData ? APIData.date_to_move : "Loading..."} />
                             <span className={styles.value}>{APIData ? APIData.date_to_move : "Loading..."}</span>
                         </div>
                     </div>
@@ -200,12 +184,10 @@ const SingleRequest = () =>
                     <div className={styles.roomInfoRow}>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>No of person to occupy the room</span>
-                            <Input type="number" defaultValue={APIData ? APIData.no_of_persons : ""} />
                             <span className={styles.value}>{APIData ? APIData.no_of_persons : "Loading..."}</span>
                         </div>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>No of current roommates</span>
-                            <Input type="number" defaultValue={APIData ? APIData.no_of_current_roomies : ""} />
                             <span className={styles.value}>{APIData ? APIData.no_of_current_roomies : "Loading..."}</span>
                         </div>
                     </div>
@@ -214,27 +196,6 @@ const SingleRequest = () =>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Location</span>
                             <span className={styles.value}>
-                                <div>
-                                    <span>Country</span>
-                                    <Select defaultValue={APIData ? APIData.country : ""}>
-                                        <option>Nigeria</option>
-                                        <option>South Africa</option>
-                                    </Select>
-                                </div>
-                                <div>
-                                    <span>State</span>
-                                    <Select defaultValue={APIData ? APIData.state : ""}>
-                                        <option>Nigeria</option>
-                                        <option>South Africa</option>
-                                    </Select>
-                                </div>
-                                <div>
-                                    <span>Street Address</span>
-                                    <Textarea
-                                        defaultValue={APIData ? APIData.street_address : ""}
-                                    >
-                                    </Textarea>
-                                </div>
                             {APIData ? APIData.street_address + ", " + APIData.state + ", " + APIData.country : "Loading..."}
                             </span>
                         </div>

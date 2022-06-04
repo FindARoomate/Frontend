@@ -45,10 +45,7 @@
   border-radius: 5px;
 }
 
-.contactBody .contactForm form input, textarea
-{
-  border: none;
-}
+
 
 .contactBody .contactForm textarea
 {
@@ -107,9 +104,4 @@
         width: 530px;
     }
 
-    .contactBody .contactForm textarea
-    {
-        height: 200px;
-        max-width: 100%;
-    }
 }

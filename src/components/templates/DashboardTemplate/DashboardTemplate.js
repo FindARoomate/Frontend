@@ -14,12 +14,13 @@ import overviewIcon from './../../../icons/overview-icon.svg';
 import dashboardStyles from './DashboardTemplate.module.css';
 import logoutIcon from './../../../icons/logout-icon.svg';
 import Header from '../../ui/organisms/Header/Header';
+import useGet from '../../../customHooks/useGet';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context';
+import { STATISTICS } from '../../routes';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';
 import P from '../../ui/atoms/P/P';
-
-import { useContext, useState } from 'react';
-import { UserContext } from '../../context';
 
 const DashboardTemplate = ({
         children,
@@ -91,6 +92,11 @@ const DashboardTemplate = ({
     const [logoutModalState, setLogoutModalState] = useState(false);
     const closeLogoutDialog = () => setLogoutModalState(false);
     const openLogoutDialog = () => setLogoutModalState(true);
+
+    // Get Statistics
+    const token = localStorage.getItem("accessToken");
+    const {isSucccess, isError, APIData} = useGet(STATISTICS, token);
+    console.log(APIData);
 
     return (  
     <div className={dashboardStyles.viewMoreRequests}>
@@ -176,7 +182,7 @@ const DashboardTemplate = ({
                                         <Img src={currentPath === "/connection-sent" ? activeConnectionSent : connectionSent}/>
                                     </div>
                                     <P>Connection sent</P>
-                                    <P>5</P>
+                                    <P>{APIData ? APIData.connections_sent : ""}</P>
                                 </div>
                             </Link>
 
@@ -186,7 +192,7 @@ const DashboardTemplate = ({
                                     <Img src={currentPath === "/connection-received" ? activeConnectionReceived : connectionReceived}/>
                                 </div>
                                 <P>Connection received</P>
-                                <P>4</P>
+                                <P>{APIData ? APIData.connections_recieved : ""}</P>
                             </div>
                             </Link>
 
@@ -196,7 +202,7 @@ const DashboardTemplate = ({
                                     <Img src={currentPath === "/active-requests" ? activeActiveRequest : activeRequest}/>
                                 </div>
                                 <P>Active request</P>
-                                <P>1</P>
+                                <P>{APIData ? APIData.active_requests : ""}</P>
                             </div>
                             </Link>
 
@@ -206,7 +212,7 @@ const DashboardTemplate = ({
                                     <Img src={currentPath === "/inactive-requests" ? activeInactiveRequest : inactiveRequest}/>
                                 </div>
                                 <P>Inactive request</P>
-                                <P>5</P>
+                                <P>{APIData ? APIData.inactive_requests : ""}</P>
                             </div>
                             </Link>
 
