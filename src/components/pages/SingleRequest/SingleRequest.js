@@ -34,6 +34,7 @@ const SingleRequest = () =>
     const token = localStorage.getItem("accessToken");
     const url = GET_SINGLE_ROOMMATE_REQUEST + id + '/'; 
     const {APIData} = useGet(url, token);
+    const [isCurrentlyEditting, setIsCurrentlyEditting] = useState(false);
     
     // Activate or deactivate request
     const updateToken = "Bearer " + token;
@@ -109,7 +110,12 @@ const SingleRequest = () =>
                     </div>
                     
                     <div className={styles.editIcon}>
-                        <Button><Img src={editIcon}/><span>Edit</span></Button>
+                        {!isCurrentlyEditting && 
+                        <Button handleOnClick={() => setIsCurrentlyEditting(true)}><Img src={editIcon}/><span>Edit</span></Button>
+                        }
+                        {isCurrentlyEditting && 
+                        <Button handleOnClick={() => setIsCurrentlyEditting(false)}><span>Submit</span></Button>
+                        }
                     </div>
                 </div>
 
@@ -163,50 +169,69 @@ const SingleRequest = () =>
                     <div className={styles.roomInfoRow}>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Room Type</span>
+                            {isCurrentlyEditting && 
                             <Select defaultValue={APIData ? APIData.room_type : ""}>        
                                 <option value={"Self Contain"}>Self Contain</option>
                                 <option value={"2 Bedroom Flat"}>2 Bedroom Flat</option>
                                 <option value={"3 Bedroom Flat"}>3 Bedroom Flat</option>
                                 <option value={"Shortlet"}>Shortlet</option>
                                 <option value={"Single Room Apartment"}>Single Room Apartment</option>
-                            </Select>
+                            </Select>}
+                            {!isCurrentlyEditting && 
                             <span className={styles.value}>{APIData ? APIData.room_type : "Loading..."}</span>
+                            }
                         </div>
 
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Rent</span>
-                            ₦ <Input defaultValue={APIData ? APIData.rent_per_person : ""}/> /Year
+                            {isCurrentlyEditting &&<>
+                            ₦ <Input defaultValue={APIData ? APIData.rent_per_person : ""}/> /Year</>}
+                            {!isCurrentlyEditting && 
                             <span className={styles.value}>{APIData ? "₦ " + APIData.rent_per_person + "/Year": "Loading..."}</span>
+                            }
                         </div>
                     </div>
 
                     <div className={styles.roomInfoRow}>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Other bills</span>
-                            <Textarea
+                            {isCurrentlyEditting && <Textarea
                                 defaultValue={APIData ? APIData.additional_cost : ""}
                             >
-                            </Textarea>
+                            </Textarea>}
+                            {!isCurrentlyEditting &&
                             <span className={styles.value}>{APIData ? APIData.additional_cost : "Loading..."}</span>
+                            }
                         </div>
 
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Availability</span>
+                            {isCurrentlyEditting &&
                             <Input type="date" defaultValue={APIData ? APIData.date_to_move : "Loading..."} />
+                            }
+                            {!isCurrentlyEditting &&
                             <span className={styles.value}>{APIData ? APIData.date_to_move : "Loading..."}</span>
+                            }
                         </div>
                     </div>
 
                     <div className={styles.roomInfoRow}>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>No of person to occupy the room</span>
-                            <Input type="number" defaultValue={APIData ? APIData.no_of_persons : ""} />
+                            {isCurrentlyEditting && 
+                            <Input type="number" defaultValue={APIData ? APIData.no_of_persons : ""} />}
+                            {!isCurrentlyEditting &&
                             <span className={styles.value}>{APIData ? APIData.no_of_persons : "Loading..."}</span>
+                            }
                         </div>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>No of current roommates</span>
+                            {isCurrentlyEditting &&
                             <Input type="number" defaultValue={APIData ? APIData.no_of_current_roomies : ""} />
+                            }
+                            {!isCurrentlyEditting &&
                             <span className={styles.value}>{APIData ? APIData.no_of_current_roomies : "Loading..."}</span>
+                            }
                         </div>
                     </div>
 
@@ -214,6 +239,8 @@ const SingleRequest = () =>
                         <div className={styles.roomInfo}>
                             <span className={styles.label}>Location</span>
                             <span className={styles.value}>
+                            {isCurrentlyEditting &&
+                            <div>
                                 <div>
                                     <span>Country</span>
                                     <Select defaultValue={APIData ? APIData.country : ""}>
@@ -235,7 +262,10 @@ const SingleRequest = () =>
                                     >
                                     </Textarea>
                                 </div>
-                            {APIData ? APIData.street_address + ", " + APIData.state + ", " + APIData.country : "Loading..."}
+                                </div>
+                            }
+                            {!isCurrentlyEditting &&
+                            (APIData ? APIData.street_address + ", " + APIData.state + ", " + APIData.country : "Loading...")  }
                             </span>
                         </div>
                     </div>
