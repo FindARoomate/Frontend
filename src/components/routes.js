@@ -10,6 +10,7 @@ export const LOGIN = API_URL+'/auth/login/';
 
 export const CONFIRM_EMAIL = API_URL + '/auth/activate/';
 
+export const REFRESH_TOKEN = API_URL + '/auth/refresh/'
 
 
 export const CONTACT = API_URL + '/auth/contact-us/';

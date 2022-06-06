@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { createContext } from "react";
+import { REFRESH_TOKEN } from "./routes";
+import usePost from "../customHooks/usePost";
+import { useEffect, useState, createContext } from "react";
 
 
 
@@ -19,6 +20,9 @@ export const UserContext = createContext({
 
 export const UserContextProvider = ({children}) => 
 {
+    const {isSuccess, isError, APIData, sendPostRequest} = usePost(REFRESH_TOKEN);
+
+    const [onFirstLoad, setOnFirstLoad] = useState(true);
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem("isUserLoggedIn"));
     const [isProfileCreated, setIsProfileCreated] = useState();
     const [userProfile, setUserProfile] = useState({
@@ -31,15 +35,9 @@ export const UserContextProvider = ({children}) =>
     const [connectionsReceived, setConnectionsReceived] = useState({});
     const [connectionsSent, setConnectionsSent] = useState({});
 
-    // Function to check if user is logged in based on their time their token is meant to expire
-    const checkIfUserIsLoggedIn = () =>
-    {
-        return localStorage.getItem("isUserLoggedIn") ? localStorage.getItem("isUserLoggedIn") : false;
-    }
-
     const UserContextValue = 
     {
-        isUserLoggedIn: isUserLoggedIn,
+        isUserLoggedIn: localStorage.getItem("isUserLoggedIn") ? localStorage.getItem("isUserLoggedIn") : false,
         setIsUserLoggedIn: (value) => setIsUserLoggedIn(value),
         isProfileCreated: isProfileCreated,
         setIsProfileCreated: (value) => setIsProfileCreated(value),
@@ -51,6 +49,48 @@ export const UserContextProvider = ({children}) =>
         setConnectionsReceived: (data) => setConnectionsReceived(data),
 
     }
+
+    const refreshToken = () =>
+    {
+        console.log("Refresh Token");
+        let formData = new FormData();
+        formData.append("refresh", localStorage.getItem("refreshToken"))
+        sendPostRequest(formData);
+
+        if(isSuccess && APIData !=null)
+        {
+            console.log("Success refresh token");
+            localStorage.setItem("isUserLoggedIn", true);
+            localStorage.setItem("accessToken", APIData.access);
+            localStorage.setItem("refreshToken", APIData.refresh);
+        }
+
+        if(isError && APIData !=null)
+        {
+            console.log("Error refresh token")
+            localStorage.removeItem("isUserLoggedIn");
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+        }
+
+        setOnFirstLoad(false);
+    }   
+
+    useEffect(() => 
+    {
+        const timeForTokenToExpire = 15 * 60 * 1000; 
+
+        if(onFirstLoad || isUserLoggedIn)
+        {
+            let timer = setInterval(() => 
+            {
+                refreshToken()
+            }, timeForTokenToExpire)
+
+            return () => clearInterval(timer);
+        }   
+        
+    }, [isUserLoggedIn, onFirstLoad])
 
     return (   
         <UserContext.Provider value={UserContextValue}>

@@ -113,9 +113,7 @@ const SingleRequest = () =>
                         {!isCurrentlyEditting && 
                         <Button handleOnClick={() => setIsCurrentlyEditting(true)}><Img src={editIcon}/><span>Edit</span></Button>
                         }
-                        {isCurrentlyEditting && 
-                        <Button handleOnClick={() => setIsCurrentlyEditting(false)}><span>Submit</span></Button>
-                        }
+                        
                     </div>
                 </div>
 
@@ -270,14 +268,16 @@ const SingleRequest = () =>
                         </div>
                     </div>
                 </div>
-
+                
                 <div className={styles.buttonGroup}>
+                {!isCurrentlyEditting && 
                     <div className={styles.viewRequest}>
                         <Link to={APIData ? `/roommate-request/${APIData.id}` : '/'}>
                             View Request Page
                         </Link>
                     </div>
-                    {APIData &&
+                }
+                    {(APIData &&!isCurrentlyEditting) &&
                         (APIData.is_active ? 
                             <div className={styles.rejectButton}>
                                 <Button handleOnClick={handleOnClick} className={isLoading ? "isLoading" : ""}>
@@ -289,10 +289,15 @@ const SingleRequest = () =>
                                 <Button handleOnClick={handleOnClick} className={isLoading ? "isLoading" : ""}>
                                     {isLoading ? "Loading..." : "Activate Request"}
                                 </Button>
+                                
                             </div>
                         )
                     }
+                    
                 </div>
+                {isCurrentlyEditting && 
+                    <Button customStyle={{float: "right"}} stylehandleOnClick={() => setIsCurrentlyEditting(false)}><span>Update</span></Button>
+                }
                 {updateSuccess && <div className={styles.successMessage}>{updateData.detail}</div>}
                 {updateError && <div className={styles.errorMessage}>Something bad happened. Please try again</div>}
 

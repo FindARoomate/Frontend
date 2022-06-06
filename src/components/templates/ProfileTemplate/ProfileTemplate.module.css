@@ -20,12 +20,25 @@
     margin-left: 8px;
 }
 
+.profileInfoContainer
+{
+    width: 100%;
+}
+
 .profileInfoContainer .profileInfoRow
 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 12px 0px;
+    width: 100%;
+}
+
+.profileInfoContainer .editButton
+{
+    background-color: #F5F7FF;
+    color: #0029DD;
+    float: right;
 }
 
 .profileImageRow
@@ -58,6 +71,11 @@
     cursor: pointer;
     width: 15.5px;
     height: 15.5px;
+}
+
+.profileInfo
+{
+    width: 100%;
 }
 
 .profileInfo .label

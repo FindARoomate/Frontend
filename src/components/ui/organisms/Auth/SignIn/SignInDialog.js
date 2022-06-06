@@ -90,7 +90,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
                   
       {isSuccess &&  
       (
-        (APIdata.data.last_login) ? (!redirectTo && <Navigate to="/dashboard"/>) : <Navigate to="/create-profile-instruction" />
+        (APIdata.data.last_login) ? (!redirectTo ? <Navigate to="/dashboard"/> : redirectTo != window.location.path && redirectTo) : <Navigate to="/create-profile-instruction" />
       )}
 
       <Modal open={open} closeModal={closeModal}>
