@@ -9,7 +9,7 @@ export const UserContext = createContext({
     setIsUserLoggedIn: () => {},
     isProfileCreated: false,
     setIsProfileCreated: () => {} ,
-    userProfile: {"Hi": "me"},
+    userProfile: {},
     setUserProfile : () => {},
     connectionsSent : {},
     setConnectionsSent : () => {},
@@ -25,24 +25,23 @@ export const UserContextProvider = ({children}) =>
     const [onFirstLoad, setOnFirstLoad] = useState(true);
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem("isUserLoggedIn"));
     const [isProfileCreated, setIsProfileCreated] = useState();
-    const [userProfile, setUserProfile] = useState({
-        "fullname": localStorage.getItem("fullname"),
-        "image_url": localStorage.getItem("image_url"),
-        "profile_id": localStorage.getItem("id"),
-        "user_id": localStorage.getItem("user_id")
-      });
+    const [userProfile, setUserProfile] = useState(JSON.parse(localStorage.getItem("profile_data")));
 
     const [connectionsReceived, setConnectionsReceived] = useState({});
     const [connectionsSent, setConnectionsSent] = useState({});
 
     const UserContextValue = 
     {
-        isUserLoggedIn: localStorage.getItem("isUserLoggedIn") ? localStorage.getItem("isUserLoggedIn") : false,
+        isUserLoggedIn: localStorage.getItem("isUserLoggedIn"),
         setIsUserLoggedIn: (value) => setIsUserLoggedIn(value),
         isProfileCreated: isProfileCreated,
         setIsProfileCreated: (value) => setIsProfileCreated(value),
         userProfile: userProfile,
-        setUserProfile: (profile) => setUserProfile(profile),
+        setUserProfile: (profile) => 
+        {
+            setUserProfile(profile);
+            localStorage.setItem("profile_data", JSON.stringify(profile));
+        },
         connectionsSent: connectionsSent,
         setConnectionsSent: (data) => setConnectionsSent(data),
         connectionsReceived: connectionsReceived,
@@ -52,33 +51,16 @@ export const UserContextProvider = ({children}) =>
 
     const refreshToken = () =>
     {
-        console.log("Refresh Token");
         let formData = new FormData();
         formData.append("refresh", localStorage.getItem("refreshToken"))
         sendPostRequest(formData);
-
-        if(isSuccess && APIData !=null)
-        {
-            console.log("Success refresh token");
-            localStorage.setItem("isUserLoggedIn", true);
-            localStorage.setItem("accessToken", APIData.access);
-            localStorage.setItem("refreshToken", APIData.refresh);
-        }
-
-        if(isError && APIData !=null)
-        {
-            console.log("Error refresh token")
-            localStorage.removeItem("isUserLoggedIn");
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-        }
-
         setOnFirstLoad(false);
     }   
 
     useEffect(() => 
     {
-        const timeForTokenToExpire = 15 * 60 * 1000; 
+
+        const timeForTokenToExpire = 13 * 60 * 1000; 
 
         if(onFirstLoad || isUserLoggedIn)
         {
@@ -90,7 +72,24 @@ export const UserContextProvider = ({children}) =>
             return () => clearInterval(timer);
         }   
         
-    }, [isUserLoggedIn, onFirstLoad])
+        if(isSuccess)
+        {
+            console.log("Success refresh token");
+            console.log(APIData);
+            localStorage.setItem("isUserLoggedIn", true);
+            localStorage.setItem("accessToken", APIData.access);
+            localStorage.setItem("refreshToken", APIData.refresh);
+        }
+
+        if(isError)
+        {
+            console.log("Error refresh token")
+            localStorage.removeItem("isUserLoggedIn");
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+        }        
+
+    }, [isUserLoggedIn, onFirstLoad, isSuccess, isError, APIData, userProfile])
 
     return (   
         <UserContext.Provider value={UserContextValue}>

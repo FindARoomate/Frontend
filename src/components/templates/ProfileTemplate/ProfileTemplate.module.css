@@ -62,15 +62,12 @@
 
 .addProfileImageIcon
 {
-    bottom: 2px;
-    right: 6px;
-    position: absolute;
-}
-.addProfileImageIcon img 
-{
     cursor: pointer;
     width: 15.5px;
     height: 15.5px;
+    position: absolute;
+    bottom: 35px;
+    right: 30px;
 }
 
 .profileInfo
@@ -92,6 +89,20 @@
     color: #000E4A;
 }
 
+.successMessage
+{
+    color: #0CF542;
+    padding: 14px;
+    width: 100%;
+    background-color:  #E2FEE8;
+    font-weight: 700;
+    font-size:13px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-transform: capitalize;
+    text-align: center;
+}
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
@@ -106,23 +117,13 @@
         font-size: 20px;
         margin-left: 16px;
     }
-
-    .addProfileImageIcon img 
+   
+    .addProfileImageIcon
     {
         width: 47px;
         height: 47px;
-    }
-    
-    .addProfileImageIcon
-    {
-        bottom: 3px;
-        right: 10px;
-    }
-
-    .profileImage img
-    {
-        width: 208px;
-        height: 208px;
+        bottom: 10px;
+        right: -10px;
     }
 
     .profileInfo .label
@@ -133,5 +134,11 @@
     .profileInfo .value
     {
         font-size: 24px;
+    }
+
+    .successMessage
+    {
+        padding: 18px;
+        font-size: 20px;
     }
 }

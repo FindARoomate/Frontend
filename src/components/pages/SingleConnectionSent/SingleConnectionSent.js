@@ -1,5 +1,7 @@
 import SingleConnectionReceivedTemplate from '../../templates/SingleConnectionReceivedTemplate/SingleConnectionReceivedTemplate';
+import { CANCEL_CONNECTION_START, CANCEL_CONNECTION_END } from '../../routes';
 import dp from './../../../images/card-display-picture.jpg';
+import useDelete from '../../../customHooks/useDelete';
 import { useContext, useState, useEffect} from "react";
 import styles from './SingleConnectionSent.module.css';
 import backIcon from './../../../icons/back-icon.svg';
@@ -18,12 +20,20 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css";
 
+
 const SingleConnectionSent = () => 
 {
     const {connectionsSent} = useContext(UserContext);
     const {id: connection_id} = useParams();
     const [connectionData, setConnectionData] = useState(null);
-    console.log(connectionData);
+
+    const deleteUrl = CANCEL_CONNECTION_START + connection_id + CANCEL_CONNECTION_END;
+    const {isError, isSuccess, APIData, sendDeleteRequest} = useDelete(deleteUrl);
+
+    const cancelConnectionRequest = () => 
+    {
+
+    }
 
     const getConnection = () => 
     {
@@ -81,7 +91,7 @@ const SingleConnectionSent = () =>
                         <Img src={connectionData ? connectionData.roomate_request.profile.image_url : dp}/>
                         <div className={styles.profileContent}>
                             <div className={styles.userInfo}>
-                                <b>Name:</b>{connectionData ? connectionData.roomate_request.profile.fullname : "Loading..."}
+                                <b>Name: </b>{connectionData ? connectionData.roomate_request.profile.fullname : "Loading..."}
                             </div>
                             <div className={styles.userInfo}>
                                 <b>Age group: </b> {connectionData ? connectionData.roomate_request.profile.age_range : "Loading..."}
@@ -211,7 +221,7 @@ const SingleConnectionSent = () =>
                         </Link>
                     </div>
                     <div className={styles.rejectButton}>
-                        <Button>Cancel Connection Request</Button>
+                        <Button handleOnClick={cancelConnectionRequest}>Cancel Connection Request</Button>
                     </div>
                     
                 </div>

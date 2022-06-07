@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import Img from '../../ui/atoms/Img/Img';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import Label from '../../ui/atoms/Label/Label';
 import Input from '../../ui/atoms/Input/Input';
@@ -30,7 +30,6 @@ const CreateRoommateRequest = () =>
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [nextButtonClicked, setNextButtonClicked] = useState(false);
-
 
     const moveToNextFormGroup = (current_index, errors) => 
     {        
@@ -149,8 +148,7 @@ const CreateRoommateRequest = () =>
         
         {formik => (
         
-            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik.errors)}
-            >
+            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik.errors)} >
             <div className={`${styles.formGroup} ${styles.formGroupActive}`}>
 
                 <div className={styles.inputGroup}>

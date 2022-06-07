@@ -32,6 +32,10 @@ export const ACTIVATE_ROOMMATE_REQUEST = API_URL + '/request/activate/';
 
 export const DEACTIVATE_ROOMMATE_REQUEST = API_URL + '/request/deactivate/';
 
+export const UPDATE_ROOMMATE_REQUEST_START = API_URL + '/request/';
+
+export const UPDATE_ROOMMATE_REQUEST_END = '/update/';
+
 //Connection endpoints
 export const CREATE_CONNECTION_REQUEST = API_URL + '/connections/create/';
 
@@ -43,7 +47,15 @@ export const ACCEPT_CONNECTION = API_URL + '/connections/accept/';
 
 export const REJECT_CONNECTION = API_URL + '/connections/reject/';
 
+export const CANCEL_CONNECTION_START = API_URL + 'connections/';
+
+export const CANCEL_CONNECTION_END = '/delete/';
+
 export const STATISTICS = API_URL + '/statistics/';
 
 // Profile
 export const GET_PROFILE = API_URL + '/profile/get/';
+
+export const UPDATE_PROFILE_START = API_URL + '/profile/';
+
+export const UPDATE_PROFILE_END = '/update/';

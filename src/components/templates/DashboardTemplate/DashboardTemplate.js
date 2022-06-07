@@ -54,7 +54,13 @@ const DashboardTemplate = ({
             id: 2,
             text: "Create request",
             path: '/create-roommate-request'
-        }
+        },
+        {
+            id: 3,
+            text: "View roommate requests",
+            path: '/view-all-requests'
+        },
+
     ]
 
     const mobileLinks = 

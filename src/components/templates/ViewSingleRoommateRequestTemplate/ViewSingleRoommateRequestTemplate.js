@@ -88,6 +88,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
       }, []);
 
       const {isUserLoggedIn} = useContext(UserContext);
+      
       const sendConnectionRequest = () => 
       {
         //Check if user is logged in

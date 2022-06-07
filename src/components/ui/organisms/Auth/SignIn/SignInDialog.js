@@ -40,25 +40,19 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
   }
 
   //update context
-  const {setUserProfile, setIsUserLoggedIn} = useContext(UserContext);
+  const {userProfile, setUserProfile, setIsUserLoggedIn} = useContext(UserContext);
 
-  const updateContext = (user_id, data) => 
+  const updateContext = (user_id, data, email) => 
   {
-    localStorage.setItem("isUserLoggedIn", true);
-    localStorage.setItem("fullname", data.fullname);
-    localStorage.setItem("image_url", data.image_url);
-    localStorage.setItem("profile_id", data.id);
+    let profile_data = {...data, email:email};
+
     localStorage.setItem("user_id", user_id);
+    localStorage.setItem("isUserLoggedIn", true);
+    localStorage.setItem("profile_data", JSON.stringify(profile_data));
 
     setIsUserLoggedIn(true);
-    setUserProfile(
-      {
-        "fullname": data.fullname,
-        "image_url": data.image_url,
-        "profile_id": data.id,
-        "user_id": user_id
-      }
-    )
+    setUserProfile(profile_data);
+
   }
 
   useEffect(() => 
@@ -78,7 +72,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
         closeModal();
       }
 
-      updateContext(APIdata.data.id, APIdata.data.profile_data);
+      updateContext(APIdata.data.id, APIdata.data.profile_data, APIdata.data.email);
       localStorage.setItem("accessToken", APIdata.access); //add access token to localStorage
       localStorage.setItem("refreshToken", APIdata.refresh); //add refresh token to localStorage
     }

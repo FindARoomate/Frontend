@@ -54,6 +54,7 @@
      height: 208px;
      width: 100%;
      margin: 13px 0;
+     cursor: pointer;
  }
 
  .roomInfoContainer

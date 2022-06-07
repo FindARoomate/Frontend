@@ -18,7 +18,8 @@ import LogoutDialog from '../LogoutDialog/LogoutDialog';
 const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, links, mobileLinks}) => {
 
     //get user info
-    const {isUserLoggedIn, userProfile} = useContext(UserContext);
+    const isUserLoggedIn=false;
+    // const {isUserLoggedIn, userProfile} = useContext(UserContext);
 
     //variable to check if there are any links available
     var areLinksAvailable = signIn || createAccount || links || mobileLinks || localStorage.getItem("accessToken");
@@ -113,9 +114,9 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
             {/* If user is logged in display profile */}
               {((signIn || createAccount) && isUserLoggedIn) ? 
                 <div className={styles.headerProfile}>
-                  <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link>
+                  {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
                   <span>
-                    <P><Link to ="/dashboard">{userProfile.fullname}</Link></P>
+                    {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
                     <Link to="/profile">View profile</Link>
                   </span>
                 </div>
@@ -129,9 +130,9 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
 
             { showProfile &&
               <div className={styles.headerProfile}>
-                <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link>
+                {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
               <span>
-                <P><Link to ="/dashboard">{userProfile.fullname}</Link></P>
+                {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
                 <Link to="/profile">View profile</Link>
               </span>
               </div>
@@ -153,9 +154,9 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
             
             {showProfile &&
              <div className={styles.headerProfile}>
-              <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link>
+              {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
               <span>
-                <P><Link to ="/dashboard">{userProfile.fullname}</Link></P>
+                {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
                 <Link to="/profile">View profile</Link>
               </span>
             </div>
@@ -175,22 +176,24 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
 
 
               {/* Only display sign in and create account links if user is not logged in */}
-              {/* If user is logged in display profile */}
-              {((signIn || createAccount) && isUserLoggedIn) ? 
-              
-                  <div className={styles.headerProfile}>
-                    <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link>
-                    <span>
-                      <P><Link to ="/dashboard">{userProfile.fullname}</Link></P>
-                      <Link to="/profile">View profile</Link>
-                    </span>
-                  </div>  
-                : 
+              {((signIn || createAccount) &&  !isUserLoggedIn) &&  
                 <>
                 {signIn && <SignInButton openSignInDialog={openSignInDialog} />}
                 {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
                 </>                
                }
+
+               {/* If user is logged in display profile */}
+              {isUserLoggedIn && 
+              
+                <div className={styles.headerProfile}>
+                  {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
+                  <span>
+                    {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
+                    <Link to="/profile">View profile</Link>
+                  </span>
+                </div>  
+            }
 
             {showLogout && 
               <div onClick={openLogoutDialog} className={styles.logoutLink}>
