@@ -20,7 +20,7 @@ export const UserContext = createContext({
 
 export const UserContextProvider = ({children}) => 
 {
-    const {isSuccess, isError, APIData, sendPostRequest} = usePost(REFRESH_TOKEN);
+    const {isSuccess, isError, APIdata, sendPostRequest} = usePost(REFRESH_TOKEN);
 
     const [onFirstLoad, setOnFirstLoad] = useState(true);
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem("isUserLoggedIn"));
@@ -60,25 +60,30 @@ export const UserContextProvider = ({children}) =>
     useEffect(() => 
     {
 
-        const timeForTokenToExpire = 13 * 60 * 1000; 
+        console.log(onFirstLoad);
 
-        if(onFirstLoad || isUserLoggedIn)
+        const timeForTokenToExpire = 30 * 1000; 
+        let timer;
+
+        if(onFirstLoad && isUserLoggedIn)
         {
-            let timer = setInterval(() => 
-            {
-                refreshToken()
-            }, timeForTokenToExpire)
+            refreshToken();
+        }
 
-            return () => clearInterval(timer);
-        }   
-        
+        if(!onFirstLoad && isUserLoggedIn)
+        {
+            timer = setInterval(() => 
+            {
+                refreshToken();
+            }, timeForTokenToExpire);
+        } 
+
         if(isSuccess)
         {
             console.log("Success refresh token");
-            console.log(APIData);
             localStorage.setItem("isUserLoggedIn", true);
-            localStorage.setItem("accessToken", APIData.access);
-            localStorage.setItem("refreshToken", APIData.refresh);
+            localStorage.setItem("accessToken", APIdata.access);
+            localStorage.setItem("refreshToken", APIdata.refresh);
         }
 
         if(isError)
@@ -87,13 +92,15 @@ export const UserContextProvider = ({children}) =>
             localStorage.removeItem("isUserLoggedIn");
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-        }        
+        }    
 
-    }, [isUserLoggedIn, onFirstLoad, isSuccess, isError, APIData, userProfile])
+        return () => clearInterval(timer);
+
+    }, [isUserLoggedIn, onFirstLoad, isSuccess, isError, APIdata, userProfile])
 
     return (   
         <UserContext.Provider value={UserContextValue}>
-            {children}
+            {(onFirstLoad && isUserLoggedIn) ? "Loading..." : children}
         </UserContext.Provider>
      );
 }

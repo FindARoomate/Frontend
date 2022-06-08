@@ -13,13 +13,13 @@ import logoutIcon from './../../../../icons/logout-icon.svg';
 import CreateAccountDialog from '../Auth/CreateAccount/CreateAccountDialog';
 import CreateAccountButton from '../Auth/CreateAccount/CreateAccountButton';
 import LogoutDialog from '../LogoutDialog/LogoutDialog';
+import HeaderDropdown from '../../molecules/HeaderDropdown/HeaderDropdown';
 
 
 const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, links, mobileLinks}) => {
 
     //get user info
-    const isUserLoggedIn=false;
-    // const {isUserLoggedIn, userProfile} = useContext(UserContext);
+    const {isUserLoggedIn, userProfile} = useContext(UserContext);
 
     //variable to check if there are any links available
     var areLinksAvailable = signIn || createAccount || links || mobileLinks || localStorage.getItem("accessToken");
@@ -113,14 +113,7 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
             {/* Only display sign in and create account links if user is not logged in */}
             {/* If user is logged in display profile */}
               {((signIn || createAccount) && isUserLoggedIn) ? 
-                <div className={styles.headerProfile}>
-                  {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
-                  <span>
-                    {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
-                    <Link to="/profile">View profile</Link>
-                  </span>
-                </div>
-
+                  <HeaderDropdown/>
                 : 
                 <>
                 {signIn && <SignInButton openSignInDialog={openSignInDialog} />}
@@ -128,15 +121,8 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
                 </>                
                }
 
-            { showProfile &&
-              <div className={styles.headerProfile}>
-                {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
-              <span>
-                {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
-                <Link to="/profile">View profile</Link>
-              </span>
-              </div>
-            }
+            {showProfile && <HeaderDropdown/>}
+
           </div>
 
           {/* Harmburger Icon */}
@@ -152,15 +138,7 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
           <div className={styles.mobileMenuModal}>
             <Modal closeModal={closeMobileDialog} open={modalState}>
             
-            {showProfile &&
-             <div className={styles.headerProfile}>
-              {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
-              <span>
-                {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
-                <Link to="/profile">View profile</Link>
-              </span>
-            </div>
-            }
+            {showProfile && <HeaderDropdown/>}
 
               {mobileLinks && (
                 <div className={styles.mobileOnlyLinks}>
@@ -184,16 +162,7 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
                }
 
                {/* If user is logged in display profile */}
-              {isUserLoggedIn && 
-              
-                <div className={styles.headerProfile}>
-                  {/* <Link to ="/dashboard"><Img src={userProfile.image_url} /></Link> */}
-                  <span>
-                    {/* <P><Link to ="/dashboard">{userProfile.fullname}</Link></P> */}
-                    <Link to="/profile">View profile</Link>
-                  </span>
-                </div>  
-            }
+              {isUserLoggedIn && <HeaderDropdown/> }
 
             {showLogout && 
               <div onClick={openLogoutDialog} className={styles.logoutLink}>

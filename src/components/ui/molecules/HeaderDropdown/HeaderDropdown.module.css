@@ -1,0 +1,98 @@
+.dropdownContainer
+{
+    display: relative;
+}   
+
+.dropdownButton 
+{
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.dropdownButton span
+{
+    color: #000E4A;
+    font-weight: 600;
+}
+
+.dropdownButton .profileImage
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dropdownButton .dropdownIcon, .dropdownButton .pullupIcon
+{
+    cursor: pointer;
+}
+
+.dropdownMenu
+{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #000E4A;
+    background-color: white;
+    border-radius: 8px;
+    padding: 11px 16px;
+    position: absolute;
+    top: calc(100% - 5px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-15px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdownIcon
+{
+    transform: rotate(0deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+.dropdownIcon.activeIcon
+{
+    transform: rotate(180deg);
+}
+
+.dropdownMenu.active
+{
+    opacity: 1;
+    transform: translateY(0px);
+    pointer-events: all;
+}
+
+.dropdownMenu span 
+{
+    cursor: pointer;
+
+}
+
+.dropdownMenu span.middleMenuItem
+{
+    padding: 4px 0 4px 0;
+}
+
+.dropdownMenu .middleMenuItem
+{
+    border-top: 1px solid rgba(125, 125, 125, 0.7);
+    border-bottom: 1px solid rgba(125, 125, 125, 0.7);
+}
+
+
+@media screen and (min-width: 760px) 
+{
+ 
+    .dropdownMenu
+    {
+        top: calc(100% - 15px);
+    }
+    
+}
