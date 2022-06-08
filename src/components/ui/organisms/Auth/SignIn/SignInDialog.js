@@ -16,10 +16,20 @@ import PasswordInput from "../../../atoms/Input/PasswordInput";
 import { UserContext } from "../../../../context";
 import { useContext } from "react";
 
-const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = null, message = null}) => 
+const SignInDialog = (props) => 
 {
+  const {  open, closeModal, openCreateAccountModal, redirectTo = null, message = null} = props;
   const [isLoading, setIsLoading] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
+  const {isUserLoggedIn, setIsUserLoggedIn} = useContext(UserContext);
+
+  const updateContext = () => 
+  {
+    console.log("Before: ", isUserLoggedIn);
+    localStorage.setItem("isUserLoggedIn", true);
+    setIsUserLoggedIn(true);
+    
+  }
 
   const handleSignIn = (e) => 
   {
@@ -30,7 +40,10 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
     formData.append("email", e.target[0].value);
     formData.append("password", e.target[1].value)
     sendPostRequest(formData);
-    
+    if (isSuccess){ 
+    updateContext();
+    closeModal()
+  }
   };
 
   const handleCreateAccountOnClick = (e) => 
@@ -39,20 +52,9 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
     openCreateAccountModal();
   }
 
-  //update context
-  {
-    const {isUserLoggedIn, setIsUserLoggedIn} = useContext(UserContext);
-
-    const updateContext = () => 
-    {
-      console.log("Before: ", isUserLoggedIn);
-      localStorage.setItem("isUserLoggedIn", true);
-      setIsUserLoggedIn(true);
-    }
-
-    {isSuccess && updateContext()}
-
-   }
+  useEffect(() => {
+    console.log(isUserLoggedIn)
+  }, [isUserLoggedIn])
 
   useEffect(() => 
   {
@@ -91,9 +93,10 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
       
       {/* move them to the on boarding screens on login */}
       {isSuccess &&  ((APIdata.data.last_login) ? 
+      
       <>
         {/* Redirect to dashboard page or a page defined by another component */}
-        {redirectTo ?  <Navigate to={redirectTo}/> : <Navigate to="/dashboard"/>}
+        {isUserLoggedIn ? <Navigate to={redirectTo ? redirectTo : "/dashboard"} />: null}
       </> : 
       // Redirect to profile page on first login
       <Navigate to="/create-profile-instruction" />

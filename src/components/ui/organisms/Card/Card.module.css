@@ -37,6 +37,7 @@
     /* border: 1px solid black; */
     border-radius: 16px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+    flex: 1 0 30%;
 }
 
 .card .top
