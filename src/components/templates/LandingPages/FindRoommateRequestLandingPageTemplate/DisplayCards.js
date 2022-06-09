@@ -8,9 +8,12 @@ import nextBtn from './../../../../icons/forward-icon.svg';
 import { Link } from "react-router-dom";
 import {v4 as uuidv4} from 'uuid';
 import { useLocation } from "react-router-dom";
+import {useEffect, useState} from "react";
 
-const DisplayCards = ({data, pagination, count}) => 
+const DisplayCards = ({data, pagination, count, filters}) => 
 {
+    const [filteredData, setFilteredData] = useState(data);
+
     const numOfPaginationPages = Math.ceil(count/15);
 
     //getting pagination links
@@ -27,6 +30,104 @@ const DisplayCards = ({data, pagination, count}) =>
         paginationPagesArray.push(i+1);
     }
 
+    useEffect(() => 
+    {
+        const filterLength = Object.entries(filters).length;
+        // if there are no filters, display full data.
+        let keys = Object.keys(filters);
+        let filterQuery;
+        if(filterLength == 0)
+        {
+            setFilteredData(data);
+        }
+        
+        if(filterLength > 0)
+        {
+            let filteredDataArray = [];
+            keys.forEach((key) => 
+            {
+    
+                if(key === "gender")
+                {
+
+                    const genderFilteredData = filteredData.filter((value) => 
+                    {
+                        return value.profile.gender.toLowerCase() === filters["gender"].toLowerCase();
+                    });
+                    
+                    genderFilteredData.forEach((value) => 
+                    {
+                        filteredDataArray.push(value);
+
+                    });
+
+                }
+    
+                if(key === "religion")
+                {
+                    const religionFilteredData = filteredData.filter((value) => 
+                    {
+                        return value.profile.religion.toLowerCase() === filters["religion"].toLowerCase();
+                    });
+    
+                    religionFilteredData.forEach((value) => 
+                    {
+                        filteredDataArray.push(value);
+
+                    });
+                 }
+                
+                if(key === "personality")
+                {
+                    const personalityFilteredData = filteredData.filter((value) => 
+                    {
+                        return value.profile.personality.toLowerCase() === filters["personality"].toLowerCase();
+                    });
+    
+                    personalityFilteredData.forEach((value) => 
+                    {
+                        filteredDataArray.push(value);
+
+                    });
+                }
+    
+                if(key === "room_type")
+                {
+                    const roomTypeFilteredData = filteredData.filter((value) => 
+                    {
+                        return value.room_type.toLowerCase() == filters["room_type"].toLowerCase();
+                    });
+    
+                    roomTypeFilteredData.forEach((value) => 
+                    {
+                        filteredDataArray.push(value);
+
+                    });
+                }
+
+                setFilteredData(filteredDataArray);
+            });
+
+        }
+        
+        console.log(filteredData);
+
+    }, [filters, filteredData]);
+
+    // useEffect(() => 
+    // {
+    //     if(Object.values(filters).length > 0)
+    //     {
+    //         let filteredDataArray = filteredData.filter((value) => 
+    //         {
+    //             return value.room_type.toLowerCase() === "shortlet";
+    //         });
+
+    //         setFilteredData(filteredDataArray);
+    //     }
+        
+    // }, [filters]);
+
     return ( 
         <div className={styles.displayCardContainer}>
             <div className={styles.topSection}>
@@ -36,8 +137,7 @@ const DisplayCards = ({data, pagination, count}) =>
             <div className={styles.displayCardBody}>
                 <div className={styles.displayCards}>
                 {
-
-                    data.map((singleData) => 
+                    filteredData.map((singleData) => 
                     {
                         return (
                         <Card 

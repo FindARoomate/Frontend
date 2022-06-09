@@ -1,5 +1,5 @@
 import SingleConnectionReceivedTemplate from '../../templates/SingleConnectionReceivedTemplate/SingleConnectionReceivedTemplate';
-import { ACCEPT_CONNECTION, REJECT_CONNECTION } from '../../routes';
+import { ACCEPT_CONNECTION, CONNECTION_RECEIVED, REJECT_CONNECTION } from '../../routes';
 import dp from './../../../images/card-display-picture.jpg';
 import styles from './SingleConnectionReceived.module.css';
 import backIcon from './../../../icons/back-icon.svg';
@@ -11,14 +11,16 @@ import { UserContext } from "../../context";
 import Img from './../../ui/atoms/Img/Img';
 import P from './../../ui/atoms/P/P';
 import { useContext} from "react";
+import useGet from '../../../customHooks/useGet';
 
 const SingleConnectionReceived = () => 
 {
-    const {connectionsReceived} = useContext(UserContext);
     const {id: connection_id} = useParams();
-    console.log(connection_id);
+
+    const [APIData, setAPIData] = useState(null);
+    
+    const {connectionsReceived, setConnectionsReceived} = useContext(UserContext);
     const [connectionData, setConnectionData] = useState(null);
-    console.log(connectionData);
     const [isAcceptButtonLoading, setIsAcceptButtonLoading] = useState(false);
     const [isRejectButtonLoading, setIsRejectButtonLoading] = useState(false);
 
@@ -26,9 +28,37 @@ const SingleConnectionReceived = () =>
     const headers = new Headers();
     headers.append("Accept", "application/json");
     headers.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
-    const {isError, isSuccess, APIData, sendPatchRequest} = usePatch(headers);
-    
+    const {isError : isUpdateError, isUpdateSuccess : isUpdateSuccess, APIData : updateAPIData, sendPatchRequest} = usePatch(headers);
+  
+    const fetchFunction = async (url) => 
+    {
+        console.log("Here");
+        const res = await fetch(url, 
+        {
+            headers:  
+            {
+                "Content-Type" : "application/json",
+                "Accept" : "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("accessToken")
+            } 
+        });
 
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            // Set context data if it is not currently available
+            setConnectionsReceived(body);
+        }else
+        {
+            console.log(body);
+        }
+
+    }
+
+    // Function to get the specific connection data from the list of connections in context.
+    // Because of the way the data is structured, I have to search through the context data in a specific way
+    // in order to get the single connection data I need.     
     const getConnection = () => 
     {
         let connection_data;
@@ -53,6 +83,9 @@ const SingleConnectionReceived = () =>
 
         return connection_data;
     }
+
+
+
 
     /*
 
@@ -87,17 +120,26 @@ const SingleConnectionReceived = () =>
 
     useEffect(() => 
     {
-        // Getting Connection Data From Context
-        setConnectionData(getConnection());
+        // Get data from API if the context data is not available
+        if(Object.values(connectionsReceived).length <= 0 )
+        {
+            fetchFunction(CONNECTION_RECEIVED);
+
+        }else
+        {
+            //Getting Connection Data From Context
+            setConnectionData(getConnection());
+        }
+        
 
         // Listen for response from Accept Request
-        if(isSuccess || isError)
+        if(isUpdateSuccess || isUpdateError)
         {
             setIsAcceptButtonLoading(false);
             setIsRejectButtonLoading(false);
         }
 
-    }, [connection_id, isSuccess, isError, APIData]);
+    }, [connection_id, isUpdateSuccess, isUpdateError, updateAPIData, connectionsReceived]);
 
     return ( 
             <SingleConnectionReceivedTemplate>
@@ -177,8 +219,8 @@ const SingleConnectionReceived = () =>
                         </Button>
                     </div>
                 </div>
-                {isSuccess && <div className={styles.successMessage}>{APIData.detail}</div>}
-                {isError && <div className={styles.errorMessage}>Something bad happened. Please try again</div>}
+                {isUpdateSuccess && <div className={styles.successMessage}>{updateAPIData.detail}</div>}
+                {isUpdateError && <div className={styles.errorMessage}>Something bad happened. Please try again</div>}
             </SingleConnectionReceivedTemplate>
         );
 }

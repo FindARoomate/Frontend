@@ -38,7 +38,6 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    color: #000E4A;
     background-color: white;
     border-radius: 8px;
     padding: 11px 16px;
@@ -69,13 +68,13 @@
     pointer-events: all;
 }
 
-.dropdownMenu span 
+.dropdownMenu a 
 {
     cursor: pointer;
-
+    color: #000E4A;
 }
 
-.dropdownMenu span.middleMenuItem
+.dropdownMenu a.middleMenuItem
 {
     padding: 4px 0 4px 0;
 }

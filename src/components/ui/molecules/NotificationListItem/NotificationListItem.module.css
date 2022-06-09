@@ -3,10 +3,19 @@
     {
         border-radius: 8px;
         padding: 11px 10px 11px 3px;
-        background: #F5F7FF;
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
+    }
+
+    .openedListBox
+    {
+        background: #FFFFFF;
+    }
+
+    .unopenedListBox
+    {
+        background: #F5F7FF;
     }
 
     .listBox .information

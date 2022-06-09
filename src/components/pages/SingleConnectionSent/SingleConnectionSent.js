@@ -1,5 +1,5 @@
 import SingleConnectionReceivedTemplate from '../../templates/SingleConnectionReceivedTemplate/SingleConnectionReceivedTemplate';
-import { CANCEL_CONNECTION_START, CANCEL_CONNECTION_END } from '../../routes';
+import { CANCEL_CONNECTION_START, CANCEL_CONNECTION_END, CONNECTION_SENT } from '../../routes';
 import dp from './../../../images/card-display-picture.jpg';
 import useDelete from '../../../customHooks/useDelete';
 import { useContext, useState, useEffect} from "react";
@@ -23,18 +23,45 @@ import "swiper/css";
 
 const SingleConnectionSent = () => 
 {
-    const {connectionsSent} = useContext(UserContext);
+    const {connectionsSent, setConnectionsSent} = useContext(UserContext);
     const {id: connection_id} = useParams();
     const [connectionData, setConnectionData] = useState(null);
-
     const deleteUrl = CANCEL_CONNECTION_START + connection_id + CANCEL_CONNECTION_END;
-    const {isError, isSuccess, APIData, sendDeleteRequest} = useDelete(deleteUrl);
+    const {APIData: deleteAPIData, sendDeleteRequest} = useDelete(deleteUrl);
 
     const cancelConnectionRequest = () => 
     {
 
     }
 
+    const fetchFunction = async (url) => 
+    {
+        console.log("Here");
+        const res = await fetch(url, 
+        {
+            headers:  
+            {
+                "Content-Type" : "application/json",
+                "Accept" : "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("accessToken")
+            } 
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            // Set context data if it is not currently available
+            setConnectionsSent(body);
+        }else
+        {
+            console.log(body);
+        }
+
+    }
+    // Function to get the specific connection data from the list of connections in context.
+    // Because of the way the data is structured, I have to search through the context data in a specific way
+    // in order to get the single connection data I need.  
     const getConnection = () => 
     {
         let connection_data;
@@ -72,9 +99,18 @@ const SingleConnectionSent = () =>
 
     useEffect(() => 
     {
-        setConnectionData(getConnection());
+        // Get data from API if the context data is not available
+        if(Object.values(connectionsSent).length <= 0 )
+        {
+            fetchFunction(CONNECTION_SENT);
+
+        }else
+        {
+            //Getting Connection Data From Context
+            setConnectionData(getConnection());
+        }
         
-    }, [connection_id]);
+    }, [connection_id, connectionsSent]);
 
 
     return ( 

@@ -1,15 +1,22 @@
+import DisplayCards from '../LandingPages/FindRoommateRequestLandingPageTemplate/DisplayCards';
+import ExploreSearch from '../../ui/organisms/ExploreSearch/ExploreSearch';
+import globalStyles from './../../../components/globalStyles.module.css';
+import SearchBar from '../../ui/molecules/Search/SearchBar/SearchBar';
 import styles from './ViewAllRoommateRequestsTemplate.module.css';
 import Footer from '../../ui/organisms/Footer/Footer';
 import Header from '../../ui/organisms/Header/Header';
 import H2 from '../../ui/atoms/Headings/H2/H2';
-import DisplayCards from '../LandingPages/FindRoommateRequestLandingPageTemplate/DisplayCards';
-import globalStyles from './../../../components/globalStyles.module.css';
-import SearchBar from '../../ui/molecules/Search/SearchBar/SearchBar';
-import ExploreSearch from '../../ui/organisms/ExploreSearch/ExploreSearch';
 import P from '../../ui/atoms/P/P';
+import { useState } from 'react';
 
 const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, roommateRequests = null}) => 
 {
+
+    const [tagKeys, setTagKeys] = useState({});
+    const updateTagKeys = (tagKeys) => 
+    {
+        setTagKeys(tagKeys);
+    }
     const handleOnBlur = (e) => 
     {
         console.log(e.target.value);
@@ -45,7 +52,9 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, room
                         placeholder="Search by location"
                         handleOnBlur={handleOnBlur}
                         />
-                    <ExploreSearch/>
+                    <ExploreSearch
+                        getTagKeys={updateTagKeys}
+                    />
                 </div>
 
                 {/* To display roommate request cards */}
@@ -57,6 +66,7 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, room
                             data={roommateRequests.results} 
                             count = {roommateRequests.count}
                             pagination={true}
+                            filters = {tagKeys}
                         />)
                     }
                     {(isSuccess && !roommateRequests) && (<P>There are no roommates at this time</P>)}
