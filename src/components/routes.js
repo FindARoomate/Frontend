@@ -59,3 +59,7 @@ export const GET_PROFILE = API_URL + '/profile/get/';
 export const UPDATE_PROFILE_START = API_URL + '/profile/';
 
 export const UPDATE_PROFILE_END = '/update/';
+
+// NOTIFICATION
+
+export const GET_NOTIFICATIONS = API_URL + '/notifications/'

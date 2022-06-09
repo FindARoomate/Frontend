@@ -4,72 +4,46 @@ import dp from './../../../images/card-display-picture.jpg';
 import styles from './NotificationTemplate.module.css';
 import settingsIcon from './../../../icons/setting-icon.svg';
 
-const NotificationTemplate = () => {
+const NotificationTemplate = ({data}) => 
+{
+    console.log(data);
+
+    const getConnectionLink = (datum) => 
+    {
+        if(datum.title.toLowerCase().includes("request accepted") || datum.title.toLowerCase().includes("request declined"))
+        {
+            return "/connection-sent/"+ datum.connection.id;
+        }
+
+        if(datum.title.toLowerCase().includes("request recieved") || datum.title.toLowerCase().includes("request accepted"))
+        {
+            return "/connection-received/"+ datum.connection.id;
+        }
+    }
+
     return ( 
         <DashboardTemplate
             showStatistics={false}
             title="Notifications"
             description="Catch up on what's been happening"
             dashboardIcon={settingsIcon}
-            dashboardIconLink="/"
+            dashboardIconLink="/dashboard"
         >
             
             <div className={styles.notificationsContainer}>
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
-                <NotificationListItem
-                    dp={dp}
-                    name = "Connection request received"
-                    description = "Precious Faseyosan just sent you a connection request."
-                />
+                {
+                data && data.map((datum) => 
+                    {
+                        return (
+                        <NotificationListItem
+                            dp={datum.connection.sender_data[0].image_url}
+                            name = {datum.title}
+                            description = {datum.content}
+                            link = {getConnectionLink(datum)}
+                        />);
+                    })
+                }
+                
             </div>
 
         </DashboardTemplate>

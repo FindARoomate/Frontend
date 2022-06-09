@@ -1,4 +1,3 @@
-import P from '../../atoms/P/P';
 import Modal from '../Modal/Modal';
 import { useContext } from 'react';
 import {Link} from 'react-router-dom';

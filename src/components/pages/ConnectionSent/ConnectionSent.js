@@ -12,12 +12,12 @@ import { UserContext } from "../../context";
 
 const ConnectionSent = () => 
 {
-    var token = localStorage.getItem("accessToken")
-    const {isError, isSuccess, APIData} = useGet(CONNECTION_SENT, token);
     const [data, setData] = useState([]);
+    const {setConnectionsSent} = useContext(UserContext);
     const [connectionRequestError, setConnectionRequestError] = useState(null);
 
-    const {setConnectionsSent} = useContext(UserContext);
+    const {isError, isSuccess, APIData} = useGet(CONNECTION_SENT, localStorage.getItem("accessToken"));
+
 
     useEffect(() => 
     {
@@ -107,7 +107,7 @@ const ConnectionSent = () =>
                             link = {"/connection-sent/" + datum.id}
                             name = {datum.roomate_request.profile.fullname}
                             description = {datum.roomate_request.listing_title}
-                            tag="pending"
+                            tag={datum.status}
                             dp={datum.roomate_request.request_images[0].image_url}
                         />)
                     }) }

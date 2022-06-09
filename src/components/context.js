@@ -90,8 +90,8 @@ export const UserContextProvider = ({children}) =>
         {
             console.log("Error refresh token")
             localStorage.removeItem("isUserLoggedIn");
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
+            // localStorage.removeItem("accessToken");
+            // localStorage.removeItem("refreshToken");
         }    
 
         return () => clearInterval(timer);

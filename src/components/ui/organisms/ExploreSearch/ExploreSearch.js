@@ -4,7 +4,7 @@ import SearchOptions from "../../molecules/Search/SearchOptions/SearchOptions";
 import DisplaySearchTags from "../../molecules/Search/DisplaySearchTags/DisplaySearchTags";
 import {v4 as uuidv4} from 'uuid';
 
-const ExploreSearch = () => {
+const ExploreSearch = ({getTagKeys}) => {
   const [tagKeys, updateTagKeys] = useState({});
 
   const filters = [
@@ -84,7 +84,14 @@ const ExploreSearch = () => {
       delete tagKeys[data[0]];
       return {...tagKeys}
     });
+
   };
+
+  useEffect(() => 
+  {
+    getTagKeys({...tagKeys});
+    
+  }, [tagKeys])
 
   return (
     <div className={styles.exploreSearch}>

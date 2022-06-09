@@ -48,12 +48,12 @@ const DashboardTemplate = ({
         {
             id: 1,
             text: "Contact us",
-            path: '#contact-us'
+            path: '/#contact-us'
         },
         {
             id: 2,
             text: "Create request",
-            path: '/create-roommate-request'
+            path: '/create-roommate-request-instruction'
         },
         {
             id: 3,

@@ -1,12 +1,18 @@
 import Img from './../../atoms/Img/Img';
+import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { UserContext } from './../../../context';
 import styles from './HeaderDropdown.module.css';
-import pullupIcon from './../../../../icons/pullupIcon.svg';
 import dp from './../../../../images/card-display-picture.jpg';
 import dropdownIcon from './../../../../icons/dropdownIcon.svg';
-import { useState } from 'react';
+
 
 const HeaderDropdown = () => 
 {
+    // Getting user name from context
+    const {userProfile} = useContext(UserContext);
+
+
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const toggleModal = () => 
@@ -17,14 +23,14 @@ const HeaderDropdown = () =>
     return ( 
         <div className={styles.dropdownContainer}>
             <div className={styles.dropdownButton} onClick={toggleModal}>
-                <Img className={styles.profileImage}  src={dp}/>
-                <span className={styles.text}>Precious Faseyosan</span>
+                <Img className={styles.profileImage}  src={userProfile.image_url ? userProfile.image_url : dp}/>
+                <span className={styles.text}>{userProfile.fullname}</span>
                 {<Img className={`${styles.dropdownIcon} ${isDropdownOpen ? styles.activeIcon : ""}`}  src={dropdownIcon}/>}
             </div>
             <div className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.active : ""}`} name="dropdownMenu">
-                <span>View Dashboard</span>
-                <span className={styles.middleMenuItem}>Edit Profile</span>
-                <span>Update Ideal Roommate</span>
+                <Link to="/dashboard">View Dashboard</Link>
+                <Link to="/profile" className={styles.middleMenuItem}>Edit Profile</Link>
+                <Link to="/">Update Ideal Roommate</Link>
             </div>
         </div>
      );
