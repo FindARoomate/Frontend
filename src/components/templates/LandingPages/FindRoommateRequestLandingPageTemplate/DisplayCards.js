@@ -10,9 +10,10 @@ import {v4 as uuidv4} from 'uuid';
 import { useLocation } from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const DisplayCards = ({data, pagination, count, filters}) => 
+const DisplayCards = ({data, pagination, count, filters = {}}) => 
 {
     const [filteredData, setFilteredData] = useState(data);
+    console.log(filters)
 
     const numOfPaginationPages = Math.ceil(count/15);
 
@@ -29,90 +30,97 @@ const DisplayCards = ({data, pagination, count, filters}) =>
     {
         paginationPagesArray.push(i+1);
     }
-
+    console.log(filteredData)
     useEffect(() => 
     {
-        const filterLength = Object.entries(filters).length;
-        // if there are no filters, display full data.
-        let keys = Object.keys(filters);
-        let filterQuery;
-        if(filterLength == 0)
-        {
-            setFilteredData(data);
-        }
+        // const filterLength = Object.entries(filters).length;
+        // // if there are no filters, display full data.
+        // let keys = Object.keys(filters);
+        // let filterQuery;
+        // if(filterLength == 0)
+        // {
+        //     setFilteredData(data);
+        // }
         
-        if(filterLength > 0)
-        {
-            let filteredDataArray = [];
-            keys.forEach((key) => 
-            {
+        // if(filterLength > 0)
+        // {
+        //     let filteredDataArray = [];
+        //     keys.forEach((key) => 
+        //     {
     
-                if(key === "gender")
-                {
+        //         if(key === "gender")
+        //         {
 
-                    const genderFilteredData = filteredData.filter((value) => 
-                    {
-                        return value.profile.gender.toLowerCase() === filters["gender"].toLowerCase();
-                    });
+        //             const genderFilteredData = filteredData.filter((value) => 
+        //             {
+        //                 return value.profile.gender.toLowerCase() === filters["gender"].toLowerCase();
+        //             });
                     
-                    genderFilteredData.forEach((value) => 
-                    {
-                        filteredDataArray.push(value);
+        //             genderFilteredData.forEach((value) => 
+        //             {
+        //                 filteredDataArray.push(value);
 
-                    });
+        //             });
 
-                }
+        //         }
     
-                if(key === "religion")
-                {
-                    const religionFilteredData = filteredData.filter((value) => 
-                    {
-                        return value.profile.religion.toLowerCase() === filters["religion"].toLowerCase();
-                    });
+        //         if(key === "religion")
+        //         {
+        //             const religionFilteredData = filteredData.filter((value) => 
+        //             {
+        //                 return value.profile.religion.toLowerCase() === filters["religion"].toLowerCase();
+        //             });
     
-                    religionFilteredData.forEach((value) => 
-                    {
-                        filteredDataArray.push(value);
+        //             religionFilteredData.forEach((value) => 
+        //             {
+        //                 filteredDataArray.push(value);
 
-                    });
-                 }
+        //             });
+        //          }
                 
-                if(key === "personality")
-                {
-                    const personalityFilteredData = filteredData.filter((value) => 
-                    {
-                        return value.profile.personality.toLowerCase() === filters["personality"].toLowerCase();
-                    });
+        //         if(key === "personality")
+        //         {
+        //             const personalityFilteredData = filteredData.filter((value) => 
+        //             {
+        //                 return value.profile.personality.toLowerCase() === filters["personality"].toLowerCase();
+        //             });
     
-                    personalityFilteredData.forEach((value) => 
-                    {
-                        filteredDataArray.push(value);
+        //             personalityFilteredData.forEach((value) => 
+        //             {
+        //                 filteredDataArray.push(value);
 
-                    });
-                }
+        //             });
+        //         }
     
-                if(key === "room_type")
-                {
-                    const roomTypeFilteredData = filteredData.filter((value) => 
-                    {
-                        return value.room_type.toLowerCase() == filters["room_type"].toLowerCase();
-                    });
+        //         if(key === "room_type")
+        //         {
+        //             const roomTypeFilteredData = filteredData.filter((value) => 
+        //             {
+        //                 return value.room_type.toLowerCase() == filters["room_type"].toLowerCase();
+        //             });
     
-                    roomTypeFilteredData.forEach((value) => 
-                    {
-                        filteredDataArray.push(value);
+        //             roomTypeFilteredData.forEach((value) => 
+        //             {
+        //                 filteredDataArray.push(value);
 
-                    });
-                }
+        //             });
+        //         }
 
-                setFilteredData(filteredDataArray);
-            });
+        //         setFilteredData(filteredDataArray);
+        //     });
 
-        }
+        // }
         
-        console.log(filteredData);
+        // console.log(filteredData);
 
-    }, [filters, filteredData]);
+        const filterArray = Object.values(filters);
+        let filteredItems;
+        filteredData.forEach(item => {
+        filteredItems = Object.keys(item).filter((itemValue) => filterArray.includes(item[itemValue]))
+        console.log({...item, filteredItems: item[filteredItems]})
+        })
+        
+    }, [data, filteredData, filters]);
 
     // useEffect(() => 
     // {
