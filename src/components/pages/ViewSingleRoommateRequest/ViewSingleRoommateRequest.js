@@ -10,7 +10,6 @@ const ViewSingleRoommateRequest = () =>
     const {id} = useParams();
     const url = GET_SINGLE_ROOMMATE_REQUEST + id + "/";
     var {isError, isSuccess, APIData} = useGet(url);
-    
 
     return ( 
             <ViewSingleRoommateRequestTemplate

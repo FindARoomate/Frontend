@@ -299,7 +299,7 @@
     .desktopOwnerInformation .personalInfo img
     {
         width: 75px;
-        height: auto;
+        height: 75px;
         margin-right: 8px;
         border-radius: 50%;
     }

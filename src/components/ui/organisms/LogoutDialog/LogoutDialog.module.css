@@ -1,0 +1,63 @@
+.logoutDialog
+{
+    width: 100%;
+}
+
+.logoutDialog p
+{
+    margin-bottom: 24px;
+}
+
+.logoutDialog span 
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+}
+
+.logoutDialog button
+{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    width: 180px;
+}
+
+.logoutDialog .backButton
+{
+    background-color: white;
+    border: 1px solid #0029DD;
+    color: #0029DD;
+    margin-top: 14px;
+}
+
+
+@media screen and (min-width: 760px) 
+{
+    
+
+    .logoutDialog p
+    {
+        margin-bottom: 20px;
+    }
+
+    .logoutDialog span 
+    {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 50px;
+    }
+
+    .logoutDialog button
+    {
+        font-size: 20px;
+        width: max-content;
+    }
+
+    .logoutDialog .backButton
+    {
+        margin-top: 0;
+    }
+}

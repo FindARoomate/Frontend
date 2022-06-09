@@ -1,18 +1,18 @@
 import { useCallback, useState } from "react";
 
-const usePost = (url, headersValue = {}) => 
+const useDelete = (headersValue = {}) => 
 {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [APIdata, setAPIData] = useState({});
+  const [APIData, setAPIData] = useState({});
 
-  const fetchFunction = async(formData) =>
+  const fetchFunction = async(url, formData = {}) =>
   {
     
     try 
     {
       const res = await fetch(url, {
-        method: "POST",
+        method: "DELETE",
         body: formData,
         headers: headersValue,
       });
@@ -40,15 +40,13 @@ const usePost = (url, headersValue = {}) =>
     }
   }
     
-  const sendPostRequest = useCallback((formData) => 
+  const sendDeleteRequest = useCallback((url, formData) => 
   {
-    fetchFunction(formData);    
-  },
-    [fetchFunction]
-  );
+    fetchFunction(url, formData);    
+    
+  }, [headersValue]);
 
-
-  return { isError, isSuccess, APIdata, sendPostRequest };
+  return { isError, isSuccess, APIData, sendDeleteRequest };
 };
 
-export default usePost;
+export default useDelete;

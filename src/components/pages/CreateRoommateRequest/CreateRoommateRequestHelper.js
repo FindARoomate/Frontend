@@ -28,11 +28,11 @@ export const createRoommateRequestValidation =
         room_type: Yup.string().required('Room Type is required'),
         no_of_persons: Yup.number().typeError('Kindly enter a numeric value')
                         .integer("This value must be an integer")
-                        .min(0, 'Value should be greater than or equal to 0')
+                        .min(1, 'Value should be greater than 0')
                         .required('No of persons to occupy the apartment is required'),
         no_of_current_roomies:  Yup.number().typeError('Kindly enter a numeric value')
                                 .integer("This value must be an integer")
-                                .min(0, 'Value should be greater than or equal to 0')
+                                .min(1, 'Value should be greater than 0')
                                 .test("maxValue", 'The number of current roommates has to be less than the total number of persons to occupy apartment',
                                 (value) => 
                                 {
@@ -72,7 +72,6 @@ export const createRoommateRequestValidation =
         additional_information: Yup.string().required('Additional Information is required'), 
 });
 
-    
 
 export const validateForm = (current_index, errors) =>
 {

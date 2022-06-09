@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import Img from '../../ui/atoms/Img/Img';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import Label from '../../ui/atoms/Label/Label';
 import Input from '../../ui/atoms/Input/Input';
@@ -30,7 +30,6 @@ const CreateRoommateRequest = () =>
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [nextButtonClicked, setNextButtonClicked] = useState(false);
-
 
     const moveToNextFormGroup = (current_index, errors) => 
     {        
@@ -149,8 +148,7 @@ const CreateRoommateRequest = () =>
         
         {formik => (
         
-            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik.errors)}
-            >
+            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik.errors)} >
             <div className={`${styles.formGroup} ${styles.formGroupActive}`}>
 
                 <div className={styles.inputGroup}>
@@ -312,7 +310,7 @@ const CreateRoommateRequest = () =>
                 </div>
 
                 <div className={styles.inputGroup}>
-                    <Label name="rent_per_person">Rent per person?</Label>
+                    <Label name="rent_per_person">Rent per person (in naira)?</Label>
                     <Input  name="rent_per_person" type="text" placeholder="Please enter the rent each person is to pay" {...formik.getFieldProps('rent_per_person')}/>
                     {!nextButtonClicked && ((formik.touched.rent_per_person && formik.errors.rent_per_person) &&<ErrorAlert>{formik.errors.rent_per_person}</ErrorAlert>)}
                     {nextButtonClicked && (formik.errors.rent_per_person && <ErrorAlert>{formik.errors.rent_per_person}</ErrorAlert>)}

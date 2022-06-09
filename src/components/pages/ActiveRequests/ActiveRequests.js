@@ -26,7 +26,7 @@ const ActiveRequests = () =>
                         (APIData.length === 0) ?
                             <P className={styles.noRequestMessage}>You have no active requests at this moment. <Link to="/create-roommate-request-instruction">Request for a roommate now</Link></P> 
                         :
-                        APIData.map((request) => 
+                        APIData?.map((request) => 
                         {
                         return ( <ListBox
                             key = {uuidv4()}

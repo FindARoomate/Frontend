@@ -31,26 +31,27 @@ import {useEffect} from 'react';
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 
-const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) => 
+const ViewSingleRoommateRequestTemplateOld = ({roommateRequest = null}) => 
 {
-
     const token =  "Bearer " + localStorage.getItem("accessToken");
     var myHeaders = new Headers();
     myHeaders.append("Authorization", token);
     const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_CONNECTION_REQUEST, myHeaders);
-    const [showConnectionSuccessMessage, setShowConnectionSuccessMessage] = useState(false);
 
-    let [photoIndex, setPhotoIndex] = useState(0);
-    let [isOpen, setIsOpen] = useState(false);
+    // let [photoIndex, setPhotoIndex] = useState(0);
+    // let [isOpen, setIsOpen] = useState(false);
 
     let [isLoading, setIsLoading] = useState(false);
+
+    // const {isUserLoggedIn} = useContext(UserContext);
 
     // For sign in modal
     const [signInModalState, setSignInModalState] = useState(false);
     const showSignInDialog = () => setSignInModalState(true);
     const closeSignInModal = () => setSignInModalState(false);
 
-    // //For create account modal
+
+    //For create account modal
     const [createAccountModalState, setCreateAccountModalState] = useState(false);
     const showCreateAccountDialog = () => setCreateAccountModalState(true);
     const closeCreateAccountModal = () => setCreateAccountModalState(false);
@@ -68,27 +69,30 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         showCreateAccountDialog();
     }
 
-    let image_array = [];
+    // let image_array = [];
 
-    if (roommateRequest)
-    {   
-        roommateRequest.request_images.forEach((image) => 
-        {
-            <div key={uuidv4()}>
-                {image_array.push({src: image.image_url, width: 1, height: 1})}
-            </div>
-        });
-    }
+    // if (roommateRequest)
+    // {   
+    //     roommateRequest.request_images.forEach((image) => 
+    //     {
+    //         <div key={uuidv4()}>
+    //             {image_array.push({src: image.image_url, width: 1, height: 1})}
+    //         </div>
+    //     });
+    // }
 
-    const openLightBox = useCallback((event, { photo, index }) => 
-    {
-        setPhotoIndex(index);
-        setIsOpen(true);
+    // const openLightBox = useCallback((event, { photo, index }) => {
+    //     setPhotoIndex(index);
+    //     setIsOpen(true);
+    //   }, []);
 
-      }, []);
+      const [shouldShowForm, setShouldShowForm] = useState(false);
+      const closeMessage = () => 
+      {
+        setShouldShowForm(false);
+      }
 
-      const {isUserLoggedIn} = useContext(UserContext);
-      
+      const isUserLoggedIn = false;
       const sendConnectionRequest = () => 
       {
         //Check if user is logged in
@@ -102,47 +106,40 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
             setIsLoading(true);
 
             const formData = new FormData();
-            formData.append("request_id", roommateRequest.id);
+            formData.append("user", 3);
+            formData.append("roomate_request", roommateRequest.id);
             sendPostRequest(formData);
         }
       }
 
-      const closeConnectionSuccessMessage = () =>
-      {
-          setShowConnectionSuccessMessage(false);
-      }
-
       useEffect(() => 
-      {          
+      {
         if(isSuccess || isError)
         {
             setIsLoading(false);
             console.log(APIdata);
         }
          
-        if(isSuccess) setShowConnectionSuccessMessage(true);
-
-      }, [isSuccess, isError, APIdata]);
+      }, [APIdata, isSuccess, isError]);
  
-    const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'}); 
-
-
-    const headerLinks = 
-    [
-        {
-            id: 1,
-            text: "Create Request",
-            path: '/create-roommate-request-instruction'
-        }
-    ]
+   {/* const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'}); */}
+  
+    // const headerLinks = 
+    // [
+    //     {
+    //         id: 1,
+    //         text: "Create Request",
+    //         path: '/create-roommate-request-instruction'
+    //     }
+    // ]
 
     return ( 
         <div className={styles.viewAll}>
-             <Header
+            {/* <Header
                 links = {headerLinks}
                 customStyle={{borderBottom: "1px solid rgba(125, 125, 125, 0.45)"}}
             />
-            <div className={styles.heading}>
+                 <div className={styles.heading}>
                 <div className={styles.headingAndIcon}>
                     <Link to="/view-all-requests">
                         <Img src={backIcon}/>
@@ -155,8 +152,9 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                             </span>
                         </P> 
                 </div>
-            </div>
-            <div className={styles.imageContainer}>
+            </div> */}
+
+            {/* <div className={styles.imageContainer}>
                 <div className={styles.imageGroup}>
                     {roommateRequest ? <Gallery photos={image_array} onClick={openLightBox}/> : ""}
                     {isOpen && (
@@ -182,9 +180,10 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                         )
                     }
                 </div>
-            </div>
+            </div> */}
 
-            <div className={`${globalStyles.body} ${styles.viewSingleRequestBody}`}>
+
+                <div className={`${globalStyles.body} ${styles.viewSingleRequestBody}`}>
                 {roommateRequest ? (
                 <>            
                     <div className={styles.roomInformation}>
@@ -227,7 +226,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                 <div className={styles.ammenitiesContainer}>
                                     <H2>Amenities</H2>
 
-                                    <div className={styles.ammenities}>
+                                    {/* <div className={styles.ammenities}>
                                         {(roommateRequest.amenities.length === 0) && <P>No ammenities available</P>}
                                         {(roommateRequest.amenities.length > 0) && roommateRequest.amenities.map((amenity) => 
                                         {
@@ -239,23 +238,23 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                             )
                                         })}
                                         
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
                             <div className={styles.desktopOwnerInformation}>
-                                {showConnectionSuccessMessage && 
+                                {/* {shouldShowForm && 
                                     <div className={styles.connectionSentNotification}>
                                         <div className={styles.content}>
-                                            You have successfully sent a connection request to {roommateRequest.profile.fullname}. We will notify you when your connection request has been attended to.
+                                            You have successfully sent a connection request to Precious Faseyosan. We will notify you when she accepts or declines your connection request.
                                         </div>
-                                        <div className={styles.closeIcon} onClick={closeConnectionSuccessMessage}>
+                                        <div className={styles.closeIcon} onClick={closeMessage}>
                                             x
                                         </div>  
                                     </div>
-                                }   
+                                }    */}
                                 <div className={styles.personalInfo}>
-                                    <Img src ={roommateRequest.profile.image_url} />
+                                    <Img src ={displayPicture} />
                                     <span>
                                         <H3>{roommateRequest.profile.fullname}</H3>
                                         <P>{roommateRequest.profile.profession}</P>
@@ -300,7 +299,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                 <P styles={styles.address}>{roommateRequest.street_address + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
                             </div>
                             <div className={styles.map} id="single-roommate-request-map">
-                                {/* <Map
+                                {/*<Map
                                     style="mapbox://styles/mapbox/streets-v9"
                                     containerStyle={{
                                         height: '100%',
@@ -312,7 +311,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                     <Layer type="line" id="marker" layout={{ 'icon-image': 'marker-15' }}>
                                         <Feature coordinates={[roommateRequest.longitude, roommateRequest.latitude]} />
                                     </Layer>
-                                </Map> */}
+                                </Map>*/}
                             </div>
                         </div>
 
@@ -324,7 +323,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                 </>) : "Loading ..."}
 
                 </div>
-               
+                
                 {roommateRequest ? (
                 <> 
                     <div className={styles.mobileOwnerInformation}>
@@ -343,6 +342,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                         </div>
                     </div>
                 </>) : "Loading ..."}
+            
 
             <SignInDialog 
                 open={signInModalState} 
@@ -364,4 +364,4 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
      );
 }
  
-export default ViewSingleRoommateRequestTemplate;
+export default ViewSingleRoommateRequestTemplateOld;

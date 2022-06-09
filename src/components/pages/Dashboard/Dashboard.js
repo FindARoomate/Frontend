@@ -5,8 +5,7 @@ import { useContext } from "react";
 const Dashboard = () => 
 {
     return ( 
-       <DashboardTemplate
-       />
+       <DashboardTemplate/>
      );
 }
  

@@ -4,20 +4,23 @@ import activeConnectionSent from './../../../icons/active-connection-sent.svg';
 import activeActiveRequest from './../../../icons/active-active-request.svg';
 import connectionReceived from './../../../icons/connection-received.svg';
 import globalStyles from './../../../components/globalStyles.module.css';
+import LogoutDialog from '../../ui/organisms/LogoutDialog/LogoutDialog';
+import notificationIcon from './../../../icons/notification-icon.svg';
 import inactiveRequest from './../../../icons/inactive-request.svg';
 import connectionSent from './../../../icons/connection-sent.svg';
-import activeRequest from './../../../icons/active-request.svg';
 import dashboardImg from './../../../images/dashboard-image.png';
-import logoutIcon from './../../../icons/logout-icon.svg';
+import activeRequest from './../../../icons/active-request.svg';
 import overviewIcon from './../../../icons/overview-icon.svg';
-import Header from '../../ui/organisms/Header/Header';
 import dashboardStyles from './DashboardTemplate.module.css';
+import logoutIcon from './../../../icons/logout-icon.svg';
+import Header from '../../ui/organisms/Header/Header';
+import useGet from '../../../customHooks/useGet';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../context';
+import { STATISTICS } from '../../routes';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';
 import P from '../../ui/atoms/P/P';
-import useGet from '../../../customHooks/useGet';
-import { GET_PROFILE } from '../../routes';
-import notificationIcon from './../../../icons/notification-icon.svg';
 
 const DashboardTemplate = ({
         children,
@@ -28,24 +31,16 @@ const DashboardTemplate = ({
         dashboardIconLink = "/notifications"
     }) => 
 {
-    const token = localStorage.getItem("accessToken");
-    const {APIData} = useGet(GET_PROFILE, token);
+    
+    const {userProfile} = useContext(UserContext);
 
-    console.log(APIData);
-
-    if(APIData && title == "Welcome back") title = "Welcome back " + APIData.data.fullname;
+    if(title == "Welcome back") title = "Welcome back " + userProfile.fullname;
   
     const imgLinkStyle = 
     {
         height: "14px",
         width: "auto",
         marginRight: "8.5px"
-    }
-
-    const logoutLinkStyle = 
-    {
-        color: "#0029DD",
-        textDecoration: "underline",
     }
 
     const headerLinks = 
@@ -62,11 +57,12 @@ const DashboardTemplate = ({
         },
         {
             id: 3,
-            text: <><Img customStyle={imgLinkStyle} src={logoutIcon}/><span style={logoutLinkStyle}>Logout</span></>,
-            path: '/dashboard'
+            text: "View roommate requests",
+            path: '/view-all-requests'
         },
 
     ]
+
     const mobileLinks = 
     [
         {
@@ -97,6 +93,16 @@ const DashboardTemplate = ({
     ]
 
     const currentPath = window.location.pathname;
+    
+    // Create Account Menu Dialog Box controls
+    const [logoutModalState, setLogoutModalState] = useState(false);
+    const closeLogoutDialog = () => setLogoutModalState(false);
+    const openLogoutDialog = () => setLogoutModalState(true);
+
+    // Get Statistics
+    const token = localStorage.getItem("accessToken");
+    const {isSucccess, isError, APIData} = useGet(STATISTICS, token);
+    console.log(APIData);
 
     return (  
     <div className={dashboardStyles.viewMoreRequests}>
@@ -104,6 +110,8 @@ const DashboardTemplate = ({
             mobileLinks={mobileLinks}
             links = {headerLinks}
             customStyle={{backgroundColor: '#F5F7FF'}}
+            showProfile = {true}
+            showLogout = {true}
         />
 
         <div className={`${globalStyles.body} ${dashboardStyles.dashboardBody}`}>
@@ -111,10 +119,7 @@ const DashboardTemplate = ({
                 <div className={dashboardStyles.sidebarContainer}>
                 <div className={dashboardStyles.sidebar}>
                     <div className={dashboardStyles.image}>
-                            {APIData && 
-                                    <Img src={dashboardImg}/>
-                                    // <Img src={APIData.data.image_url}/>
-                            }
+                        <Img src={userProfile.image_url}/>
                     </div>
                     <div className={dashboardStyles.links}>
                         <ul>
@@ -152,11 +157,8 @@ const DashboardTemplate = ({
                             </li>
                         </ul>
                         <div className={dashboardStyles.logout}>
-                            <Link to="/">
-                                <span className={dashboardStyles.icon}><Img src={logoutIcon}/></span>
-                                <span className={dashboardStyles.text}>Logout</span>
-                            </Link>
-                            
+                            <span className={dashboardStyles.icon}><Img src={logoutIcon}/></span>
+                            <span onClick={openLogoutDialog} className={dashboardStyles.text}>Logout</span>
                         </div>
                     </div>
                 </div>
@@ -186,7 +188,7 @@ const DashboardTemplate = ({
                                         <Img src={currentPath === "/connection-sent" ? activeConnectionSent : connectionSent}/>
                                     </div>
                                     <P>Connection sent</P>
-                                    <P>5</P>
+                                    <P>{APIData ? APIData.connections_sent : ""}</P>
                                 </div>
                             </Link>
 
@@ -196,7 +198,7 @@ const DashboardTemplate = ({
                                     <Img src={currentPath === "/connection-received" ? activeConnectionReceived : connectionReceived}/>
                                 </div>
                                 <P>Connection received</P>
-                                <P>4</P>
+                                <P>{APIData ? APIData.connections_recieved : ""}</P>
                             </div>
                             </Link>
 
@@ -206,7 +208,7 @@ const DashboardTemplate = ({
                                     <Img src={currentPath === "/active-requests" ? activeActiveRequest : activeRequest}/>
                                 </div>
                                 <P>Active request</P>
-                                <P>1</P>
+                                <P>{APIData ? APIData.active_requests : ""}</P>
                             </div>
                             </Link>
 
@@ -216,7 +218,7 @@ const DashboardTemplate = ({
                                     <Img src={currentPath === "/inactive-requests" ? activeInactiveRequest : inactiveRequest}/>
                                 </div>
                                 <P>Inactive request</P>
-                                <P>5</P>
+                                <P>{APIData ? APIData.inactive_requests : ""}</P>
                             </div>
                             </Link>
 
@@ -229,6 +231,13 @@ const DashboardTemplate = ({
                 </div>
             </div>
         </div>
+
+        {/* Logout pop-up */}
+        <LogoutDialog
+            open={logoutModalState}
+            closeModal={closeLogoutDialog}
+        />
+
     </div>
     );
 }

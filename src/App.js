@@ -24,7 +24,7 @@ import Notification from './components/pages/Notification/Notification';
 import CreateProfile from './components/pages/CreateProfile/CreateProfile';
 import ActivateEmail from './components/pages/ActivateEmail/ActivateEmail';
 import CreateRoommateRequest from './components/pages/CreateRoommateRequest/CreateRoommateRequest';
-
+import Protected from './Protected';
 
 function App() 
 {
@@ -67,32 +67,32 @@ function App()
           <Route path='/roommate-request/:id' element={<ViewSingleRoommateRequest/>}/>
 
           {/* Create Profile */}
-          <Route path='/create-profile-instruction' element={<CreateProfileInstruction/>} />
-          <Route path='/create-profile' element={<CreateProfile/>} />
-          <Route path='/create-profile-thankyou' element={<CreateProfileThankYou/>}/>
+          <Route path='/create-profile-instruction' element={<Protected><CreateProfileInstruction/></Protected>} />
+          <Route path='/create-profile' element={<Protected><CreateProfile/></Protected>} />
+          <Route path='/create-profile-thankyou' element={<Protected><CreateProfileThankYou/></Protected>}/>
 
           {/* Roommate Request */}
-          <Route path='/create-roommate-request-instruction' element={<CreateRooomateRequestInstruction/>}/>
-          <Route path='/create-roommate-request' element={<CreateRoommateRequest/>} />
-          <Route path='/create-roommate-request-thankyou' element={<CreateRoommateRequestThankYou/>} />
+          <Route path='/create-roommate-request-instruction' element={<Protected><CreateRooomateRequestInstruction/></Protected>}/>
+          <Route path='/create-roommate-request' element={<Protected><CreateRoommateRequest/></Protected>} />
+          <Route path='/create-roommate-request-thankyou' element={<Protected><CreateRoommateRequestThankYou/></Protected>} />
           
           {/* Dashboard related routes */}
-          <Route path='/dashboard' element={<Dashboard/>}/>
-          <Route path='/connection-sent' element={<ConnectionSent/>}/>
-          <Route path='/connection-received' element={<ConnectionReceived/>}/>
-          <Route path='/inactive-requests' element={<InactiveRequests/>} />
-          <Route path='/active-requests' element={<ActiveRequests/>}/>
+          <Route path='/dashboard' element={<Protected><Dashboard/></Protected>}/>
+          <Route path='/connection-sent' element={<Protected><ConnectionSent/></Protected>}/>
+          <Route path='/connection-received' element={<Protected><ConnectionReceived/></Protected>}/>
+          <Route path='/inactive-requests' element={<Protected><InactiveRequests/></Protected>} />
+          <Route path='/active-requests' element={<Protected><ActiveRequests/></Protected>}/>
 
 
-          <Route path='/connection-received/1' element={<SingleConnectionReceived/>}/>
-          <Route path='/connection-sent/1' element={<SingleConnectionSent/>}/>
-          <Route path='/request/:id' element={<SingleRequest/>}/>
+          <Route path='/connection-received/:id' element={<Protected><SingleConnectionReceived/></Protected>}/>
+          <Route path='/connection-sent/:id' element={<Protected><SingleConnectionSent/></Protected>}/>
+          <Route path='/request/:id' element={<Protected><SingleRequest/></Protected>}/>
 
           {/* Profile */}
-          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/profile' element={<Protected><Profile/></Protected>}/>
 
           {/* Notification */}
-          <Route path='/notifications' element={<Notification/>}/>
+          <Route path='/notifications' element={<Protected><Notification/></Protected>}/>
 
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />

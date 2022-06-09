@@ -1,7 +1,6 @@
-import styles from './CreateProfile.module.css';
 import * as Yup from 'yup';
 
-export const createProfileInitialValues = 
+export const updateProfileInitialValues = 
 {
     fullname: '',
     email: '',
@@ -20,7 +19,7 @@ export const createProfileInitialValues =
     profile_picture: '',
 }
 
-export const createProfileValidation = 
+export const updateProfileValidation = 
  Yup.object({
         fullname: Yup.string().required('Fullname is required'),
         email: Yup.string().email('Must be a valid email').required('Email is required'),
@@ -54,46 +53,3 @@ export const createProfileValidation =
 });
 
     
-
-export const validateForm = (current_index, errors) =>
-{
-
-    var formStatus;
-    var message = "Kindly attend to the error messages";
-    
-    if(current_index == 1)
-    {
-        formStatus =  (errors.fullname || errors.email || errors.phone_number || errors.gender || errors.age_range) ? false : true;
-    } 
-
-    if(current_index == 2)
-    {
-        formStatus =  (errors.profile_picture || errors.personality || errors.profession || errors.bio) ? false : true;
-    } 
-
-    if(current_index == 3)
-    {
-        formStatus =  (errors.roomie_gender || errors.roomie_religion || errors.roomie_personality || errors.roomie_age || errors.roomie_description) ? false : true;
-    } 
-
-    //if there are no errors, ensure the user didn't just leave the whole form blank
-    if(formStatus && current_index == 1)
-    {
-        const currentFormGroup = document.querySelectorAll(`.${styles.formGroup}`)[current_index-1];
-        const formInputs = currentFormGroup.querySelectorAll(`input, select, textarea`);
-
-        for(var i = 0; i< formInputs.length; i++)
-        {
-            
-            if(!formInputs[i].value)
-            {
-                message = "All fields are required";
-                formStatus = false;
-                break;
-            }
-        }
-
-    }
-    
-     return {formStatus, message}
-}
