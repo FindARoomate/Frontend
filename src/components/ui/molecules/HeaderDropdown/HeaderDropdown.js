@@ -22,7 +22,7 @@ const HeaderDropdown = () =>
 
     return ( 
         <div className={styles.dropdownContainer}>
-            <div className={styles.dropdownButton} onClick={toggleModal}>
+            <div className={`${styles.dropdownButton} ${isDropdownOpen ? styles.whiteBg : styles.transparentBg}`} onClick={toggleModal}>
                 <Img className={styles.profileImage}  src={userProfile.image_url ? userProfile.image_url : dp}/>
                 <span className={styles.text}>{userProfile.fullname}</span>
                 {<Img className={`${styles.dropdownIcon} ${isDropdownOpen ? styles.activeIcon : ""}`}  src={dropdownIcon}/>}
