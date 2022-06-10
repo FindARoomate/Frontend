@@ -26,8 +26,8 @@ const ExploreSearch = ({getTagKeys}) => {
       data:
       [
           {key: uuidv4(), label: "Religion", value: ""},
-          {key: uuidv4(), label: "Christian", value: "Christian"},
-          {key: uuidv4(), label: "Muslim", value: "Muslim"},
+          {key: uuidv4(), label: "Christian", value: "Christianity"},
+          {key: uuidv4(), label: "Muslim", value: "Islam"},
       ]
     },
     {

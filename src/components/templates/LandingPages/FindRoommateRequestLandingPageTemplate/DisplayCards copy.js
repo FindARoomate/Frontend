@@ -10,10 +10,9 @@ import {v4 as uuidv4} from 'uuid';
 import { useLocation } from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const DisplayCards = ({data, pagination, count, filters = {}}) => 
+const DisplayCards = ({data, pagination, count, filters}) => 
 {
     const [filteredData, setFilteredData] = useState(data);
-    console.log(filters)
 
     const numOfPaginationPages = Math.ceil(count/15);
 
@@ -30,63 +29,104 @@ const DisplayCards = ({data, pagination, count, filters = {}}) =>
     {
         paginationPagesArray.push(i+1);
     }
-    console.log(filteredData)
+
     useEffect(() => 
     {
-
-        const filtersArray = Object.keys(filters);
-
-        if(filtersArray.length == 0)
+        const filterLength = Object.entries(filters).length;
+        // if there are no filters, display full data.
+        let keys = Object.keys(filters);
+        let filterQuery;
+        if(filterLength == 0)
         {
             setFilteredData(data);
         }
-
-        if(filtersArray.length > 0)
+        
+        if(filterLength > 0)
         {
-            let newFilteredData;
-
-            let unfilteredData;
-
-            filtersArray.forEach((filterKey, index) => 
+            let filteredDataArray = [];
+            keys.forEach((key) => 
             {
-                //initializing unfilteredData
-                unfilteredData = (index === 0) ? data : newFilteredData
-
-
-                if((filterKey === 'gender') || (filterKey === 'religion')  || (filterKey ===  'personality'))
+    
+                if(key === "gender")
                 {
-                    let tempFilteredData = [];
-                    unfilteredData.forEach((datum) => 
+
+                    const genderFilteredData = data.filter((value) => 
                     {
-                        if(datum.profile[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
+                        return value.profile.gender.toLowerCase() === filters["gender"].toLowerCase();
+                    });
+                    
+                    genderFilteredData.forEach((value) => 
+                    {
+                        filteredDataArray.push(value);
+
                     });
 
-                    newFilteredData = tempFilteredData;
                 }
-
-                if(filterKey === 'room_type')
+    
+                if(key === "religion")
                 {
-                    let tempFilteredData = [];
-                    unfilteredData.forEach((datum) => 
+                    const religionFilteredData = data.filter((value) => 
                     {
-                        if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
+                        return value.profile.religion.toLowerCase() === filters["religion"].toLowerCase();
                     });
+    
+                    religionFilteredData.forEach((value) => 
+                    {
+                        filteredDataArray.push(value);
 
-                    newFilteredData = tempFilteredData;
-                }
+                    });
+                 }
+                
+                // if(key === "personality")
+                // {
+                //     const personalityFilteredData = data.filter((value) => 
+                //     {
+                //         return value.profile.personality.toLowerCase() === filters["personality"].toLowerCase();
+                //     });
+    
+                //     personalityFilteredData.forEach((value) => 
+                //     {
+                //         filteredDataArray.push(value);
 
-                console.log("Unfiltered Data", unfilteredData);
-                console.log("Filtered Data", newFilteredData);
+                //     });
+                // }
+    
+                // if(key === "room_type")
+                // {
+                //     const roomTypeFilteredData = data.filter((value) => 
+                //     {
+                //         return value.room_type.toLowerCase() == filters["room_type"].toLowerCase();
+                //     });
+    
+                //     roomTypeFilteredData.forEach((value) => 
+                //     {
+                //         filteredDataArray.push(value);
 
+                //     });
+                // }
 
+                setFilteredData(filteredDataArray);
             });
-            console.log(newFilteredData);
-            setFilteredData(newFilteredData);
-        }
 
-        // console.log(filteredData);
+        }
+        
+        console.log(filteredData);
 
     }, [filters]);
+
+    // useEffect(() => 
+    // {
+    //     if(Object.values(filters).length > 0)
+    //     {
+    //         let filteredDataArray = filteredData.filter((value) => 
+    //         {
+    //             return value.room_type.toLowerCase() === "shortlet";
+    //         });
+
+    //         setFilteredData(filteredDataArray);
+    //     }
+        
+    // }, [filters]);
 
     return ( 
         <div className={styles.displayCardContainer}>
@@ -106,7 +146,7 @@ const DisplayCards = ({data, pagination, count, filters = {}}) =>
                             ownerName={singleData.profile.fullname}
                             moreInfoLink={"/roommate-request/"+singleData.id}
                             sliderImages = {singleData.request_images}
-                            thumbnail = {singleData.profile.image_url}
+                            thumbnail = {dp}
                         />)
                     })
                 }
