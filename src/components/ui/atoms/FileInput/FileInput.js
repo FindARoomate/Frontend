@@ -12,7 +12,6 @@ const FileInput = ({name, fileValue = null, required=true, multiple=false, onCha
 
     const handleOnChange = (e) => 
     {
-
         if(e.target.files.length > 1)
         {
             setLabelText(`${e.target.files.length} files selected`)

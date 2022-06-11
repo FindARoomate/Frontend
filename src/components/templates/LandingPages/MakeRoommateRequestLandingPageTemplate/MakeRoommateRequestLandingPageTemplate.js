@@ -7,6 +7,7 @@ import TextButtonGroup from '../../../ui/molecules/TextButtonGroup/TextButtonGro
 import Footer from '../../../ui/organisms/Footer/Footer';
 import heroBackgroundImg from './../../../../images/make-roomate-request-hero-bg.png';
 import LandingPageContactUs from '../../../pages/LandingPageContactUs/LandingPageContactUs';
+import {v4 as uuidv4} from "uuid";
 
 const MakeRoommateRequestLandingPageTemplate = (props) => 
 {
@@ -25,19 +26,24 @@ const MakeRoommateRequestLandingPageTemplate = (props) =>
     const headerLinks = 
     [
         {
-            id: 1,
+            id: uuidv4(),
             text: "Home",
             path: '/create-request'
         },
         {
-            id: 2,
+            id: uuidv4(),
             text: "How it works",
             path: '#how-it-works'
         },
         {
-            id: 3,
+            id: uuidv4(),
             text: "Contact us",
             path: "#contact-us"
+        },
+        {
+            id: uuidv4(),
+            text: "Explore",
+            path: "/view-all-requests"
         }
     ]
 

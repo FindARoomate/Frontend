@@ -20,17 +20,90 @@ import {createRoommateRequestInitialValues, createRoommateRequestValidation, val
 
 const CreateRoommateRequest = () => 
 {
-
-    const token =  "Bearer " + localStorage.getItem("accessToken");
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", token);
-    myHeaders.append("Accept", "application/json");
-
-    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_ROOMMATE_REQUEST, myHeaders);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [nextButtonClicked, setNextButtonClicked] = useState(false);
 
+    const [cities, setCities] = useState([]);
+    const [states, setStates] = useState([]);
+    const [countries, setCountries] = useState([]);
+    const [selectedCity, setSelectedCity] = useState({});
+    const [selectedState, setSelectedState] = useState({});
+    const [selectedCountry, setSelectedCountry] = useState({});
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
+    myHeaders.append("Accept", "application/json");
+    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_ROOMMATE_REQUEST, myHeaders);
+
+
+    //Get country list from API
+    const getCountries = async () => 
+    {
+        var headers = new Headers();
+        headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
+
+        const res = await fetch("https://api.countrystatecity.in/v1/countries", 
+        {   headers:  headers,
+            method: "GET"
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            setCountries(body);
+
+        }else
+        {
+            console.log(body);
+        }
+    }
+
+    //Get state list from API (based on country ISO2)
+    const getStates = async () => 
+    {
+        var headers = new Headers();
+        headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
+
+        const res = await fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states`, 
+        {   headers:  headers,
+            method: "GET"
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            setStates(body);
+        }else
+        {
+            console.log(body);
+        }
+    }
+
+    //Get state list from API (based on country ISO2)
+    const getCities = async () => 
+    {
+        var headers = new Headers();
+        headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
+
+        const res = await fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states/${selectedState}/cities`, 
+        {   headers:  headers,
+            method: "GET"
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            setCities(body);
+        }else
+        {
+            console.log(body);
+        }
+    }
+    
     const moveToNextFormGroup = (current_index, errors) => 
     {        
         const {formStatus, message} = validateForm(current_index, errors);
@@ -72,38 +145,37 @@ const CreateRoommateRequest = () =>
     }
 
     
-    const handleCreateProfile = (e, errors) => 
+    const handleCreateProfile = (e, formik) => 
     {
         e.preventDefault();
 
-        const {formStatus, message} = validateForm(4, errors);
+        const {formStatus, message} = validateForm(4, formik.errors);
         setIsLoading(true);
         
         if(formStatus)
         {
             const formData = new FormData();
-            formData.append("country", document.querySelector("select[name='country']").value);
-            formData.append("state", document.querySelector("select[name='state']").value);
-            formData.append("city", document.querySelector("select[name='city']").value);
-            formData.append("street_address", document.querySelector("textarea[name='street_address']").value); //gives issues if the street is a single word
-            formData.append("room_type", document.querySelector("select[name='room_type']").value);
-            formData.append("no_of_persons", document.querySelector("input[name='no_of_persons']").value);
-            formData.append("no_of_current_roomies", document.querySelector("input[name='no_of_current_roomies']").value);
-            formData.append("rent_per_person", document.querySelector("input[name='rent_per_person']").value);
-            formData.append("additional_cost", document.querySelector("textarea[name='additional_cost']").value);
-            formData.append("listing_title", document.querySelector("input[name='listing_title']").value);
-            formData.append("additional_information", document.querySelector("textarea[name='additional_information']").value);
-            formData.append("amenities", document.querySelector("input[name='amenities']").value);
-            formData.append("date_to_move", document.querySelector("input[name='date_to_move']").value); 
+            formData.append("country", formik.values.country);
+            formData.append("state", formik.values.state);
+            formData.append("city", formik.values.city);
+            formData.append("street_address", formik.values.street_address); //gives issues if the street is a single word
+            formData.append("room_type", formik.values.room_type);
+            formData.append("no_of_persons", formik.values.no_of_persons);
+            formData.append("no_of_current_roomies", formik.values.no_of_current_roomies);
+            formData.append("rent_per_person", formik.values.rent_per_person);
+            formData.append("additional_cost", formik.values.additional_cost);
+            formData.append("listing_title", formik.values.listing_title);
+            formData.append("additional_information", formik.values.additional_information);
+            formData.append("amenities", formik.values.amenities);
+            formData.append("date_to_move", formik.values.date_to_move); 
 
              //append all images
-             const requestImages =  document.querySelector("input[name='request_images']").files;
-             for (let i = 0; i < requestImages.length; i++)
+             for (let i = 0; i < formik.values.request_images.length; i++)
              {
-                 formData.append("request_images", requestImages[i]);
+                 formData.append("request_images", formik.values.request_images[i]);
              }
 
-             //create profile record on backend
+            //create profile record on backend
             sendPostRequest(formData);
 
         }else
@@ -120,7 +192,13 @@ const CreateRoommateRequest = () =>
         if(isError) setError(APIdata.detail);
         if(isError || isSuccess) setIsLoading(false);
 
-    }, [isError, isSuccess, APIdata]);
+        if(countries.length <= 0) getCountries();
+        
+        if(selectedCountry) getStates();
+
+        if(selectedState) getCities();
+
+    }, [isError, isSuccess, APIdata, countries, selectedCountry, selectedState]);
 
 
     return (   
@@ -148,26 +226,51 @@ const CreateRoommateRequest = () =>
         
         {formik => (
         
-            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik.errors)} >
+            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik)} >
             <div className={`${styles.formGroup} ${styles.formGroupActive}`}>
 
                 <div className={styles.inputGroup}>
                     <Label name="country">Country</Label>
-                    <Select name="country" {...formik.getFieldProps('country')}>
-                        <option value="">Select a country</option>
-                        <option>Nigeria</option>
-                        <option>South Africa</option>
+                    <Select 
+                        name="country" 
+                        onChange={(e) => 
+                        {
+                            setSelectedCountry(e.target.options[e.target.selectedIndex].dataset.iso)
+                            formik.setFieldValue("country", e.target.value)
+                        }
+                        }
+                        onBlur={formik.handleBlur}
+                    >
+                    <option value="">Select a country</option>
+                    {countries.map((country) => 
+                    {
+                        return <option key={country.id} data-iso={country.iso2}>{country.name}</option>
+
+                    })}
                     </Select>
+                  
                     {!nextButtonClicked && ((formik.touched.country && formik.errors.country) &&<ErrorAlert>{formik.errors.country}</ErrorAlert>)}
                     {nextButtonClicked && (formik.errors.country && <ErrorAlert>{formik.errors.country}</ErrorAlert>)}
                 </div>
 
                 <div className={styles.inputGroup}>
                     <Label name="state">State</Label>
-                    <Select name="state" {...formik.getFieldProps('state')}>
-                        <option value="">Select a state</option>
-                        <option>Nigeria</option>
-                        <option>South Africa</option>
+                    <Select 
+                        name="state" 
+                        onChange={(e) => 
+                        {
+                            setSelectedState(e.target.options[e.target.selectedIndex].dataset.iso)
+                            formik.setFieldValue("state", e.target.value)
+                        }
+                        }
+                        onBlur={formik.handleBlur}
+                    >
+                    <option value="">Select a state</option>
+                    {states.map((state) => 
+                    {
+                        return <option key={state.id} data-iso={state.iso2}>{state.name}</option>
+
+                    })}
                     </Select>
                     {!nextButtonClicked && ((formik.touched.state && formik.errors.state) &&<ErrorAlert>{formik.errors.state}</ErrorAlert>)}
                     {nextButtonClicked && (formik.errors.state && <ErrorAlert>{formik.errors.state}</ErrorAlert>)}
@@ -175,10 +278,22 @@ const CreateRoommateRequest = () =>
                 
                 <div className={styles.inputGroup}>
                     <Label name="city">City</Label>
-                    <Select name="city" {...formik.getFieldProps('city')}>
-                        <option value="">Select a city</option>
-                        <option>Nigeria</option>
-                        <option>South Africa</option>
+                    <Select 
+                        name="city" 
+                        onChange={(e) => 
+                        {
+                            setSelectedCity(e.target.options[e.target.selectedIndex].dataset.iso)
+                            formik.setFieldValue("city", e.target.value)
+                        }
+                        }
+                        onBlur={formik.handleBlur}
+                    >
+                    <option value="">Select a city</option>
+                    {cities.map((city) => 
+                    {
+                        return <option key={city.id} data-iso={city.iso2}>{city.name}</option>
+
+                    })}
                     </Select>
                     {!nextButtonClicked && ((formik.touched.city && formik.errors.city) &&<ErrorAlert>{formik.errors.city}</ErrorAlert>)}
                     {nextButtonClicked && (formik.errors.city && <ErrorAlert>{formik.errors.city}</ErrorAlert>)}

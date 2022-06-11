@@ -214,10 +214,23 @@
         padding: 40px 100px;
     }
 
-    /* .imageGroup
+    .imageGroup
     {
-        height: 345px;
-    } */
+        border-radius: 8px;
+        border: 1px solid red;
+    }
+
+    .imageGroup > div, .imageGroup > div > div
+    {
+        border-radius: inherit;
+        border: 1px solid blue;
+    }
+
+    .imageGroup > div > div >img
+    {
+        /* border-radius: ; */
+        overflow: hidden;
+    }
 
     .roomInformation h2
     {

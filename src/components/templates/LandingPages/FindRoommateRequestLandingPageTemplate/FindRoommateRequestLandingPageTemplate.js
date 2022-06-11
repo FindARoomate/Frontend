@@ -11,8 +11,9 @@ import H2 from '../../../ui/atoms/Headings/H2/H2';
 import DisplayCards from './DisplayCards';
 import { Link } from 'react-router-dom';
 import P from '../../../ui/atoms/P/P';
+import {v4 as uuidv4} from "uuid";
 
-const FindRoommateRequestLandingPageTemplate = ({roommateRequests = null, isError = null, isSuccess = null}) => 
+const FindRoommateRequestLandingPageTemplate = ({roommateRequests = [], isError = null, isSuccess = null}) => 
 {
     const contact = 
     {
@@ -66,14 +67,19 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests = null, isErro
     const headerLinks = 
     [
         {
-            id: 1,
+            id: uuidv4(),
             text: "Contact us",
             path: '#contact-us'
         },
         {
-            id: 2,
+            id: uuidv4(),
             text: "Create request",
             path: '/create-request'
+        },
+        {
+            id: uuidv4(),
+            text: "Explore",
+            path: '/view-all-requests'
         }
     ]
 

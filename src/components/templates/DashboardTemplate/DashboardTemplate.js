@@ -21,6 +21,7 @@ import { STATISTICS } from '../../routes';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';
 import P from '../../ui/atoms/P/P';
+import {v4 as uuidv4} from "uuid";
 
 const DashboardTemplate = ({
         children,
@@ -46,19 +47,19 @@ const DashboardTemplate = ({
     const headerLinks = 
     [
         {
-            id: 1,
-            text: "Contact us",
-            path: '/#contact-us'
-        },
-        {
-            id: 2,
+            id: uuidv4(),
             text: "Create request",
             path: '/create-roommate-request-instruction'
         },
         {
-            id: 3,
-            text: "View roommate requests",
+            id: uuidv4(),
+            text: "Explore requests",
             path: '/view-all-requests'
+        },
+        {
+            id: uuidv4(),
+            text: "Contact us",
+            path: '/#contact-us'
         },
 
     ]

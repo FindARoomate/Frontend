@@ -1,8 +1,6 @@
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl'; 
 import P from '../../ui/atoms/P/P';
 import { v4 as uuidv4 } from 'uuid';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import Gallery from "react-photo-gallery";
 import Img from './../../ui/atoms/Img/Img';
 import { UserContext } from '../../context';
@@ -18,16 +16,18 @@ import backIcon from './../../../icons/back-icon.svg';
 import usePatch from './../../../customHooks/usePatch';
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import washingMachine from './../../../icons/washing-machine.svg';
-import { useState, useCallback, useContext, useEffect} from 'react';
 import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
 import SignInDialog from './../../ui/organisms/Auth/SignIn/SignInDialog';
+import { useState, useCallback, useContext, useEffect, useRef} from 'react';
 import displayPicture from './../../../images/view-single-roomate-display-picture.png';
 import CreateAccountDialog from './../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
 import {CREATE_CONNECTION_REQUEST, DEACTIVATE_ROOMMATE_REQUEST, CONNECTION_SENT} from './../../routes';
+import {getMeta} from '../../../helperFunctions/getFileDimensions';
+import "mapbox-gl/dist/mapbox-gl.css"
+import ShowMap from '../../pages/ShowMap';
 
-// eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+mapboxgl.accessToken = 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'; 
 
 const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) => 
 {
@@ -35,8 +35,16 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     let [isLoading, setIsLoading] = useState(false);
     const {isUserLoggedIn, userProfile, connectionsSent, setConnectionsSent} = useContext(UserContext);
 
+    // For Map Box
+    const [lng, setLng] = useState(0);
+    const [lat, setLat] = useState(0);
+    const [zoom, setZoom] = useState(9);
+
     // To check if user has previously sent a connection request to this roomate request 
     const [hasUserSentConnectionRequest, setHasUserSentConnectionRequest] = useState(false);
+
+    // The image array for image gallery
+    const [imageGallery, setImageGallery] = useState([]);
 
     // For creating connection request
     var myHeaders = new Headers();
@@ -75,18 +83,32 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     }
 
 
-    // Formatting image information into an object the image gallery can use
-    let image_array = [];
-    if (roommateRequest)
-    {   
-        roommateRequest.request_images.forEach((image) => 
+    // Formatting image information into an object the image gallery can use    
+    const formatRequestImages = (request_images) => 
+    {
+        const getFileDimensions = async (image_url) =>
+        {
+            let img = await getMeta(image_url);  
+            console.log("Here");
+            let width = img.width;
+            let height = img.height;     
+            setImageGallery((imageGallery) => 
+            {
+                return [...imageGallery, {src: image_url, width: width, height: height}]
+                
+            });
+        }
+
+        request_images.forEach((image) => 
         {
             <div key={uuidv4()}>
-                {image_array.push({src: image.image_url, width: 1, height: 1})}
+                {getFileDimensions(image.image_url)};
             </div>
         });
     }
 
+
+    
     // Initializing the lightbox
     const openLightBox = useCallback((event, { photo, index }) => 
     {
@@ -150,7 +172,6 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         {
             // Set context data if it is not currently available
             setConnectionsSent(body);
-            console.log("Set connections sent");
         }else
         {
             console.log(body);
@@ -183,7 +204,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     useEffect(() => 
     {          
         // Get connection sent from API if it is not currently available in context
-        if(Object.values(connectionsSent).length <= 0 )
+        if(isUserLoggedIn && Object.values(connectionsSent).length <= 0 )
         {
             fetchConnectionSent(CONNECTION_SENT);
         }
@@ -204,10 +225,27 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
 
         if(isUserLoggedIn) checkIfUserHasSentConnectionRequest();
 
-      }, [isSuccess, isError, APIdata, updateSuccess, updateError, updateData, roommate_request_id, isUserLoggedIn, connectionsSent]);
- 
-    const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'}); 
+        if(roommateRequest && imageGallery.length<=0) 
+        {
+            formatRequestImages(roommateRequest.request_images);
+            setLat(roommateRequest.latitude);
+            setLng(roommateRequest.longitude);
+        }
 
+        console.log(imageGallery);
+      }, [
+        isSuccess, 
+        isError,
+        APIdata,
+        updateSuccess,
+        updateError,
+        updateData,
+        roommate_request_id,
+        isUserLoggedIn,
+        connectionsSent,
+        roommateRequest,
+        ]);
+ 
 
     const headerLinks = 
     [
@@ -240,24 +278,24 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
             </div>
             <div className={styles.imageContainer}>
                 <div className={styles.imageGroup}>
-                    {roommateRequest ? <Gallery photos={image_array} onClick={openLightBox}/> : ""}
+                    {roommateRequest ? <Gallery photos={imageGallery} onClick={openLightBox}/> : ""}
                     {isOpen && (
                         <Lightbox
-                            mainSrc={image_array[photoIndex].src}
-                            nextSrc={image_array[(photoIndex + 1) % image_array.length].src}
-                            prevSrc={image_array[(photoIndex + image_array.length - 1) % image_array.length].src}
+                            mainSrc={imageGallery[photoIndex].src}
+                            nextSrc={imageGallery[(photoIndex + 1) % imageGallery.length].src}
+                            prevSrc={imageGallery[(photoIndex + imageGallery.length - 1) % imageGallery.length].src}
                             onCloseRequest={() => setIsOpen(false)}
                             onMovePrevRequest={() =>
                                 setPhotoIndex((photoIndex) => 
                                 {
-                                    return (photoIndex + image_array.length - 1) % image_array.length;
+                                    return (photoIndex + imageGallery.length - 1) % imageGallery.length;
 
                                 })
                             }
                             onMoveNextRequest={() =>
                                 setPhotoIndex((photoIndex) => 
                                 {
-                                    return (photoIndex + 1) % image_array.length;
+                                    return (photoIndex + 1) % imageGallery.length;
                                 })
                             }
                         />
@@ -407,19 +445,11 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                 <P styles={styles.address}>{roommateRequest.street_address + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
                             </div>
                             <div className={styles.map} id="single-roommate-request-map">
-                                {/* <Map
-                                    style="mapbox://styles/mapbox/streets-v9"
-                                    containerStyle={{
-                                        height: '100%',
-                                        width: '100%',
-                                        borderRadius: 'inherit'
-                                    }}
-                                    >
-                                
-                                    <Layer type="line" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-                                        <Feature coordinates={[roommateRequest.longitude, roommateRequest.latitude]} />
-                                    </Layer>
-                                </Map> */}
+                                <ShowMap 
+                                    lng={lng}
+                                    lat={lat}
+                                    zoom={zoom}
+                                />
                             </div>
                         </div>
 

@@ -26,6 +26,7 @@ import ActivateEmail from './components/pages/ActivateEmail/ActivateEmail';
 import CreateRoommateRequest from './components/pages/CreateRoommateRequest/CreateRoommateRequest';
 import Protected from './Protected';
 import IdealRoommate from './components/pages/IdealRoommate/IdealRoommate';
+import ShowMap from './components/pages/ShowMap';
 
 function App() 
 {
@@ -97,6 +98,8 @@ function App()
 
           {/* Notification */}
           <Route path='/notifications' element={<Protected><Notification/></Protected>}/>
+
+          <Route path='/map' element={<ShowMap/>}/>
 
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />

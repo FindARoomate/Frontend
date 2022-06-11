@@ -33,55 +33,59 @@ const DisplayCards = ({data, pagination, count, filters}) =>
     useEffect(() => 
     {
 
-        const filtersArray = Object.keys(filters);
-
-        if(filtersArray.length == 0)
+        if(filters)
         {
-            setFilteredData(data);
-        }
+            const filtersArray = Object.keys(filters);
 
-        if(filtersArray.length > 0)
-        {
-            let newFilteredData;
-
-            let unfilteredData;
-
-            filtersArray.forEach((filterKey, index) => 
+            if(filtersArray.length == 0)
             {
-                //initializing unfilteredData
-                unfilteredData = (index === 0) ? data : newFilteredData
-
-
-                if((filterKey === 'gender') || (filterKey === 'religion')  || (filterKey ===  'personality'))
+                setFilteredData(data);
+            }
+    
+            if(filtersArray.length > 0)
+            {
+                let newFilteredData;
+    
+                let unfilteredData;
+    
+                filtersArray.forEach((filterKey, index) => 
                 {
-                    let tempFilteredData = [];
-                    unfilteredData.forEach((datum) => 
+                    //initializing unfilteredData
+                    unfilteredData = (index === 0) ? data : newFilteredData
+    
+    
+                    if((filterKey === 'gender') || (filterKey === 'religion')  || (filterKey ===  'personality'))
                     {
-                        if(datum.profile[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
-                    });
-
-                    newFilteredData = tempFilteredData;
-                }
-
-                if(filterKey === 'room_type')
-                {
-                    let tempFilteredData = [];
-                    unfilteredData.forEach((datum) => 
+                        let tempFilteredData = [];
+                        unfilteredData.forEach((datum) => 
+                        {
+                            if(datum.profile[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
+                        });
+    
+                        newFilteredData = tempFilteredData;
+                    }
+    
+                    if(filterKey === 'room_type')
                     {
-                        if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
-                    });
-
-                    newFilteredData = tempFilteredData;
-                }
-
-                console.log("Unfiltered Data", unfilteredData);
-                console.log("Filtered Data", newFilteredData);
-
-
-            });
-            // console.log(newFilteredData);
-            setFilteredData(newFilteredData);
+                        let tempFilteredData = [];
+                        unfilteredData.forEach((datum) => 
+                        {
+                            if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
+                        });
+    
+                        newFilteredData = tempFilteredData;
+                    }
+    
+                    console.log("Unfiltered Data", unfilteredData);
+                    console.log("Filtered Data", newFilteredData);
+    
+    
+                });
+                // console.log(newFilteredData);
+                setFilteredData(newFilteredData);
+            }
         }
+       
 
         // console.log(filteredData);
 

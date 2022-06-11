@@ -1,7 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {UserContextProvider} from './components/context'

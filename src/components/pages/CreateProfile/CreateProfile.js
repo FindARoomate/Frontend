@@ -17,18 +17,20 @@ import nextIcon from './../../../icons/right-arrow-icon.svg';
 import { Formik, Field } from 'formik';
 import ErrorAlert from '../../ui/molecules/Alerts/ErrorAlert/ErrorAlert';
 import {createProfileInitialValues, createProfileValidation, validateForm} from './CreateProfileHelper';
+import useGet from '../../../customHooks/useGet';
 
 const CreateProfile = () => 
 {
 
-    const token =  "Bearer " + localStorage.getItem("accessToken");
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", token);
-
-    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_PROFILE, myHeaders);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [nextButtonClicked, setNextButtonClicked] = useState(false);
+
+    // Creating Profile
+    const token =  "Bearer " + localStorage.getItem("accessToken");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", token);
+    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_PROFILE, myHeaders);
 
 
     const moveToNextFormGroup = (current_index, errors) => 
