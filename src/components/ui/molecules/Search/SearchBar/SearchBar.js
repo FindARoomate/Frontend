@@ -4,10 +4,12 @@ import { Navigate, Link } from 'react-router-dom';
 import styles from './SearchBar.module.css';
 import Input from '../../../atoms/Input/Input';
 import searchIcon from './../../../../../icons/search-icon.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 const SearchBar = ({placeholder}) => 
 {
+    const navigate = useNavigate();
     const [searchUrl, setSearchUrl] = useState("");
     const [redirect, setRedirect] = useState(false);
 
@@ -47,8 +49,7 @@ const SearchBar = ({placeholder}) =>
                 name="search"
                 // value={defaultValue
             />
-            <Link to ={searchUrl}><Img src={searchIcon}/></Link>
-            {/* <Img src={searchIcon} onClick={handleSearch}/> */}
+            <Img src={searchIcon} onClick={() => navigate(searchUrl)}/>
         </div>
         </>
        

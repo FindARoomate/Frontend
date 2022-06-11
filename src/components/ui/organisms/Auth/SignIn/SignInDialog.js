@@ -16,10 +16,20 @@ import PasswordInput from "../../../atoms/Input/PasswordInput";
 import { UserContext } from "../../../../context";
 import { useContext } from "react";
 
-const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = null, message = null}) => 
+const SignInDialog = (props) => 
 {
+  const {  open, closeModal, openCreateAccountModal, redirectTo = null, message = null} = props;
   const [isLoading, setIsLoading] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
+  // const {isUserLoggedIn, setIsUserLoggedIn} = useContext(UserContext);
+
+  // const updateContext = () => 
+  // {
+  //   console.log("Before: ", isUserLoggedIn);
+  //   localStorage.setItem("isUserLoggedIn", true);
+  //   setIsUserLoggedIn(true);
+    
+  // }
 
   const handleSignIn = (e) => 
   {
@@ -84,7 +94,7 @@ const SignInDialog = ({ open, closeModal, openCreateAccountModal, redirectTo = n
                   
       {isSuccess &&  
       (
-        (APIdata.data.last_login) ? (!redirectTo ? <Navigate to="/dashboard"/> : redirectTo != window.location.path && redirectTo) : <Navigate to="/create-profile-instruction" />
+        (APIdata.data.last_login) ? (!redirectTo ? <Navigate to="/dashboard"/> : redirectTo !== window.location.path && redirectTo) : <Navigate to="/create-profile-instruction" />
       )}
 
       <Modal open={open} closeModal={closeModal}>

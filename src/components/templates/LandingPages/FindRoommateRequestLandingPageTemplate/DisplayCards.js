@@ -10,9 +10,10 @@ import {v4 as uuidv4} from 'uuid';
 import { useLocation } from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const DisplayCards = ({data, pagination, count, filters}) => 
+const DisplayCards = ({data, pagination, count, filters = {}}) => 
 {
     const [filteredData, setFilteredData] = useState(data);
+    console.log(filters)
 
     const numOfPaginationPages = Math.ceil(count/15);
 
@@ -29,7 +30,7 @@ const DisplayCards = ({data, pagination, count, filters}) =>
     {
         paginationPagesArray.push(i+1);
     }
-
+    console.log(filteredData)
     useEffect(() => 
     {
 
@@ -67,23 +68,19 @@ const DisplayCards = ({data, pagination, count, filters}) =>
     
                     if(filterKey === 'room_type')
                     {
-                        let tempFilteredData = [];
-                        unfilteredData.forEach((datum) => 
-                        {
-                            if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
-                        });
-    
-                        newFilteredData = tempFilteredData;
+                        if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum);
                     }
-    
-                    console.log("Unfiltered Data", unfilteredData);
-                    console.log("Filtered Data", newFilteredData);
-    
-    
-                });
-                // console.log(newFilteredData);
-                setFilteredData(newFilteredData);
-            }
+
+                    newFilteredData = tempFilteredData;
+                })
+
+                console.log("Unfiltered Data", unfilteredData);
+                console.log("Filtered Data", newFilteredData);
+
+
+            };
+            console.log(newFilteredData);
+            setFilteredData(newFilteredData);
         }
        
 
