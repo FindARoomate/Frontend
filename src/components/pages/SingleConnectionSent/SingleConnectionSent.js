@@ -29,12 +29,13 @@ const SingleConnectionSent = () =>
     const deleteUrl = CANCEL_CONNECTION_START + connection_id + CANCEL_CONNECTION_END;
     const {APIData: deleteAPIData, sendDeleteRequest} = useDelete(deleteUrl);
 
+
     const cancelConnectionRequest = () => 
     {
 
     }
 
-    const fetchFunction = async (url) => 
+    const fetchConnectionSent = async (url) => 
     {
         console.log("Here");
         const res = await fetch(url, 
@@ -57,7 +58,6 @@ const SingleConnectionSent = () =>
         {
             console.log(body);
         }
-
     }
     // Function to get the specific connection data from the list of connections in context.
     // Because of the way the data is structured, I have to search through the context data in a specific way
@@ -76,7 +76,6 @@ const SingleConnectionSent = () =>
                     return false;
                 }
 
-                console.log(single_connection);
                 return true;
             });
 
@@ -102,7 +101,7 @@ const SingleConnectionSent = () =>
         // Get data from API if the context data is not available
         if(Object.values(connectionsSent).length <= 0 )
         {
-            fetchFunction(CONNECTION_SENT);
+            fetchConnectionSent(CONNECTION_SENT);
 
         }else
         {
@@ -256,9 +255,11 @@ const SingleConnectionSent = () =>
                             View Request Page
                         </Link>
                     </div>
-                    <div className={styles.rejectButton}>
-                        <Button handleOnClick={cancelConnectionRequest}>Cancel Connection Request</Button>
-                    </div>
+                    {(connectionData && connectionData.status == "PENDING") && 
+                        <div className={styles.rejectButton}>
+                            <Button handleOnClick={cancelConnectionRequest}>Cancel Connection Request</Button>
+                        </div>
+                    }
                     
                 </div>
 

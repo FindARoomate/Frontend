@@ -9,6 +9,7 @@
 .searchBar img
 {
     margin-left: -38px;
+    cursor: pointer;
 }
 
 /* Desktop and Table view */

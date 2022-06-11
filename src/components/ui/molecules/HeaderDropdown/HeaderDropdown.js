@@ -30,7 +30,7 @@ const HeaderDropdown = () =>
             <div className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.active : ""}`} name="dropdownMenu">
                 <Link to="/dashboard">View Dashboard</Link>
                 <Link to="/profile" className={styles.middleMenuItem}>Edit Profile</Link>
-                <Link to="/">Update Ideal Roommate</Link>
+                <Link to="/ideal-roommate">Update Ideal Roommate</Link>
             </div>
         </div>
      );

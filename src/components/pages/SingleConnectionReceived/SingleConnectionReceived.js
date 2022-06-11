@@ -28,7 +28,7 @@ const SingleConnectionReceived = () =>
     const headers = new Headers();
     headers.append("Accept", "application/json");
     headers.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
-    const {isError : isUpdateError, isUpdateSuccess : isUpdateSuccess, APIData : updateAPIData, sendPatchRequest} = usePatch(headers);
+    const {isError : isUpdateError, isSuccess : isUpdateSuccess, APIData : updateAPIData, sendPatchRequest} = usePatch(headers);
   
     const fetchFunction = async (url) => 
     {
@@ -102,8 +102,6 @@ const SingleConnectionReceived = () =>
         const formData = new FormData();
         formData.append("status", "ACCEPTED");
         sendPatchRequest(ACCEPT_CONNECTION + connection_id + "/", formData);
-
-        console.log("Accept connection");
     }
 
     const rejectConnection = () => 
@@ -114,8 +112,6 @@ const SingleConnectionReceived = () =>
         const formData = new FormData();
         formData.append("status", "REJECTED");
         sendPatchRequest(REJECT_CONNECTION + connection_id + "/", formData);
-
-        console.log("Reject connection");
     }
 
     useEffect(() => 
@@ -135,6 +131,7 @@ const SingleConnectionReceived = () =>
         // Listen for response from Accept Request
         if(isUpdateSuccess || isUpdateError)
         {
+            console.log(updateAPIData);
             setIsAcceptButtonLoading(false);
             setIsRejectButtonLoading(false);
         }
