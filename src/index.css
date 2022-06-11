@@ -85,6 +85,34 @@ a
   margin-right: auto;
 }
 
+
+.successMessage
+{
+    color: #0CF542;
+    padding: 14px;
+    width: 100%;
+    background-color:  #E2FEE8;
+    font-weight: 700;
+    font-size:13px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.errorMessage
+{
+    color: #a51b1b;
+    padding: 14px;
+    width: 100%;
+    background-color:  #ffaeae;
+    font-weight: 700;
+    font-size:13px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+
 /*
 h1,h2, h3
 {
@@ -185,7 +213,7 @@ p
 
 
 /* Login page and Sign Up page- Mobile */
-
+/* 
 .auth .auth-headers
 {
   display: flex;
@@ -275,7 +303,7 @@ p
   display: block;
   margin: 0 auto;
   width: 90%;
-}
+} */
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
@@ -321,11 +349,13 @@ p
 
   /* Login and Sign Up pages - Desktop */
 
-  .auth .auth-headers h1
+  /* .auth .auth-headers h1
   {
     font-size: 28px;
   }
-  .auth {
+
+  .auth 
+  {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -402,22 +432,34 @@ p
   {
     opacity: 75%;
     font-size: 18px;
-  }
+  } */
 
   /* Login page */
-  .login-body
+  /* .login-body
   {
     flex-direction: row-reverse;
   }
   .auth-body {
     width: 55%;
-  }
+  } */
 
   /* Sign Up page */
-  .sign-up-headers p
+  /* .sign-up-headers p
   {
     width: 100%;
     max-width: 400px;
+  } */
+
+  .successMessage
+  {
+      padding: 18px;
+      font-size: 20px;
+  }
+
+  .errorMessage
+  {
+      padding: 18px;
+      font-size: 20px;
   }
 }
 

@@ -2,10 +2,7 @@ import SingleConnectionReceivedTemplate from "../SingleConnectionReceivedTemplat
 import ErrorAlert from "../../ui/molecules/Alerts/ErrorAlert/ErrorAlert";
 import { UPDATE_PROFILE_END, UPDATE_PROFILE_START } from "../../routes";
 import { updateProfileValidation } from "./UpdateProfileHelper";
-import addImageIcon from './../../../icons/add-image-icon.svg';
 import Textarea from "../../ui/atoms/Textarea/Textarea";
-import dp from './../../../images/dashboard-image.png';
-import editIcon from './../../../icons/edit-icon.svg';
 import backIcon from './../../../icons/back-icon.svg';
 import usePatch from "../../../customHooks/usePatch";
 import { Formik, useFormik, Field } from 'formik';
@@ -41,6 +38,11 @@ const ProfileTemplate = () =>
         {
             setProfileImage(URL.createObjectURL(files[0]));
         }
+    }
+
+    const handleBack = () => 
+    {
+        return !isCurrentlyEditting ? window.history.back() : setIsCurrentlyEditting(false);
     }
 
     const handleUpdateProfile = (e, dirtyFields) => 
@@ -85,7 +87,7 @@ const ProfileTemplate = () =>
 
     return ( 
         <SingleConnectionReceivedTemplate>
-             <div className={styles.backNavigation} onClick={() => window.history.back()}>
+             <div className={styles.backNavigation} onClick={handleBack}>
                     <Img src={backIcon} />
                     <span>Back</span>
                 </div>

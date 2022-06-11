@@ -25,6 +25,7 @@ import CreateProfile from './components/pages/CreateProfile/CreateProfile';
 import ActivateEmail from './components/pages/ActivateEmail/ActivateEmail';
 import CreateRoommateRequest from './components/pages/CreateRoommateRequest/CreateRoommateRequest';
 import Protected from './Protected';
+import IdealRoommate from './components/pages/IdealRoommate/IdealRoommate';
 
 function App() 
 {
@@ -90,6 +91,9 @@ function App()
 
           {/* Profile */}
           <Route path='/profile' element={<Protected><Profile/></Protected>}/>
+
+          {/* Ideal Roommate */}
+          <Route path='/ideal-roommate' element={<Protected><IdealRoommate/></Protected>}/>
 
           {/* Notification */}
           <Route path='/notifications' element={<Protected><Notification/></Protected>}/>

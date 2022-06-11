@@ -13,10 +13,12 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, room
 {
 
     const [tagKeys, setTagKeys] = useState({});
+
     const updateTagKeys = (tagKeys) => 
     {
         setTagKeys(tagKeys);
     }
+    
     const handleOnBlur = (e) => 
     {
         console.log(e.target.value);

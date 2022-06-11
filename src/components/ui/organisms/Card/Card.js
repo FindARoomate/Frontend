@@ -64,10 +64,10 @@ console.log("rerender card")
                 </span>
                 <div className={cardStyles.cardDescription}>
                     <P customStyle={{color: "#000E4A"}}>{title ? title.substr(0, 50) + "... " : ""}
-                        <Link to={moreInfoLink}>More info</Link>
+                        <Link to={moreInfoLink} target="_blank">More info</Link>
                     </P>
                 </div>
-                <Button>Connect now</Button>
+                {/* <Button>Connect now</Button> */}
             </div>
         </div>
      );

@@ -1,49 +1,56 @@
+import mapboxgl from 'mapbox-gl';
 import P from '../../ui/atoms/P/P';
+import { v4 as uuidv4 } from 'uuid';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+import Gallery from "react-photo-gallery";
 import Img from './../../ui/atoms/Img/Img';
+import { UserContext } from '../../context';
+import Lightbox from 'react-image-lightbox';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import H2 from '../../ui/atoms/Headings/H2/H2';
 import H3 from '../../ui/atoms/Headings/H3/H3';
 import Button from '../../ui/atoms/Button/Button';
+import { Link, useParams } from 'react-router-dom';
+import usePost from './../../../customHooks/usePost';
 import Header from '../../ui/organisms/Header/Header';
 import backIcon from './../../../icons/back-icon.svg';
+import usePatch from './../../../customHooks/usePatch';
+import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import washingMachine from './../../../icons/washing-machine.svg';
+import { useState, useCallback, useContext, useEffect} from 'react';
 import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
-import displayPicture from './../../../images/view-single-roomate-display-picture.png';
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import mapboxgl from 'mapbox-gl';
-import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import Gallery from "react-photo-gallery";
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
-import { useState, useCallback} from 'react';
-import {CREATE_CONNECTION_REQUEST} from './../../routes';
-import usePost from './../../../customHooks/usePost';
-import { useContext } from 'react';
-import { UserContext } from '../../context';
-import CreateAccountDialog from './../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
 import SignInDialog from './../../ui/organisms/Auth/SignIn/SignInDialog';
-import {useEffect} from 'react';
+import displayPicture from './../../../images/view-single-roomate-display-picture.png';
+import CreateAccountDialog from './../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
+import {CREATE_CONNECTION_REQUEST, DEACTIVATE_ROOMMATE_REQUEST, CONNECTION_SENT} from './../../routes';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
-
 const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) => 
 {
+    const {id: roommate_request_id} = useParams();
+    let [isLoading, setIsLoading] = useState(false);
+    const {isUserLoggedIn, userProfile, connectionsSent, setConnectionsSent} = useContext(UserContext);
 
-    const token =  "Bearer " + localStorage.getItem("accessToken");
+    // To check if user has previously sent a connection request to this roomate request 
+    const [hasUserSentConnectionRequest, setHasUserSentConnectionRequest] = useState(false);
+
+    // For creating connection request
     var myHeaders = new Headers();
+    const token =  "Bearer " + localStorage.getItem("accessToken");
     myHeaders.append("Authorization", token);
     const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_CONNECTION_REQUEST, myHeaders);
     const [showConnectionSuccessMessage, setShowConnectionSuccessMessage] = useState(false);
 
+    // For deactivating roommate request
+    const {isSuccess: updateSuccess, isError: updateError, APIData: updateData, sendPatchRequest} = usePatch(myHeaders);
+
+    // For Photo LightBox
     let [photoIndex, setPhotoIndex] = useState(0);
     let [isOpen, setIsOpen] = useState(false);
-
-    let [isLoading, setIsLoading] = useState(false);
 
     // For sign in modal
     const [signInModalState, setSignInModalState] = useState(false);
@@ -54,7 +61,6 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     const [createAccountModalState, setCreateAccountModalState] = useState(false);
     const showCreateAccountDialog = () => setCreateAccountModalState(true);
     const closeCreateAccountModal = () => setCreateAccountModalState(false);
-
 
     const openSignInModal = () => 
     {
@@ -68,8 +74,9 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         showCreateAccountDialog();
     }
 
-    let image_array = [];
 
+    // Formatting image information into an object the image gallery can use
+    let image_array = [];
     if (roommateRequest)
     {   
         roommateRequest.request_images.forEach((image) => 
@@ -80,17 +87,17 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         });
     }
 
+    // Initializing the lightbox
     const openLightBox = useCallback((event, { photo, index }) => 
     {
         setPhotoIndex(index);
         setIsOpen(true);
 
-      }, []);
+    }, []);
 
-      const {isUserLoggedIn} = useContext(UserContext);
       
-      const sendConnectionRequest = () => 
-      {
+    const sendConnectionRequest = () => 
+    {
         //Check if user is logged in
         if(!isUserLoggedIn)
         {
@@ -105,15 +112,82 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
             formData.append("request_id", roommateRequest.id);
             sendPostRequest(formData);
         }
-      }
+    }
 
-      const closeConnectionSuccessMessage = () =>
-      {
-          setShowConnectionSuccessMessage(false);
-      }
+    const closeConnectionSuccessMessage = () =>
+    {
+        setShowConnectionSuccessMessage(false);
+    }
 
-      useEffect(() => 
-      {          
+    const deactivateRequest = () => 
+    {
+        //deactivate
+        setIsLoading(true);
+
+        //deactivate request
+        const url = DEACTIVATE_ROOMMATE_REQUEST + roommate_request_id + '/'; 
+
+        const formData = new FormData();
+        formData.append("is_active", false);
+        sendPatchRequest(url, formData);
+    }
+
+    const fetchConnectionSent = async (url) => 
+    {
+        const res = await fetch(url, 
+        {
+            headers:  
+            {
+                "Content-Type" : "application/json",
+                "Accept" : "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("accessToken")
+            } 
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            // Set context data if it is not currently available
+            setConnectionsSent(body);
+            console.log("Set connections sent");
+        }else
+        {
+            console.log(body);
+        }
+
+    }
+
+    // function to check if user has previously sent a connection to this particular roommate request
+    // Because of the way the data is structured, I have to search through the context data in a specific way
+    // in order check if the user has connected to this request before.
+    const checkIfUserHasSentConnectionRequest = () => 
+    {
+        Object.values(connectionsSent).every((connection_type) =>
+        {
+            connection_type.every((single_connection) => 
+            {
+                if(single_connection.roomate_request.id == roommate_request_id)
+                {
+                    setHasUserSentConnectionRequest(true);
+                    return false;
+                }
+
+                return true;
+            });
+
+            return true;
+        });           
+    }
+
+    useEffect(() => 
+    {          
+        // Get connection sent from API if it is not currently available in context
+        if(Object.values(connectionsSent).length <= 0 )
+        {
+            fetchConnectionSent(CONNECTION_SENT);
+        }
+
         if(isSuccess || isError)
         {
             setIsLoading(false);
@@ -122,7 +196,15 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
          
         if(isSuccess) setShowConnectionSuccessMessage(true);
 
-      }, [isSuccess, isError, APIdata]);
+        if(updateSuccess || updateError)
+        {
+            setIsLoading(false);
+            console.log(updateData);
+        }
+
+        if(isUserLoggedIn) checkIfUserHasSentConnectionRequest();
+
+      }, [isSuccess, isError, APIdata, updateSuccess, updateError, updateData, roommate_request_id, isUserLoggedIn, connectionsSent]);
  
     const Map = ReactMapboxGl({accessToken: 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'}); 
 
@@ -244,16 +326,6 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                             </div>
 
                             <div className={styles.desktopOwnerInformation}>
-                                {showConnectionSuccessMessage && 
-                                    <div className={styles.connectionSentNotification}>
-                                        <div className={styles.content}>
-                                            You have successfully sent a connection request to {roommateRequest.profile.fullname}. We will notify you when your connection request has been attended to.
-                                        </div>
-                                        <div className={styles.closeIcon} onClick={closeConnectionSuccessMessage}>
-                                            x
-                                        </div>  
-                                    </div>
-                                }   
                                 <div className={styles.personalInfo}>
                                     <Img src ={roommateRequest.profile.image_url} />
                                     <span>
@@ -285,10 +357,45 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                             )}
                                         </P>
                                     </div>
-                                    <Button 
-                                        handleOnClick={sendConnectionRequest}
-                                        className={isLoading ? "isLoading": ""}
-                                    >{isLoading ? "Loading..." : "Connect Now"}</Button>
+                                    {((isUserLoggedIn && (userProfile.id !== roommateRequest.profile.id)) || !isUserLoggedIn) ?
+                                       <>
+                                        {//if user is not the owner of the roommate request
+                                        (isUserLoggedIn && hasUserSentConnectionRequest) ? 
+                                            <>
+                                                <Button disabled>{isLoading ? "Loading..." : "Connection Sent"}</Button>
+                                                <div className={styles.connectionSentNotification}>
+                                                    <div className={styles.content}>
+                                                        Kindly check <Link to="/connection-sent" target="_blank">
+                                                            <span style={{textDecoration: "underline", color: "#0029DD"}}>your dashboard</span></Link> for more information
+                                                    </div>
+                                                </div>
+                                            </>
+                                        :
+                                            <Button 
+                                            handleOnClick={sendConnectionRequest}
+                                            className={isLoading ? "isLoading": ""}
+                                            >{isLoading ? "Loading..." : "Connect Now"}</Button>
+                                        }
+                                        </>
+                                        :
+                                        // If user is the owner of the roommate request
+                                        <Button 
+                                            handleOnClick={deactivateRequest}
+                                            className={isLoading ? "isLoading": ""}
+                                        >{isLoading ? "Loading..." : "Deactivate Request"}</Button>
+                                    }
+
+                                    {showConnectionSuccessMessage && 
+                                    <div className={styles.connectionSentNotification}>
+                                        <div className={styles.content}>
+                                            You have successfully sent a connection request to {roommateRequest.profile.fullname}. We will notify you when your connection request has been attended to.
+                                        </div>
+                                        <div className={styles.closeIcon} onClick={closeConnectionSuccessMessage}>
+                                            x
+                                        </div>  
+                                    </div>
+                                    }  
+                                    {updateSuccess && <div className="successMessage">{updateData.detail}</div>}
                                 </div>
                             </div>
                             
