@@ -15,6 +15,9 @@
 .cardDescription
 {
     margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .cardDescription p
@@ -50,10 +53,15 @@
 
 .card .bottom
 {
-    padding: 16px 26px 30px 26px;
+    padding: 16px 26px;
     border-radius: 0px 0px 16px 16px;
     /* border: 1px solid red; */
     margin: 0;
+}
+
+.card .bottom .listingTitle
+{
+    color: #000E4A;
 }
 
 .card button
@@ -67,12 +75,32 @@
     margin: 0;
 }
 
+.infoRow
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.infoRow .title
+{
+    color: #7D7D7D;
+    margin-right: 4px;
+}
+
+.infoRow .content
+{
+    color: #000E4A;
+    font-weight: 600;
+}
+
 @media screen and (min-width: 760px) 
 {
     .cardDescription
     {
         margin: 16px 0px;
     }
+
     .cardDescription p
     {
         font-size: 16.25px;
@@ -85,6 +113,6 @@
     
     .card .bottom
     {
-        padding: 16px 26px 90px 26px;
+        padding: 16px 26px;
     }
 }

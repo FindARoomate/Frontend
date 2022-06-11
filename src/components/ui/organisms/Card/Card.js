@@ -18,8 +18,12 @@ import { Navigation, Pagination } from "swiper";
 
 import { v4 as uuidv4 } from 'uuid';
 
+// title={singleData.listing_title}
+// ownerName={singleData.profile.fullname}
+// sliderImages = {singleData.request_images}
+// thumbnail = {singleData.profile.image_url}
 
-const Card = ({ownerName, title, moreInfoLink, sliderImages, thumbnail}) => {
+const Card = ({data, moreInfoLink}) => {
 
 const imgCustomStyle = 
 {
@@ -32,6 +36,8 @@ console.log("rerender card")
     return ( 
 
         <div className={cardStyles.card}>
+            <Link to={moreInfoLink} target="_blank">
+
             <div className={cardStyles.top}>
                 <Swiper
                     navigation={true}
@@ -40,7 +46,7 @@ console.log("rerender card")
                     className="mySwiper"
                 >
                     {
-                        sliderImages && sliderImages.map((imageLink) => 
+                        data && data.request_images.map((imageLink) => 
                         {
                             return (
                             <SwiperSlide key={uuidv4()}>
@@ -59,16 +65,25 @@ console.log("rerender card")
             <div className={cardStyles.bottom}>
                 {/* Image title */}
                 <span className={cardStyles.imageTitle}> 
-                    <Img src={thumbnail} customStyle={{width: "27px", height: "27px", borderRadius: "50%"}}/>
-                    <P customStyle={{color: "#00082C"}}>{ownerName}</P>
+                    <Img src={data.profile.image_url} customStyle={{width: "27px", height: "27px", borderRadius: "50%"}}/>
+                    <P customStyle={{color: "#00082C"}}>{data.profile.fullname}</P>
                 </span>
                 <div className={cardStyles.cardDescription}>
-                    <P customStyle={{color: "#000E4A"}}>{title ? title.substr(0, 50) + "... " : ""}
-                        <Link to={moreInfoLink} target="_blank">More info</Link>
+                    <P className={cardStyles.listingTitle}>{data ? <>
+                        {data.listing_title.length > 82 ? data.listing_title.substr(0, 82) + "... " : data.listing_title }
+                    </> : ""}
                     </P>
+                    <div className={cardStyles.infoRow}>
+                        <span className={cardStyles.title}>Move-in date: </span>
+                        <span className={cardStyles.content}>{data.date_to_move}</span>
+                    </div>
+                    <div className={cardStyles.infoRow}>
+                        <span className={cardStyles.title}>Rent: </span>
+                        <span className={cardStyles.content}>#{data.rent_per_person}</span>
+                    </div>
                 </div>
-                {/* <Button>Connect now</Button> */}
             </div>
+            </Link>
         </div>
      );
 }

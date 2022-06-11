@@ -46,7 +46,6 @@ const DisplayCards = ({data, pagination, count, filters = {}}) =>
             if(filtersArray.length > 0)
             {
                 let newFilteredData;
-    
                 let unfilteredData;
     
                 filtersArray.forEach((filterKey, index) => 
@@ -54,33 +53,30 @@ const DisplayCards = ({data, pagination, count, filters = {}}) =>
                     //initializing unfilteredData
                     unfilteredData = (index === 0) ? data : newFilteredData
     
-    
-                    if((filterKey === 'gender') || (filterKey === 'religion')  || (filterKey ===  'personality'))
+                    let tempFilteredData = [];
+                    unfilteredData.forEach((datum) => 
                     {
-                        let tempFilteredData = [];
-                        unfilteredData.forEach((datum) => 
+                        if((filterKey === 'gender') || (filterKey === 'religion')  || (filterKey ===  'personality'))
                         {
-                            if(datum.profile[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
-                        });
-    
-                        newFilteredData = tempFilteredData;
-                    }
-    
-                    if(filterKey === 'room_type')
-                    {
-                        if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum);
-                    }
-
+                            
+                                if(datum.profile[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
+                            
+        
+                            newFilteredData = tempFilteredData;
+                        }
+        
+                        if(filterKey === 'room_type')
+                        {
+                            if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum);
+                        }
+                    });
                     newFilteredData = tempFilteredData;
                 })
 
-                console.log("Unfiltered Data", unfilteredData);
-                console.log("Filtered Data", newFilteredData);
-
-
-            };
-            console.log(newFilteredData);
-            setFilteredData(newFilteredData);
+                console.log(newFilteredData);
+                setFilteredData(newFilteredData);
+            }
+       
         }
        
 
@@ -102,11 +98,8 @@ const DisplayCards = ({data, pagination, count, filters = {}}) =>
                         return (
                         <Card 
                             key={uuidv4()}
-                            title={singleData.listing_title}
-                            ownerName={singleData.profile.fullname}
+                            data={singleData}
                             moreInfoLink={"/roommate-request/"+singleData.id}
-                            sliderImages = {singleData.request_images}
-                            thumbnail = {singleData.profile.image_url}
                         />)
                     })
                 }
