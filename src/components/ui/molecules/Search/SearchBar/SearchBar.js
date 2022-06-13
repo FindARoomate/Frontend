@@ -11,43 +11,24 @@ const SearchBar = ({placeholder}) =>
 {
     const navigate = useNavigate();
     const [searchUrl, setSearchUrl] = useState("");
-    const [redirect, setRedirect] = useState(false);
 
     const handleOnChange = (e) => 
     {
         e.preventDefault();
-        // let searchTerm = document.querySelector("input[name='search']").value;
         if(e.target.value)
         {
             setSearchUrl("?listing_title="+e.target.value);
         }
     }
 
-    // const handleSearch = () => 
-    // {
-    //     let searchTerm = document.querySelector("input[name='search']").value;
-    //     if(searchTerm)
-    //     {
-    //         setSearchUrl("?listing_title="+searchTerm);
-    //     }
-    // }
-
-    useEffect(() => 
-    {
-        if(searchUrl) setRedirect(true);
-
-    }, [searchUrl, redirect]);
-
     return ( 
         <>
-        {/* {searchUrl && <Navigate to={searchUrl}/>} */}
          <div className={styles.searchBar}>
             <Input
                 type="text"
                 placeholder={placeholder}
                 onChange={handleOnChange}
                 name="search"
-                // value={defaultValue
             />
             <Img src={searchIcon} onClick={() => navigate(searchUrl)}/>
         </div>

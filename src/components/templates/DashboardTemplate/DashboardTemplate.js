@@ -95,7 +95,7 @@ const DashboardTemplate = ({
 
     const currentPath = window.location.pathname;
     
-    // Create Account Menu Dialog Box controls
+    // Logout Menu Dialog Box controls
     const [logoutModalState, setLogoutModalState] = useState(false);
     const closeLogoutDialog = () => setLogoutModalState(false);
     const openLogoutDialog = () => setLogoutModalState(true);
@@ -103,7 +103,6 @@ const DashboardTemplate = ({
     // Get Statistics
     const token = localStorage.getItem("accessToken");
     const {isSucccess, isError, APIData} = useGet(STATISTICS, token);
-    console.log(APIData);
 
     return (  
     <div className={dashboardStyles.viewMoreRequests}>
@@ -167,7 +166,7 @@ const DashboardTemplate = ({
                 <div className={dashboardStyles.mainContent}>
                     <div className={dashboardStyles.welcomePanel}>
                         <div className={dashboardStyles.welcomeMessage}>
-                            <Img src={dashboardImg}/>
+                            <Img src={userProfile.image_url}/>
                             <div>
                                 <P>{title}</P>
                                 <P>{description}</P>

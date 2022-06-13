@@ -12,9 +12,14 @@ import SignInDialog from '../../../ui/organisms/Auth/SignIn/SignInDialog';
 import CreateAccountDialog from '../../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../../context';
 
 const MakeRoommateRequestLandingPage = () => 
 {
+
+    const {isUserLoggedIn} = useContext(UserContext);
+
     // For sign in modal
     const [signInModalState, setSignInModalState] = useState(false);
     const showSignInDialog = () => setSignInModalState(true);
@@ -45,7 +50,8 @@ const MakeRoommateRequestLandingPage = () =>
     // Hero Section
     var heading =  <H1>Find the perfect roommates...</H1>
     var description = <P> A platform to allow people to connect with potential roommates</P>
-    var button = <Button handleOnClick={showSignInDialog}>Get Started</Button>
+    var button =  <Link to="/dashboard"><Button>Get Started</Button></Link> 
+    // var button = <Button handleOnClick={showSignInDialog}>Get Started</Button>
     var img = {src: heroImage}
     var order = "textFirst"
     const heroSection = {heading, description, button, img, order}

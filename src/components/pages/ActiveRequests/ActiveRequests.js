@@ -33,7 +33,7 @@ const ActiveRequests = () =>
                             link = {`/request/${request.id}`}
                             name = {request.listing_title}
                             description = {request.additional_information}
-                            dp={dp}
+                            // dp={dp}
                         />);
 
                         })

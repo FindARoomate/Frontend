@@ -1,6 +1,9 @@
 import mapboxgl from 'mapbox-gl'; 
+import { DateTime } from 'luxon';
 import P from '../../ui/atoms/P/P';
 import { v4 as uuidv4 } from 'uuid';
+import "mapbox-gl/dist/mapbox-gl.css";
+import ShowMap from '../../pages/ShowMap';
 import Gallery from "react-photo-gallery";
 import Img from './../../ui/atoms/Img/Img';
 import { UserContext } from '../../context';
@@ -14,7 +17,6 @@ import usePost from './../../../customHooks/usePost';
 import Header from '../../ui/organisms/Header/Header';
 import backIcon from './../../../icons/back-icon.svg';
 import usePatch from './../../../customHooks/usePatch';
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import washingMachine from './../../../icons/washing-machine.svg';
 import styles from './ViewSingleRoommateRequestTemplate.module.css';
 import globalStyles from './../../../components/globalStyles.module.css';
@@ -24,8 +26,6 @@ import displayPicture from './../../../images/view-single-roomate-display-pictur
 import CreateAccountDialog from './../../ui/organisms/Auth/CreateAccount/CreateAccountDialog';
 import {CREATE_CONNECTION_REQUEST, DEACTIVATE_ROOMMATE_REQUEST, CONNECTION_SENT} from './../../routes';
 import {getMeta} from '../../../helperFunctions/getFileDimensions';
-import "mapbox-gl/dist/mapbox-gl.css"
-import ShowMap from '../../pages/ShowMap';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZm9sYXJhbm1pamVzdXRvZnVubWkiLCJhIjoiY2wyd2NxcHE0MDV5dTNsbno3ZWMxZmJidSJ9.lnia2WE6dICt77XhejO1dQ'; 
 
@@ -89,7 +89,6 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         const getFileDimensions = async (image_url) =>
         {
             let img = await getMeta(image_url);  
-            console.log("Here");
             let width = img.width;
             let height = img.height;     
             setImageGallery((imageGallery) => 
@@ -106,8 +105,6 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
             </div>
         });
     }
-
-
     
     // Initializing the lightbox
     const openLightBox = useCallback((event, { photo, index }) => 
@@ -270,10 +267,10 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                     <H1>{roommateRequest ? roommateRequest.listing_title : "Loading..."}</H1>
                 </div>
                 <div className={styles.requestOwner}>
-                        <P>Request created by <span className={styles.name}>
-                            {roommateRequest ? roommateRequest.profile.fullname : "Loading..."}
-                            </span>
-                        </P> 
+                    <P>Request created by <Link to={roommateRequest ? "/guest-profile/"+roommateRequest.profile.id : ""} target="_blank" className={styles.name}>
+                        {roommateRequest ? roommateRequest.profile.fullname : "Loading..."}
+                        </Link>
+                    </P> 
                 </div>
             </div>
             <div className={styles.imageContainer}>
@@ -330,7 +327,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
 
                                     <div className={styles.singleRoomInformation}>
                                         <H3>Availability</H3>
-                                        <P>{roommateRequest.date_to_move}</P>
+                                        <P>{DateTime.fromISO(roommateRequest.date_to_move).toLocaleString(DateTime.DATE_FULL)}</P>
                                     </div>
 
                                     <div className={styles.singleRoomInformation}>
@@ -464,20 +461,62 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                
                 {roommateRequest ? (
                 <> 
+                <div className={styles.mobileOwnerContainer}>
                     <div className={styles.mobileOwnerInformation}>
                         <div className={styles.personalInfo}>
-                            <Img src ={displayPicture} />
+                            <Img src ={roommateRequest.profile.image_url} />
                             <span>
-                                <H3>Precious Faseyosan</H3>
-                                <P>Student</P>
+                                <H3>{roommateRequest.profile.fullname}</H3>
+                                <P>{roommateRequest.profile.profession}</P>
                             </span>
                         </div>
-                        <div>
-                        <Button 
-                            handleOnClick={sendConnectionRequest}
-                            className={isLoading ? "isLoading": ""}
-                        >{isLoading ? "Loading..." : "Connect Now"}</Button>
+                        <div className={styles.buttonContainer}>
+                            {/* <Button 
+                                handleOnClick={sendConnectionRequest}
+                                className={isLoading ? "isLoading": ""}
+                            >{isLoading ? "Loading..." : "Connect Now"}</Button> */}
+                                {/* if user is not the owner of the roommate request */}
+                            {((isUserLoggedIn && (userProfile.id !== roommateRequest.profile.id)) || !isUserLoggedIn) ?
+                                <>
+                                {//If user has ssent connection request before
+                                (isUserLoggedIn && hasUserSentConnectionRequest) ? 
+                                    <>
+                                        <Button disabled>{isLoading ? "Loading..." : "Connection Sent"}</Button>
+                                    </>
+                                :
+                                    <Button 
+                                    handleOnClick={sendConnectionRequest}
+                                    className={isLoading ? "isLoading": ""}
+                                    >{isLoading ? "Loading..." : "Connect Now"}</Button>
+                                }
+                                </>
+                                :
+                                // If user is the owner of the roommate request
+                                <Button 
+                                    handleOnClick={deactivateRequest}
+                                    className={isLoading ? "isLoading": ""}
+                                >{isLoading ? "Loading..." : "Deactivate Request"}</Button>
+                                }
                         </div>
+                        </div>
+                        {//If user has sent connection request before
+                        (isUserLoggedIn && hasUserSentConnectionRequest) && 
+                        <div className={styles.connectionSentNotification}>
+                            <div className={styles.content}>
+                                Kindly check <Link to="/connection-sent" target="_blank">
+                                    <span style={{textDecoration: "underline", color: "#0029DD"}}>your dashboard</span></Link> for more information
+                            </div>
+                        </div>
+                        }
+                        {//On successful connection sent
+                        (showConnectionSuccessMessage) && 
+                        <div className="successMessage">
+                            You have successfully sent a connection request to "{roommateRequest.profile.fullname}" and you will be notified when your connection request has been attended to.
+                        </div>
+                        }
+                        {//If user has ssent connection request before
+                        (updateSuccess) && <div className="successMessage">{updateData.detail}</div>
+                        }
                     </div>
                 </>) : "Loading ..."}
 

@@ -25,13 +25,13 @@ const useGet = (url, token = null) =>
             setIsError(false);
             setIsSuccess(true);
             setAPIData(body);
-            console.log(body);
+            // console.log(body);
         }else
         {
             setIsError(true)
             setIsSuccess(false);
             setAPIData(body); 
-            console.log(body);
+            // console.log(body);
         }
 
     }

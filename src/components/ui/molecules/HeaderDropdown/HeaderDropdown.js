@@ -3,15 +3,20 @@ import { Link } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { UserContext } from './../../../context';
 import styles from './HeaderDropdown.module.css';
+import logoutIcon from './../../../../icons/red-logout-icon.svg';
 import dp from './../../../../images/card-display-picture.jpg';
 import dropdownIcon from './../../../../icons/dropdownIcon.svg';
-
+import LogoutDialog from '../../organisms/LogoutDialog/LogoutDialog';
 
 const HeaderDropdown = () => 
 {
     // Getting user name from context
     const {userProfile} = useContext(UserContext);
 
+    // Logout Menu Dialog Box controls
+    const [logoutModalState, setLogoutModalState] = useState(false);
+    const closeLogoutDialog = () => setLogoutModalState(false);
+    const openLogoutDialog = () => setLogoutModalState(true);
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -21,6 +26,7 @@ const HeaderDropdown = () =>
     }
 
     return ( 
+        <>
         <div className={styles.dropdownContainer}>
             <div className={`${styles.dropdownButton} ${isDropdownOpen ? styles.whiteBg : styles.transparentBg}`} onClick={toggleModal}>
                 <Img className={styles.profileImage}  src={userProfile.image_url ? userProfile.image_url : dp}/>
@@ -31,8 +37,15 @@ const HeaderDropdown = () =>
                 <Link to="/dashboard">View Dashboard</Link>
                 <Link to="/profile" className={styles.middleMenuItem}>Edit Profile</Link>
                 <Link to="/ideal-roommate">Update Ideal Roommate</Link>
+                <span onClick={openLogoutDialog}><Img src={logoutIcon}/> <span>Logout</span></span>
             </div>
         </div>
+          {/* Logout pop-up */}
+          {/* <LogoutDialog
+            open={logoutModalState}
+            closeModal={closeLogoutDialog}
+        /> */}
+        </>
      );
 }
  

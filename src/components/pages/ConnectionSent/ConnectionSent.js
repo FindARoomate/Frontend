@@ -99,7 +99,7 @@ const ConnectionSent = () =>
                 </div>
                 <div className={styles.listBoxContainer}>
                     {!APIData && <P>Loading...</P>}
-                    {connectionRequestError && <P>{connectionRequestError}</P>}
+                    {connectionRequestError && <P className={styles.connectionRequestError}>{connectionRequestError}</P>}
                     {!connectionRequestError && data.map((datum) => 
                     {
                         return (<ListBox

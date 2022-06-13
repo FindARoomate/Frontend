@@ -10,10 +10,10 @@ const ListBox = ({dp, name, description, tag="", link=""}) =>
         <Link to={link}>
             <div className={styles.listBox}>
             <div className={styles.information}>
-                <Img src={dp}/>
+                {dp && <Img src={dp}/>}
                 <span>
                     <P className={styles.name}>{name}</P>
-                    <P className={styles.description}>{description.slice(0, 35)+"..."}</P>
+                    <P className={styles.description}>{description.length <= 32 ? description : description.slice(0, 35)+"..."}</P>
                 </span>
             </div>
             <div className={styles.tagAndIcon}>

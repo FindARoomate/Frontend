@@ -27,6 +27,7 @@ import CreateRoommateRequest from './components/pages/CreateRoommateRequest/Crea
 import Protected from './Protected';
 import IdealRoommate from './components/pages/IdealRoommate/IdealRoommate';
 import ShowMap from './components/pages/ShowMap';
+import GuestProfile from './components/pages/GuestProfile/GuestProfile';
 
 function App() 
 {
@@ -72,6 +73,9 @@ function App()
           <Route path='/create-profile-instruction' element={<Protected><CreateProfileInstruction/></Protected>} />
           <Route path='/create-profile' element={<Protected><CreateProfile/></Protected>} />
           <Route path='/create-profile-thankyou' element={<Protected><CreateProfileThankYou/></Protected>}/>
+
+          {/* Guest Profile */}
+          <Route path='/guest-profile/:id' element={<Protected><GuestProfile/></Protected>}/>
 
           {/* Roommate Request */}
           <Route path='/create-roommate-request-instruction' element={<Protected><CreateRooomateRequestInstruction/></Protected>}/>

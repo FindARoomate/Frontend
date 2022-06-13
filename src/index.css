@@ -89,15 +89,20 @@ a
 .successMessage
 {
     color: #0CF542;
-    padding: 14px;
+    padding: 8px;
     width: 100%;
     background-color:  #E2FEE8;
-    font-weight: 700;
+    font-weight: 500;
     font-size:13px;
     border-radius: 8px;
     margin: 10px 0;
-    text-transform: capitalize;
+    text-transform: lowercase;
     text-align: center;
+}
+
+.successMessage::first-letter
+{
+   text-transform: uppercase;
 }
 
 .errorMessage

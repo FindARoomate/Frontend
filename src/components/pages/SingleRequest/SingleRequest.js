@@ -42,6 +42,16 @@ const SingleRequest = () =>
     const token = localStorage.getItem("accessToken");
     const url = GET_SINGLE_ROOMMATE_REQUEST + id + '/'; 
     const {isSuccess, APIData} = useGet(url, token);
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [cities, setCities] = useState([]);
+    const [states, setStates] = useState([]);
+    const [countries, setCountries] = useState([]);
+    const [selectedCity, setSelectedCity] = useState({});
+    const [selectedState, setSelectedState] = useState({});
+    const [selectedCountry, setSelectedCountry] = useState({});
+    
     
     const [isCurrentlyEditting, setIsCurrentlyEditting] = useState(false);
 
@@ -53,7 +63,74 @@ const SingleRequest = () =>
     const {isSuccess: updateRoommateRequestSuccess, isError: updateRoommateRequestError, APIData: updateRoommateRequestData, sendPatchRequest: sendUpdateRooomatePatchRequest} = usePatch(myHeaders);
     const [roommateRequestInitialValues, setRoommateRequestInitialValues] = useState({});
 
-    const [isLoading, setIsLoading] = useState(false);
+
+    //Get country list from API
+    const getCountries = async () => 
+    {
+        var headers = new Headers();
+        headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
+
+        const res = await fetch("https://api.countrystatecity.in/v1/countries", 
+        {   headers:  headers,
+            method: "GET"
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            setCountries(body);
+
+        }else
+        {
+            console.log(body);
+        }
+    }
+
+    //Get state list from API (based on country ISO2)
+    const getStates = async () => 
+    {
+        var headers = new Headers();
+        headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
+
+        const res = await fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states`, 
+        {   headers:  headers,
+            method: "GET"
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            setStates(body);
+        }else
+        {
+            console.log(body);
+        }
+    }
+
+    //Get state list from API (based on country ISO2)
+    const getCities = async () => 
+    {
+        var headers = new Headers();
+        headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
+
+        const res = await fetch(`https://api.countrystatecity.in/v1/countries/${selectedCountry}/states/${selectedState}/cities`, 
+        {   headers:  headers,
+            method: "GET"
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            setCities(body);
+        }else
+        {
+            console.log(body);
+        }
+    }
+
 
     const updateRoommateRequest = (e) => 
     {
@@ -155,6 +232,12 @@ const SingleRequest = () =>
             console.log("initial values",roommateRequestInitialValues);
         }
 
+        if(countries.length <= 0) getCountries();
+        
+        if(selectedCountry) getStates();
+
+        if(selectedState) getCities();
+
     }, [
             isSuccess,
             APIData,
@@ -163,7 +246,8 @@ const SingleRequest = () =>
             updateSuccess, 
             updateRoommateRequestData,
             updateRoommateRequestError, 
-            updateRoommateRequestSuccess 
+            updateRoommateRequestSuccess,
+            countries, selectedCountry, selectedState
         ]);
 
     const [isLightBoxOpen, setIsLightBoxOpen] = useState(false);
@@ -347,30 +431,66 @@ const SingleRequest = () =>
                             <H3>Where is your room located?</H3>
                             <div className={styles.inputGroup}>
                                 <Label name="country">Country</Label>
-                                <Select name="country" {...formik.getFieldProps('country')}>
+                                <Select 
+                                    name="country" 
+                                    onChange={(e) => 
+                                    {
+                                        setSelectedCountry(e.target.options[e.target.selectedIndex].dataset.iso)
+                                        formik.setFieldValue("country", e.target.value)
+                                    }
+                                    }
+                                    onBlur={formik.handleBlur}
+                                >
                                     <option value="">Select a country</option>
-                                    <option>Nigeria</option>
-                                    <option>South Africa</option>
+                                    {countries.map((country) => 
+                                    {
+                                        return <option key={country.id} data-iso={country.iso2}>{country.name}</option>
+
+                                    })}
                                 </Select>
                                 {((formik.touched.country && formik.errors.country) &&<ErrorAlert>{formik.errors.country}</ErrorAlert>)}
                             </div>
 
                             <div className={styles.inputGroup}>
                                 <Label name="state">State</Label>
-                                <Select name="state" {...formik.getFieldProps('state')}>
+                                <Select 
+                                    name="state" 
+                                    onChange={(e) => 
+                                    {
+                                        setSelectedState(e.target.options[e.target.selectedIndex].dataset.iso)
+                                        formik.setFieldValue("state", e.target.value)
+                                    }
+                                    }
+                                    onBlur={formik.handleBlur}
+                                >
                                     <option value="">Select a state</option>
-                                    <option>Nigeria</option>
-                                    <option>South Africa</option>
+                                    {states.map((state) => 
+                                    {
+                                        return <option key={state.id} data-iso={state.iso2}>{state.name}</option>
+
+                                    })}
                                 </Select>
                                 {((formik.touched.state && formik.errors.state) &&<ErrorAlert>{formik.errors.state}</ErrorAlert>)}
                             </div>
                             
                             <div className={styles.inputGroup}>
                                 <Label name="city">City</Label>
-                                <Select name="city" {...formik.getFieldProps('city')}>
+                                <Select 
+                                    name="city" 
+                                    onChange={(e) => 
+                                    {
+                                        setSelectedCity(e.target.options[e.target.selectedIndex].dataset.iso)
+                                        formik.setFieldValue("city", e.target.value)
+                                    }
+                                    }
+                                    onBlur={formik.handleBlur}
+                                >
                                     <option value="">Select a city</option>
-                                    <option>Nigeria</option>
-                                    <option>South Africa</option>
+                                    {cities.map((city) => 
+                                    {
+                                        return <option key={city.id} data-iso={city.iso2}>{city.name}</option>
+
+                                    })}
                                 </Select>
                                 {((formik.touched.city && formik.errors.city) &&<ErrorAlert>{formik.errors.city}</ErrorAlert>)}
                             </div>

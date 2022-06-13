@@ -1,6 +1,5 @@
 import {memo} from 'react';
 import P from "../../atoms/P/P";
-import Button from "../../atoms/Button/Button";
 import Img from "../../atoms/Img/Img";
 import cardStyles from './Card.module.css';
 import { Link } from "react-router-dom";
@@ -17,11 +16,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper";
 
 import { v4 as uuidv4 } from 'uuid';
-
-// title={singleData.listing_title}
-// ownerName={singleData.profile.fullname}
-// sliderImages = {singleData.request_images}
-// thumbnail = {singleData.profile.image_url}
+import { DateTime } from 'luxon';
 
 const Card = ({data, moreInfoLink}) => {
 
@@ -75,7 +70,7 @@ console.log("rerender card")
                     </P>
                     <div className={cardStyles.infoRow}>
                         <span className={cardStyles.title}>Move-in date: </span>
-                        <span className={cardStyles.content}>{data.date_to_move}</span>
+                        <span className={cardStyles.content}>{DateTime.fromISO(data.date_to_move).toLocaleString(DateTime.DATE_FULL)}</span>
                     </div>
                     <div className={cardStyles.infoRow}>
                         <span className={cardStyles.title}>Rent: </span>

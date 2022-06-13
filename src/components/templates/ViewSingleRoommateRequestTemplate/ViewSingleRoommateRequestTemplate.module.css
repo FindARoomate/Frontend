@@ -37,7 +37,7 @@
     margin-top: 4px;
 }
 
-.requestOwner p span
+.requestOwner p a
 {
     color: #0029DD;
     text-decoration: underline;
@@ -111,7 +111,6 @@
     margin-right: 8px;
 }
 
-
 .map 
 {
     height: 180px;
@@ -129,26 +128,47 @@
     display: none;
 }
 
-.mobileOwnerInformation
+.mobileOwnerContainer
 {
-    display: flex;
-    padding: 20px 28px;
     box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.1);
     position: sticky;
     bottom: 0;
     width: 100%;
     background: white;
+    padding: 20px;
+}
+
+.mobileOwnerContainer .connectionSentNotification   
+{
+    font-size: 13px;
+    padding: 0;
+    margin-top: 7px;
+    background: white;
+}
+
+.mobileOwnerContainer .connectionSentNotification .content
+{
+    text-align: center;
+}
+
+.mobileOwnerInformation
+{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    column-gap: 10px;
 }
 
 .mobileOwnerInformation .personalInfo
 {
     display: flex;
-    width: 100%;
+    flex-grow: 2;
 }
 
 .mobileOwnerInformation .personalInfo img
 {
     margin-right: 8px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
 }
 
@@ -163,6 +183,11 @@
     color: rgba(0, 41, 221, 0.75);
     font-size: 14px;
     font-weight: 400;
+}
+
+.mobileOwnerInformation .buttonContainer button
+{
+    white-space: normal;
 }
 
 .connectionSentNotification

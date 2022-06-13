@@ -2,7 +2,7 @@
     .listBox
     {
         border-radius: 8px;
-        padding: 11px 10px 11px 3px;
+        padding: 11px 10px;
         background: white;
         display: flex;
         justify-content: space-between;
@@ -82,7 +82,7 @@
 
     .listBox
     {
-        padding: 24px 33px 24px 9px;
+        padding: 24px 33px;
     }
 
     .listBox .information

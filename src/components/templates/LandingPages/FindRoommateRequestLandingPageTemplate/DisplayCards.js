@@ -10,12 +10,12 @@ import {v4 as uuidv4} from 'uuid';
 import { useLocation } from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const DisplayCards = ({data, pagination, count, filters = {}}) => 
+const DisplayCards = ({data, pagination,  filters = {}}) => 
 {
     const [filteredData, setFilteredData] = useState(data);
-    console.log(filters)
-
-    const numOfPaginationPages = Math.ceil(count/15);
+    // const [count, setCount] = useState(0);
+    const count = filteredData.length;
+    const numOfPaginationPages = count > 0 ? Math.ceil(count/15) : 1;
 
     //getting pagination links
     const search = useLocation().search;
@@ -73,16 +73,16 @@ const DisplayCards = ({data, pagination, count, filters = {}}) =>
                     newFilteredData = tempFilteredData;
                 })
 
-                console.log(newFilteredData);
+                // console.log(newFilteredData);
                 setFilteredData(newFilteredData);
             }
        
         }
        
-
+        // setCount(filteredData.length); 
         // console.log(filteredData);
 
-    }, [filters]);
+    }, [filters, data]);
 
     return ( 
         <div className={styles.displayCardContainer}>
@@ -104,7 +104,7 @@ const DisplayCards = ({data, pagination, count, filters = {}}) =>
                     })
                 }
                 </div>
-                {pagination && (
+                {(pagination && numOfPaginationPages > 1)&& (
                      <div className={styles.bottom}>
                      <div className={styles.pagination}>
                         <Link to={prevPaginationUrl}>

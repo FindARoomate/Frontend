@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Img from "../../atoms/Img/Img";
 import P from '../../atoms/P/P';
 
-const NotificationListItem = ({dp, name, description, tag="", link="", is_read}) =>
+const NotificationListItem = ({dp, name, description, tag="", link="", is_read, id, handleClick}) =>
 {
     return ( 
             <div className={`${styles.listBox} ${is_read ? styles.openedListBox : styles.unopenedListBox }`}>
@@ -20,7 +20,7 @@ const NotificationListItem = ({dp, name, description, tag="", link="", is_read})
 
                         <P className={styles.description}>
                             {description.slice(0, 40)+"..."}
-                            <Link to={link} target="_blank">View details</Link>
+                            <Link to={link} target="_blank" onClick={(e) => handleClick(e, id)}>View details</Link>
                         </P>
                     </span>
                 </div>
