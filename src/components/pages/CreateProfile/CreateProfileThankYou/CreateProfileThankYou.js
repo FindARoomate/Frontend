@@ -7,12 +7,12 @@ const CreateProfileThankYou = () =>
     const subtitle = "You can now proceed to creating a roommate request!";
     const link1 = 
     {
-        text: "Create a roommate request now!",
+        text: "Create a roommate request now.",
         link: "/create-roommate-request-instruction"
     };
     const link2 = 
     {
-        text: "Return to dashboard",
+        text: "Go to dashboard.",
         link: "/dashboard"
     };
     return ( 

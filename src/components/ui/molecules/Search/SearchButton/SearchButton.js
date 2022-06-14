@@ -15,13 +15,8 @@ const SearchButton = ({placeholder, handleSubmit}) =>
     return ( 
         <div className={styles.searchButton}>
             <form onSubmit={handleFormSubmit}>
-                <Input
-                    type="text"
-                    placeholder={placeholder}
-                />
-                <Button
-                    customStyle={{}}
-                >Search</Button>
+                <Input type="text" placeholder={placeholder} />
+                <Button>Search</Button>
             </form>
         </div>
      );

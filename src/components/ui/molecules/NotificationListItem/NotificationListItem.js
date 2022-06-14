@@ -3,9 +3,32 @@ import styles from './NotificationListItem.module.css';
 import { Link } from 'react-router-dom';
 import Img from "../../atoms/Img/Img";
 import P from '../../atoms/P/P';
+import { DateTime } from 'luxon';
 
-const NotificationListItem = ({dp, name, description, tag="", link="", is_read, id, handleClick}) =>
+const NotificationListItem = ({dp, name, description, tag="", created_at, link="", is_read, id, handleClick}) =>
 {
+    const units = [
+        'year',
+        'month',
+        'week',
+        'day',
+        'hour',
+        'minute',
+        'second',
+      ];
+      
+      const timeAgo = (date) => {
+        let dateTime = DateTime.fromISO(date)
+        const diff = dateTime.diffNow().shiftTo(...units);
+        const unit = units.find((unit) => diff.get(unit) !== 0) || 'second';
+      
+        const relativeFormatter = new Intl.RelativeTimeFormat('en', {
+          numeric: 'auto',
+        });
+        console.log(Math.trunc(diff.as(unit)));
+        return relativeFormatter.format(Math.trunc(diff.as(unit)), unit);
+      };
+
     return ( 
             <div className={`${styles.listBox} ${is_read ? styles.openedListBox : styles.unopenedListBox }`}>
             <div className={styles.information}>
@@ -25,7 +48,7 @@ const NotificationListItem = ({dp, name, description, tag="", link="", is_read, 
                     </span>
                 </div>
                 <div className={`${styles.time} ${globalStyles.desktopOnly}`}>
-                    2 hours ago
+                    {DateTime.fromFormat(created_at, "y-MM-dd - HH:mm:ss").toRelative()}
                 </div>
             </div>
         </div>        

@@ -33,9 +33,9 @@ const CreateProfile = () =>
     const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_PROFILE, myHeaders);
 
 
-    const moveToNextFormGroup = (current_index, errors) => 
+    const moveToNextFormGroup = (current_index, formik) => 
     {        
-        const {formStatus, message} = validateForm(current_index, errors);
+        const {formStatus, message} = validateForm(current_index, formik.errors);
 
         if(formStatus)
         {
@@ -85,30 +85,30 @@ const CreateProfile = () =>
     }
 
     
-    const handleCreateProfile = (e, errors) => 
+    const handleCreateProfile = (e, formik) => 
     {
         e.preventDefault();
 
-        const {formStatus, message} = validateForm(3, errors);
+        const {formStatus, message} = validateForm(3, formik.errors);
         setIsLoading(true);
 
         if(formStatus)
         {
             const formData = new FormData();
-            formData.append("fullname", document.querySelector("input[name='fullname']").value);
-            formData.append("religion", document.querySelector("select[name='religion']").value);
-            formData.append("gender", document.querySelector("select[name='gender']").value);
-            formData.append("phone_number", document.querySelector("input[name='phone_number']").value);
-            formData.append("personality", document.querySelector("select[name='personality']").value);
-            formData.append("profession", document.querySelector("input[name='profession']").value);
-            formData.append("bio", document.querySelector("textarea[name='bio']").value);
-            formData.append("age_range", document.querySelector("select[name='age_range']").value);
-            formData.append("roomie_gender", document.querySelector("input[name='roomie_gender']").value);
-            formData.append("roomie_religion", document.querySelector("input[name='roomie_religion']").value);
-            formData.append("roomie_age", 13);
-            formData.append("roomie_personality", document.querySelector("input[name='roomie_personality']").value);
-            formData.append("roomate_description", document.querySelector("textarea[name='roomate_description']").value);
-            formData.append("profile_picture", document.querySelector("input[name='profile_picture']").files[0]);
+            formData.append("fullname", formik.values.fullname);
+            formData.append("religion", formik.values.religion);
+            formData.append("gender", formik.values.gender);
+            formData.append("phone_number", formik.values.phone_number.replace(/,/g, ''));
+            formData.append("personality", formik.values.personality);
+            formData.append("profession", formik.values.profession);
+            formData.append("bio", formik.values.bio);
+            formData.append("age_range", formik.values.age_range);
+            formData.append("roomie_gender", formik.values.roomie_gender);
+            formData.append("roomie_religion", formik.values.roomie_religion);
+            formData.append("roomie_age", formik.values.roomie_age);
+            formData.append("roomie_personality", formik.values.roomie_personality);
+            formData.append("roomate_description", formik.values.roomate_description);
+            formData.append("profile_picture", formik.values.profile_picture);
 
             //create profile record on backend
             sendPostRequest(formData);
@@ -155,7 +155,7 @@ const CreateProfile = () =>
         
         {formik => (
         
-            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik.errors)}>
+            <form className={styles.formGroupForm } onSubmit={(e) => handleCreateProfile(e, formik)}>
             <div id={styles.formGroup1} className={`${styles.formGroup} ${styles.formGroupActive}`}>
 
                 <div className={styles.inputGroup}>
@@ -166,15 +166,8 @@ const CreateProfile = () =>
                 </div>
 
                 <div className={styles.inputGroup}>
-                    <Label name="email">Email</Label>
-                    <Input name="email" type="email" placeholder="email@gmail.com" {...formik.getFieldProps('email')}/>
-                    {!nextButtonClicked && ((formik.touched.email && formik.errors.email) &&<ErrorAlert>{formik.errors.email}</ErrorAlert>)}
-                    {nextButtonClicked && (formik.errors.email && <ErrorAlert>{formik.errors.email}</ErrorAlert>)}
-                </div>
-
-                <div className={styles.inputGroup}>
                     <Label name="phone_number">Phone Number</Label>
-                    <Input name="phone_number" type="tel" placeholder="+234-123-456-789" {...formik.getFieldProps('phone_number')}/>
+                    <Input name="phone_number" type="text" placeholder="+234-123-456-789" {...formik.getFieldProps('phone_number')}/>
                     {!nextButtonClicked && ((formik.touched.phone_number && formik.errors.phone_number) &&<ErrorAlert>{formik.errors.phone_number}</ErrorAlert>)}
                     {nextButtonClicked && (formik.errors.phone_number && <ErrorAlert>{formik.errors.phone_number}</ErrorAlert>)}
                 </div>
@@ -205,15 +198,16 @@ const CreateProfile = () =>
                 </div>
 
                 <div className='ml-auto'>
-                    <Button type="button" onClick={() => moveToNextFormGroup(1, formik.errors)}>Next <Img src={nextIcon}/></Button>
+                    <Button type="button" onClick={() => moveToNextFormGroup(1, formik)}>Next <Img src={nextIcon}/></Button>
                     {error && <ErrorAlert>{error}</ErrorAlert>}
                 </div>
                
             </div>
 
-            <div className={`${styles.formGroup}`}>
+            <div className={`${styles.formGroup} `}>
                 <div className={styles.inputGroup}>
                     <FileInput
+                        fileLabel="Upload a profile"
                         name="profile_picture"
                         onChange={(name, value) => {formik.setFieldValue(name, value)}}
                         onBlur={formik.handleBlur}
@@ -267,7 +261,7 @@ const CreateProfile = () =>
                 <div>
                     <div className={styles.buttonGroup}>
                         <Button type="button" className={`${styles.prevButton}`} onClick={() => moveToPreviousFormGroup(2)}>Previous</Button>
-                        <Button type="button" className={`${styles.nextButton}`} onClick={() => moveToNextFormGroup(2, formik.errors)}>Next <Img src={nextIcon}/></Button>
+                        <Button type="button" className={`${styles.nextButton}`} onClick={() => moveToNextFormGroup(2, formik)}>Next <Img src={nextIcon}/></Button>
                     </div>
                     {error && <ErrorAlert>{error}</ErrorAlert>}
                 </div>

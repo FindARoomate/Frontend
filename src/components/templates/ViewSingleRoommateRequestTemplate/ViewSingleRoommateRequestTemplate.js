@@ -35,6 +35,10 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     let [isLoading, setIsLoading] = useState(false);
     const {isUserLoggedIn, userProfile, connectionsSent, setConnectionsSent} = useContext(UserContext);
 
+    // For setting the bio of the roommate request owner
+    const [roommateRequestOwnerBio, setRoommateRequestOwnerBio] = useState("");
+    const [isFullBioShowing, setIsFullBioShowing] = useState(false);
+
     // For Map Box
     const [lng, setLng] = useState(0);
     const [lat, setLat] = useState(0);
@@ -86,6 +90,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
     // Formatting image information into an object the image gallery can use    
     const formatRequestImages = (request_images) => 
     {
+        console.log("format images");
         const getFileDimensions = async (image_url) =>
         {
             let img = await getMeta(image_url);  
@@ -198,6 +203,13 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         });           
     }
 
+    // Show full bio of the roommate request creator
+    const showFullBio = () => 
+    {
+        setRoommateRequestOwnerBio(roommateRequest.profile.bio);
+        setIsFullBioShowing(true);
+    }
+
     useEffect(() => 
     {          
         // Get connection sent from API if it is not currently available in context
@@ -229,7 +241,14 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
             setLng(roommateRequest.longitude);
         }
 
+        if(roommateRequest && roommateRequestOwnerBio.length == 0)
+        {
+            (roommateRequest.profile.bio.length < 82) ? setIsFullBioShowing(true) : setIsFullBioShowing(false);
+            setRoommateRequestOwnerBio(roommateRequest.profile.bio.substr(0, 82));
+        } 
+
         console.log(imageGallery);
+        
       }, [
         isSuccess, 
         isError,
@@ -237,10 +256,9 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
         updateSuccess,
         updateError,
         updateData,
-        roommate_request_id,
         isUserLoggedIn,
-        connectionsSent,
         roommateRequest,
+        // roommateRequestOwnerBio
         ]);
  
 
@@ -383,13 +401,8 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                                             {roommateRequest.profile.personality.toLowerCase()}
                                         </P>
                                         <P><span className={styles.infoHeading}>Bio: </span>
-                                            {(roommateRequest.profile.bio.length < 82) ?
-                                                roommateRequest.profile.bio:
-                                            (<>
-                                                {roommateRequest.profile.bio.substr(0, 82) + "... "}
-                                                <span className={styles.readMore}>Read more</span>
-                                            </>
-                                            )}
+                                            {roommateRequestOwnerBio}
+                                            {!isFullBioShowing && <> ... <span className={styles.readMore} onClick={showFullBio}>Read more</span></>}
                                         </P>
                                     </div>
                                     {((isUserLoggedIn && (userProfile.id !== roommateRequest.profile.id)) || !isUserLoggedIn) ?
@@ -439,7 +452,7 @@ const ViewSingleRoommateRequestTemplate = ({roommateRequest = null}) =>
                         <div className={styles.location}>
                             <div>
                                 <H2>Location</H2>
-                                <P styles={styles.address}>{roommateRequest.street_address + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
+                                <P styles={styles.address}>{roommateRequest.street_address + ", " + roommateRequest.city + ", " + roommateRequest.state + ", " + roommateRequest.country}</P>
                             </div>
                             <div className={styles.map} id="single-roommate-request-map">
                                 <ShowMap 

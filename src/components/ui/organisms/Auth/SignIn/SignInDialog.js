@@ -15,32 +15,30 @@ import P from "../../../atoms/P/P";
 import PasswordInput from "../../../atoms/Input/PasswordInput";
 import { UserContext } from "../../../../context";
 import { useContext } from "react";
+import { Formik } from 'formik';
+import { signInInitialValues, signInValidation } from "./SignInHelper";
 
-const SignInDialog = (props) => 
+const SignInDialog = ({open, closeModal, openCreateAccountModal, redirectTo = null, message = null}) => 
 {
-  const {  open, closeModal, openCreateAccountModal, redirectTo = null, message = null} = props;
   const [isLoading, setIsLoading] = useState(false);
+  const [signInButtonClicked, setSignInButtonClicked] = useState(false);
   const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
-  // const {isUserLoggedIn, setIsUserLoggedIn} = useContext(UserContext);
 
-  // const updateContext = () => 
-  // {
-  //   console.log("Before: ", isUserLoggedIn);
-  //   localStorage.setItem("isUserLoggedIn", true);
-  //   setIsUserLoggedIn(true);
-    
-  // }
-
-  const handleSignIn = (e) => 
+  const handleSignIn = (e, formik) => 
   {
     e.preventDefault();
-    setIsLoading(true);
+    setSignInButtonClicked(true);
 
-    //trigger login request to backend
-    const formData = new FormData();
-    formData.append("email", e.target[0].value);
-    formData.append("password", e.target[1].value)
-    sendPostRequest(formData);
+    if(Object.values(formik.errors).length <= 0)
+    {
+      setIsLoading(true);
+      //trigger login request to backend
+      const formData = new FormData();
+      formData.append("email", e.target[0].value);
+      formData.append("password", e.target[1].value)
+      sendPostRequest(formData);
+    }
+
   };
 
   const handleCreateAccountOnClick = (e) => 
@@ -105,15 +103,24 @@ const SignInDialog = (props) =>
             <P>It's nice having you here again</P>
           </div>
           <div className={styles.form}>
-            <form onSubmit={handleSignIn}>
+          <Formik
+            initialValues = {signInInitialValues}
+            validationSchema = {signInValidation}
+            onSubmit = {handleSignIn}
+          >
+           {formik => (
+            <form onSubmit={(e) => handleSignIn(e, formik)}>
               {isError && <ErrorAlert>{APIdata.detail}</ErrorAlert>}
               <div className={styles.inputGroup}>
                 <Label>Email</Label>
-                <Input type="text" placeholder="Enter your email address"/>
+                <Input {...formik.getFieldProps('email')} name="email" required placeholder="Enter your email address"/>
+                {signInButtonClicked && (formik.errors.email && <ErrorAlert>{formik.errors.email}</ErrorAlert>)}
+
               </div>
               <div className={styles.inputGroup}>
                 <Label>Password</Label>
-                <PasswordInput placeholder="Enter your password" />
+                <PasswordInput {...formik.getFieldProps('password')} required name="password" placeholder="Enter your password" />
+                {signInButtonClicked && (formik.errors.password && <ErrorAlert>{formik.errors.password}</ErrorAlert>)}
               </div>
 
               <Button className={isLoading ? "isLoading": ""}>{isLoading ? "Loading..." : "Sign In"}</Button>
@@ -130,6 +137,8 @@ const SignInDialog = (props) =>
                 </P>
               </div>
             </form>
+           )}
+           </Formik>
           </div>
         </div>
       </Modal>

@@ -123,10 +123,11 @@
     padding-top: 8px;
 }
 
-.desktopOwnerInformation
+.desktopOwnerInformation, .desktopOwnerInformation > *
 {
     display: none;
 }
+
 
 .mobileOwnerContainer
 {
@@ -239,18 +240,6 @@
         padding: 40px 100px;
     }
 
-    .imageGroup
-    {
-        border-radius: 8px;
-        border: 1px solid red;
-    }
-
-    .imageGroup > div, .imageGroup > div > div
-    {
-        border-radius: inherit;
-        border: 1px solid blue;
-    }
-
     .imageGroup > div > div >img
     {
         /* border-radius: ; */
@@ -264,7 +253,7 @@
     }
 
 
-    .mobileOwnerInformation
+    .mobileOwnerInformation, .mobileOwnerContainer *
     {
         display: none;
     }
@@ -326,6 +315,12 @@
         padding: 38px 60px;
     }
 
+    .desktopOwnerInformation > *
+    {
+        display: inherit;
+    }
+
+
     
     .desktopOwnerInformation .personalInfo
     {
@@ -383,6 +378,7 @@
 
     .desktopOwnerInformation .information .readMore
     {
+        cursor: pointer;
         color: #0029DD;
         text-decoration: underline;
     }

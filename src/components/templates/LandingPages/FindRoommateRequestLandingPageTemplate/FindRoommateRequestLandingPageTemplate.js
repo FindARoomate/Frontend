@@ -74,7 +74,7 @@ const FindRoommateRequestLandingPageTemplate = ({roommateRequests = [], isError 
         {
             id: uuidv4(),
             text: "Create request",
-            path: '/create-request'
+            path: '/create-roommate-request-instruction'
         },
         {
             id: uuidv4(),

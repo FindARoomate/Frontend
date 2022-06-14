@@ -13,10 +13,11 @@ import activeRequest from './../../../icons/active-request.svg';
 import overviewIcon from './../../../icons/overview-icon.svg';
 import dashboardStyles from './DashboardTemplate.module.css';
 import logoutIcon from './../../../icons/logout-icon.svg';
+import { useContext, useState, useCallback } from 'react';
 import Header from '../../ui/organisms/Header/Header';
 import useGet from '../../../customHooks/useGet';
-import { useContext, useState } from 'react';
 import { UserContext } from '../../context';
+import Lightbox from 'react-image-lightbox';
 import { STATISTICS } from '../../routes';
 import Img from '../../ui/atoms/Img/Img';
 import {Link} from 'react-router-dom';
@@ -104,6 +105,14 @@ const DashboardTemplate = ({
     const token = localStorage.getItem("accessToken");
     const {isSucccess, isError, APIData} = useGet(STATISTICS, token);
 
+    // For Photo LightBox
+    let [photoIndex, setPhotoIndex] = useState(0);
+    let [isProfileLightBoxOpen, setIsProfileLightBoxOpen] = useState(false);
+
+        
+    // Initializing the lightbox
+    const openLightBox = useCallback(() => { setIsProfileLightBoxOpen(true); }, []);
+
     return (  
     <div className={dashboardStyles.viewMoreRequests}>
         <Header
@@ -119,7 +128,14 @@ const DashboardTemplate = ({
                 <div className={dashboardStyles.sidebarContainer}>
                 <div className={dashboardStyles.sidebar}>
                     <div className={dashboardStyles.image}>
-                        <Img src={userProfile.image_url}/>
+                        <Img src={userProfile.image_url}  onClick={openLightBox}/>
+                        {isProfileLightBoxOpen && (
+                        <Lightbox
+                            mainSrc={userProfile.image_url}
+                            onCloseRequest={() => setIsProfileLightBoxOpen(false)}
+                        />
+                        )
+                    }
                     </div>
                     <div className={dashboardStyles.links}>
                         <ul>

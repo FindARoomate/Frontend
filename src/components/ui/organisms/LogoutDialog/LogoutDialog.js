@@ -8,18 +8,27 @@ import Button from '../../atoms/Button/Button';
 const LogoutDialog = ({open, closeModal}) => 
 {
     const [isLoggedOut, setIsLoggedOut] = useState(false);
-
+    
     const logout = () => 
     {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("isUserLoggedIn");
-        setIsLoggedOut(true);
+
+        if(window.location.pathname == "/")
+        {
+            window.location.reload();
+        }
+        else 
+        {
+            setIsLoggedOut(true);
+        }
     }
 
     return ( 
         <>
-        {isLoggedOut && <Navigate to="/" />}
+        {/* If user is currently on home page, this will lead to infinite re-render. Don't navigate when on home page. Just close the logout modal */}
+        {isLoggedOut && window.location.replace("/")}
          <Modal 
             open={open} 
             closeModal={closeModal}

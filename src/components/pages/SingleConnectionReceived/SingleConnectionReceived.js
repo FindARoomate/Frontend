@@ -117,7 +117,7 @@ const SingleConnectionReceived = () =>
     useEffect(() => 
     {
         // Get data from API if the context data is not available
-        if(Object.values(connectionsReceived).length <= 0 )
+        if(connectionsReceived.length <= 0 )
         {
             fetchFunction(CONNECTION_RECEIVED);
 

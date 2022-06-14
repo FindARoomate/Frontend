@@ -110,17 +110,15 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
               })}
 
             {/* Only display sign in and create account links if user is not logged in */}
-            {/* If user is logged in display profile */}
-              {((signIn || createAccount) && isUserLoggedIn) ? 
-                  <HeaderDropdown/>
-                : 
+              {(!isUserLoggedIn) && 
                 <>
                 {signIn && <SignInButton openSignInDialog={openSignInDialog} />}
                 {createAccount && <CreateAccountButton openCreateAccountDialog={openCreateAccountDialog}/>}
                 </>                
                }
 
-            {showProfile && <HeaderDropdown/>}
+              {/* If user is logged in display profile */}
+              {isUserLoggedIn && <HeaderDropdown/> }
 
           </div>
 

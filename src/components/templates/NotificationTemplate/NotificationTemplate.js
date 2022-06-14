@@ -63,6 +63,7 @@ const NotificationTemplate = ({data}) =>
                             id = {datum.id}
                             is_read = {datum.is_read}
                             handleClick = {handleClick}
+                            created_at={datum.created_at}
                         />);
                     })
                 }

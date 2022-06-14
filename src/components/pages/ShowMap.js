@@ -15,30 +15,15 @@ const  ShowMap = ({lng, lat, zoom}) =>
 {
     const mapContainer = useRef()
 
-    // this is where all of our map logic is going to live
-    // adding the empty dependency array ensures that the map
-    // is only created once
     useEffect(() => 
     {
-      // create the map and configure it
-      // check out the API reference for more options
-      // https://docs.mapbox.com/mapbox-gl-js/api/map/
-    //   const map = new mapboxgl.Map({
-    //     container: mapContainer.current,
-    //     style: "mapbox://styles/mapbox/streets-v11",
-    //     center: [-87.903982, 43.020403],
-    //     zoom: 9,
-    //   })
-
       const map = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/streets-v11",
         center: [lng, lat],
         zoom: zoom,
       })
-      
-      console.log(lng, lat)
-  
+        
       // cleanup function to remove map on unmount
       return () => map.remove()
     }, [lng, lat, zoom])

@@ -59,15 +59,45 @@ const DisplayCards = ({data, pagination,  filters = {}}) =>
                         if((filterKey === 'gender') || (filterKey === 'religion')  || (filterKey ===  'personality'))
                         {
                             
-                                if(datum.profile[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)
-                            
-        
-                            newFilteredData = tempFilteredData;
+                            if(datum.profile[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum)            
                         }
         
                         if(filterKey === 'room_type')
                         {
                             if(datum[filterKey].toLowerCase() == filters[filterKey].toLowerCase()) tempFilteredData.push(datum);
+                        }
+
+                        if(filterKey == 'price')
+                        {
+                            let rent = datum["rent_per_person"];
+
+                            switch(filters[filterKey])
+                            {
+                                case("< #100k"):
+                                {
+                                    if(rent < 100000) tempFilteredData.push(datum);
+                                    break;
+                                }
+
+                                case("#100k - #250k"):
+                                {
+                                    if((rent > 100000) && (rent < 250000) )tempFilteredData.push(datum);
+                                    break;
+                                }
+
+                                case("#250k - #500k"):
+                                {
+                                    if((rent > 250000) && (rent < 500000) )tempFilteredData.push(datum);
+                                    break;
+                                }
+
+                                case("> #500k"):
+                                {
+                                    if(rent > 500000) tempFilteredData.push(datum);
+                                    break;
+                                }
+
+                            }
                         }
                     });
                     newFilteredData = tempFilteredData;

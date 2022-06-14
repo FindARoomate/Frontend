@@ -41,7 +41,7 @@ export const createRoommateRequestValidation =
                                 })
                                 .required('No of current roommates/flatmates is required'),
         amenities: Yup.array().required('Please select at least one amenity'),
-        date_to_move: Yup.date().min(Date(), 'Date To Move cannot be in the past').required('Date To Move is required'), 
+        date_to_move: Yup.date().min(Date(), 'Move In Date cannot be in the past').required('Move In Date is required'), 
         rent_per_person: Yup.number().typeError("Kindly enter a numeric value").required('Rent per person is required'),
         additional_cost: Yup.string().required('Additional cost is required'),
         listing_title: Yup.string().required('Listing Title is required'),

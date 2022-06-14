@@ -13,7 +13,7 @@ export const UserContext = createContext({
     setUserProfile : () => {},
     connectionsSent : {},
     setConnectionsSent : () => {},
-    connectionsReceived : {},
+    connectionsReceived : [],
     setConnectionsReceived : () => {}
 });
 
@@ -27,7 +27,7 @@ export const UserContextProvider = ({children}) =>
     const [isProfileCreated, setIsProfileCreated] = useState();
     const [userProfile, setUserProfile] = useState(JSON.parse(localStorage.getItem("profile_data")));
 
-    const [connectionsReceived, setConnectionsReceived] = useState({});
+    const [connectionsReceived, setConnectionsReceived] = useState([]);
     const [connectionsSent, setConnectionsSent] = useState({});
 
     const UserContextValue = 

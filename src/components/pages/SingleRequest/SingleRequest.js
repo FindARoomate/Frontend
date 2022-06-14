@@ -1,8 +1,7 @@
-import { ACTIVATE_ROOMMATE_REQUEST, DEACTIVATE_ROOMMATE_REQUEST, UPDATE_ROOMMATE_REQUEST_END, UPDATE_ROOMMATE_REQUEST_START } from "../../routes";
+import { ACTIVATE_ROOMMATE_REQUEST, DEACTIVATE_ROOMMATE_REQUEST, UPDATE_ROOMMATE_REQUEST_END, UPDATE_ROOMMATE_REQUEST_START, GET_SINGLE_ROOMMATE_REQUEST, CONNECTION_RECEIVED } from "../../routes";
 import SingleConnectionReceivedTemplate from '../../templates/SingleConnectionReceivedTemplate/SingleConnectionReceivedTemplate';
 import {updateRoommateRequestInitialValues, updateRoommateRequestValidation} from './UpdateRoommateRequestHelper';
 import ErrorAlert from '../../ui/molecules/Alerts/ErrorAlert/ErrorAlert'
-import { GET_SINGLE_ROOMMATE_REQUEST } from "../../routes";
 import tickSquare from './../../../icons/tick-square.svg';
 import alertIcon from './../../../icons/alert-icon.svg';
 import Textarea from '../../ui/atoms/Textarea/Textarea';
@@ -32,6 +31,8 @@ import "swiper/css/pagination";
 import "swiper/css";
 import Label from "../../ui/atoms/Label/Label";
 import FileInput from "../../ui/atoms/FileInput/FileInput";
+import { useContext } from "react";
+import { UserContext } from "../../context";
 
 
 
@@ -43,16 +44,18 @@ const SingleRequest = () =>
     const url = GET_SINGLE_ROOMMATE_REQUEST + id + '/'; 
     const {isSuccess, APIData} = useGet(url, token);
 
-    const [isLoading, setIsLoading] = useState(false);
-
     const [cities, setCities] = useState([]);
     const [states, setStates] = useState([]);
     const [countries, setCountries] = useState([]);
     const [selectedCity, setSelectedCity] = useState({});
     const [selectedState, setSelectedState] = useState({});
     const [selectedCountry, setSelectedCountry] = useState({});
-    
-    
+
+    // Getting context information for single request
+    const {connectionsReceived, setConnectionsReceived} = useContext(UserContext);
+    const [connectionData, setConnectionData] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(false);
     const [isCurrentlyEditting, setIsCurrentlyEditting] = useState(false);
 
     // Activate or deactivate request
@@ -62,6 +65,35 @@ const SingleRequest = () =>
     const {isSuccess: updateSuccess, isError: updateError, APIData: updateData, sendPatchRequest} = usePatch(myHeaders);
     const {isSuccess: updateRoommateRequestSuccess, isError: updateRoommateRequestError, APIData: updateRoommateRequestData, sendPatchRequest: sendUpdateRooomatePatchRequest} = usePatch(myHeaders);
     const [roommateRequestInitialValues, setRoommateRequestInitialValues] = useState({});
+
+
+    // Function to get the specific connection data from the list of connections in context.
+    // Because of the way the data is structured, I have to search through the context data in a specific way
+    // in order to get the single connection data I need.     
+    const getConnection = () => 
+    {
+        let connection_data;
+
+        Object.values(connectionsReceived).every((connection_type) =>
+        {
+            connection_type.every((single_connection) => 
+            {
+                if(single_connection.id == id)
+                {
+                    connection_data = single_connection;
+                    return false;
+                }
+                return true;
+            });
+
+            return true;
+
+        });       
+
+        console.log(connection_data);
+
+        return connection_data;
+    }
 
 
     //Get country list from API
@@ -152,7 +184,6 @@ const SingleRequest = () =>
         formData.append("amenities", document.querySelector("input[name='amenities']").value);
         formData.append("date_to_move", document.querySelector("input[name='date_to_move']").value); 
 
-
         let updateRoommateRequestUrl = UPDATE_ROOMMATE_REQUEST_START + id + UPDATE_ROOMMATE_REQUEST_END;
         sendUpdateRooomatePatchRequest(updateRoommateRequestUrl, formData);
         // console.log("Update");
@@ -189,6 +220,32 @@ const SingleRequest = () =>
             sendPatchRequest(url, formData);
         }
     }
+      
+    const fetchFunction = async (url) => 
+    {
+        const res = await fetch(url, 
+        {
+            headers:  
+            {
+                "Content-Type" : "application/json",
+                "Accept" : "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("accessToken")
+            } 
+        });
+
+        const body = await res.json();
+
+        if(res.ok)
+        {
+            // Set context data if it is not currently available
+            console.log(body);
+            setConnectionsReceived(body);
+        }else
+        {
+            console.log(body);
+        }
+    }
+
 
     useEffect (() => 
     {
@@ -238,12 +295,25 @@ const SingleRequest = () =>
 
         if(selectedState) getCities();
 
+        // If user connections are not availble from context, get it from backend.
+        // If it is available, set it in the state
+        if(connectionsReceived.length <= 0)
+        {
+            fetchFunction(CONNECTION_RECEIVED);
+        }else 
+        {
+            setConnectionData(getConnection());
+        }
+
+        if(connectionData) console.log(connectionData);
+
     }, [
             isSuccess,
             APIData,
             updateData,
             updateError, 
             updateSuccess, 
+            connectionsReceived,
             updateRoommateRequestData,
             updateRoommateRequestError, 
             updateRoommateRequestSuccess,

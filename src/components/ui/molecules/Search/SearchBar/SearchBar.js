@@ -22,8 +22,7 @@ const SearchBar = ({placeholder}) =>
     }
 
     return ( 
-        <>
-         <div className={styles.searchBar}>
+        <form className={styles.searchBar} onSubmit={(e) => {e.preventDefault(); navigate(searchUrl)}}>
             <Input
                 type="text"
                 placeholder={placeholder}
@@ -31,8 +30,7 @@ const SearchBar = ({placeholder}) =>
                 name="search"
             />
             <Img src={searchIcon} onClick={() => navigate(searchUrl)}/>
-        </div>
-        </>
+        </form>
        
      );
 }

@@ -12,7 +12,7 @@ const RoomLook = ({formik, styles, nextButtonClicked, moveToPreviousFormGroup, i
     return ( 
         <>
              <div className={styles.inputGroup}>
-                    <Label>Please add at least four pictures of different parts of your room e.g bedroom, ktchen, bathroom, balcony, etc. </Label>
+                    <Label>Please add at least four pictures of different parts of your room e.g bedroom, kitchen, bathroom, balcony, etc. </Label>
                     <FileInput
                         name="request_images"
                         multiple

@@ -4,9 +4,9 @@ import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
 
-const FileInput = ({name, fileValue = null, required=true, multiple=false, onChange, ...rest}) => 
+const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", required=true, multiple=false, onChange, ...rest}) => 
 {
-    const [labelText, setLabelText] = useState("Upload a photo");
+    const [labelText, setLabelText] = useState(fileLabel);
     const [isInputRequired, setIsInputRequired] = useState(required); 
 
 

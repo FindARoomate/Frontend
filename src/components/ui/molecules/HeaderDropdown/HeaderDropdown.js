@@ -41,10 +41,10 @@ const HeaderDropdown = () =>
             </div>
         </div>
           {/* Logout pop-up */}
-          {/* <LogoutDialog
+          <LogoutDialog
             open={logoutModalState}
             closeModal={closeLogoutDialog}
-        /> */}
+        />
         </>
      );
 }
