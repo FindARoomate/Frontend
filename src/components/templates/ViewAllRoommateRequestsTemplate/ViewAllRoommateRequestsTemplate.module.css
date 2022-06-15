@@ -15,6 +15,7 @@
 .viewMoreRequestBody
 {
     padding-top: 20px;
+    min-height: 73vh;
 }
 
 @media screen and (min-width: 760px) 

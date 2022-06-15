@@ -35,7 +35,7 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
             //trigger create account request to backend
 
             const formData = new FormData();
-            formData.append("email", e.target[0].value);
+            formData.append("email", e.target[0].value.toLowerCase());
             formData.append("password", e.target[1].value);
             formData.append("confirm_password", e.target[2].value);
             sendPostRequest(formData);  

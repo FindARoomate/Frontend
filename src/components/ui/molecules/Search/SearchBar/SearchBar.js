@@ -17,7 +17,7 @@ const SearchBar = ({placeholder}) =>
         e.preventDefault();
         if(e.target.value)
         {
-            setSearchUrl("?listing_title="+e.target.value);
+            setSearchUrl("?city="+e.target.value);
         }
     }
 

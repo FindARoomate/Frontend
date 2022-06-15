@@ -15,6 +15,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    background-color: white;
 }
 
 /*To remove button from IE11, thank you Matt */

@@ -20,15 +20,15 @@ const FindRoommateRequestLandingPageHeroSection = () =>
             {redirectLink && <Navigate to={redirectLink} />}
             <div>
                 <H1>Find the perfect roomates for you</H1>
-                <SearchButton
+                 <SearchButton
                     placeholder="e.g roommate in Agbowo"
                     handleSubmit={handleSubmit}
                 />
             </div>
             {/* Left Side (It's currently empty but design can change) */}
-            <div>
+            {/* <div>
 
-            </div>
+            </div> */}
 
         </div>
      );

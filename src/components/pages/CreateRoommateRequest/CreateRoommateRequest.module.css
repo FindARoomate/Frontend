@@ -165,7 +165,7 @@
 {
     .createRoommateRequest
     {
-        width: 47vw;
+        width: clamp(600px, 47vw, 47vw);
         margin: 24px auto 50px;
         padding: 50px 94px;
         border-radius: 8px;
@@ -190,11 +190,16 @@
     .createRoommateRequest #formGroup3
     {
         gap: 40px;
-    }
+    }   
+
+    /* .createRoommateRequest .formGroup button
+    {
+        padding: 19px 61px;
+    } */
 
     .createRoommateRequest .formGroup button
     {
-        padding: 19px 61px;
+        padding: 19px 50px;
     }
 
     .createRoommateRequest .inputGroup

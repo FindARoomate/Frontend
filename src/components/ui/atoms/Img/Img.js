@@ -1,6 +1,6 @@
 import styles from './Img.module.css';
 
-const P = (props) => 
+const Img = (props) => 
 {
   const {src, customStyle, ...rest} = props
     return ( 
@@ -14,4 +14,4 @@ const P = (props) =>
 
 }
  
-export default P;
+export default Img;

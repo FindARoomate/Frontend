@@ -23,12 +23,12 @@
   width: 100%;
 }
 
-.img img
+/* .img img
 {
   width: 80vw;
   height: auto;
   margin: 0 auto;
-}
+} */
 
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
@@ -37,8 +37,21 @@
   {
       flex-wrap: nowrap;
   }
-  .imageTextRow > * 
+
+  .imageTextRow .textButtonGroup 
   {
     width:50%;
+  }
+  
+  .imageTextRow .img
+  {
+    /* width: 200px; */
+    width: clamp(250px, 50%, 50%);
+  }
+
+  .imageTextRow .img img
+  {
+    max-width: 100%;
+    width: auto;
   }
 }

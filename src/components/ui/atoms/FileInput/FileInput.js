@@ -9,6 +9,12 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", required
     const [labelText, setLabelText] = useState(fileLabel);
     const [isInputRequired, setIsInputRequired] = useState(required); 
 
+    // When you click a form input, it clears the selected files
+    // This is to revert the text back to "Upload a photo" or "Upload photos" when the input is clicked
+    const handleOnClick = () => 
+    {
+        (multiple) ? setLabelText("Upload Photos") : setLabelText(fileLabel);
+    }
 
     const handleOnChange = (e) => 
     {
@@ -58,6 +64,7 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", required
                     name={name}
                     id={name}
                     onChange={handleOnChange}
+                    onClick={handleOnClick}
                     required={isInputRequired}
                     multiple={multiple}
                     {...rest}

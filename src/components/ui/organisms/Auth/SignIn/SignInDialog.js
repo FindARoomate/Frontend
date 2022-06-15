@@ -34,7 +34,7 @@ const SignInDialog = ({open, closeModal, openCreateAccountModal, redirectTo = nu
       setIsLoading(true);
       //trigger login request to backend
       const formData = new FormData();
-      formData.append("email", e.target[0].value);
+      formData.append("email", e.target[0].value.toLowerCase());
       formData.append("password", e.target[1].value)
       sendPostRequest(formData);
     }

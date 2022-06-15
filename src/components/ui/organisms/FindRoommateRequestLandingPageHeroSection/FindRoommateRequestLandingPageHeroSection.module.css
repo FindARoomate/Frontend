@@ -14,7 +14,7 @@
 .hero h1
 {
     color: white;
-    font-size: 32px;
+    font-size: clamp(32px, 8vw, 53px);
     margin-bottom: 32px;
 }
 
@@ -28,11 +28,13 @@
     }
     .hero > *
     {
-        width: 50%
+        width: clamp(580px, 50%, 50%);
     }
+
     .hero h1
     {
-        font-size: 56px;
+        font-size: clamp(50px, 3.65vw, 70px);
+        /* font-size: 56px; */
         margin-bottom: 40px;
     }
 }

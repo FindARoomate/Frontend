@@ -2,7 +2,8 @@ h1
 {
   font-family: 'Syne';
   color: #0029DD;
-  font-size: 36px;
+  /* font-size: 36px; */
+  font-size: clamp(32px, 8vw, 53px);
 }
 
 /* Tablet and Desktop view */
@@ -10,6 +11,7 @@ h1
 {
   h1
   {
-    font-size: 60px;
+    /* font-size: 60px; */
+    font-size: clamp(50px, 3.65vw, 70px);
   }
 }
