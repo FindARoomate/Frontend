@@ -14,30 +14,31 @@ const RoomLocation = ({formik, error, styles, nextButtonClicked, moveToNextFormG
     const [countries, setCountries] = useState([]);
     const [selectedCity, setSelectedCity] = useState({});
     const [selectedState, setSelectedState] = useState({});
-    const [selectedCountry, setSelectedCountry] = useState({});
+    const [selectedCountry, setSelectedCountry] = useState("NG");
 
     //Get country list from API
-    const getCountries = async () => 
-    {
-        var headers = new Headers();
-        headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
+    // const getCountries = async () => 
+    // {
+    //     var headers = new Headers();
+    //     headers.append("X-CSCAPI-KEY", "am9vVVAyRlBRY1B0VDl6anR2UGI0YXMyNDdwQXFDWmJmUHFraGN2RQ==");
 
-        const res = await fetch("https://api.countrystatecity.in/v1/countries", 
-        {   headers:  headers,
-            method: "GET"
-        });
+    //     const res = await fetch("https://api.countrystatecity.in/v1/countries", 
+    //     {   headers:  headers,
+    //         method: "GET"
+    //     });
 
-        const body = await res.json();
+    //     const body = await res.json();
 
-        if(res.ok)
-        {
-            setCountries(body);
+    //     if(res.ok)
+    //     {
+    //         setCountries(body);
+    //         console.log(body);
 
-        }else
-        {
-            console.log(body);
-        }
-    }
+    //     }else
+    //     {
+    //         console.log(body);
+    //     }
+    // }
 
     //Get state list from API (based on country ISO2)
     const getStates = async () => 
@@ -86,36 +87,20 @@ const RoomLocation = ({formik, error, styles, nextButtonClicked, moveToNextFormG
     useEffect(() => 
     {
 
-
-        if(countries.length <= 0) getCountries();
-        
-        if(selectedCountry) getStates();
+        getStates();
 
         if(selectedState) getCities();
 
-    }, [ countries, selectedCountry, selectedState]);
+    }, [selectedState]);
 
 
     return ( 
         <>
             <div className={styles.inputGroup}>
             <Label name="country">Country</Label>
-            <Select 
-                name="country" 
-                onChange={(e) => 
-                {
-                    setSelectedCountry(e.target.options[e.target.selectedIndex].dataset.iso)
-                    formik.setFieldValue("country", e.target.value)
-                }
-                }
-                onBlur={formik.handleBlur}
-            >
-            <option value="">Select a country</option>
-            {countries.map((country) => 
-            {
-                return <option key={country.id} data-iso={country.iso2}>{country.name}</option>
-
-            })}
+            <Select name="country" {...formik.getFieldProps('country')}>
+                <option value="">Select a country</option>
+                <option selected data-iso="NG">Nigeria</option>
             </Select>
         
             {!nextButtonClicked && ((formik.touched.country && formik.errors.country) &&<ErrorAlert>{formik.errors.country}</ErrorAlert>)}

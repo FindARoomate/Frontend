@@ -1,0 +1,37 @@
+.EditImage
+{
+    position: relative;
+    /* width: max-content; */
+    width: 100%;
+    height: min-content;
+}
+
+.EditImage .iconContainer
+{
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    right: 3.33px;
+    top: 3.33px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.EditImage .icon
+{  
+    font-size: 30px;
+    font-family: 'Nanum Gothic', sans-serif;
+    transform: rotate(45deg);
+}
+
+.EditImage img 
+{
+    width:100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 10px;
+}

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const OnboardingInstruction = ({title, description, img, url, linkText}) => {
     return ( 
         <div className={styles.onboardingBody}>
-            <Header/>
+            {/* <Header/> */}
             <div className={styles.onboardingContainer}>
                 <div className={styles.onboarding}>
                     <H1>{title}</H1>

@@ -81,25 +81,6 @@
     margin-right: 4px;
 }
 
-.imageContainer
-{
-    border-radius: 8px;
-    height: 100%;
-    max-height: 208px;
-    width: auto; 
-    margin: 24px 0;
-} 
-
-.imageContainer img
-{
-    border-radius: 8px;
-    width: auto;
-    height: 100%;
-    max-height: 208px;
-    cursor: pointer;
-}
-
-
 .roomInfoContainer
 {
     padding: 9px 0 16px 0;
@@ -257,6 +238,12 @@
     color: #7D7D7D;
 }
 
+.inputGroup .editRequestImagesContainer
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+}  
 
 .checkboxContainer
 {
@@ -289,7 +276,7 @@
     border: 1px solid #7D7D7D;
 }
 
- 
+
 /* Tablet and Desktop view */
 @media screen and (min-width: 760px) 
 {
@@ -352,15 +339,6 @@
     {
        width: 20px;
        height: auto;
-    }
-
-    .imageContainer
-    {
-        width: auto;
-        height: 100%;
-        max-height: 345px;
-        margin-top: 13px;
-        margin-bottom: 41px;
     }
 
     .roomInfoContainer

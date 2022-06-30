@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
 
-const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", required=true, multiple=false, onChange, ...rest}) => 
+const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", iconImg=img, required=true, multiple=false, onChange, ...rest}) => 
 {
     const [labelText, setLabelText] = useState(fileLabel);
     const [isInputRequired, setIsInputRequired] = useState(required); 
@@ -13,7 +13,7 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", required
     // This is to revert the text back to "Upload a photo" or "Upload photos" when the input is clicked
     const handleOnClick = () => 
     {
-        (multiple) ? setLabelText("Upload Photos") : setLabelText(fileLabel);
+        (multiple && !fileLabel) ? setLabelText("Upload Photos") : setLabelText(fileLabel);
     }
 
     const handleOnChange = (e) => 
@@ -32,10 +32,7 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", required
 
     useEffect(() => 
     {
-        if(multiple)
-        {
-            setLabelText("Upload Photos");
-        }
+        (multiple && !fileLabel) ? setLabelText("Upload Photos") : setLabelText(fileLabel);
 
         if(fileValue)
         {
@@ -50,25 +47,24 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", required
             }
         }
 
-
     }, [fileValue, multiple])
 
     return ( 
         <div className={styles.fileInput}>
             <label htmlFor={name}>
-                <Img src={img} />
+                <Img src={iconImg} />
                 <span>{labelText}</span>
             </label>
             <Input 
-                    type="file"
-                    name={name}
-                    id={name}
-                    onChange={handleOnChange}
-                    onClick={handleOnClick}
-                    required={isInputRequired}
-                    multiple={multiple}
-                    {...rest}
-                />
+                type="file"
+                name={name}
+                id={name}
+                onChange={handleOnChange}
+                onClick={handleOnClick}
+                required={isInputRequired}
+                multiple={multiple}
+                {...rest}
+            />
         </div>
      );
 }

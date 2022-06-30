@@ -3,8 +3,9 @@ import { Route, useLocation } from "react-router-dom";
 import SignInDialog from "./components/ui/organisms/Auth/SignIn/SignInDialog";
 import CreateAccountDialog from "./components/ui/organisms/Auth/CreateAccount/CreateAccountDialog";
 import { useEffect } from "react";
+import CreateProfileDialog from "./components/ui/organisms/Auth/CreateProfileDialog/CreateProfileDialog";
 
-const Protected = ({children}) => 
+const Protected = ({children, checkProfile}) => 
 {
     let location = useLocation();
 
@@ -18,7 +19,11 @@ const Protected = ({children}) =>
      const showCreateAccountDialog = () => setCreateAccountModalState(true);
      const closeCreateAccountModal = () => setCreateAccountModalState(false);
  
- 
+    // For create account modal
+    const [createProfileModalState, setCreateProfileModalState] = useState(false);
+    const showCreateProfileDialog = () => setCreateProfileModalState(true);
+    const closeCreateProfileModal = () => setCreateAccountModalState(false);
+    
      const openSignInModal = () => 
      {
          closeCreateAccountModal();
@@ -35,14 +40,40 @@ const Protected = ({children}) =>
      {
         if(!localStorage.getItem("isUserLoggedIn"))
         {
+          
             openSignInModal();
+
         }
+
+        if(localStorage.getItem && (checkProfile && !localStorage.getItem("profile_data")))
+        {
+            console.log("Open profile modal");
+            showCreateProfileDialog();
+        }
+
      }, []);
 
     
         if(localStorage.getItem("isUserLoggedIn"))
         {
-            return (children);
+            if(checkProfile)
+            {
+                if(localStorage.getItem("profile_data"))
+                {
+                    return (children);
+                } else 
+                {
+                    return (<CreateProfileDialog
+                        open={createProfileModalState}
+                        closeModal={closeCreateProfileModal}
+                        message = "You need to login before you can proceed" 
+                    />);
+                }
+                
+            }else 
+            {
+                return (children);
+            }
         }else 
         {
             return (

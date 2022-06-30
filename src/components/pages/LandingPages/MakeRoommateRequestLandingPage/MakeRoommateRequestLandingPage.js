@@ -51,7 +51,10 @@ const MakeRoommateRequestLandingPage = () =>
     var heading =  <H1>Find the perfect roommates...</H1>
     var description = <P> A platform to allow people to connect with potential roommates</P>
     // var button =  <Link to="/dashboard"><Button>Get Started</Button></Link> 
-    var button = <Button handleOnClick={showSignInDialog}>Get Started</Button>
+    var button = <div style={{display:"flex", flexWrap: "noWrap", flexDirection: "row", gap: "24px"}}>
+                    <Link to="/view-requests"><Button customStyle={{fontWeight: "500"}}>Explore Listings</Button></Link>
+                    <Button customStyle={{background: "transparent", fontWeight: "500", color: "#0029DD", border: "1px solid #0029DD"}} handleOnClick={showSignInDialog}>Sign Up</Button>
+                </div>
     var img = {src: heroImage}
     var order = "textFirst"
     const heroSection = {heading, description, button, img, order}

@@ -14,6 +14,7 @@ const LogoutDialog = ({open, closeModal}) =>
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("isUserLoggedIn");
+        localStorage.removeItem("profile_data");
 
         if(window.location.pathname == "/")
         {

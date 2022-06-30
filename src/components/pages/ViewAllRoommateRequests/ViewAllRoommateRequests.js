@@ -8,7 +8,7 @@ const ViewAllRoommateRequests = () =>
 {
     const search = useLocation().search;
     const pageId = new URLSearchParams(search).get('page');
-    const searchTerm = new URLSearchParams(search).get('listing_title');
+    const searchTerm = new URLSearchParams(search).get('city');
     
     const [url, setURL] = useState(GET_ALL_ROOMMATE_REQUESTS);
 
@@ -25,7 +25,7 @@ const ViewAllRoommateRequests = () =>
 
         if(searchTerm)
         {
-            setURL(GET_ALL_ROOMMATE_REQUESTS+"?listing_title="+searchTerm)
+            setURL(GET_ALL_ROOMMATE_REQUESTS+"?city="+searchTerm)
         }
     }, [pageId, searchTerm]);
 

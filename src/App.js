@@ -75,33 +75,33 @@ function App()
           <Route path='/create-profile-thankyou' element={<Protected><CreateProfileThankYou/></Protected>}/>
 
           {/* Guest Profile */}
-          <Route path='/guest-profile/:id' element={<Protected><GuestProfile/></Protected>}/>
+          <Route path='/guest-profile/:id' element={<Protected checkProfile><GuestProfile/></Protected>}/>
 
           {/* Roommate Request */}
-          <Route path='/create-roommate-request-instruction' element={<Protected><CreateRooomateRequestInstruction/></Protected>}/>
-          <Route path='/create-roommate-request' element={<Protected><CreateRoommateRequest/></Protected>} />
-          <Route path='/create-roommate-request-thankyou' element={<Protected><CreateRoommateRequestThankYou/></Protected>} />
+          <Route path='/create-roommate-request-instruction' element={<Protected checkProfile><CreateRooomateRequestInstruction/></Protected>}/>
+          <Route path='/create-roommate-request' element={<Protected checkProfile><CreateRoommateRequest/></Protected>} />
+          <Route path='/create-roommate-request-thankyou' element={<Protected checkProfile><CreateRoommateRequestThankYou/></Protected>} />
           
           {/* Dashboard related routes */}
-          <Route path='/dashboard' element={<Protected><Dashboard/></Protected>}/>
-          <Route path='/connection-sent' element={<Protected><ConnectionSent/></Protected>}/>
-          <Route path='/connection-received' element={<Protected><ConnectionReceived/></Protected>}/>
-          <Route path='/inactive-requests' element={<Protected><InactiveRequests/></Protected>} />
-          <Route path='/active-requests' element={<Protected><ActiveRequests/></Protected>}/>
+          <Route path='/dashboard' element={<Protected checkProfile><Dashboard/></Protected>}/>
+          <Route path='/connection-sent' element={<Protected checkProfile><ConnectionSent/></Protected>}/>
+          <Route path='/connection-received' element={<Protected checkProfile><ConnectionReceived/></Protected>}/>
+          <Route path='/inactive-requests' element={<Protected checkProfile><InactiveRequests/></Protected>} />
+          <Route path='/active-requests' element={<Protected checkProfile><ActiveRequests/></Protected>}/>
 
 
-          <Route path='/connection-received/:id' element={<Protected><SingleConnectionReceived/></Protected>}/>
-          <Route path='/connection-sent/:id' element={<Protected><SingleConnectionSent/></Protected>}/>
-          <Route path='/request/:id' element={<Protected><SingleRequest/></Protected>}/>
+          <Route path='/connection-received/:id' element={<Protected checkProfile><SingleConnectionReceived/></Protected>}/>
+          <Route path='/connection-sent/:id' element={<Protected checkProfile><SingleConnectionSent/></Protected>}/>
+          <Route path='/request/:id' element={<Protected checkProfile><SingleRequest/></Protected>}/>
 
           {/* Profile */}
-          <Route path='/profile' element={<Protected><Profile/></Protected>}/>
+          <Route path='/profile' element={<Protected checkProfile><Profile/></Protected>}/>
 
           {/* Ideal Roommate */}
-          <Route path='/ideal-roommate' element={<Protected><IdealRoommate/></Protected>}/>
+          <Route path='/ideal-roommate' element={<Protected checkProfile><IdealRoommate/></Protected>}/>
 
           {/* Notification */}
-          <Route path='/notifications' element={<Protected><Notification/></Protected>}/>
+          <Route path='/notifications' element={<Protected checkProfile><Notification/></Protected>}/>
 
           <Route path='/map' element={<ShowMap/>}/>
 

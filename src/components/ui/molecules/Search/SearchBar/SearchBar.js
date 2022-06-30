@@ -5,19 +5,19 @@ import styles from './SearchBar.module.css';
 import Input from '../../../atoms/Input/Input';
 import searchIcon from './../../../../../icons/search-icon.svg';
 import { useNavigate } from 'react-router-dom';
-
+import { makeFirstLetterCaps } from '../../../../../helperFunctions/makeFirstLetterCaps';
 
 const SearchBar = ({placeholder}) => 
 {
     const navigate = useNavigate();
     const [searchUrl, setSearchUrl] = useState("");
-
+    
     const handleOnChange = (e) => 
     {
         e.preventDefault();
         if(e.target.value)
         {
-            setSearchUrl("?city="+e.target.value);
+            setSearchUrl("?city="+makeFirstLetterCaps(e.target.value));
         }
     }
 

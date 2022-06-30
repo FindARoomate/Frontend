@@ -51,7 +51,7 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, room
                 <H2>Explore</H2>
                 <div className={styles.searchBar}>
                     <SearchBar 
-                        placeholder="Search by location"
+                        placeholder="Search by city (e.g Ikeja)"
                         handleOnBlur={handleOnBlur}
                         />
                     <ExploreSearch

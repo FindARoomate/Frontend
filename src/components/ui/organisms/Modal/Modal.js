@@ -1,21 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import styles from './Modal.module.css';
 
 const Modal = ({children, open, closeModal, customStyles}) =>
 {
     const modalRef = useRef(null);
     
-    
-    useEffect(() => {
+    const escFunction = useCallback((event) => 
+    {
+        if (event.key === "Escape")   closeModal();
+
+    }, []);
+
+    useEffect(() => 
+    {
         const modalNode = modalRef.current;
 
-        if(open)
-        {
-            modalNode.showModal();
-        }else
-        {
-            modalNode.close();
-        }
+        (open) ? modalNode.showModal() : modalNode.close();
+
+        document.addEventListener("keydown", escFunction, false);
+
+        return () =>   document.removeEventListener("keydown", escFunction, false);
+        
     }, [open]);
 
     const handleClose = () =>

@@ -30,7 +30,8 @@ const DisplayCards = ({data, pagination,  filters = {}}) =>
     {
         paginationPagesArray.push(i+1);
     }
-    console.log(filteredData)
+
+
     useEffect(() => 
     {
 
