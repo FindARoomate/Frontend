@@ -100,7 +100,7 @@ const RoomLocation = ({formik, error, styles, nextButtonClicked, moveToNextFormG
             <Label name="country">Country</Label>
             <Select name="country" {...formik.getFieldProps('country')}>
                 <option value="">Select a country</option>
-                <option selected data-iso="NG">Nigeria</option>
+                <option value="Nigeria" data-iso="NG">Nigeria</option>
             </Select>
         
             {!nextButtonClicked && ((formik.touched.country && formik.errors.country) &&<ErrorAlert>{formik.errors.country}</ErrorAlert>)}

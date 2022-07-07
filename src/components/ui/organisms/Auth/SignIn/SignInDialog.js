@@ -17,38 +17,19 @@ import { UserContext } from "../../../../context";
 import { useContext } from "react";
 import { Formik } from 'formik';
 import { signInInitialValues, signInValidation } from "./SignInHelper";
+import { useLoginData } from "../../../../../customHooks/useAuthData";
+
+
+
 
 const SignInDialog = ({open, closeModal, openCreateAccountModal, redirectTo = null, message = null}) => 
 {
-  const [isLoading, setIsLoading] = useState(false);
+  
   const [signInButtonClicked, setSignInButtonClicked] = useState(false);
-  const { isSuccess, isError, APIdata, sendPostRequest } = usePost(LOGIN);
+  const { setUserProfile, setIsUserLoggedIn } = useContext(UserContext);
+  const { isLoading, error, data: APIdata, mutate } = useLoginData();
 
-  const handleSignIn = (e, formik) => 
-  {
-    e.preventDefault();
-    setSignInButtonClicked(true);
-
-    if(Object.values(formik.errors).length <= 0)
-    {
-      setIsLoading(true);
-      //trigger login request to backend
-      const formData = new FormData();
-      formData.append("email", e.target[0].value.toLowerCase());
-      formData.append("password", e.target[1].value)
-      sendPostRequest(formData);
-    }
-
-  };
-
-  const handleCreateAccountOnClick = (e) => 
-  {
-    e.preventDefault();
-    openCreateAccountModal();
-  }
-
-  //update context
-  const {userProfile, setUserProfile, setIsUserLoggedIn} = useContext(UserContext);
+  if(error) console.log(error);
 
   const updateContext = (user_id, data, email) => 
   {
@@ -60,40 +41,58 @@ const SignInDialog = ({open, closeModal, openCreateAccountModal, redirectTo = nu
 
     setIsUserLoggedIn(true);
     setUserProfile(profile_data);
+  }
+
+  const handleSignIn = (e, formik) => 
+  {
+    e.preventDefault();
+    setSignInButtonClicked(true);
+
+    if(Object.values(formik.errors).length <= 0)
+    {
+      //trigger login request to backend
+      const formData = new FormData();
+      formData.append("email", e.target[0].value.toLowerCase());
+      formData.append("password", e.target[1].value)
+      mutate(formData);
+    }
+
+  };
+
+  const handleCreateAccountOnClick = (e) => 
+  {
+    e.preventDefault();
+    openCreateAccountModal();
+  }
+
+
+useEffect(() => 
+{
+  if(APIdata) 
+  {
+    console.log(APIdata);
+    // Close Modal if you are trying to redirect to the same page
+    if(redirectTo == window.location.pathname)
+    {
+      closeModal();
+    }
+
+
+    updateContext(APIdata.data.id, APIdata.data.profile_data, APIdata.data.email);
+    localStorage.setItem("accessToken", APIdata.access); //add access token to localStorage
+    localStorage.setItem("refreshToken", APIdata.refresh); //add refresh token to localStorage
 
   }
 
-  useEffect(() => 
-  {
-    //after getting a response from database, remove loading message
-    if (isSuccess || isError) 
-    {
-      setIsLoading(false);
-      console.log(APIdata);
-    }
-
-    if (isSuccess) 
-    {
-      // Close Modal if you are trying to redirect to the same page
-      if(redirectTo == window.location.pathname)
-      {
-        closeModal();
-      }
-
-      updateContext(APIdata.data.id, APIdata.data.profile_data, APIdata.data.email);
-      localStorage.setItem("accessToken", APIdata.access); //add access token to localStorage
-      localStorage.setItem("refreshToken", APIdata.refresh); //add refresh token to localStorage
-    }
-
-  }, [isError, isSuccess, APIdata]);
+}, [APIdata]);
 
   return (
-    <div className={styles.signInDialogContainer}>
-                  
-      {isSuccess &&  
-      (
-        (APIdata.data.last_login) ? (!redirectTo ? <Navigate to="/dashboard"/> : redirectTo !== window.location.path && redirectTo) : <Navigate to="/create-profile-instruction" />
-      )}
+    <div className={styles.signInDialogContainer}>      
+        {
+          APIdata && (APIdata.data.last_login ?
+            (!redirectTo ? <Navigate to="/dashboard"/> : redirectTo !== window.location.path && redirectTo) : 
+          <Navigate to="/create-profile-instruction" />)
+        }
 
       <Modal open={open} closeModal={closeModal}>
         <div className={styles.signInDialog}>
@@ -110,7 +109,7 @@ const SignInDialog = ({open, closeModal, openCreateAccountModal, redirectTo = nu
           >
            {formik => (
             <form onSubmit={(e) => handleSignIn(e, formik)}>
-              {isError && <ErrorAlert>{APIdata.detail}</ErrorAlert>}
+              {error && <ErrorAlert>{APIdata.detail}</ErrorAlert>}
               <div className={styles.inputGroup}>
                 <Label>Email</Label>
                 <Input {...formik.getFieldProps('email')} name="email" required placeholder="Enter your email address"/>
@@ -145,6 +144,7 @@ const SignInDialog = ({open, closeModal, openCreateAccountModal, redirectTo = nu
 
     </div>
   );
+
 };
 
 export default memo(SignInDialog);

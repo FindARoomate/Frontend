@@ -3,16 +3,14 @@ import styles from './ActiveRequests.module.css';
 import H2 from "../../ui/atoms/Headings/H2/H2";
 import ListBox from "../../ui/molecules/ListBox/ListBox";
 import dp from "../../../images/dashboard-image.png";
-import { USER_ACTIVE_REQUESTS } from "../../routes";
-import useGet from "../../../customHooks/useGet";
 import {v4 as uuidv4} from 'uuid';
 import P from "../../ui/atoms/P/P";
 import { Link } from "react-router-dom";
+import { useGetActiveRequests } from "../../../customHooks/useDashboardData";
 
 const ActiveRequests = () => 
 {
-    const token = localStorage.getItem("accessToken");
-    const {APIData} = useGet(USER_ACTIVE_REQUESTS, token);
+    const {isLoading, error, data: APIData } = useGetActiveRequests();
 
     return ( 
         <DashboardTemplate>
@@ -20,7 +18,7 @@ const ActiveRequests = () =>
                 <H2>Active Requests</H2>    
 
                 <div className={styles.listBoxContainer}>
-                {!APIData && "Loading..."}
+                {isLoading && "Loading..."}
                 {APIData && 
                     (
                         (APIData.length === 0) ?

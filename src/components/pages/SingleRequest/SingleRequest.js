@@ -134,6 +134,9 @@ const SingleRequest = () =>
 
     useEffect (() => 
     {
+
+        // console.log(APIData);
+
         if(updateSuccess || updateError)
         {
             setIsLoading(false);

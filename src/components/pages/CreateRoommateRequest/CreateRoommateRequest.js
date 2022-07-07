@@ -10,6 +10,7 @@ import RoomDetails from '../../ui/organisms/CreateRoommateRequestPages/RoomDetai
 import RoomPricing from '../../ui/organisms/CreateRoommateRequestPages/RoomPricing';
 import RoomLocation from '../../ui/organisms/CreateRoommateRequestPages/RoomLocation';
 import {createRoommateRequestInitialValues, createRoommateRequestValidation, validateForm} from './CreateRoommateRequestHelper';
+import { useCreateRoommateRequestData } from '../../../customHooks/useRoommateRequestData';
 
 const CreateRoommateRequest = () => 
 {
@@ -20,8 +21,8 @@ const CreateRoommateRequest = () =>
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
     myHeaders.append("Accept", "application/json");
-    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_ROOMMATE_REQUEST, myHeaders);
-
+    // const { isError, isSuccess, APIdata, sendPostRequest } = usePost(CREATE_ROOMMATE_REQUEST, myHeaders);
+    const { error: APIerror, isSuccess, isError, data: APIdata, mutate } = useCreateRoommateRequestData();
 
     
     const moveToNextFormGroup = (current_index, errors) => 
@@ -69,7 +70,7 @@ const CreateRoommateRequest = () =>
     {
         e.preventDefault();
 
-        const {formStatus, message} = validateForm(4, formik.errors);
+        const { formStatus, message } = validateForm(4, formik.errors);
         setIsLoading(true);
         
         if(formStatus)
@@ -93,14 +94,18 @@ const CreateRoommateRequest = () =>
                 formData.append("amenities", formik.values.amenities[i]);
             }
 
+            // let newImageArray = [];
              //append all request images
              for (let i = 0; i < formik.values.request_images.length; i++)
              {
                  formData.append("request_images", formik.values.request_images[i]);
+                //  newImageArray.push(formik.values.request_images[i])
              }
 
+            //  console.log(newImageArray);
+             console.log(formik.values.request_images);
             //create profile record on backend
-            sendPostRequest(formData);
+            mutate(formData);
 
         }else
         {
@@ -113,7 +118,7 @@ const CreateRoommateRequest = () =>
 
     useEffect(() => 
     {
-        if(isError) setError(APIdata.detail);
+        if(isError) console.log(APIerror);//setError(APIdata.detail);
         if(isError || isSuccess) setIsLoading(false);
 
     }, [isError, isSuccess, APIdata]);

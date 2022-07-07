@@ -16,14 +16,16 @@ import Img from '../../../atoms/Img/Img';
 import Modal from "../../Modal/Modal";
 import P from "../../../atoms/P/P";
 import { Formik } from 'formik';
+import { useCreateAccountData } from "../../../../../customHooks/useAuthData";
 
 const CreateAccountDialog = ({open, closeModal, openSignInModal}) => 
 {
 
-    const headers = new Headers();
-    const [isLoading, setIsLoading] = useState(false);
-    const {isSuccess, APIdata, isError, sendPostRequest} = usePost(CREATE_ACCOUNT, headers)
-    const [signUpButtonClicked, setSignUpButtonClicked] = useState(false);
+    const [ signUpButtonClicked, setSignUpButtonClicked ] = useState(false);
+    const { isLoading, isSuccess, data: APIdata, error, mutate} = useCreateAccountData();
+    if(error) console.log(error);
+
+
     const handleSignUp = (e, formik) => 
     { 
         e.preventDefault();
@@ -31,25 +33,13 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
 
         if(Object.values(formik.errors).length <= 0)
         {
-            setIsLoading(true);
-            //trigger create account request to backend
-
             const formData = new FormData();
             formData.append("email", e.target[0].value.toLowerCase());
             formData.append("password", e.target[1].value);
             formData.append("confirm_password", e.target[2].value);
-            sendPostRequest(formData);  
+            mutate(formData);  
         }      
     }
-
-    useEffect(() => 
-    {
-        //after getting a response from database, remove loading message
-        if(isSuccess || isError)
-        { 
-            setIsLoading(false); 
-        }
-    }, [isError, isSuccess, APIdata]);
 
     const handleSignInOnClick = (e) => 
     {
@@ -73,7 +63,7 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
             >
            {formik => (
                 <form onSubmit={(e) => handleSignUp(e, formik)}>
-                    {isError &&  <CreateAccountErrors errors={APIdata}/>}
+                    {error &&  <CreateAccountErrors errors={error}/>}
                     {isSuccess && <SuccessAlert message={APIdata.message}/>}
                     <div className={styles.inputGroup}>
                         <Label>Email</Label>

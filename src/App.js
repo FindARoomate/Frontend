@@ -28,6 +28,9 @@ import Protected from './Protected';
 import IdealRoommate from './components/pages/IdealRoommate/IdealRoommate';
 import ShowMap from './components/pages/ShowMap';
 import GuestProfile from './components/pages/GuestProfile/GuestProfile';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() 
 {
@@ -51,8 +54,8 @@ function App()
   }, [pathname, hash, key]); // do this on route change
 
   return (
-    // <Router>
       <div className="App">
+        <QueryClientProvider client={queryClient}>
         <Routes>
           {/* Waitlist Endpoints */}
           <Route path='/' element={<ComingSoon2/>} />
@@ -108,9 +111,9 @@ function App()
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
         </Routes>
-      </div>
-    // </Router>
-    
+        </QueryClientProvider>
+
+      </div>    
   );
 }
 

@@ -60,7 +60,7 @@ export const UserContextProvider = ({children}) =>
     useEffect(() => 
     {
 
-        console.log(onFirstLoad);
+        // console.log(onFirstLoad);
 
         const timeForTokenToExpire = 30 * 1000; 
         let timer;
@@ -80,7 +80,7 @@ export const UserContextProvider = ({children}) =>
 
         if(isSuccess)
         {
-            console.log("Success refresh token");
+            // console.log("Success refresh token");
             localStorage.setItem("isUserLoggedIn", true);
             localStorage.setItem("accessToken", APIdata.access);
             localStorage.setItem("refreshToken", APIdata.refresh);
@@ -88,11 +88,10 @@ export const UserContextProvider = ({children}) =>
 
         if(isError)
         {
-            console.log("Error refresh token")
+            // console.log("Error refresh token");
             localStorage.removeItem("isUserLoggedIn");
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-            localStorage.removeItem("profile_data");
         }    
 
         return () => clearInterval(timer);

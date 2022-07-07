@@ -1,6 +1,6 @@
 import {updateRoommateRequestInitialValues, updateRoommateRequestValidation} from './UpdateRoommateRequestHelper';
 import EditRommateRequestImages from "../../ui/organisms/EditRommateRequestImages/EditRommateRequestImages";
-import { UPDATE_ROOMMATE_REQUEST_END, UPDATE_ROOMMATE_REQUEST_START} from "../../routes";
+import { UPDATE_ROOMMATE_REQUEST_END, UPDATE_ROOMMATE_REQUEST_START, ADD_IMAGES_TO_ROOMMATE_REQUEST} from "../../routes";
 import ErrorAlert from '../../ui/molecules/Alerts/ErrorAlert/ErrorAlert';
 import addMoreFilesIcon from './../../../icons/add-more-files-icon.svg';
 import FileInput from "../../ui/atoms/FileInput/FileInput";
@@ -15,6 +15,8 @@ import H3 from '../../ui/atoms/Headings/H3/H3';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import { useState } from "react";
 import { useParams } from 'react-router-dom';
+import { useAddImagesToRoommateRequestData } from '../../../customHooks/useRoommateRequestData';
+import { ACCESS_TOKEN } from '../../settings';
 
 const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurrentlyEditting}) => 
 {
@@ -33,40 +35,44 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
 
     const [roommateRequestInitialValues, setRoommateRequestInitialValues] = useState({});
 
+    const [errorMessage, setErrorMessage] = useState(null);
+
     // Activate or deactivate request
     const updateToken = "Bearer " + localStorage.getItem("accessToken");
     const myHeaders = new Headers();
     myHeaders.append("Authorization", updateToken);
     const {isSuccess: updateRoommateRequestSuccess, isError: updateRoommateRequestError, APIData: updateRoommateRequestData, sendPatchRequest: sendUpdateRooomatePatchRequest} = usePatch(myHeaders);
 
+    //For adding request images data
+    const { isLoading: addRequestImageIsLoading, error:  addRequestImageError, data:  addRequestImageData, mutate: addRequestImageMutate } = useAddImagesToRoommateRequestData();
+    if (addRequestImageIsLoading) console.log("Loading...");
+    if (addRequestImageError) console.log(addRequestImageError);
+    if(addRequestImageData) console.log(addRequestImageData);
 
-    const validateFileUpload = (files, formik) => 
+    const validateFileUpload = (oldImageLength = 0, files, formik) => 
     {
+
+        //set formik values
+        formik.values.request_images = files;
         formik.touched.request_images = true;
-        let oldImageLen = editRequestImages.length;
+        let oldImageLen = oldImageLength > 0 ? oldImageLength : editRequestImages.length;
         let newImageLen = files.length;
         let totalLen = oldImageLen + newImageLen;
 
-        console.log(totalLen);
-        console.log(totalLen);
-
-        if((totalLen) > 8)
+        if(totalLen > 8)
         {
             formik.errors.request_images = 'Please select a maximum of 8 images';
         }
 
-        if((totalLen) < 4)
+        if(totalLen < 4)
         {
             formik.errors.request_images = 'Please select at least 4 images';
         }
 
-        if(totalLen >4 && totalLen < 8)
+        if((totalLen > 3) && (totalLen < 9))
         {
             delete(formik.errors.request_images);
         }
-
-        console.log(totalLen);
-        console.log(formik);
     }
 
     const removeImage = (id, formik) => 
@@ -79,9 +85,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
 
         setEditRequestImages(newEditImages);
         setImagesToBeDeleted((oldImages) => ([...oldImages, id]));
-        
-        validateFileUpload([], formik); //ensure we don't have below 4 images
-
+        validateFileUpload(oldEditRequestImages.length - 1, [], formik); //ensure we don't have below 4 images
     }
 
   //Get country list from API
@@ -151,33 +155,94 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
         }
     }
 
-    const updateRoommateRequest = (e) => 
+    // const temporaryFormImagePost = async (formData) =>
+    // {
+    //     console.log("Sending");
+    //     console.log(formData);
+
+    //     const options = 
+    //     {
+    //         method: "POST",
+    //         body: formData,
+    //         headers: 
+    //         {
+    //             "Accept" : "application/json",
+    //             "Authorization": ACCESS_TOKEN
+    //         } 
+    //     }
+
+    //     const res = await fetch(ADD_IMAGES_TO_ROOMMATE_REQUEST, options);
+
+    //     console.log(await res.json());
+
+    // }
+    const updateRoommateRequest = (e, formik) => 
     {
         e.preventDefault();
-        setIsLoading(true);
+        // setIsLoading(true);
 
-        const formData = new FormData();
-        formData.append("country", document.querySelector("select[name='country']").value);
-        formData.append("state", document.querySelector("select[name='state']").value);
-        formData.append("city", document.querySelector("select[name='city']").value);
-        formData.append("street_address", document.querySelector("textarea[name='street_address']").value); //gives issues if the street is a single word
-        formData.append("room_type", document.querySelector("select[name='room_type']").value);
-        formData.append("no_of_persons", document.querySelector("input[name='no_of_persons']").value);
-        formData.append("no_of_current_roomies", document.querySelector("input[name='no_of_current_roomies']").value);
-        formData.append("rent_per_person", document.querySelector("input[name='rent_per_person']").value);
-        formData.append("additional_cost", document.querySelector("textarea[name='additional_cost']").value);
-        formData.append("listing_title", document.querySelector("input[name='listing_title']").value);
-        formData.append("additional_information", document.querySelector("textarea[name='additional_information']").value);
-        formData.append("amenities", document.querySelector("input[name='amenities']").value);
-        formData.append("date_to_move", document.querySelector("input[name='date_to_move']").value); 
+        // A temporary fix for the image error
+        let oldImageLen = editRequestImages.length;
+        let newImageLen = formik.values.request_images.length;
+        let totalLen = oldImageLen + newImageLen;
+        if((totalLen > 3) && (totalLen < 9))
+        {
+            delete(formik.errors.request_images);
+        }
 
-        let updateRoommateRequestUrl = UPDATE_ROOMMATE_REQUEST_START + id + UPDATE_ROOMMATE_REQUEST_END;
-        sendUpdateRooomatePatchRequest(updateRoommateRequestUrl, formData);
-        // console.log("Update");
+        if(false)//Object.values(formik.errors).length > 0)
+        {
+            console.log(formik.errors);
+            setIsLoading(false);
+            setErrorMessage("Kindly attend to error messages");
+        }else 
+        {
+            const formData = new FormData();
+            {formik.touched.country && formData.append("country", document.querySelector("select[name='country']").value);}
+            {formik.touched.state && formData.append("state", document.querySelector("select[name='state']").value);}
+            {formik.touched.city && formData.append("city", document.querySelector("select[name='city']").value);}
+            {formik.touched.street_address && formData.append("street_address", document.querySelector("textarea[name='street_address']").value);} //gives issues if the street is a single word
+            {formik.touched.room_type && formData.append("room_type", document.querySelector("select[name='room_type']").value);}
+            {formik.touched.no_of_persons && formData.append("no_of_persons", document.querySelector("input[name='no_of_persons']").value);}
+            {formik.touched.no_of_current_roomies && formData.append("no_of_current_roomies", document.querySelector("input[name='no_of_current_roomies']").value);}
+            {formik.touched.rent_per_person && formData.append("rent_per_person", document.querySelector("input[name='rent_per_person']").value);}
+            {formik.touched.additional_cost && formData.append("additional_cost", document.querySelector("textarea[name='additional_cost']").value);}
+            {formik.touched.listing_title && formData.append("listing_title", document.querySelector("input[name='listing_title']").value);}
+            {formik.touched.additional_information && formData.append("additional_information", document.querySelector("textarea[name='additional_information']").value);}
+            {formik.touched.amenities && formData.append("amenities", document.querySelector("input[name='amenities']").value);}
+            {formik.touched.date_to_move && formData.append("date_to_move", document.querySelector("input[name='date_to_move']").value);} 
+
+            let updateRoommateRequestUrl = UPDATE_ROOMMATE_REQUEST_START + id + UPDATE_ROOMMATE_REQUEST_END;
+            // sendUpdateRooomatePatchRequest(updateRoommateRequestUrl, formData);
+
+            // add new images
+            if(Object.values(formik.values.request_images).length > 0)
+            {
+                console.log("Adding images");
+                let requestImages = Object.values(formik.values.request_images);
+
+                requestImages.forEach((image) => 
+                {       
+                    // console.log(requestImages[0])
+                    const formData = new FormData();
+                    formData.append("image_file", image);
+                    formData.append("request_id", APIData.id)
+                    addRequestImageMutate(formData);
+                });
+
+                //temporaryFormImagePost(formData);
+            }
+            //delete images
+        }
+
+       
     }
 
     useState(() => 
     {      
+        console.log(APIData);
+        console.log(updateRoommateRequestSuccess);
+
         // if(imagesToBeDeleted.length > 0)
         // {
         // }
@@ -206,6 +271,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
 
         if(updateRoommateRequestSuccess)
         {
+            setIsLoading(false);
             window.location.reload();
         }
 
@@ -223,7 +289,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                 date_to_move: APIData.date_to_move, 
                 rent_per_person: APIData.rent_per_person, 
                 additional_cost: APIData.additional_cost, 
-                request_images: APIData.request_images, 
+                request_images: [], 
                 listing_title: APIData.listing_title,
                 amenities: APIData.amenities,
                 additional_information: APIData.additional_information,
@@ -233,11 +299,11 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
         }
 
     }, [
-        editRequestImages,
-        imagesToBeDeleted,
         updateRoommateRequestData,
         updateRoommateRequestError, 
         updateRoommateRequestSuccess,
+        editRequestImages,
+        imagesToBeDeleted,
         roommateRequestInitialValues,
     ]);
 
@@ -246,11 +312,11 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
         <Formik
             initialValues = {roommateRequestInitialValues}
             validationSchema = {updateRoommateRequestValidation}
-        onSubmit = {updateRoommateRequest}
-        >
+            onSubmit={(e) => updateRoommateRequest(e)}  
+            >
     
     {formik => (
-        <form className={styles.formGroupForm} onSubmit={(e) => updateRoommateRequest(e, formik.errors)} >
+        <form className={styles.formGroupForm}>
             <div className={styles.inputForm}>
 
             <H1>Edit Roommate Request</H1>
@@ -262,7 +328,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                     <Select name="country" {...formik.getFieldProps('country')}>
                         <option data-iso="NG">Nigeria</option>
                     </Select>
-                    {((formik.touched.country && formik.errors.country) &&<ErrorAlert>{formik.errors.country}</ErrorAlert>)}
+                    {formik.errors.country &&<ErrorAlert>{formik.errors.country}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
@@ -284,7 +350,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
 
                         })}
                     </Select>
-                    {((formik.touched.state && formik.errors.state) &&<ErrorAlert>{formik.errors.state}</ErrorAlert>)}
+                    {formik.errors.state &&<ErrorAlert>{formik.errors.state}</ErrorAlert>}
                 </div>
                 
                 <div className={styles.inputGroup}>
@@ -306,7 +372,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
 
                         })}
                     </Select>
-                    {((formik.touched.city && formik.errors.city) &&<ErrorAlert>{formik.errors.city}</ErrorAlert>)}
+                    {formik.errors.city &&<ErrorAlert>{formik.errors.city}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
@@ -317,7 +383,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                         placeholder="E.g  I am a church girl and I love playing music out loud. 
                         Do not consider becoming my roommate if you hate loud music.">
                     </Textarea>
-                    {((formik.touched.street_address && formik.errors.street_address) &&<ErrorAlert>{formik.errors.street_address}</ErrorAlert>)}
+                    {formik.errors.street_address && <ErrorAlert>{formik.errors.street_address}</ErrorAlert>}
                 </div>
             </div>
 
@@ -335,19 +401,19 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                         <option>Shortlet</option>
                         <option>Single Room Apartment</option>
                     </Select>
-                    {((formik.touched.room_type && formik.errors.room_type) &&<ErrorAlert>{formik.errors.room_type}</ErrorAlert>)}
+                    {formik.errors.room_type &&<ErrorAlert>{formik.errors.room_type}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
                     <Label name="no_of_persons">No of persons to occupy the apartment</Label>
                     <Input  name="no_of_persons" placeholder="Please type in the total number of occupants in your room" type="text" {...formik.getFieldProps('no_of_persons')}/>
-                    {((formik.touched.no_of_persons && formik.errors.no_of_persons) &&<ErrorAlert>{formik.errors.no_of_persons}</ErrorAlert>)}
+                    {formik.errors.no_of_persons &&<ErrorAlert>{formik.errors.no_of_persons}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
                     <Label name="no_of_current_roomies">No of current roommates/flatmates</Label>
                     <Input  name="no_of_current_roomies" placeholder="Please type in the number of roommates you currently have" type="text" {...formik.getFieldProps('no_of_current_roomies')}/>
-                    {((formik.touched.no_of_current_roomies && formik.errors.no_of_current_roomies) &&<ErrorAlert>{formik.errors.no_of_current_roomies}</ErrorAlert>)}
+                    {formik.errors.no_of_current_roomies &&<ErrorAlert>{formik.errors.no_of_current_roomies}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
@@ -406,7 +472,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                             <Label>Other</Label>
                         </span>
                     </div>
-                    {((formik.touched.amenities && formik.errors.amenities) &&<ErrorAlert>{formik.errors.amenities}</ErrorAlert>)}
+                    {formik.errors.amenities &&<ErrorAlert>{formik.errors.amenities}</ErrorAlert>}
                 </div>
             </div>
             
@@ -417,13 +483,13 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                 <div className={styles.inputGroup}>
                     <Label name="date_to_move">How soon can your roommate move in?</Label>
                     <Input  name="date_to_move" type="date" placeholder="Select a date" {...formik.getFieldProps('date_to_move')}/>
-                    {((formik.touched.date_to_move && formik.errors.date_to_move) &&<ErrorAlert>{formik.errors.date_to_move}</ErrorAlert>)}
+                    {formik.errors.date_to_move &&<ErrorAlert>{formik.errors.date_to_move}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
                     <Label name="rent_per_person">Rent per person (in naira)?</Label>
                     <Input  name="rent_per_person" type="text" placeholder="Please enter the rent each person is to pay" {...formik.getFieldProps('rent_per_person')}/>
-                    {((formik.touched.rent_per_person && formik.errors.rent_per_person) &&<ErrorAlert>{formik.errors.rent_per_person}</ErrorAlert>)}
+                    {formik.errors.rent_per_person && <ErrorAlert>{formik.errors.rent_per_person}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
@@ -433,7 +499,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                         {...formik.getFieldProps('additional_cost')}
                         placeholder="E.g We pay #5,000 monthly for the gym and #500 to use the washing machine for an hour.">
                     </Textarea>
-                    {((formik.touched.additional_cost && formik.errors.additional_cost) &&<ErrorAlert>{formik.errors.additional_cost}</ErrorAlert>)}
+                    {formik.errors.additional_cost &&<ErrorAlert>{formik.errors.additional_cost}</ErrorAlert>}
                 </div>
             </div>
             
@@ -450,19 +516,18 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                             multiple
                             fileLabel="Add more"
                             iconImg = {addMoreFilesIcon}
-                            onChange={(name, value) => {formik.setFieldValue(name, value); formik.validateField(validateFileUpload(value, formik))}}
+                            onChange={(name, value) => validateFileUpload(0, value, formik)}
                             onBlur={formik.handleBlur}
-
                         />
                     </div>
                     
-                    {((formik.touched.request_images && formik.errors.request_images) &&<ErrorAlert>{formik.errors.request_images}</ErrorAlert>)}
+                    {formik.errors.request_images && <ErrorAlert>{formik.errors.request_images}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
                     <Label name="listing_title">Add a suitable title for your room listing</Label>
                     <Input  name="listing_title" type="text" placeholder="E.g Bedroom flat in Bodija, Ibadan." {...formik.getFieldProps('listing_title')}/>
-                    {((formik.touched.listing_title && formik.errors.listing_title) &&<ErrorAlert>{formik.errors.listing_title}</ErrorAlert>)}
+                    {formik.errors.listing_title && <ErrorAlert>{formik.errors.listing_title}</ErrorAlert>}
                 </div>
 
                 <div className={styles.inputGroup}>
@@ -472,11 +537,11 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
                         {...formik.getFieldProps('additional_information')}
                         placeholder="I have lived in this room for two years and have had no issues whatever. This is a good choice for you, if you ask me.">
                     </Textarea>
-                    {((formik.touched.additional_information && formik.errors.additional_information) &&<ErrorAlert>{formik.errors.additional_information}</ErrorAlert>)}
+                    {formik.errors.additional_information && <ErrorAlert>{formik.errors.additional_information}</ErrorAlert>}
                 </div>
             </div>
             
-            <Button className={isLoading ? "isLoading" : ""} type="submit">{isLoading ? "Loading..." : "Save changes"} </Button>
+            <Button className={isLoading ? "isLoading" : ""} type="button" onClick={(e) => updateRoommateRequest(e, formik)}>{isLoading ? "Loading..." : "Save changes"} </Button>
         
         </div>
         </form>
@@ -484,6 +549,7 @@ const EditSingleRequestForm = ({styles, APIData, isCurrentlyEditting, setIsCurre
         )}
     </Formik>
     {updateRoommateRequestSuccess && <div className={styles.successMessage}>Request updated successfully</div>}
+    {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
     </>
      );
 }

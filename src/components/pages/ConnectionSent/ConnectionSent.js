@@ -9,15 +9,15 @@ import { useState, useEffect, useContext} from "react";
 import P from "../../ui/atoms/P/P";
 import {v4 as uuidv4} from 'uuid';
 import { UserContext } from "../../context";
+import { useGetConnectionsSent } from "../../../customHooks/useDashboardData";
 
 const ConnectionSent = () => 
 {
     const [data, setData] = useState([]);
-    const {setConnectionsSent} = useContext(UserContext);
+    const { setConnectionsSent } = useContext(UserContext);
     const [connectionRequestError, setConnectionRequestError] = useState(null);
 
-    const {isError, isSuccess, APIData} = useGet(CONNECTION_SENT, localStorage.getItem("accessToken"));
-
+    const { error, isLoading, isSuccess, data: APIData } = useGetConnectionsSent();
 
     useEffect(() => 
     {
@@ -25,7 +25,7 @@ const ConnectionSent = () =>
         {
             setConnectionsSent(APIData);//save data to context
 
-            if(APIData && APIData.accepted_requests.length > 0) 
+            if(APIData?.accepted_requests?.length > 0) 
             {
                 setConnectionRequestError(null);
                 setData(APIData.accepted_requests);
