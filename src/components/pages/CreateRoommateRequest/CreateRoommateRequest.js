@@ -2,8 +2,6 @@ import { Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import H1 from '../../ui/atoms/Headings/H1/H1';
-import usePost from '../../../customHooks/usePost';
-import { CREATE_ROOMMATE_REQUEST } from '../../routes';
 import styles from './CreateRoommateRequest.module.css';
 import RoomLook from '../../ui/organisms/CreateRoommateRequestPages/RoomLook';
 import RoomDetails from '../../ui/organisms/CreateRoommateRequestPages/RoomDetails';
@@ -15,14 +13,10 @@ import { useCreateRoommateRequestData } from '../../../customHooks/useRoommateRe
 const CreateRoommateRequest = () => 
 {
     const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
     const [nextButtonClicked, setNextButtonClicked] = useState(false);
-    
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
-    myHeaders.append("Accept", "application/json");
-    // const { isError, isSuccess, APIdata, sendPostRequest } = usePost(CREATE_ROOMMATE_REQUEST, myHeaders);
-    const { error: APIerror, isSuccess, isError, data: APIdata, mutate } = useCreateRoommateRequestData();
+
+    const { error: APIerror, isLoading, isSuccess, isError, data: APIdata, mutate } = useCreateRoommateRequestData();
+    if(isError) console.log(APIerror);
 
     
     const moveToNextFormGroup = (current_index, errors) => 
@@ -71,7 +65,6 @@ const CreateRoommateRequest = () =>
         e.preventDefault();
 
         const { formStatus, message } = validateForm(4, formik.errors);
-        setIsLoading(true);
         
         if(formStatus)
         {
@@ -98,30 +91,28 @@ const CreateRoommateRequest = () =>
              //append all request images
              for (let i = 0; i < formik.values.request_images.length; i++)
              {
-                 formData.append("request_images", formik.values.request_images[i]);
+                // console.log(formik.values.request_images[i]);
+                formData.append("request_images", formik.values.request_images[i]);
                 //  newImageArray.push(formik.values.request_images[i])
              }
 
             //  console.log(newImageArray);
-             console.log(formik.values.request_images);
+            //  setIsLoading(false);
             //create profile record on backend
             mutate(formData);
 
         }else
         {
-            setIsLoading(false);
             setNextButtonClicked(true);
             setError(message);
         }
         
     }
 
-    useEffect(() => 
-    {
-        if(isError) console.log(APIerror);//setError(APIdata.detail);
-        if(isError || isSuccess) setIsLoading(false);
-
-    }, [isError, isSuccess, APIdata]);
+    // useEffect(() => 
+    // {
+    //     console.log(APIdata);
+    // }, [isError, isSuccess, APIdata]);
 
 
     return (   

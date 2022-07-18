@@ -5,7 +5,8 @@ import axios from "axios";
 const postLoginData = async (formData) => 
 {
     const res = await axios.post(LOGIN, formData);
-    return await res.data;
+    return await res.data; 
+    
 }
 
 
@@ -21,6 +22,7 @@ const postCreateAccountData = async (formData) =>
     const res = await axios.post(CREATE_ACCOUNT, formData);
     return await res.data;
 }
+
 
 export const useCreateAccountData = (config = {}) => 
 {

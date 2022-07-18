@@ -31,7 +31,7 @@ console.log("rerender card")
     return ( 
 
         <div className={cardStyles.card}>
-            <Link to={moreInfoLink} target="_blank">
+            <Link to={moreInfoLink}>
 
             <div className={cardStyles.top}>
                 <Swiper

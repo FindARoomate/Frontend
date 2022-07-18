@@ -1,16 +1,16 @@
 import { useParams } from 'react-router-dom';
-import useGet from '../../../customHooks/useGet';
 import { GET_SINGLE_ROOMMATE_REQUEST } from '../../routes';
 import ViewSingleRoommateRequestTemplate from "../../templates/ViewSingleRoommateRequestTemplate/ViewSingleRoommateRequestTemplate";
-import { useState } from 'react';
+import { useViewSingleRoommateRequestData } from '../../../customHooks/useRoommateRequestData';
 
 const ViewSingleRoommateRequest = () => 
 {
 
-    const {id} = useParams();
+    const { id } = useParams();
     const url = GET_SINGLE_ROOMMATE_REQUEST + id + "/";
-    var {isError, isSuccess, APIData} = useGet(url);
-    console.log(APIData);
+    var { isLoading, isError, isSuccess, data:APIData } = useViewSingleRoommateRequestData(id)
+
+
     return ( 
             <ViewSingleRoommateRequestTemplate
                 roommateRequest = {APIData}

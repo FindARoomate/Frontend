@@ -9,7 +9,7 @@ import H2 from '../../ui/atoms/Headings/H2/H2';
 import P from '../../ui/atoms/P/P';
 import { useState } from 'react';
 
-const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, roommateRequests = null}) => 
+const ViewAllRoommateRequestsTemplate = ({isLoading, isSuccess, isError, roommateRequests}) => 
 {
 
     const [tagKeys, setTagKeys] = useState({});
@@ -62,7 +62,7 @@ const ViewAllRoommateRequestsTemplate = ({isSuccess = null, isError = null, room
                 {/* To display roommate request cards */}
                 <div className={styles.roommateRequests}>
                     {isError && (<P>Something bad happened. Please try again</P>)}
-                    {!(roommateRequests || isError || isSuccess) && (<P>Loading ...</P>)}
+                    {isLoading && (<P>Loading ...</P>)}
                     {(isSuccess && roommateRequests) && (
                         <DisplayCards 
                             data={roommateRequests.results} 

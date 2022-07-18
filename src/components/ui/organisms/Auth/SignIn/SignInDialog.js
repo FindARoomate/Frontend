@@ -109,7 +109,7 @@ useEffect(() =>
           >
            {formik => (
             <form onSubmit={(e) => handleSignIn(e, formik)}>
-              {error && <ErrorAlert>{APIdata.detail}</ErrorAlert>}
+              {error && <ErrorAlert>{error.response.data.detail}</ErrorAlert>}
               <div className={styles.inputGroup}>
                 <Label>Email</Label>
                 <Input {...formik.getFieldProps('email')} name="email" required placeholder="Enter your email address"/>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import useGet from '../../../customHooks/useGet';
+import { useViewAllRoommateRequestData } from '../../../customHooks/useRoommateRequestData';
 import { GET_ALL_ROOMMATE_REQUESTS } from '../../routes';
 import ViewAllRoommateRequestsTemplate from '../../templates/ViewAllRoommateRequestsTemplate/ViewAllRoommateRequestsTemplate';
 
@@ -12,7 +12,7 @@ const ViewAllRoommateRequests = () =>
     
     const [url, setURL] = useState(GET_ALL_ROOMMATE_REQUESTS);
 
-    const {isError, isSuccess, APIData} = useGet(url);
+    const { isLoading, isError, isSuccess, data:APIData } = useViewAllRoommateRequestData();
 
     console.log(APIData);
 
@@ -29,13 +29,11 @@ const ViewAllRoommateRequests = () =>
         }
     }, [pageId, searchTerm]);
 
-    
-    
-
      return(
 
             <ViewAllRoommateRequestsTemplate
                 roommateRequests={APIData}
+                isLoading = {isLoading}
                 isSuccess = {isSuccess}
                 isError = {isError}
             />

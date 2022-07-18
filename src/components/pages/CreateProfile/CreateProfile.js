@@ -30,12 +30,12 @@ const CreateProfile = () =>
     const token =  "Bearer " + localStorage.getItem("accessToken");
     var myHeaders = new Headers();
     myHeaders.append("Authorization", token);
-    const {isError, isSuccess, APIdata, sendPostRequest} = usePost(CREATE_PROFILE, myHeaders);
+    const { isError, isSuccess, APIdata, sendPostRequest } = usePost(CREATE_PROFILE, myHeaders);
 
 
     const moveToNextFormGroup = (current_index, formik) => 
     {        
-        const {formStatus, message} = validateForm(current_index, formik.errors);
+        const { formStatus, message } = validateForm(current_index, formik.errors);
 
         if(formStatus)
         {
@@ -89,9 +89,8 @@ const CreateProfile = () =>
     {
         e.preventDefault();
 
-        const {formStatus, message} = validateForm(3, formik.errors);
+        const { formStatus, message } = validateForm(3, formik.errors);
         setIsLoading(true);
-
         if(formStatus)
         {
             const formData = new FormData();
@@ -108,11 +107,10 @@ const CreateProfile = () =>
             formData.append("roomie_age", formik.values.roomie_age);
             formData.append("roomie_personality", formik.values.roomie_personality);
             formData.append("roomate_description", formik.values.roomate_description);
-            formData.append("profile_picture", formik.values.profile_picture);
+            formData.append("profile_picture", formik.values.profile_picture[0]);
 
             //create profile record on backend
             sendPostRequest(formData);
-
         }else
         {
             setIsLoading(false);

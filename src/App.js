@@ -26,9 +26,9 @@ import ActivateEmail from './components/pages/ActivateEmail/ActivateEmail';
 import CreateRoommateRequest from './components/pages/CreateRoommateRequest/CreateRoommateRequest';
 import Protected from './Protected';
 import IdealRoommate from './components/pages/IdealRoommate/IdealRoommate';
-import ShowMap from './components/pages/ShowMap';
 import GuestProfile from './components/pages/GuestProfile/GuestProfile';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
 
@@ -106,11 +106,11 @@ function App()
           {/* Notification */}
           <Route path='/notifications' element={<Protected checkProfile><Notification/></Protected>}/>
 
-          <Route path='/map' element={<ShowMap/>}/>
-
           {/* Not Found */}
           <Route path='*' element={<NotFound/>} />
+          
         </Routes>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right"/>
         </QueryClientProvider>
 
       </div>    

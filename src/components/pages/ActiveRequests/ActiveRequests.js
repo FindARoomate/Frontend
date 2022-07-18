@@ -10,7 +10,7 @@ import { useGetActiveRequests } from "../../../customHooks/useDashboardData";
 
 const ActiveRequests = () => 
 {
-    const {isLoading, error, data: APIData } = useGetActiveRequests();
+    const { isLoading, error, data: APIData } = useGetActiveRequests();
 
     return ( 
         <DashboardTemplate>

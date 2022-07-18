@@ -7,7 +7,7 @@ import H1 from '../../ui/atoms/Headings/H1/H1';
 import Label from '../../ui/atoms/Label/Label';
 import Input from '../../ui/atoms/Input/Input';
 import P from '../../ui/atoms/P/P';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateRoommateRequestTemplate = (
     {

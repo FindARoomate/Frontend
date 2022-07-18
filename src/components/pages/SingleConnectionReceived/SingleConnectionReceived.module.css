@@ -76,6 +76,13 @@
      color: #000E4A;
  }
 
+ .userInfo a
+ {
+    font-weight: 400;
+    text-decoration: underline;
+    color: rgba(0, 41, 221, 0.7);
+ }
+
 
  .buttonGroup
  {

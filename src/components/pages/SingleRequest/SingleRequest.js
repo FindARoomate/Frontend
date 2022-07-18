@@ -21,57 +21,25 @@ import { useState } from 'react';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css";
+import { useGetSingleRoommateRequestData } from '../../../customHooks/useDashboardData';
+import { ACCESS_TOKEN } from '../../settings';
 
 const SingleRequest = () => 
 {
     // Get request
-    const {id} = useParams();
-    const token = localStorage.getItem("accessToken");
-    const url = GET_SINGLE_ROOMMATE_REQUEST + id + '/'; 
-    const {isSuccess, APIData} = useGet(url, token);
+    const { id } = useParams();
+    const { isSuccess, data: APIData } =  useGetSingleRoommateRequestData(id);
+    console.log(APIData);
 
     // Getting context information for single request
-    const {connectionsReceived, setConnectionsReceived} = useContext(UserContext);
-    const [connectionData, setConnectionData] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false);
     const [isCurrentlyEditting, setIsCurrentlyEditting] = useState(false);
 
     // Activate or deactivate request
-    const updateToken = "Bearer " + token;
     const myHeaders = new Headers();
-    myHeaders.append("Authorization", updateToken);
+    myHeaders.append("Authorization", ACCESS_TOKEN);
     const {isSuccess: updateSuccess, isError: updateError, APIData: updateData, sendPatchRequest} = usePatch(myHeaders);
-
-
-    // Function to get the specific connection data from the list of connections in context.
-    // Because of the way the data is structured, I have to search through the context data in a specific way
-    // in order to get the single connection data I need.     
-    const getConnection = () => 
-    {
-        let connection_data;
-
-        Object.values(connectionsReceived).every((connection_type) =>
-        {
-            connection_type.every((single_connection) => 
-            {
-                if(single_connection.id == id)
-                {
-                    connection_data = single_connection;
-                    return false;
-                }
-                return true;
-            });
-
-            return true;
-
-        });       
-
-        console.log(connection_data);
-
-        return connection_data;
-    }
-
 
 
     const handleBack = () => 
@@ -105,61 +73,18 @@ const SingleRequest = () =>
             sendPatchRequest(url, formData);
         }
     }
-      
-    const fetchFunction = async (url) => 
-    {
-        const res = await fetch(url, 
-        {
-            headers:  
-            {
-                "Content-Type" : "application/json",
-                "Accept" : "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("accessToken")
-            } 
-        });
-
-        const body = await res.json();
-
-        if(res.ok)
-        {
-            // Set context data if it is not currently available
-            console.log(body);
-            setConnectionsReceived(body);
-        }else
-        {
-            console.log(body);
-        }
-    }
-
 
     useEffect (() => 
     {
-
-        // console.log(APIData);
-
         if(updateSuccess || updateError)
         {
             setIsLoading(false);
         }
        
-        // If user connections are not availble from context, get it from backend.
-        // If it is available, set it in the state
-        // if(connectionsReceived.length <= 0)
-        // {
-        //     fetchFunction(CONNECTION_RECEIVED);
-        // }else 
-        // {
-        //     setConnectionData(getConnection());
-        // }
-
-        // if(connectionData) console.log(connectionData);
     }, [
-            isSuccess,
-            APIData,
             updateData,
             updateError, 
             updateSuccess, 
-            connectionsReceived
         ]);
 
   

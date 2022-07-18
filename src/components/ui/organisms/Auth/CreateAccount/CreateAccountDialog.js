@@ -21,9 +21,9 @@ import { useCreateAccountData } from "../../../../../customHooks/useAuthData";
 const CreateAccountDialog = ({open, closeModal, openSignInModal}) => 
 {
 
-    const [ signUpButtonClicked, setSignUpButtonClicked ] = useState(false);
+    const [ signUpButtonClicked, setSignUpButtonClicked] = useState(false);
     const { isLoading, isSuccess, data: APIdata, error, mutate} = useCreateAccountData();
-    if(error) console.log(error);
+    if(error) console.log("error from dialog", error);
 
 
     const handleSignUp = (e, formik) => 
@@ -63,7 +63,7 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
             >
            {formik => (
                 <form onSubmit={(e) => handleSignUp(e, formik)}>
-                    {error &&  <CreateAccountErrors errors={error}/>}
+                    {error &&  <CreateAccountErrors errors={error.response.data}/>}
                     {isSuccess && <SuccessAlert message={APIdata.message}/>}
                     <div className={styles.inputGroup}>
                         <Label>Email</Label>

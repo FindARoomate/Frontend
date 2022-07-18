@@ -193,7 +193,16 @@ const SingleConnectionReceived = () =>
                     <div>
                         <div className={styles.userInfo}>
                             <span className={styles.label}>Request details</span>
-                            <span className={styles.value}>{connectionData ? ((connectionData.roomate_request.listing_title).substring(0, 40)+"...") : "Loading..."}</span>
+                            <span className={styles.value}>
+                            {
+                                connectionData ?
+                                <>
+                                    {(connectionData.roomate_request.listing_title).substring(0, 40)+"..."}
+                                    <Link to={`/roommate-request/${connectionData.roomate_request.id}`} target="_blank">More Info</Link>
+                                </>:
+                                "Loading..."
+                            }
+                            </span>
                         </div>
                     </div>
                 </div>

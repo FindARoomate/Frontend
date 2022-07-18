@@ -2,23 +2,21 @@ import DashboardTemplate from "../../templates/DashboardTemplate/DashboardTempla
 import ListBox from "../../ui/molecules/ListBox/ListBox";
 import styles from './ConnectionReceived.module.css';
 import dp from "../../../images/dashboard-image.png";
-import { CONNECTION_RECEIVED } from "../../routes";
-import useGet from '../../../customHooks/useGet';
 import H2 from "../../ui/atoms/Headings/H2/H2";
 import { useState, useEffect, useContext} from "react";
 import P from "../../ui/atoms/P/P";
 import {v4 as uuidv4} from "uuid";
 import { UserContext } from "../../context";
+import { useGetConnectionsReceived } from "../../../customHooks/useDashboardData";
 
 
 const ConnectionReceived = () => 
 {
-    var token = localStorage.getItem("accessToken")
-    const {isError, isSuccess, APIData} = useGet(CONNECTION_RECEIVED, token);
     const [data, setData] = useState([]);
     const [connectionRequestError, setConnectionRequestError] = useState(null);
+    const { isLoading, isError, isSuccess, data:APIData } = useGetConnectionsReceived();
 
-    const {setConnectionsReceived} = useContext(UserContext);
+    const { setConnectionsReceived } = useContext(UserContext);
 
     useEffect(() => 
     {

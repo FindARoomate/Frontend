@@ -108,7 +108,7 @@ const ConnectionSent = () =>
                             name = {datum.roomate_request.profile.fullname}
                             description = {datum.roomate_request.listing_title}
                             tag={datum.status}
-                            dp={datum.roomate_request.request_images[0].image_url}
+                            dp={datum.roomate_request.request_images[0]?.image_url}
                         />)
                     }) }
                     
