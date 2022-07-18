@@ -153,7 +153,7 @@ const CreateProfile = () =>
         
         {formik => (
         
-            <form className={styles.formGroupForm } onSubmit={(e) => handleCreateProfile(e, formik)}>
+            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik)}>
             <div id={styles.formGroup1} className={`${styles.formGroup} ${styles.formGroupActive}`}>
 
                 <div className={styles.inputGroup}>
@@ -202,10 +202,10 @@ const CreateProfile = () =>
                
             </div>
 
-            <div className={`${styles.formGroup} `}>
+            <div className={`${styles.formGroup}`}>
                 <div className={styles.inputGroup}>
                     <FileInput
-                        fileLabel="Upload a profile"
+                        fileLabel="Upload profile image"
                         name="profile_picture"
                         onChange={(name, value) => {formik.setFieldValue(name, value)}}
                         onBlur={formik.handleBlur}

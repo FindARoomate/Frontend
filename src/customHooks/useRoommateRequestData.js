@@ -1,10 +1,4 @@
-import { 
-            ADD_IMAGES_TO_ROOMMATE_REQUEST, 
-            CREATE_ROOMMATE_REQUEST, 
-            GET_SINGLE_ROOMMATE_REQUEST,
-            GET_ALL_ROOMMATE_REQUESTS,
-            CREATE_CONNECTION_REQUEST
-        } from "../components/routes";
+import {ADD_IMAGES_TO_ROOMMATE_REQUEST, CREATE_ROOMMATE_REQUEST, GET_SINGLE_ROOMMATE_REQUEST, GET_ALL_ROOMMATE_REQUESTS} from "../components/routes";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import axios from "axios";
 
@@ -116,19 +110,3 @@ export const useViewSingleRoommateRequestData = (id, config = {}) =>
 }
 
 
-// Creating a new request
-const sendConnectionRequestData = async (formData) => 
-{
-    var headersValue = 
-    {
-        "Accept" : "application/json",
-        "Authorization": ACCESS_TOKEN
-    } 
-    const res = await axios.post(CREATE_CONNECTION_REQUEST, formData, { headers: headersValue });
-    return res.data;
-}
-
-export const useSendConnectionRequestData = (config = {}) => 
-{
-    return useMutation(sendConnectionRequestData, config)
-}

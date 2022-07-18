@@ -49,7 +49,7 @@ export const ACCEPT_CONNECTION = API_URL + '/connections/accept/';
 
 export const REJECT_CONNECTION = API_URL + '/connections/reject/';
 
-export const CANCEL_CONNECTION_START = API_URL + 'connections/';
+export const CANCEL_CONNECTION_START = API_URL + '/connections/';
 
 export const CANCEL_CONNECTION_END = '/delete/';
 

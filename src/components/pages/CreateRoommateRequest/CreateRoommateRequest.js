@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import H1 from '../../ui/atoms/Headings/H1/H1';
 import styles from './CreateRoommateRequest.module.css';
@@ -7,8 +7,8 @@ import RoomLook from '../../ui/organisms/CreateRoommateRequestPages/RoomLook';
 import RoomDetails from '../../ui/organisms/CreateRoommateRequestPages/RoomDetails';
 import RoomPricing from '../../ui/organisms/CreateRoommateRequestPages/RoomPricing';
 import RoomLocation from '../../ui/organisms/CreateRoommateRequestPages/RoomLocation';
-import {createRoommateRequestInitialValues, createRoommateRequestValidation, validateForm} from './CreateRoommateRequestHelper';
 import { useCreateRoommateRequestData } from '../../../customHooks/useRoommateRequestData';
+import { createRoommateRequestInitialValues, createRoommateRequestValidation, validateForm } from './CreateRoommateRequestHelper';
 
 const CreateRoommateRequest = () => 
 {
@@ -60,12 +60,12 @@ const CreateRoommateRequest = () =>
     }
 
     
-    const handleCreateProfile = (e, formik) => 
+    const handleCreateRoommateRequest = (e, formik) => 
     {
         e.preventDefault();
 
         const { formStatus, message } = validateForm(4, formik.errors);
-        
+
         if(formStatus)
         {
             const formData = new FormData();
@@ -76,7 +76,7 @@ const CreateRoommateRequest = () =>
             formData.append("room_type", formik.values.room_type);
             formData.append("no_of_persons", formik.values.no_of_persons);
             formData.append("no_of_current_roomies", formik.values.no_of_current_roomies);
-            formData.append("rent_per_person", formik.values.rent_per_person);
+            formData.append("rent_per_person", formik.values.rent_per_person.replace(/,/g, ''));
             formData.append("additional_cost", formik.values.additional_cost);
             formData.append("listing_title", formik.values.listing_title);
             formData.append("additional_information", formik.values.additional_information);
@@ -87,17 +87,12 @@ const CreateRoommateRequest = () =>
                 formData.append("amenities", formik.values.amenities[i]);
             }
 
-            // let newImageArray = [];
-             //append all request images
-             for (let i = 0; i < formik.values.request_images.length; i++)
-             {
-                // console.log(formik.values.request_images[i]);
+            //append all request images
+            for (let i = 0; i < formik.values.request_images.length; i++)
+            {
                 formData.append("request_images", formik.values.request_images[i]);
-                //  newImageArray.push(formik.values.request_images[i])
-             }
+            }
 
-            //  console.log(newImageArray);
-            //  setIsLoading(false);
             //create profile record on backend
             mutate(formData);
 
@@ -106,14 +101,7 @@ const CreateRoommateRequest = () =>
             setNextButtonClicked(true);
             setError(message);
         }
-        
     }
-
-    // useEffect(() => 
-    // {
-    //     console.log(APIdata);
-    // }, [isError, isSuccess, APIdata]);
-
 
     return (   
         <>
@@ -135,14 +123,13 @@ const CreateRoommateRequest = () =>
         <Formik
             initialValues = {createRoommateRequestInitialValues}
             validationSchema = {createRoommateRequestValidation}
-            onSubmit = {handleCreateProfile}
+            onSubmit = {handleCreateRoommateRequest}
         >
         
         {formik => (
         
-            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateProfile(e, formik)} >
+            <form className={styles.formGroupForm} onSubmit={(e) => handleCreateRoommateRequest(e, formik)} >
             <div className={`${styles.formGroup} ${styles.formGroupActive}`}>
-
                <RoomLocation
                     formik={formik}
                     error = {error}
@@ -150,7 +137,6 @@ const CreateRoommateRequest = () =>
                     nextButtonClicked={nextButtonClicked}
                     moveToNextFormGroup={moveToNextFormGroup}
                />
-               
             </div>
 
             <div className={`${styles.formGroup}`}>

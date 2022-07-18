@@ -19,21 +19,27 @@ import { v4 as uuidv4 } from 'uuid';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css";
+import { useCancelConnectionRequestData } from '../../../customHooks/useConnectionRequestData';
 
 
 const SingleConnectionSent = () => 
 {
-    const {connectionsSent, setConnectionsSent} = useContext(UserContext);
-    const {id: connection_id} = useParams();
+    const { connectionsSent, setConnectionsSent } = useContext(UserContext);
+    const { id: connection_id } = useParams();
     const [connectionData, setConnectionData] = useState(null);
     const deleteUrl = CANCEL_CONNECTION_START + connection_id + CANCEL_CONNECTION_END;
-    const {APIData: deleteAPIData, sendDeleteRequest} = useDelete(deleteUrl);
+    const { APIData: deleteAPIData, sendDeleteRequest } = useDelete(deleteUrl);
 
+    const { isLoading, isSuccess, data, error, mutate: cancelConnection } = useCancelConnectionRequestData(connection_id);
+    if(error)
+    {
+        console.log(error);
+    }
 
     const cancelConnectionRequest = () => 
     {
-
-    }
+        cancelConnection();
+    }   
 
     const fetchConnectionSent = async (url) => 
     {
@@ -257,10 +263,17 @@ const SingleConnectionSent = () =>
                     </div>
                     {(connectionData && connectionData.status == "PENDING") && 
                         <div className={styles.rejectButton}>
-                            <Button handleOnClick={cancelConnectionRequest}>Cancel Connection Request</Button>
+                            <Button 
+                                className={isLoading ? "isLoading" : ""}
+                                handleOnClick={cancelConnectionRequest}
+                            >
+                                {isLoading ? "Loading..." : "Cancel Connection Request"}
+                            </Button>
                         </div>
                     }
-                    
+                    {isSuccess && <div className="successMessage">Connection Request Cancelled.</div>    }
+                    {error && <div className="errorMessage">An error occurred. Kindly try again.</div>    }
+
                 </div>
 
             </SingleConnectionReceivedTemplate>

@@ -26,7 +26,8 @@ export const createRoommateRequestValidation =
         city: Yup.string().required('City is required'),
         street_address:  Yup.string().required('Street Address is required'),
         room_type: Yup.string().required('Room Type is required'),
-        no_of_persons: Yup.number().typeError('Kindly enter a numeric value')
+        no_of_persons: Yup.number()
+                        .typeError('Kindly enter a numeric value')
                         .integer("This value must be an integer")
                         .min(1, 'Value should be greater than 0')
                         .required('No of persons to occupy the apartment is required'),
@@ -42,7 +43,10 @@ export const createRoommateRequestValidation =
                                 .required('No of current roommates/flatmates is required'),
         amenities: Yup.array().required('Please select at least one amenity'),
         date_to_move: Yup.date().min(Date(), 'Move In Date cannot be in the past').required('Move In Date is required'), 
-        rent_per_person: Yup.number().typeError("Kindly enter a numeric value").required('Rent per person is required'),
+        rent_per_person: Yup.number()
+                            .transform((_value, originalValue) => Number(originalValue.replace(/,/g, '')))
+                            .typeError("Kindly enter a numeric value")
+                            .required('Rent per person is required'),
         additional_cost: Yup.string().required('Additional cost is required'),
         listing_title: Yup.string().required('Listing Title is required'),
         request_images: Yup.mixed()

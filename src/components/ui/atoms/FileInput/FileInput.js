@@ -4,23 +4,14 @@ import Input from "../Input/Input";
 import styles from './FileInput.module.css';
 import img from './../../../../icons/file-upload.svg';
 
-const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", iconImg=img, required=true, multiple=false, onChange, ...rest}) => 
+const FileInput = ({name, fileValue = null, fileLabel=null, iconImg=img, required=true, multiple=false, onChange, ...rest}) => 
 {
     const [labelText, setLabelText] = useState(fileLabel);
     const [isInputRequired, setIsInputRequired] = useState(required); 
-    const [fileData, setFileData] = useState([]);
-
-    // When you click a form input, it clears the selected files
-    // This is to revert the text back to "Upload a photo" or "Upload photos" when the input is clicked
-    const handleOnClick = () => 
-    {
-        (multiple && !fileLabel) ? setLabelText("Upload Photos") : setLabelText(fileLabel);
-    }
 
     const handleOnChange = (e) => 
-    {
-        setFileData(e.target.files);
-
+    {        
+        onChange(name, e.target.files);
         if(e.target.files.length > 1)
         {
             setLabelText(`${e.target.files.length} files selected`)
@@ -30,16 +21,21 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", iconImg=
         {
             setLabelText(e.target.files[0].name);
         }
+
     }
 
     useEffect(() => 
-    {
-        if(Object.values(fileData).length > 0) 
-        { 
-            onChange(name, fileData);
+    {   
+        if(!labelText)
+        {
+            if(multiple)
+            {
+                setLabelText("Select photos");
+            }else 
+            {
+                setLabelText("Select a photo");
+            }
         }
-
-        (multiple && !fileLabel) ? setLabelText("Upload Photos") : setLabelText(fileLabel);
 
         if(fileValue)
         {
@@ -54,7 +50,7 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", iconImg=
             }
         }
 
-    }, [fileData, fileValue, multiple])
+    }, [fileValue, fileLabel, multiple, labelText])
 
     return ( 
         <div className={styles.fileInput}>
@@ -67,7 +63,6 @@ const FileInput = ({name, fileValue = null, fileLabel="Upload a photo", iconImg=
                 name={name}
                 id={name}
                 onChange={handleOnChange}
-                onClick={handleOnClick}
                 required={isInputRequired}
                 multiple={multiple}
                 {...rest}

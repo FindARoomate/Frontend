@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import usePatch from "../../../../customHooks/usePatch";
 import { DEACTIVATE_ROOMMATE_REQUEST } from "../../../routes";
-import { useSendConnectionRequestData } from "../../../../customHooks/useRoommateRequestData";
+import { useSendConnectionRequestData } from "../../../../customHooks/useConnectionRequestData";
 
 const MobileRoommateRequestOwnerInfo = ({styles, roommateRequest, openSignInModal, hasUserSentConnectionRequest}) => 
 {

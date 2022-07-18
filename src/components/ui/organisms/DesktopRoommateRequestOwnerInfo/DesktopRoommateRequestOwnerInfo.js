@@ -3,11 +3,11 @@ import Img from "../../atoms/Img/Img";
 import H3 from "../../atoms/Headings/H3/H3";
 import { UserContext } from "../../../context";
 import Button from "../../atoms/Button/Button";
-import { CONNECTION_SENT, DEACTIVATE_ROOMMATE_REQUEST } from "../../../routes";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
-import { useSendConnectionRequestData } from "../../../../customHooks/useRoommateRequestData";
 import usePatch from "../../../../customHooks/usePatch"; 
+import { DEACTIVATE_ROOMMATE_REQUEST } from "../../../routes";
+import { useSendConnectionRequestData } from "../../../../customHooks/useConnectionRequestData";
 
 const DesktopRoommateRequestOwnerInfo = ({styles, roommateRequest, openSignInModal, hasUserSentConnectionRequest}) => 
 {
