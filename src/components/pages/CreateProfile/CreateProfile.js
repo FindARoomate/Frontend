@@ -18,6 +18,7 @@ import { Formik, Field } from 'formik';
 import ErrorAlert from '../../ui/molecules/Alerts/ErrorAlert/ErrorAlert';
 import {createProfileInitialValues, createProfileValidation, validateForm} from './CreateProfileHelper';
 import useGet from '../../../customHooks/useGet';
+import CreateProfileErrors from './CreateProfileErrors';
 
 const CreateProfile = () => 
 {
@@ -117,13 +118,24 @@ const CreateProfile = () =>
             setNextButtonClicked(true);
             setError(message);
         }
-        
     }
-
+    
     useEffect(() => 
     {
-        if(isError) setError(APIdata.detail);
-        if(isError || isSuccess) setIsLoading(false);
+        if(isError) 
+        {
+            setIsLoading(false);
+            setError(APIdata.detail);
+        }
+
+        if(isSuccess)
+        {
+            setIsLoading(false);
+            let email = JSON.parse(localStorage.getItem("profile_data"));
+            let newProfileData = {...APIdata, ...email}
+            // Update profile_data in localStorage;
+            localStorage.setItem("profile_data", JSON.stringify(newProfileData));
+        }
 
     }, [isError, isSuccess, APIdata]);
 
@@ -198,8 +210,8 @@ const CreateProfile = () =>
                 <div className='ml-auto'>
                     <Button type="button" onClick={() => moveToNextFormGroup(1, formik)}>Next <Img src={nextIcon}/></Button>
                     {error && <ErrorAlert>{error}</ErrorAlert>}
+                    {isError && <CreateProfileErrors errors={APIdata}/>}
                 </div>
-               
             </div>
 
             <div className={`${styles.formGroup}`}>
@@ -262,8 +274,8 @@ const CreateProfile = () =>
                         <Button type="button" className={`${styles.nextButton}`} onClick={() => moveToNextFormGroup(2, formik)}>Next <Img src={nextIcon}/></Button>
                     </div>
                     {error && <ErrorAlert>{error}</ErrorAlert>}
+                    {isError && <CreateProfileErrors errors={APIdata}/>}
                 </div>
-
             </div>
 
             <div className={`${styles.formGroup}`} id={styles.formGroup3}>
@@ -364,6 +376,9 @@ const CreateProfile = () =>
                         </>}
                     </Button>
                 </div>
+                {error && <ErrorAlert>{error}</ErrorAlert>}
+                {isError && <CreateProfileErrors errors={APIdata}/>}
+
             </div>
             </form>
             )}

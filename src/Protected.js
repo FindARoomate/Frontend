@@ -36,6 +36,9 @@ const Protected = ({children, checkProfile}) =>
          showCreateAccountDialog();
      }
 
+     let profile_data = JSON.parse(localStorage.getItem("profile_data"));
+     let isProfileValid = profile_data?.email && profile_data?.fullname && profile_data?.id;
+
      useEffect(() => 
      {
         if(!localStorage.getItem("isUserLoggedIn"))
@@ -45,28 +48,28 @@ const Protected = ({children, checkProfile}) =>
 
         }
 
-        if(localStorage.getItem && (checkProfile && !localStorage.getItem("profile_data")))
+        if(localStorage.getItem && (checkProfile && !isProfileValid))
         {
-            console.log("Open profile modal");
             showCreateProfileDialog();
         }
 
      }, []);
 
-    
+
         if(localStorage.getItem("isUserLoggedIn"))
         {
             if(checkProfile)
             {
-                if(localStorage.getItem("profile_data"))
+                if(isProfileValid)
                 {
                     return (children);
+
                 } else 
                 {
                     return (<CreateProfileDialog
                         open={createProfileModalState}
                         closeModal={closeCreateProfileModal}
-                        message = "You need to login before you can proceed" 
+                        message = "You need to create your profile before you can proceed" 
                     />);
                 }
                 

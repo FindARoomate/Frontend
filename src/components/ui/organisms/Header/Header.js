@@ -15,7 +15,11 @@ import LogoutDialog from '../LogoutDialog/LogoutDialog';
 import HeaderDropdown from '../../molecules/HeaderDropdown/HeaderDropdown';
 
 
-const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, links, mobileLinks}) => {
+const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, links, mobileLinks}) => 
+{
+
+  let profile_data = JSON.parse(localStorage.getItem("profile_data"));
+  let isProfileValid = profile_data?.email && profile_data?.fullname && profile_data?.id;
 
     //get user info
     const {isUserLoggedIn, userProfile} = useContext(UserContext);
@@ -118,7 +122,7 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
                }
 
               {/* If user is logged in display profile */}
-              {isUserLoggedIn && <HeaderDropdown/> }
+              {(isUserLoggedIn && isProfileValid) && <HeaderDropdown/> }
 
           </div>
 
@@ -135,7 +139,7 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
           <div className={styles.mobileMenuModal}>
             <Modal closeModal={closeMobileDialog} open={modalState}>
             
-            {showProfile && <HeaderDropdown/>}
+            {(showProfile && isProfileValid) && <HeaderDropdown/>}
 
               {mobileLinks && (
                 <div className={styles.mobileOnlyLinks}>
@@ -159,7 +163,7 @@ const Header = ({customStyle, signIn, createAccount, showProfile, showLogout, li
                }
 
                {/* If user is logged in display profile */}
-              {isUserLoggedIn && <HeaderDropdown/> }
+              {(isUserLoggedIn && isProfileValid) && <HeaderDropdown/> }
 
             {showLogout && 
               <div onClick={openLogoutDialog} className={styles.logoutLink}>

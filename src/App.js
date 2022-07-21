@@ -75,7 +75,7 @@ function App()
           {/* Create Profile */}
           <Route path='/create-profile-instruction' element={<Protected><CreateProfileInstruction/></Protected>} />
           <Route path='/create-profile' element={<Protected><CreateProfile/></Protected>} />
-          <Route path='/create-profile-thankyou' element={<Protected><CreateProfileThankYou/></Protected>}/>
+          <Route path='/create-profile-thankyou' element={<Protected checkProfile><CreateProfileThankYou/></Protected>}/>
 
           {/* Guest Profile */}
           <Route path='/guest-profile/:id' element={<Protected checkProfile><GuestProfile/></Protected>}/>

@@ -62,9 +62,7 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
                 onSubmit = {handleSignUp}
             >
            {formik => (
-                <form onSubmit={(e) => handleSignUp(e, formik)}>
-                    {error &&  <CreateAccountErrors errors={error.response.data}/>}
-                    {isSuccess && <SuccessAlert message={APIdata.message}/>}
+                <form onSubmit={(e) => handleSignUp(e, formik)}>    
                     <div className={styles.inputGroup}>
                         <Label>Email</Label>
                         <Input type="text" name="email" {...formik.getFieldProps('email')} placeholder="Enter your email address"/>
@@ -81,6 +79,8 @@ const CreateAccountDialog = ({open, closeModal, openSignInModal}) =>
                         {signUpButtonClicked && (formik.errors.password_confirmation && <ErrorAlert>{formik.errors.password_confirmation}</ErrorAlert>)}
                     </div>
                 <Button className={isLoading ? "isLoading": ""}>{isLoading ? "Loading..." : "Sign Up"}</Button>
+                {error &&  <CreateAccountErrors errors={error.response.data}/>}
+                {isSuccess && <SuccessAlert message={APIdata.message}/>}
                 </form>
            )}
            </Formik>
